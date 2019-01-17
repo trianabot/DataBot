@@ -14,6 +14,7 @@ import { InventoryReportComponent } from './inventory-report/inventory-report.co
 import { InventoryMapComponent } from './inventory-map/inventory-map.component';
 import { WarehouseOverviewComponent } from './warehouse-overview/warehouse-overview.component';
 import { StockTrackingComponent } from './stock-tracking/stock-tracking.component';
+import { DriverOverviewComponent } from './driver-overview/driver-overview.component';
 
 const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'inventory',component:InventoryReportComponent},
   {path:'inventormap', component:InventoryMapComponent},
   {path:'warehouseoverview', component:WarehouseOverviewComponent},
-  {path:'stocktracking', component:StockTrackingComponent}
+  {path:'stocktracking', component:StockTrackingComponent},
+  {path:'driver-overview', component:DriverOverviewComponent}
   
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
