@@ -1,0 +1,163 @@
+.card_wrapper{
+    /* width: 18rem; */
+    height: 11rem;
+    background-color: #FFFFFF;
+    border-top: 2px solid #50c4bb;
+}
+
+.card_wrapper-chart{
+    /* width: 18rem; */
+    height: 10rem;
+    background-color: #FFFFFF;
+    border-top: 2px solid #50c4bb;
+}
+
+.card_wrapper-drivers{
+    /* width: 18rem; */
+    height: 11rem;
+    background-color: #FFFFFF;
+    border-top: 2px solid #50c4bb;
+    padding-left: 24px;
+}
+.fs-29{
+    font-size: 29px
+}
+
+.fs-15{
+    font-size: 15px
+}
+
+.fs-23{
+    font-size: 23px;
+}
+
+.fs-25{
+    font-size: 25px;
+}
+.fs-19{
+    font-size: 19px
+}
+
+.padding-top-12{
+    padding-top: 10px
+}
+
+.padding-0{
+    padding: 0px
+}
+
+.padding-right-0{
+    padding-right: 0px;
+
+}
+
+.padding-left-10{
+padding-left: 10px
+}
+
+.fs-40{
+    font-size: 40px;
+    color: #939292
+    
+}
+.fs-17{
+    font-size: 17px;
+    color: #939292
+}
+.fs-26{
+    font-size: 26px;
+}
+
+.txt-wrapper{
+   
+        background-color: #559290;
+        height: 4rem;
+        font-size: 16px;
+        padding-top: 8px;
+        padding-left: 12px;
+        color: aliceblue;
+ 
+}
+
+.icon-color{
+    color:#D6D7D6
+}
+
+.cardheader-wrapper{
+    background-color: #538F8D;
+    /* height: 20px; */
+    height: 37px;
+    font-size: 17px;
+    color: white;
+    padding-top: 9px;
+    padding-left: 9px;
+    padding-bottom: 11px;
+}
+
+.ulleftdiv-wrapper{
+   position: absolute;
+    top: 41%; 
+    list-style-type: none"
+}
+
+.ulrighttdiv-wrapper{
+    position: absolute;
+    left: 64%;
+    top: 41%; list-style-type: none"
+ }
+
+
+.lirghtdiv-wrapper{
+  color: white;
+  font-size: 17px;
+}
+.btn-primary {
+    
+    border-color: none;
+}
+
+.image-wrapper{
+    width:"100%";
+    opacity: 0.2;
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  } 
+
+
+  .speeding-icon-wrapper{
+      
+    width: 15%;
+    float: right;
+    padding-top: -9px;
+    margin-top: -4px;
+    /* margin-left: 10px; */
+    margin-right: 16px;
+  }
+
+  .rashbreaking-icon-wrapper{
+      
+    width: 11%;
+    float: right;
+    padding-top: -9px;
+    margin-top: -4px;
+    /* margin-left: 10px; */
+    margin-right: 16px;
+  }
+  
+  .idletime-icon-wrapper{
+      
+    width: 11%;
+    float: right;
+    padding-top: -9px;
+    margin-top: -4px;
+    /* margin-left: 10px; */
+    margin-right: 16px;
+  }

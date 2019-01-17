@@ -1,0 +1,114 @@
+<app-header></app-header>
+<div class="container-fluid" style="padding: 0px">
+
+  <div class="panel panel-default">
+       <div class="panel-body" style="text-align: right; background-color:#34577d"><strong style="color:white;">INDUSTRIES</strong></div>
+     </div>
+ 
+     <div class="col-md-12 padding:0px">
+       <div class="row">
+ 
+         <div class="col-md-2 imgmargin"(click)="showUseCase(1)" *ngIf='!show'>
+             <div class="talkbubble">
+ 
+               <img src="../../assets/22.png" class="img-center img-responsive">
+ 
+             <p style="text-align: center; color:#36567e;font-weight:bold;">Fleet Management</p>
+           </div>
+           </div>
+ 
+           <div class="col-md-2 imgmargin" *ngIf='show'>
+ 
+             <div class="talkbubble1">
+ 
+               <img src="../../assets/22.png" class="img-center img-responsive">
+ 
+             <p style="text-align: center; color:#fff;font-weight:bold;">Fleet Management</p>
+           </div>
+             <!-- <img src="../../assets/fleet_Image.png"  class="img-center img-responsive">
+           <p style="text-align: center; color:#267872"></p> -->
+ 
+ 
+          </div>
+ 
+           <div class="col-md-2 imgmargin" (click)="showUseCase(2)" *ngIf='!showHealth'>
+             <div class="talkbubble">
+ 
+             <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
+           <p style="text-align: center;color:#36567e ;font-weight:bold;">Health</p>
+ 
+ 
+          </div>
+         </div>
+ 
+ 
+        <div class="col-md-2 imgmargin" *ngIf='showHealth'>
+         <div class="talkbubble1">
+ 
+           <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
+         <p style="text-align: center;color:#fff;font-weight:bold; ">Health</p>
+ 
+ 
+        </div>
+ 
+         </div>
+ 
+ 
+         <div class="col-md-2 imgmargin" (click)="showUseCase(3)" *ngIf='!showManufacturing'>
+           <div class="talkbubble">
+           <img src="../../assets/3.png" class="img-center img-responsive">
+           <p style="text-align: center;color:#36567e;font-weight:bold;">Supply Chain</p>
+   </div>
+         </div>
+         <div class="col-md-2 imgmargin" *ngIf='showManufacturing'>
+           <div class="talkbubble1">
+             <img src="../../assets/3.png" class="img-center img-responsive">
+             <p style="text-align: center;color:#fff;font-weight:bold;">Supply Chain</p>
+     </div>
+ 
+           </div>
+ 
+ 
+         <div class="col-md-2 imgmargin" (click)="showUseCase(4)" *ngIf='!showTextile'>
+           <div class="talkbubble">
+           <img src="../../assets/4.png" class="img-center img-responsive">
+           <p style="text-align: center;color:#36567e;font-weight:bold;">Textile</p>
+   </div>
+         </div>
+         <div class="col-md-2 imgmargin" *ngIf='showTextile'>
+           <div class="talkbubble1">
+             <img src="../../assets/4.png" class="img-center img-responsive">
+             <p style="text-align: center;color:#fff;font-weight:bold;">Textile</p>
+     </div>
+ 
+           </div>
+ 
+ 
+ 
+    <div class="col-md-2 imgmargin" (click)="showUseCase(5)" *ngIf='!showEnergy'>
+           <div class="talkbubble">
+           <img src="../../assets/5.png" class="img-center img-responsive">
+           <p style="text-align: center;color:#36567e;font-weight:bold;">Energy</p>
+   </div>
+         </div>
+         <div class="col-md-2 imgmargin" *ngIf='showEnergy'>
+           <div class="talkbubble1">
+             <img src="../../assets/5.png" class="img-center img-responsive">
+             <p style="text-align: center;color:#fff;font-weight:bold;">Energy</p>
+     </div>
+ 
+           </div>
+ 
+ 
+       </div>
+     </div>
+ 
+ 
+   </div>
+   <app-usecase [UseCaseType]="UseCaseTypeValue" *ngIf="usecase"></app-usecase>
+ 
+   
+
+
+   <!-- <app-health *ngIf="health"></app-health> -->
+ 
