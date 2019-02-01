@@ -1,16 +1,13 @@
 <app-header></app-header>
 <div class="container-fluid">
-
- 
-      <div class="col-md-10 padding-0">
+  <div class="col-md-10 padding-0">
       <div class="col-md-12">
         <div class="col-md-6">
-          <span class="fs-26">Attendance</span>
-        </div>
+          <span class="fs-26 textborder">Attendance</span>
+          </div>
         <div class="col-md-6">
-          <span class="fs-26">Fleet Availability</span>
-
-        </div>
+          <span class="fs-26 textborder">Fleet Availability</span>
+       </div>
       </div>
 
       <div class="col-md-12">
@@ -18,10 +15,10 @@
           <div class=" card card_wrapper">
             <div class="col-md-3">
               <div class="card-body">
-                <img src ="../../assets/iconss/Attendence.png" width="38%"><br>
+                <img src ="../../assets/iconss/Attendence.png" class="attendance-icon"><br>
                 <div>
-                  <span style="padding-left: 8px;">Total</span><br>
-                  <span style="padding-left: 8px;">1000</span>
+                  <span class="padding-left-8">Total</span><br>
+                  <span class="padding-left-8">1000</span>
                 </div>
 
 
@@ -32,24 +29,27 @@
               <div class="card-body padding-top-12">
                 <span class="fs-29">88%</span><br>
                 <span class="fs-15">934 nos</span><br>
+                <hr>
                 <span class="fs-15">Present</span>
 
               </div>
 
             </div>
             <div class="col-md-3">
-              <div class="card-body padding-top-12">
+              <div class="card-body pt-12">
                 <span class="fs-29">9%</span><br>
                 <span class="fs-15">94 nos</span><br>
+                <hr>
                 <span class="fs-15">Planned leave</span>
 
               </div>
 
             </div>
             <div class="col-md-3">
-              <div class="card-body padding-top-12">
+              <div class="card-body pt-12">
                 <span class="fs-29">3%</span><br>
                 <span class="fs-15">32 nos</span><br>
+                <hr>
                 <span class="fs-15">Unplanned leave</span>
 
               </div>
@@ -60,12 +60,12 @@
 
         </div>
 
-        <div class="col-md-6 padding-left-10" style="padding-right: 0px;">
+        <div class="col-md-6 padding-left-10 pr-0">
 
           <div class="card card_wrapper">
             <div class="col-md-3">
               <div class="card-body">
-                  <img src ="../../assets/iconss/Fleet.png" width="38%"><br>
+                  <img src ="../../assets/iconss/Fleet.png" class="fleet-icon"><br>
                   <div>
                     <span style="padding-left: 5px;">Total</span><br>
                     <span style="padding-left: 5px;">1000</span>
@@ -77,6 +77,7 @@
               <div class="card-body padding-top-12">
                 <span class="fs-29">88%</span><br>
                 <span class="fs-15">930 nos</span><br>
+                <hr>
                 <span class="fs-15">On Field</span>
 
               </div>
@@ -86,6 +87,7 @@
               <div class="card-body padding-top-12">
                 <span class="fs-29">9%</span><br>
                 <span class="fs-15">80 nos</span><br>
+                <hr>
                 <span class="fs-15">Standby</span>
 
               </div>
@@ -95,6 +97,7 @@
               <div class="card-body padding-top-12">
                 <span class="fs-29">3%</span><br>
                 <span class="fs-15">30 nos</span><br>
+                <hr>
                 <span class="fs-15">Maintenance</span>
              
               </div>
@@ -107,29 +110,33 @@
         </div>
 
       </div>
-
-
-      <div class="col-md-12" style="padding-top: 8px;">
-        <div class="card card_wrapper-chart" style="height: 300px">
-          <div class="card-body">
-              <h5 class="card-title fs-19">Driver Daily Performance</h5>
-             <div [chart]="driverperformancechart" style="height: 300px">
-           </div>
+    <div class="col-md-12 driver-performace-div">
+        <div class="card card_wrapper-chart">
+          <div class="card-body" style="background-color: #ffffff">
+            <div>
+                <img src ="../../assets/iconss/performance_icon.png" width="2%" class="mt-14" style="margin-left: 33px;">
+                <!-- <h5 class="card-title fs-19">Driver Daily Performance</h5> -->
+                <span class="fs-25" style="padding-left: 14px;margin-left: 24px">Driver Daily Performance</span>
+            </div>
+              <div [chart]="driverperformancechart">   
+            </div>
+            
+        
              <!-- <h5 style="float: left">Driver Daily Performance</h5> -->
             </div>
         </div>
       </div> 
 
-      <div class="col-md-12" style="padding-top: 45px">
+      <div class="col-md-12" style="margin-top: 50px;">
         <div class="col-md-12">
-            <img src ="../../assets/iconss/Rating.png" width="2%" style="margin-top: -14px;">
+            <img src ="../../assets/iconss/Rating.png" width="2%" class="mt-14">
          <span class="fs-25" style="padding-left: 14px">Drivers By rating</span>
        </div>
         <div>
           <div class="col-md-3 padding-0">
-            <div class="card-body card_wrapper-drivers">
-              <span class="fs-40">88%</span><br>
-              <span class="fs-17">934 nos</span><br>
+            <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '5' ? 'LightSkyBlue' : '' }">
+              <span class="fs-40">35%</span><br>
+              <span class="fs-17">229 nos</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
                 class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
@@ -138,34 +145,34 @@
             </div>
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
-            <div class="card-body card_wrapper-drivers">
-              <span class="fs-40">88%</span><br>
-              <span class="fs-17">934 nos</span><br>
+            <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '4' ? 'LightSkyBlue' : '' }">
+              <span class="fs-40">35%</span><br>
+              <span class="fs-17">262 nos</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star iconback-color"
                 aria-hidden="true"></i>
             </div>
 
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
-            <div class="card-body card_wrapper-drivers">
-              <span class="fs-40">88%</span><br>
-              <span class="fs-17">934 nos</span><br>
+            <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '3' ? 'LightSkyBlue' : '' }">
+              <span class="fs-40">25%</span><br>
+              <span class="fs-17">254 nos</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                class="fa fa-star iconback-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star iconback-color"
                 aria-hidden="true"></i>
             </div>
 
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
-            <div class="card-body card_wrapper-drivers">
-              <span class="fs-40">88%</span><br>
-              <span class="fs-17">934 nos</span><br>
+            <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '2' ? 'LightSkyBlue' : '' }">
+              <span class="fs-40">05%</span><br>
+              <span class="fs-17">255 nos</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star iconback-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star iconback-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star iconback-color"
                 aria-hidden="true"></i>
             </div>
 
@@ -175,15 +182,15 @@
 
 
     </div>
-    <div class="col-md-2" style="padding-top: 27px;padding-left: 0px;padding-right:3px;">
-      <div class="col-md-12" style="padding: 0px;">
+    <div class="col-md-2 secrightdiv">
+      <div class="col-md-12 padding-0">
         <div class="card">
-          <div class="card-header cardheader-wrapper" style="background-color: #54918C">Over Speeding
+          <div class="card-header cardheader-wrapper bg-color">Over Speeding
               <img src ='../../assets/iconss/speed.png' class="speeding-icon-wrapper">
           </div>
-          <div class="card-body" style="background-color: #347C75">
-            <img src="../../assets/images/Speeding_Truck_Image.jpg" width="100%" style="opacity: 0.2;">
-            <button type="button" class="btn btn-primary" style="color:white;background-color:#19635C;position: absolute;left:49%;top:22%;border-color:none;width:46%"><span>20&nbsp;&nbsp;</span>Events</button>
+          <div class="card-body bg-color">
+            <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image" style="opacity: 0.1;">
+            <button type="button" class="btn btn-primary event-button" ><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -195,24 +202,24 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">23</li>
-                <li class="lirghtdiv-wrapper">24</li>
-                <li class="lirghtdiv-wrapper">16</li>
-                <li class="lirghtdiv-wrapper">15</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-12" style="padding: 0px;padding-top: 2px">
+      <div class="col-md-12 rightsectionbox">
         <div class="card">
-          <div class="card-header cardheader-wrapper" style="background-color: #347C75">Rash Breaking
+          <div class="card-header cardheader-wrapper" style="background-color: #347C75">Harsh Breaking
               <img src ='../../assets/iconss/Rash.png' class="rashbreaking-icon-wrapper">
           </div>
-          <div class="card-body" style="background-color:  #347C75">
-            <img src="../../assets/images/Speeding_Truck_Image.jpg" width="100%" style="opacity: 0.2;">
-            <button type="button" class="btn btn-primary" style="color:white;background-color:#19635C;position: absolute;left:49%;top:22%;border-color:none;width: 46%;"><span>20&nbsp;&nbsp;</span>Events</button>
+          <div class="card-body bg-color">
+            <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image"  style="opacity: 0.1;">
+            <button type="button" class="btn btn-primary event-button"><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -224,23 +231,23 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">23</li>
-                <li class="lirghtdiv-wrapper">24</li>
-                <li class="lirghtdiv-wrapper">16</li>
-                <li class="lirghtdiv-wrapper">15</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-12" style="padding: 0px;padding-top: 2px">
+      <div class="col-md-12 rightsectionbox">
         <div class="card">
-          <div class="card-header cardheader-wrapper" style="background-color: #54918C">IDLE TIME
+          <div class="card-header cardheader-wrapper bg-color">IDLE TIME
           <img src ='../../assets/iconss/Idle.png' class="idletime-icon-wrapper">
           </div>
-          <div class="card-body" style="background-color: #54918C">
-            <img src="../../assets/images/Speeding_Truck_Image.jpg" width="100%" style="opacity: 0.2;">
-         <button type="button" class="btn btn-primary" style="color:white;background-color:#19635C;position: absolute;left:49%;top:22%;border-color:none;width:46%;"><span>20&nbsp;&nbsp;</span>Events</button>
+          <div class="card-body bg-color">
+            <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image"  style="opacity: 0.1;">
+         <button type="button" class="btn btn-primary event-button"><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -252,10 +259,10 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">23</li>
-                <li class="lirghtdiv-wrapper">24</li>
-                <li class="lirghtdiv-wrapper">16</li>
-                <li class="lirghtdiv-wrapper">15</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
+                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
               </ul>
             </div>
           </div>
@@ -263,12 +270,5 @@
       </div>
 
     </div>
-
- 
-
-
-
-
-
 
 </div>

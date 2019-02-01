@@ -14,19 +14,20 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this.router.navigate(['/login']);
-   
+  
+  }
+  showDashBoard(){
+    this.router.navigate(['/industries'])
 
   }
-  showsideMenu()
+  showSideMenu()
   {
    
-    this.router.navigate(['/industries'])
+    document.getElementById("mySidenav").style.width = "250px";
   }
 
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
-  }
+   }
 
 }

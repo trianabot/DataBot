@@ -204,7 +204,7 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
 
 loadmap(){
  
-
+ 
   this.http.get('../../assets/data/location.json').subscribe(res => {
     var newmapdata = res;
    
@@ -349,6 +349,8 @@ newMapData(newmapdata) {
 
     }
   }
+
+
 }
 
 // getstock(catehoryname) {

@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   
   }
+  redirectRegister(){
+    this.router.navigate(['./sign-up'])
+   }
+
 
   register(register){
     // if(this.userName =="Demo" && this.password =="Demo123"){

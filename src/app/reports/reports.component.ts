@@ -18,15 +18,11 @@ export class ReportsComponent implements OnInit {
   }
   
 redirectDashboard(){
-
-   this.router.navigate(['./dashboard']);
-  
+this.router.navigate(['./dashboard']);
 }
 
 redirectInventory(){
-
-  this.router.navigate(['./inventory']);
- 
+this.router.navigate(['./inventory']);
 }
 
 redirectInventortMap(){
@@ -40,7 +36,17 @@ redirectwarehouseoverview(){
   redirectstocktracking(){
    this.router.navigate(['./stocktracking'])
   }
+  redirectdriveroverview()
+  {
+    this.router.navigate(['./driver-overview'])
+   }
+  redirectvehicleMetrics()
+  {
+    this.router.navigate(['./vehicle-metric'])
+   }
+   customerFeedbackAnalysis(){
+    this.router.navigate(['./customer-feedback'])
+   }
 
- 
 
 }

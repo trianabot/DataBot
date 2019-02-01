@@ -40,7 +40,7 @@ export class InventoryMapComponent implements OnInit {
   stockitem: any;
   sparepart:any;
   selectedItem:any;
-
+  
   categorydefaultname:any;
   stockItemdefaultname:any;
   sparepartdefaultname: any;
@@ -57,8 +57,7 @@ export class InventoryMapComponent implements OnInit {
     this.http.get('../../assets/data/stock.json').subscribe(data => {
       this.jsondata = data;
       // this.distributors = data['LOCATIONS'];
-
-      var index: any;
+       var index: any;
       for (index in this.jsondata) {
 
         if (this.categories.indexOf(this.jsondata[index].Category) < 0) {

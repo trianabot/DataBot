@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UsecaseComponent } from './usecase/usecase.component';
 import { ReportsComponent } from './reports/reports.component';
-import{HealthComponent} from './health/health.component'
-import {ManfacturingComponent} from './manfacturing/manfacturing.component'
-import {TextileComponent} from './textile/textile.component'
-import {EnergyComponent} from './energy/energy.component'
+import { HealthComponent } from './health/health.component'
+import { ManfacturingComponent } from './manfacturing/manfacturing.component'
+import { TextileComponent } from './textile/textile.component'
+import { EnergyComponent } from './energy/energy.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { IndustriesComponent } from './industries/industries.component';
@@ -15,24 +15,35 @@ import { InventoryMapComponent } from './inventory-map/inventory-map.component';
 import { WarehouseOverviewComponent } from './warehouse-overview/warehouse-overview.component';
 import { StockTrackingComponent } from './stock-tracking/stock-tracking.component';
 import { DriverOverviewComponent } from './driver-overview/driver-overview.component';
+import { VehicleliveMetricComponent } from './vehiclelive-metric/vehiclelive-metric.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AddTenantComponent } from './super-admin/add-tenant/add-tenant.component';
+import { AddUserComponent } from './super-admin/add-user/add-user.component';
+import { AddDeviceComponent } from './super-admin/add-device/add-device.component';
+import { CustomerFeedbackAnalysisComponent } from './customer-feedback-analysis/customer-feedback-analysis.component';
 
 const routes: Routes = [
-    {path:'login',component:LoginComponent},
-    { path: '', redirectTo: '/login', pathMatch: 'full'},
-    {path:'industries',component:IndustriesComponent},
-    {path: 'health', component:HealthComponent},
-   {path: 'manufacturing', component:ManfacturingComponent},
-   {path: 'textile', component:TextileComponent},
-   {path: 'energy', component:EnergyComponent},
-   {path: 'usecase', component : UsecaseComponent},
-  {path: 'reports', component :ReportsComponent,outlet:'reports'},
-  {path:'dashboard', component:DashboardComponent},
-  {path:'inventory',component:InventoryReportComponent},
-  {path:'inventormap', component:InventoryMapComponent},
-  {path:'warehouseoverview', component:WarehouseOverviewComponent},
-  {path:'stocktracking', component:StockTrackingComponent},
-  {path:'driver-overview', component:DriverOverviewComponent}
-  
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'industries', component: IndustriesComponent },
+  { path: 'health', component: HealthComponent },
+  { path: 'manufacturing', component: ManfacturingComponent },
+  { path: 'textile', component: TextileComponent },
+  { path: 'energy', component: EnergyComponent },
+  { path: 'usecase', component: UsecaseComponent },
+  { path: 'reports', component: ReportsComponent, outlet: 'reports' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'inventory', component: InventoryReportComponent },
+  { path: 'inventormap', component: InventoryMapComponent },
+  { path: 'warehouseoverview', component: WarehouseOverviewComponent },
+  { path: 'stocktracking', component: StockTrackingComponent },
+  { path: 'driver-overview', component: DriverOverviewComponent },
+  {path:'vehicle-metric', component:VehicleliveMetricComponent},
+  {path:'sign-up', component:SignUpComponent},
+  {path:'add-tenant',component:AddTenantComponent},
+  {path:'add-user', component:AddUserComponent},
+  {path:'add-device', component:AddDeviceComponent},
+  {path:'customer-feedback', component:CustomerFeedbackAnalysisComponent}
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

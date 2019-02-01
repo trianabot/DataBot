@@ -24,6 +24,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ChartModule,HIGHCHARTS_MODULES  } from 'angular-highcharts';
 import * as drilldown from 'highcharts/modules/drilldown.src.js';
 import * as treemap from 'highcharts/modules/treemap.src.js';
+import * as solidgauge from 'highcharts/modules/solid-gauge.js';
 import { HttpClientModule } from '@angular/common/http';
 import { InventoryMapComponent } from './inventory-map/inventory-map.component';
 import { WarehouseOverviewComponent } from './warehouse-overview/warehouse-overview.component';
@@ -31,6 +32,17 @@ import { StockTrackingComponent } from './stock-tracking/stock-tracking.componen
 import { RouteService } from './service/route.service';
 import { HttpModule } from '@angular/http';
 import { DriverOverviewComponent } from './driver-overview/driver-overview.component';
+import { VehicleliveMetricComponent } from './vehiclelive-metric/vehiclelive-metric.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AddTenantComponent } from './super-admin/add-tenant/add-tenant.component';
+import { AddUserComponent } from './super-admin/add-user/add-user.component';
+import { AddDeviceComponent } from './super-admin/add-device/add-device.component';
+import * as Heatmap from 'highcharts/modules/heatmap.src';
+import * as more from 'highcharts/highcharts-more.src';
+import * as solidGauge from 'highcharts/modules/solid-gauge.src';
+import { CustomerFeedbackAnalysisComponent } from './customer-feedback-analysis/customer-feedback-analysis.component';
+import * as highstock from 'highcharts/modules/stock.src';
+
 
 
 
@@ -54,6 +66,12 @@ import { DriverOverviewComponent } from './driver-overview/driver-overview.compo
     WarehouseOverviewComponent,
     StockTrackingComponent,
     DriverOverviewComponent,
+    VehicleliveMetricComponent,
+    SignUpComponent,
+    AddTenantComponent,
+    AddUserComponent,
+    AddDeviceComponent,
+    CustomerFeedbackAnalysisComponent,
     
    
     ],
@@ -72,7 +90,7 @@ import { DriverOverviewComponent } from './driver-overview/driver-overview.compo
     })
   ],
   providers: [RouteService,{provide: HIGHCHARTS_MODULES,
-    useFactory: () => [ drilldown, treemap]}],
+    useFactory: () => [ drilldown, treemap,more , Heatmap, solidGauge,highstock]}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
