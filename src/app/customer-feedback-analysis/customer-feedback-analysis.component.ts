@@ -1,89 +1,259 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
+import { HttpClient } from '@angular/common/http';
+import { state } from '@angular/animations';
+import { IfStmt } from '@angular/compiler';
+import { Console } from '@angular/core/src/console';
+
 
 @Component({
-  selector: 'app-customer-feedback-analysis',
-  templateUrl: './customer-feedback-analysis.component.html',
-  styleUrls: ['./customer-feedback-analysis.component.css']
+    selector: 'app-customer-feedback-analysis',
+    templateUrl: './customer-feedback-analysis.component.html',
+    styleUrls: ['./customer-feedback-analysis.component.css']
 })
 export class CustomerFeedbackAnalysisComponent implements OnInit {
-scrollchart:any;
-options:any;
+    scrollchart: any;
+    options: any;
 
-  constructor() { 
+    /**dropdown */
+    jsondata: any;
+    driverjsondata:any;
+    drivercount:any;
+    region: any = [];
+    state: any = [];
+    regionname: any;
+    statename: any;
+    customerinfo: any = [];
+    toprateddriveinfo: any = [];
+    lowrateddriverinfo: any = [];
+    rating: any;
+    customername:any;
+    drivername:any;
+    companyterm:any;
+    totalexp:any;
+    date:any;
+    feedback:any;
+    noofreviews:any;
+    driverperformance:any;
+    fivestartratingcount:number = 0;
+    fourstartratingcount:number = 0;
+    threestartratingcount:number = 0;
+    twostartratingcount:number = 0;
+    onestartratingcount:number = 0;
+
+    fivestarrating:any =[];
+    fourstarrating:any =[];
+    threestarrating:any =[];
+    twostartrating:any =[];
+    onestartrating:any =[];
+    dates :any =[];
+
+    driverpreviousrating:any;
+    driverpreviousratingone:any;
+    driverpreviousratingtwo:any;
+    driverpreviousratingthree:any;
+    driverpreviousratingfour:any;
+    driverpreviousratingfive:any;
+
+
+
+
+
+    constructor(public http: HttpClient) { }
+
+    ngOnInit() {
+        this.http.get('../../assets/data/customer-feedback.json').subscribe(data => {
+            this.jsondata = data;
+            var index: any;
+            for (index in this.jsondata) {
+                if (this.region.indexOf(this.jsondata[index].Region) < 0) {
+                    this.region.push(this.jsondata[index].Region);
+                }
+            }
+        });
+        // this.loadChart()
+        
+     }
+
+
+    changeRegion(region) {
+        this.regionname = region.currentTarget.value;
+        this.state = []
+        var index: any;
+        for (index in this.jsondata) {
+            if (this.jsondata[index].Region === this.regionname) {
+                if (this.state.indexOf(this.jsondata[index].State) < 0) {
+                    this.state.push(this.jsondata[index].State);
+                }
+            }
+        }
+    }
+
+    changeState(state) {
+        this.statename = state.currentTarget.value;
+        // this.loadReviewJson(this.regionname,this.statename)
+            this.customerinfo =[];
+            this.toprateddriveinfo =[];
+         var index: any;
+        for (index in this.jsondata) {
+            if (this.jsondata[index].Region === this.regionname && this.jsondata[index].State === this.statename) {
+                this.customerinfo.push({ "customername": this.jsondata[index]['Customer Name'], "consigmentno": this.jsondata[index].Consignment })
+             this.rating = this.jsondata[index].Rating
+
+            if (this.rating == "5") {
+                 this.toprateddriveinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index].Rating })
+
+                 console.log(this.toprateddriveinfo)
+                
+                }
+           else if (this.rating == "1") {
+                this.lowrateddriverinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,  "rating": this.jsondata[index].Rating })
+               
+           }
+         }
+                this.fivestartratingcount += this.jsondata[index]['5 Star'];
+                this.fourstartratingcount += this.jsondata[index]['4 Star'];
+                this.threestartratingcount += this.jsondata[index]['3 Star'];
+                this.twostartratingcount += this.jsondata[index]['2 Star'];
+                this.onestartratingcount += this.jsondata[index]['1 Star'];
+                this.fivestarrating.push(this.jsondata[index]['5 Star'])
+                this.fourstarrating.push(this.jsondata[index]['4 Star']);
+                this.threestarrating.push(this.jsondata[index]['3 Star']);
+                this.twostartrating.push(this.jsondata[index]['2 Star']);
+                this.onestartrating.push(this.jsondata[index]['1 Star']);
+                 this.dates.push(this.jsondata[index].Date)
+
+
+         } 
+         this.fleetRatingChart(this.fivestarrating,this.dates,this.fourstarrating,this.threestarrating,this.twostartrating,this.onestartrating);
+        
+        
+     }
     
+    driverDetails(item:any){
+        this.customername = item;
+        var index: any;
+        for (index in this.jsondata) {
+            if (this.jsondata[index]['Customer Name'] === this.customername) {
+                this.drivername = this.jsondata[index]['Driver Name'];
+                this.companyterm = this.jsondata[index]['Company Term'];
+                this.totalexp = this.jsondata[index]['Total Experience'];
+                this.date = this.jsondata[index]['Date'];
+                this.feedback = this.jsondata[index]['feedback'];
+                this.noofreviews = this.jsondata[index]['No of Reviews']
+                this.driverperformance = this.jsondata[index]['Rating']     
+            }
+        } 
+         this.driverRating(this.drivername)
+      }
 
-  }
 
-  ngOnInit() {
-    this.loadChart();
-  }
+      driverRating(drivername){
+        var index: any; 
+        for (index in this.jsondata) {
+        if (this.jsondata[index]['Driver Name'] ===drivername) {
+        // this.driverpreviousrating = this.jsondata[index]['Rating']
+        this.driverpreviousratingone = this.jsondata[index]['1 Star']
+        this.driverpreviousratingtwo = this.jsondata[index]['2 Star']
+        this.driverpreviousratingthree= this.jsondata[index]['3 Star']
+        this.driverpreviousratingfour = this.jsondata[index]['4 Star']
+         this.driverpreviousratingfive = this.jsondata[index]['5 Star']
+                 
+                
+            }
+        } 
+     }
 
-  loadChart(){
-    this.scrollchart = new Chart({
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Fleet Rating'
-        },
-        xAxis: {
-            categories: ['JAN', 'Feb', 'March', 'April', 'May','June','July','Aygust','Sep','Oct','Nov','Dec']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Total fruit consumption'
+
+
+fleetRatingChart(fivestarrating,dates,fourstarrating,threestarrating,twostartrating,onestartrating) {
+        this.options = {
+            chart: {
+                type: 'column'
             },
-            stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color:  'gray'
+            title: {
+                text: '',
+                
+            },
+            xAxis: {
+                categories:dates,
+                min:0,
+                max:10,
+                scrollbar:{
+                    enabled:true
                 }
-            }
-        },
-        legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: 25,
-            floating: true,
-            backgroundColor: 'white',
-            borderColor: '#CCC',
-            borderWidth: 1,
-            shadow: false
-        },
-        tooltip: {
-            headerFormat: '<b>{point.x}</b><br/>',
-            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                dataLabels: {
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                },
+                stackLabels: {
                     enabled: true,
-                    color:  'white'
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'gray'
+                    }
+                },
+                gridLineColor: 'transparent',
+                labels:{
+                    enabled:false
+                 },
+               
+             
+            },
+           
+            credits: {
+              enabled: false
+          },
+            legend: {
+                align: 'right',
+                x:0,
+                verticalAlign: 'top',
+                y:0,
+                floating: true,
+                backgroundColor: 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<b>{point.x}</b><br/>',
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: 'white'
+                    }
                 }
-            }
-        },
-        series: [{
-            name: '5 Star',
-            data: [845,839,830,889,888,824,818,896,865,822,842,829]
-        }, {
-            name: '4 Star',
-            data: [425,491,537,548,585,404,445,455,497,471,549,489]
-        }, {
-            name: '3 Star',
-            data: [386,329,316,338,302,315,368,328,395,385,389,324]
-        }, {
-            name: '2 Star',
-            data: [255,310,211,244,274,245,200,279,228,343,305,213]
-        },{
-            name: '1 Star',
-            data: [52,51,64,74,54,75,56,65,71,57,73,54]
-        }]
-    })
+            },
+            series: [{
+                name: '5 Star',
+                data: fivestarrating,
+                 color:'#FF5534'
+            }, {
+                name: '4 Star',
+                data: fourstarrating,
+                color:'#FBD41F'
+            }, {
+                name: '3 Star',
+                data: threestarrating,
+                color:'#88c053'
+            }, {
+                name: '2 Star',
+                data: twostartrating,
+                 color: '#D570AC'
+            }, {
+                name: '1 Star',
+                data: onestartrating,
+                color: '#47CEAD',
+            }]
+        };
 
-}
+        this.scrollchart = new Chart(this.options)
+
+    }
 }

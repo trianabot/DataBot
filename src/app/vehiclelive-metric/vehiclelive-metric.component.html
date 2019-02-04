@@ -232,17 +232,13 @@
                 </div>
                 <div class="card-body" style="background-color: #1A6A64;padding-bottom: 12px;OVERFLOW:overlay;height: 241px;">
                     <ul class="list-group" *ngFor="let item of address">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="padding-right: 36px;">
                           {{item.Location}}
                           <i style="font-size:24px; float:right;" class="fa" [ngStyle]="{'color':item.Status === 'Yes' ? 'yellow' : 'red' }">&#xf05d;</i>
                         </li>
                       </ul>
-                     
-                        
-                      
-                </div>
-             
-        </div>
+                     </div>
+             </div>
       
     </div>
 
