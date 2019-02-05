@@ -49,7 +49,7 @@
 .talkbubble:hover {
     /* width: 120px; */
    padding:15px;
-    background: #E69800;
+    background: #5871b2;
     position: relative;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px; 
@@ -64,7 +64,7 @@
     right: -14px;
     top: -23px;
     left: -14px;
-    border-top: 24px solid #E69800;
+    border-top: 24px solid #5871b2;
     border-left: 14px solid transparent;
     border-right: 14px solid transparent;
     height: 0;

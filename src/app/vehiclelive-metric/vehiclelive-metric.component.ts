@@ -67,8 +67,8 @@ export class VehicleliveMetricComponent implements OnInit {
   vehicledefaultname: any;
 
   /**Chart*/
-  speed:any;
-  rpm:any;
+  speed: any;
+  rpm: any;
 
 
   constructor(public http: HttpClient) { }
@@ -91,8 +91,8 @@ export class VehicleliveMetricComponent implements OnInit {
       this.loadDefaultRegion(this.region, this.jsondata)
       // this.distributors = data['LOCATIONS'];
     });
- 
-    
+
+
     // this.routeMap();
   }
 
@@ -160,12 +160,12 @@ export class VehicleliveMetricComponent implements OnInit {
     this.loadDefaultDriverData(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata, this.ratingdefaultvalue, this.vehicledefaultname)
   }
 
-   
-  loadDefaultDriverData(regiondefaultname,statedefaultname,categorydefaultname, jsondata,ratingdefaultvalue, vehicledefaultname){
+
+  loadDefaultDriverData(regiondefaultname, statedefaultname, categorydefaultname, jsondata, ratingdefaultvalue, vehicledefaultname) {
     var index: any;
     for (index in this.jsondata) {
       if (jsondata[index].Region === regiondefaultname && jsondata[index].State === statedefaultname &&
-        this.jsondata[index].Category === categorydefaultname && this.jsondata[index].Rating == ratingdefaultvalue && this.jsondata[index]['Truck ID'] ===vehicledefaultname) {
+        this.jsondata[index].Category === categorydefaultname && this.jsondata[index].Rating == ratingdefaultvalue && this.jsondata[index]['Truck ID'] === vehicledefaultname) {
 
         this.drivername = this.jsondata[index]['Name']
         this.licenceno = this.jsondata[index]['Vehicle Licence ID']
@@ -200,22 +200,22 @@ export class VehicleliveMetricComponent implements OnInit {
 
 
 
-  loadMap(){
-  this.http.get('../../assets/data/location.json').subscribe(res => {
+  loadMap() {
+    this.http.get('../../assets/data/location.json').subscribe(res => {
       var newmapdata = res;
-     console.log(newmapdata)
+      console.log(newmapdata)
       this.routeMap(newmapdata);
     });
   }
 
   routeMap(newmapdata) {
-    
+
     var lat_lng = new Array();
-// let that;
+    // let that;
     for (var i = 0; i < newmapdata.length; i++) {
       var lat = newmapdata[i].Latitude;
       var long = newmapdata[i].Longitude;
-      var myLatlng = new google.maps.LatLng( lat, long);
+      var myLatlng = new google.maps.LatLng(lat, long);
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5,
         center: myLatlng,
@@ -230,7 +230,7 @@ export class VehicleliveMetricComponent implements OnInit {
         fullscreenControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
         }
-  
+
       });
       lat_lng.push(myLatlng);
       var image = {
@@ -239,15 +239,15 @@ export class VehicleliveMetricComponent implements OnInit {
         scaledSize: new google.maps.Size(50, 50),
         // The origin for this image is (0, 0).
       };
-  
+
       var imagetruck = {
         url: '../../assets/images/truck_top.png',
         // This marker is 50 pixels wide by 50 pixels high.
         scaledSize: new google.maps.Size(30, 30),
         // The origin for this image is (0, 0).
       };
-      
-  
+
+
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, long),
         map: map,
@@ -258,46 +258,46 @@ export class VehicleliveMetricComponent implements OnInit {
         map: map,
         icon: image,
       });
-  
+
       // var infowindow = new google.maps.InfoWindow({
       //   content: '<b><p style="color:red;text-weight:bold">Tire Position:' + JSON.stringify(tirepos) + '</p></b>' +
       //     '<b><p style="color:red;text-weight:bold">Tire Pressure:' + JSON.stringify(tirepsi) + '</p></b>'
-        
-  
+
+
       // });
       // var infowindow1 = new google.maps.InfoWindow({
       //   // content: '<b><p style="color:black">1</p>'
-        
-  
+
+
       // });
       // // infowindow.open(map, marker);
       // infowindow1.open(map, marker1);
-  
+
       setInterval(function () {
         map.panTo(marker.getPosition());
       }, 5000);
     }
-  
+
     var service = new google.maps.DirectionsService();
     var delayFactor = 0;
-  
+
     function m_get_directions_route(request, latlong) {
       service.route(request, function (result, status) {
         if (status === google.maps.DirectionsStatus.OK) {
           //Process you route here
           var path = new google.maps.MVCArray();
-  
+
           var polylineoptns = {
             strokeOpacity: 0.8,
             strokeWeight: 3,
             strokeColor: "blue",
             map: map,
           };
-  
-         
+
+
           var poly = new google.maps.Polyline(polylineoptns);
           poly.setPath(path);
-  
+
           var infowindow_polygon_1 = new google.maps.InfoWindow({ content: 'Stock' });
           google.maps.event.addListener(poly, "mouseover", function (event) {
             this.setOptions({ fillColor: "#00FF00" });
@@ -309,7 +309,7 @@ export class VehicleliveMetricComponent implements OnInit {
             //infowindow_polygon_1.setPosition(event.latLng);
             infowindow_polygon_1.close(map);
           });
-  
+
           for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
             path.push(result.routes[0].overview_path[i]);
             marker.setPosition(result.routes[0].overview_path[i]);
@@ -324,8 +324,8 @@ export class VehicleliveMetricComponent implements OnInit {
         }
       });
     }
-  
-  
+
+
     for (i = 0; i < lat_lng.length; i++) {
       if ((i + 1) < lat_lng.length) {
         var src = lat_lng[i];
@@ -335,10 +335,10 @@ export class VehicleliveMetricComponent implements OnInit {
           destination: des,
           travelMode: google.maps.DirectionsTravelMode.DRIVING
         };
-  
-      
+
+
         m_get_directions_route(request, lat_lng);
-  
+
       }
     }
 
@@ -346,6 +346,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
   }
   loadGuage(speed) {
+    let $this = this;
     this.options = {
       chart: {
         type: 'gauge',
@@ -441,14 +442,45 @@ export class VehicleliveMetricComponent implements OnInit {
 
       series: [{
         name: 'Speed',
-        data: [speed],
+        data: [60],
         tooltip: {
           valueSuffix: ' km/h'
         }
       }]
 
     };
-    this.chartSpeed = new Chart(this.options);
+    $this.chartSpeed = new Chart(this.options);
+    setInterval(function () {
+      // Speed
+      var point,
+        newVal,
+        inc;
+
+      if ($this.chartSpeed) {
+        point = $this.chartSpeed.ref.series[0].points[0];
+        inc = Math.round((Math.random() - 0.5) * 100);
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 180) {
+          newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+      }
+
+      // RPM
+      if ($this.chartRpm) {
+        point = $this.chartRpm.ref.series[0].points[0];
+        inc = (Math.random() - 0.5);
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 5) {
+          newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+      }
+    }, 2000);
   }
 
   loadGaugerpm(rpm) {
@@ -507,7 +539,7 @@ export class VehicleliveMetricComponent implements OnInit {
       // the value axis
       yAxis: {
         min: 0,
-        max: 180,
+        max: 12,
 
         minorTickInterval: 'auto',
         minorTickWidth: 1,
@@ -525,26 +557,26 @@ export class VehicleliveMetricComponent implements OnInit {
           rotation: 'auto'
         },
         title: {
-          text: 'km/h'
+          text: 'r/min'
         },
         plotBands: [{
           from: 0,
-          to: 120,
+          to: 4,
           color: '#55BF3B' // green
         }, {
-          from: 120,
-          to: 160,
+          from: 4,
+          to: 8,
           color: '#DDDF0D' // yellow
         }, {
-          from: 160,
-          to: 200,
+          from: 8,
+          to: 12,
           color: '#DF5353' // red
         }]
       },
 
       series: [{
         name: 'Rpm',
-        data: [rpm],
+        data: [4],
         tooltip: {
           valueSuffix: ' km/h'
         }
@@ -589,7 +621,7 @@ export class VehicleliveMetricComponent implements OnInit {
     }
   }
 
- 
+
   changeCategory(category) {
     this.categoryname = this.categorydefaultname = category.currentTarget.value;
     this.driverrating = [];

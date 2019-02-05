@@ -14,6 +14,7 @@ import { Console } from '@angular/core/src/console';
 export class CustomerFeedbackAnalysisComponent implements OnInit {
     scrollchart: any;
     options: any;
+    selectedId:any;
 
     /**dropdown */
     jsondata: any;
@@ -48,6 +49,8 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
     onestartrating:any =[];
     dates :any =[];
 
+    avgfeedback:any;
+
     driverpreviousrating:any;
     driverpreviousratingone:any;
     driverpreviousratingtwo:any;
@@ -55,13 +58,13 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
     driverpreviousratingfour:any;
     driverpreviousratingfive:any;
 
+    regiondefaultname:any;
+    statedefaultname:any;
 
 
-
-
-    constructor(public http: HttpClient) { }
-
-    ngOnInit() {
+   constructor(public http: HttpClient) { }
+     ngOnInit() {
+         this.regiondefaultname ="Midwest",this.statedefaultname ="Michigan"
         this.http.get('../../assets/data/customer-feedback.json').subscribe(data => {
             this.jsondata = data;
             var index: any;
@@ -70,14 +73,66 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
                     this.region.push(this.jsondata[index].Region);
                 }
             }
+            this.loadDefaultRegion(this.regiondefaultname,this.jsondata)
         });
-        // this.loadChart()
         
+
+ }
+
+     loadDefaultRegion(regiondefaultname,jsondata){
+        this.state = []
+        var index: any;
+        for (index in jsondata) {
+            if (jsondata[index].Region === regiondefaultname) {
+                if (this.state.indexOf(jsondata[index].State) < 0) {
+                    this.state.push(jsondata[index].State);
+                }
+            }
+        }
+
+         this.loadDefaultData(this.regiondefaultname,this.jsondata,this.statedefaultname)
      }
 
+ loadDefaultData(regiondefaultname,jsondata,statedefaultname){
+    this.customerinfo =[];
+    this.toprateddriveinfo =[];
+     var index: any;
+        for (index in jsondata) {
+    if (this.jsondata[index].Region === regiondefaultname && this.jsondata[index].State === statedefaultname) {
+        this.customerinfo.push({ "customername": jsondata[index]['Customer Name'], "consigmentno": jsondata[index].Consignment })
+     this.rating = jsondata[index].Rating
 
-    changeRegion(region) {
-        this.regionname = region.currentTarget.value;
+    if (this.rating == "5") {
+         this.toprateddriveinfo.push({ "drivername":jsondata[index]['Driver Name'] ,"rating": jsondata[index].Rating })
+
+         console.log(this.toprateddriveinfo)
+        
+        }
+     else if (this.rating == "1") {
+        this.lowrateddriverinfo.push({ "drivername": jsondata[index]['Driver Name'] ,"rating":jsondata[index].Rating })
+       
+     }
+    }
+        this.fivestartratingcount += jsondata[index]['5 Star'];
+        this.fourstartratingcount += jsondata[index]['4 Star'];
+        this.threestartratingcount += jsondata[index]['3 Star'];
+        this.twostartratingcount += jsondata[index]['2 Star'];
+        this.onestartratingcount += jsondata[index]['1 Star'];
+        this.fivestarrating.push(jsondata[index]['5 Star'])
+        this.fourstarrating.push(jsondata[index]['4 Star']);
+        this.threestarrating.push(jsondata[index]['3 Star']);
+        this.twostartrating.push(jsondata[index]['2 Star']);
+        this.onestartrating.push(jsondata[index]['1 Star']);
+         this.dates.push(jsondata[index].Date)
+
+
+        } 
+        this.fleetRatingChart(this.fivestarrating,this.dates,this.fourstarrating,this.threestarrating,this.twostartrating,this.onestartrating);
+}
+    
+
+     changeRegion(region) {
+        this.regionname = this.regiondefaultname = region.currentTarget.value;
         this.state = []
         var index: any;
         for (index in this.jsondata) {
@@ -90,13 +145,13 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
     }
 
     changeState(state) {
-        this.statename = state.currentTarget.value;
+        this.statename =  this.statedefaultname = state.currentTarget.value;
         // this.loadReviewJson(this.regionname,this.statename)
             this.customerinfo =[];
             this.toprateddriveinfo =[];
          var index: any;
         for (index in this.jsondata) {
-            if (this.jsondata[index].Region === this.regionname && this.jsondata[index].State === this.statename) {
+            if (this.jsondata[index].Region === this.regiondefaultname && this.jsondata[index].State === this.statename) {
                 this.customerinfo.push({ "customername": this.jsondata[index]['Customer Name'], "consigmentno": this.jsondata[index].Consignment })
              this.rating = this.jsondata[index].Rating
 
@@ -130,8 +185,9 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
         
      }
     
-    driverDetails(item:any){
+    driverDetails(id,item:any){
         this.customername = item;
+        this.selectedId= id;
         var index: any;
         for (index in this.jsondata) {
             if (this.jsondata[index]['Customer Name'] === this.customername) {
@@ -141,7 +197,8 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
                 this.date = this.jsondata[index]['Date'];
                 this.feedback = this.jsondata[index]['feedback'];
                 this.noofreviews = this.jsondata[index]['No of Reviews']
-                this.driverperformance = this.jsondata[index]['Rating']     
+                this.driverperformance = this.jsondata[index]['Rating']
+                this.avgfeedback = this.jsondata[index]['Avg Review Rating']     
             }
         } 
          this.driverRating(this.drivername)

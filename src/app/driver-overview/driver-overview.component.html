@@ -39,7 +39,7 @@
             <div class="form-group">
                 <select id="category" name="category" [(ngModel)]="categorydefaultname" class="form-control dropdown-wrapper"
                   (change)="changeCategory($event)">
-                  <option>Category</option>
+                  <option> Performance Category</option>
                   <option *ngFor="let catg of categories" [selected]="categorydefaultname == catg">{{catg}}</option>
                 </select>
               </div>
@@ -49,7 +49,7 @@
             <div class="form-group">
             <select id="rating" name="rating" [(ngModel)]="ratingdefaultname"  class="form-control dropdown-wrapper"
                   (change)="changeRating($event)">
-                  <option>Rating</option>
+                  <option> Customer Rating</option>
                   <option *ngFor="let ratings of rating" [selected]="ratingdefaultname == ratings">{{ratings}}</option>
                 </select>
               </div>
@@ -58,7 +58,7 @@
 
     <div class="row" *ngFor = "let item of response">
         <div class="col-md-4 pr-0">
-           <div class="card" style="height:354px; background-color: #ffffff; border-bottom: 2px solid #50c4bb;">
+           <div class="card" style="height:353px; background-color: #ffffff; border-bottom: 1px solid #273048;">
             <div class="col-md-12">
               <div class="col-md-6">
                     <img src="../../assets/images/Driver_Image.jpg" alt="Avatar" class="avatar"><br>
@@ -80,7 +80,7 @@
            </div>
         </div>
         <div class="col-md-8 pl-3">
-            <div class="card" style="background-color: #ffffff; border-bottom:2px solid #50c4bb;">
+            <div class="card" style="background-color: #ffffff; border-bottom:1px solid #273048;">
                 <div class="card-header">
                   <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">

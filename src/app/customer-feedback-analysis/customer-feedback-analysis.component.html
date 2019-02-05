@@ -5,21 +5,23 @@
       <div class="row" style="margin-top: 4px;">
         <div class="col-md-3">
           <div class="form-group">
-            <select id="region" name="region" placeholder="Region" class="form-control dropdown-wrapper" (change)="changeRegion($event)">
+            <select id="region" name="region" [(ngModel)]="regiondefaultname" class="form-control dropdown-wrapper" (change)="changeRegion($event)">
                 <option>Region</option>
-                <option *ngFor="let regions of region">{{regions}}</option>
+                <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
             </select>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <select id="state" name="state" placeholder="State" class="form-control dropdown-wrapper" (change)="changeState($event)">
+            <select id="state" name="state" [(ngModel)]="statedefaultname" class="form-control dropdown-wrapper" (change)="changeState($event)">
                 <option>State</option>
-              <option *ngFor="let states of state">{{states}}</option>
+              <option *ngFor="let states of state" [selected]="statedefaultname == states" >{{states}}</option>
             </select>
           </div>
         </div>
       </div>
+
+      <!-- Rating Count -->
       <div class="row">
         <div class="col-md-7 pd-lr">
           <div class="col-md-4 pd-lr">
@@ -41,7 +43,7 @@
                 <span class="fs-17">{{fourstartratingcount}} nos</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                  class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
                   aria-hidden="true"></i>
               </div>
             </div>
@@ -54,7 +56,7 @@
                 <span class="fs-17">{{threestartratingcount}} nos</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
                   aria-hidden="true"></i>
               </div>
             </div>
@@ -69,8 +71,8 @@
                     <span class="fs-17">{{twostartratingcount}} nos</span><br>
                 
                  <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
                   aria-hidden="true"></i>
               </div>
             </div>
@@ -80,102 +82,89 @@
               <div class="card-body card_wrapper-drivers">
                 <span class="fs-40">35%</span><br>
                 <span class="fs-17">{{onestartratingcount}} nos</span><br>
-                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
+                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
                   aria-hidden="true"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
+         <!-- Rating Count -->
 
+<!-- Reviews Screen -->
       <div class="row" style="margin-top: 7px;">
         <div class="col-md-4" style="padding: 0px;height:296px;overflow:overlay">
           <div class="card customer_wrapper-drivers">
-            <div class="card-header" style="background-color:#387577;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
-              Customer Reviews
+            <div class="card-header Customer div-customer-reviews">
+                <img src ="../../assets/iconss/customer-review.png" class="box-icon">
+              <span style="padding-left: 11px;">Customer Reviews</span>
             </div>
             <div>
              <div class="col-md-7" style="padding: 0px">
-                <div style="padding-left: 20px;font-size:18px;border: 1px solid #FFFFFF">Name</div>
+                <div class="customer-review-name">Name</div>
                 <ul class="list-group" *ngFor ="let items of customerinfo">
-                  <li class="listgroup-wrapper list-back-ground-color-2" (click) =(driverDetails(items.customername))>{{items.customername}}</li>
+                  <li class="listgroup-wrapper list-back-ground-color-2"   (click) =(driverDetails(i,items.customername)) [ngStyle]="{'background-color': i ? 'green' : ''}">{{items.customername}}</li>
                  </ul>
               </div>
               <div class="col-md-5" style="padding: 0px;">
-                  <div  style="text-align: center;font-size:18px;border: 1px solid #FFFFFF">Consigment</div>
+                  <div class="customer-review-consigment">Consigment</div>
                   <ul class="list-group" *ngFor ="let items of customerinfo">
-               <li class="listgroup-wrapper list-back-ground-color-2" (click) =(driverDetails(items.customername))>{{items.consigmentno}}</li>
+               <li class="listgroup-wrapper list-back-ground-color-2">{{items.consigmentno}}</li>
                  </ul>
               </div>
              </div>
           </div>
 
         </div>
-        <div class="col-md-4" style="padding-left: 2px;padding-right: 0px">
-          <div class="card col-md-12" style="padding-left: 2px;padding-right: 2px">
-            <div class="card-header" style="background-color:#387577;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
-              Driver Details
+        <div class="col-md-4 pd-lr-driver-details">
+          <div class="card col-md-12 pd-lr">
+            <div class="card-header driver-details-card-header">
+                <img src ="../../assets/iconss/driver-details.png" class="box-icon">
+              <span style="padding-left: 11px;"> Driver Details</span> 
             </div>
-            <div class="card-body" style="background-color: #FFFFFF; height: 265px">
-              <!-- <div class="col-md-6">
-                    <span>Name</span>
-                    <span style="float: right;">Yvor Gav0zzi</span><br>
-                     <span>Drive Performance</span>
+            <div class="card-body driver-details-card-body">
+             <div class="row padding-details">
+                <div class="col-md-4 " text-wrap style="text-align: left;padding-left: 29px">
+                    Name<span style="float: right">:</span>
                   </div>
-                  <div class="col-md-6">
-                    <div class="col-md-6" style="padding: 0px">
-                      <span>96%</span>
-                    </div>
-                    <div class="col-md-6" style="padding: 0px">
-                        1 year exp 6 year with us
-                      </div>
-
-                    </div> -->
-              <div class="row padding-details">
-                <div class="col-md-4">
-                  <span>Name</span>
-                </div>
-                <div class="col-md-4">
-
-                </div>
-                <div class="col-md-4">
-                  <span>{{drivername}}</span>
-                </div>
+                  <div class="col-md-8" style="text-align:center;padding: 0px;font-size: 16px;">
+                    {{drivername}}
+                  </div>
               </div>
                 <div class="row padding-details">
-                    <div class="col-md-4">
-                        <span>Drive Performance</span>
+                    <div class="col-md-4" text-wrap style="text-align: left;padding-left: 29px">
+                        Drive Performance<span style="float: right">:</span>
                       </div>
-                      <div class="col-md-4" style="font-size: 25px;text-align:right;padding: 0px;">
+                      <div class="col-md-4" style="font-size: 25px;text-align:center;padding: 0px;">
                         96%
                       </div>
-                      <div class="col-md-4" style="padding: 0px;">
-                        <span>{{companyterm}} Year with us<br>{{totalexp}} year Exp</span>
+                      <div class="col-md-4" style="text-align:center" text-wrap>
+                        {{companyterm}} Year with us {{totalexp}} year Exp
                       </div>
                 </div>
                 <div class="row padding-details">
-                    <div class="col-md-4">
-                        <span>Average feedback <br> Rating</span>
+                    <div class="col-md-4" text-wrap style="text-align: left;padding-left: 29px">
+                        Average feedback Rating<span style="float: right">:</span>
                       </div>
-                      <div class="col-md-4" style="font-size: 25px;text-align:right;padding: 0px;">
-                        4<br>
+                      <div class="col-md-4" style="font-size: 25px;text-align:center;padding: 0px;">
+                        {{avgfeedback}}
                       </div>
-                      <div class="col-md-4" style="padding: 0px">
-                        <span>{{noofreviews}}</span>
+                      <div class="col-md-4" style="padding: 0px; text-align:center">
+                        {{noofreviews}} <br>Reviews
                       </div>
                 </div>
                 <div class="row padding-details">
-                    <div class="col-md-4">
-                        <span>Time Stamp <br>of delivery</span>
+                    <div class="col-md-4" text-wrap style="text-align: left;padding-left: 29px">
+                        Time Stamp of delivery<span style="float: right">:</span>
                       </div>
-                      <div class="col-md-4" style="text-align:right;padding: 0px;">
+                      <div class="col-md-4" style="text-align:center;padding: 0px;">
                         02/Jan/19<br>
                         19:35:50
                       </div>
-                      <div class="col-md-4">
-                        <span>On time<br>Delivery</span>
+                      <div class="col-md-4" style="text-align:center;">
+                        On time Delivery
                       </div>
                 </div>
                
@@ -186,130 +175,136 @@
 
         </div>
 
+        <!--Feedback-->
         <div class="col-md-4" style="padding-left: 2px;padding-right: 3px">
-          <div class="col-md-12" style="padding:0px;background-color: #FFFFFF">
+          <div class="col-md-12" style="padding:0px;background-color: #FFFFFF;padding-bottom: 7px;">
             <div class="card back-color">
-              <div class="card-header" style="background-color:#387577;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
-                Feedback
+              <div class="card-header" style="background-color:#273048;color: white;padding-bottom:5px;font-size: 18px;">
+                  <img src ="../../assets/iconss/feedback.png" class="box-icon">
+                <span style="padding-left: 11px;">Feedback</span> 
               </div>
+              <div class="card-body">
+                <div class="col-md-6" style="padding-right: 2px;padding-left: 2px;font-size: 18px;padding-left: 24px">
+                  <span>{{date}}</span>
+                </div>
+                <div class="col-md-6" style="padding: 0px;font-size: 12px;text-align: center;margin-top: 4px">
+                  <div *ngIf ="driverperformance == 5">
+                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf ="driverperformance == 4">
+                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf ="driverperformance == 3">
+                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf ="driverperformance == 2">
+                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf ="driverperformance == 1">
+                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true"></i>
+                  </div>
+                
+           </div>
+           <div style="padding-top:10px;" class="col-md-12">
+            <textarea style="width:100%;height:88px;">
+                  {{feedback}}
+            </textarea> 
+             </div>
+             <div class="col-md-12" style="text-align: center;font-size: 15px">
+              <span>Driver Total Rating :{{drivername}}</span>
+             </div>
+             <div class="col-md-8">
+                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true"></i>
+                </div>
+             <div class="col-md-4">
+                <span class="rating-span">
+                    {{driverpreviousratingfive}}
+                </span>
+            </div>
+            <div class="col-md-8">
+                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                aria-hidden="true"></i>
+                </div>
+             <div class="col-md-4">
+                <span class="rating-span">
+                    {{driverpreviousratingfour}}
+                </span>
+            </div>
+            <div class="col-md-8">
+                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color default-icon-color" aria-hidden="true">&nbsp;</i><i
+                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                  aria-hidden="true"></i>
+                </div>
+             <div class="col-md-4">
+                <span class="rating-span">
+                    {{driverpreviousratingthree}}
+                </span>
+            </div>
+          
+             <div class="col-md-8">
+                <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                aria-hidden="true"></i>
+                
+               </div>
+           <div class="col-md-4">
+              <span class="rating-span">
+                  {{driverpreviousratingtwo}}
+              </span>
+          </div>
+          <div class="col-md-8">
+              <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
+              aria-hidden="true default-icon-color">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+              class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+              aria-hidden="true"></i>
+              
+             </div>
+         <div class="col-md-4">
+            <span class="rating-span">
+                {{driverpreviousratingone}}
+            </span>
+        </div>
+       </div>
+
              
             </div>
           </div>  
-          <div class="col-md-12" style="padding:0px;padding-bottom:6px;background-color: #FFFFFF">
-            <div class="card back-color">
-              <div class="col-md-6" style="padding-right: 2px;padding-left: 2px;font-size: 18px;padding-left: 24px">
-                <span>{{date}}</span>
-              </div>
-              <div class="col-md-6" style="padding: 0px;font-size: 12px;text-align: center;margin-top: 4px">
-                <div *ngIf ="driverperformance == 5">
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true"></i>
-                </div>
-                <div *ngIf ="driverperformance == 4">
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                </div>
-                <div *ngIf ="driverperformance == 3">
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                </div>
-                <div *ngIf ="driverperformance == 2">
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                </div>
-                <div *ngIf ="driverperformance == 1">
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                </div>
-              
-         </div>
-             <div class="card-body">
-              <div style="padding-top: 36px;">
-               <textarea style="width:100%;height:83px;">
-                     {{feedback}}
-               </textarea>
-                </div>
-                </div>
+          <!---->
+       </div>
+           <!--Feedback-->
 
-                 <div class="col-md-12" style="font-size: 12px">
-                 <div>
-                  <div>
-                      <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                      aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                      class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
-                      aria-hidden="true"></i>
-                      <span class="rating-span">
-                          {{driverpreviousratingfive}}
-                      </span>
-                     
-                 </div>
-            
-                </div>
-                <div>
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                  <span class="rating-span">
-                      {{driverpreviousratingfour}}
-                  </span>
-                  
-                </div>
-                <div>
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                  <span class="rating-span">
-                      {{driverpreviousratingthree}}
-                  </span>
-                 
-                </div>
-                <div>
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                  <span class="rating-span">
-                      {{driverpreviousratingtwo}}
-                  </span>
-                  
-                </div>
-                <div>
-                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
-                  aria-hidden="true"></i>
-                  <span class="rating-span">
-                      {{driverpreviousratingone}}
-                  </span>
-               
-                </div>
-              
-         </div>
-
-            </div>
-
-
-          </div>
-
-        </div>
       </div>
+
+<!-- Reviews Screen -->
+
+      <!--Fleet Rating-->
       <div class="row" style="margin-top: 8px;">
           <div class="card card_wrapper-chart">
               <div class="card-body" style="background-color: #ffffff">
                 <div style="padding-top: 15px">
-                    <img src ="../../assets/iconss/performance_icon.png" width="2%" class="mt-14" style="margin-left: 33px;">
+                    <img src ="../../assets/iconss/fleet-rating.png" width="2%" class="mt-14" style="margin-left: 33px;">
                     <!-- <h5 class="card-title fs-19">Driver Daily Performance</h5> -->
                     <span class="fs-25" style="padding-left: 14px;margin-left:5px;font-size: 18px">Fleet Rating</span>
                 </div>
@@ -320,14 +315,22 @@
 
       
       </div>
+       <!--Fleet Rating-->
+ </div>
+<!-- col-md-9 close -->
 
-    </div>
     <div class="col-md-3" style="margin-top: 32px;padding-left: 2px;padding-right: 2px">
       <div class="card col-md-12" style="padding: 0px;height:400px;;overflow:overlay">
-        <div class="card-header" style="background-color:#387577;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
+        <div class="card-header" style="background-color:#273048;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
           Top Rated Drivers
         </div> 
+       
         <div class="card-body">
+            <ul style="list-style: none;margin-bottom: 0px;background-color: #EFEFEF">
+                <li>
+                   <span  style="font-size: 17px;">Name</span>  <span style="float: right;padding-right: 31px;font-size: 17px">Rating</span>
+                  </li>
+            </ul>
             <ul class="list-group" *ngFor ="let driverinfo of toprateddriveinfo">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   {{driverinfo.drivername}}
@@ -344,26 +347,22 @@
       </div>
 
       <div class="card col-md-12" style="padding: 0px;margin-top: 8px;height:380px;overflow: overlay;">
-        <div class="card-header" style="background-color:#387577;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
+        <div class="card-header" style="background-color:#273048;color: white;padding-bottom: 5px;text-align: center;font-size: 18px;">
           Low Rated Drivers
         </div>
         <div class="card-body">
-        <!-- <div style="float: left">
-                  <span>Name</span>
-                </div>
-                <div style="float:right">
-                    <span style="float:right">Rating</span>
-                  </div>
-         -->
-         
-         <ul class="list-group" *ngFor ="let lowrateddriverinfos of lowrateddriverinfo">
-
+            <ul style="list-style: none;margin-bottom: 0px;background-color: #EFEFEF">
+                <li>
+                   <span  style="font-size: 17px;">Name</span>  <span style="float: right;padding-right: 31px;font-size: 17px">Rating</span>
+                  </li>
+            </ul>
+            <ul class="list-group" *ngFor ="let lowrateddriverinfos of lowrateddriverinfo">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   {{lowrateddriverinfos.drivername}}
                   <span style="float:right;">
-                      <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                      <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
+                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
                   aria-hidden="true"></i>
                   </span>
                 </li>

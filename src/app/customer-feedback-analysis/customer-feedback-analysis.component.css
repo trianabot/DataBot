@@ -10,7 +10,7 @@
    .card_wrapper-drivers{
     /* width: 18rem; */
     background-color: #FFFFFF;
-    border-top: 2px solid #50c4bb;
+    border-top: 2px solid #5871b2;
     padding-left: 24px;
     padding-bottom: 22px;
 }
@@ -34,14 +34,39 @@
     font-size: 17px;
     color: #939292
 }
-.icon-color{
-    color:yellow;
+
+.fs-18{
     font-size: 18px
 }
+.icon-color{
+    color:#ff7675;
+    font-size: 18px
+}
+
+.default-icon-color{
+    color: #ccc
+}
+.btnActive
+{
+ background-color:#452950 
+}
+/*Padding*/
 .pd-lr{
     padding-left: 2px;
     padding-right: 2px
 }
+
+.pd-lr-driver-details{
+    padding-left: 2px;
+    padding-right: 0px;
+    /* background-color: #FFFFFF; */
+    /* height: 296px; */
+}
+
+
+
+/*Padding*/
+
 .form-group {
     margin-bottom: 6px;
 }
@@ -64,6 +89,9 @@
 
 }
 
+
+
+
 input[type="text"]
 {
     border: 0;
@@ -76,6 +104,7 @@ input[type="text"]
 }
 .list-group {
     margin-bottom: 0px;
+    cursor: pointer;
 }
 .li-drivers{
 padding: 7px 12px;
@@ -96,17 +125,18 @@ p-0px{
 }
 
 .padding-details{
-    padding-top:15px;
+    padding-top:20px;
     text-align: center;
 }
+
+
 
 .list-group-item {
   border:none;
 }
 
 .rating-span{
-padding-left: 69px;
-    font-size: 19px;
+font-size: 16px;
 }
 
 .lowRateddrivericon{
@@ -114,3 +144,42 @@ padding-left: 69px;
     font-size: 18px
 }
 
+.div-customer-reviews{
+    background-color:#273048;
+    color: white;
+    padding-bottom: 5px;
+    /* text-align: center; */
+    font-size: 18px;
+
+}
+
+.customer-review-name{
+    padding-left: 20px;
+    font-size:18px;
+    border: 1px solid #FFFFFF
+}
+.customer-review-consigment{
+    text-align: center;
+    font-size:18px;
+    border: 1px solid #FFFFFF
+}
+
+.driver-details-card-header{
+    background-color:#273048;
+    color: white;
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+
+.driver-details-card-body{
+    background-color: #FFFFFF; height: 265px
+}
+
+.box-icon{
+    width: 7%;
+    float: left;
+    margin-left: 21px;
+}
+/* li:active { 
+    background-color: yellow;
+  } */

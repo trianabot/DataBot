@@ -195,7 +195,7 @@ export class DriverOverviewComponent implements OnInit {
               spline: {
                   marker: {
                       // radius: 4,
-                      lineColor: '#666666',
+                      lineColor: '#273048',
                       lineWidth: 1
                   }
               }
@@ -203,7 +203,7 @@ export class DriverOverviewComponent implements OnInit {
           series: [{
              
               data:dates,
-              color:'#65DBB7' 
+              color:'#273048' 
 
       
           }]

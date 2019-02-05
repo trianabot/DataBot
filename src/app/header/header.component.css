@@ -1,6 +1,6 @@
 .topnav {
     overflow: hidden;
-    background-color:#155f57;
+    background-color:#20283d;
 }
 
 /* Style the search box inside the navigation bar */
@@ -12,7 +12,7 @@
 /*     margin-right: 16px; */
     font-size: 17px;
    /*  background-color: #155f57; */
-     border: 1px solid  #155f57;
+     border: 1px solid  #2e3956;
     border-radius: 3px;
 }
 
@@ -40,7 +40,7 @@
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color: #267872; /* Black*/
+  background-color:#1c2337; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

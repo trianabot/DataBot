@@ -18,8 +18,9 @@ export class IndustriesComponent implements OnInit {
  health:boolean = false
  UseCaseTypeValue:number=0;
  showreport:boolean = false;
+ userId: any;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router) {this.userId = localStorage.getItem('userid') }
 
   ngOnInit() {
     // alert(this.UseCaseTypeValue)

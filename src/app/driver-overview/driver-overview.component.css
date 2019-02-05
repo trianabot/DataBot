@@ -44,16 +44,16 @@
 }
 
 .btnclass{
-  background-color: #257872;
+  background-color: #3d4e7b;
   width: 15%;
-  border-radius: 9px;
+  /* border-radius: 9px; */
  border:none
 
 }
 
 
 .pl-27{
-  padding-left: 27px
+  padding-left:18px
 }
 .pl-3{
   padding-left: 3px
@@ -99,7 +99,7 @@ td{
 }
 
 .cardactiveclass{
-  background-color:#50C4BB;
+  background-color:#273048;
  
 
 }

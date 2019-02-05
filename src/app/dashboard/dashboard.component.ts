@@ -171,49 +171,49 @@ options:any;
                     "name": "91-100",
                     "y": 18,
                     "drilldown": "91-100",
-                    color:"#37B3A9"
+                    color:"#5871b2"
                 },
                 {
                     "name": "81-90",
                     "y": 187,
                     "drilldown": "81-90",
-                    color:"#37B3A9"
+                    color:"#5871b2"
                 },
                 {
                     "name": "71-80",
                     "y": 158,
                     "drilldown": "71-80",
-                    color:"#37B3A9"
+                    color:"#5871b2"
                 },
                 {
                     "name": "61-70",
                     "y": 243,
                     "drilldown": "61-70",
-                    color:"#37B3A9"
+                    color:"#5871b2"
                 },
                 {
                     "name": "51-60",
                     "y": 218,
                     "drilldown": "51-60",
-                    color:"#37B3A9"
+                    color:"#5871b2"
                 },
                 {
                   "name": "41-50",
                   "y": 126,
                   "drilldown": "41-50",
-                  color:"#37B3A9"
+                  color:"#5871b2"
                 },
                 {
                   "name": "31-40",
                   "y": 47,
                   "drilldown": "31-40",
-                  color:"#37B3A9"
+                  color:"#5871b2"
                 },
                 {
                   "name": "21-30",
                   "y": 3,
                   "drilldown": "21-30",
-                  color:"#37B3A9"
+                  color:"#5871b2"
                 },
             ]
           }
@@ -224,7 +224,7 @@ options:any;
                   "name": "91-100",
                   "id": "91-100",
                   "data": categoryone,
-                  color:"#37B3A9"
+                  color:"#5871b2"
                   
                   
               },
@@ -232,44 +232,44 @@ options:any;
                   "name": "81-90",
                   "id": "81-90",
                   "data": categorytwo,
-                  color:"#37B3A9"
+                  color:"#5871b2"
                    
               },
               {
                   "name": "71-80",
                   "id": "71-80",
                   "data": categorythree,
-                  color:"#37B3A9"
+                  color:"#5871b2"
               },
               {
                   "name": "61-70",
                   "id": "61-70",
                   "data": categoryfour,
-                  color:"#37B3A9"
+                  color:"#5871b2"
               },
               {
                   "name": "51-60",
                   "id": "51-60",
                   "data": categoryfive,
-                  color:"#37B3A9"
+                  color:"#5871b2"
               },
               {
                 "name": "41-50",
                 "id": "41-50",
                 "data": categorysix,
-                color:"#37B3A9"
+                color:"#5871b2"
             },
             {
                 "name": "31-40",
                 "id": "31-40",
                 "data": categoryseven,
-                color:"#37B3A9"
+                color:"#5871b2"
             },
             {
                 "name": "21-30",
                 "id": "21-30",
                 "data": categoryeight,
-                color:"#37B3A9"
+                color:"#5871b2"
             },
              ]
       }

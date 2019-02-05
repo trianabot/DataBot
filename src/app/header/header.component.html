@@ -1,7 +1,7 @@
 <div class="container-fluid" style="padding: 0px">
   <div>
-    <nav class="navbar navbar-inverse" style="margin-bottom: 0px;border-radius: 0px;border-color:#267872">
-      <div class="container-fluid" style="background-color: #267872;">
+    <nav class="navbar navbar-inverse" style="margin-bottom: 0px;border-radius: 0px;border:none">
+      <div class="container-fluid" style="background-color: #1c2337;">
         <div class="navbar-header">
 
           <a class="navbar-brand navheader" (click)="showDashBoard()">Client Logo</a>
@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="navheader"><a href="#" style="color:white"><span class="glyphicon glyphicon-user navheader"></span>
               User Name</a></li>
-          <li><button type="button" class="btn btn-primary btn-xs" style="margin: 14px;background-color: #1F625E;;border: 0px;" (click)="logOut()">Log
+          <li><button type="button" class="btn btn-primary btn-xs" style="margin: 14px;background-color: #273048;;border: 0px;" (click)="logOut()">Log
               Out</button></li>
         </ul>
       </div>
@@ -20,7 +20,7 @@
       <i class="fa fa-bars" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;" (click)="showSideMenu()"></i>
      <i class="fa fa-home" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;" (click)="showDashBoard()"></i>
     <!-- <i class="fas fa-home" aria-hidden="true" style="font-size:21px;color:white; margin-left:8px;padding: 4px;" (click)="showsideMenu()"></i> -->
-    <input type="text" placeholder="   Search.." style="background-color: #176D66;">
+    <input type="text" placeholder="   Search.." style="background-color:#2e3956;">
   </div>
 
 </div>
@@ -28,7 +28,7 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
   
-  <a [routerLink]="['/add-tenant']">Add Tenant</a>
+  <a [routerLink]="['/add-tenant']">Add Client</a>
   <a [routerLink]="['/add-user']" >Add User</a>
   <a [routerLink]="['/add-device']">Add Device</a>
   </div>

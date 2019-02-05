@@ -5,7 +5,7 @@
    /* padding: 0px 30px; */
    border: 0px;
    border-radius: 6px;
-   background-color: #1A6A64;
+   background-color:#273048;
    color: white;
    }
    /* .body{
@@ -44,6 +44,10 @@
 .pt-22{
    padding-top: 22px
 }
+pl-54{
+    padding-left: 54px
+}
+
 /*Padding*/
 .form-group {
     margin-bottom:1px;
@@ -58,12 +62,16 @@
    
   }
   .icon-color{
-      color: yellow
+      color: #ff7675
   }
+  .default-icon-color{
+   color: #ccc
+  }
+
   .list-group-item {
-        color: white;
+        color: #333;
         background:none;
-    border: 0px solid #ddd;
+     border: 0px solid #ddd;
 }
 .list-group {
     padding-left: 0;
@@ -77,7 +85,7 @@
     padding-top: 1px;
 }
 .box-background-color{
-    background-color: #1A6A64;
+    background-color: #fff;
     padding-bottom: 24px;
     border-radius: 6px;
     padding-top: 24px;
@@ -85,13 +93,13 @@
 .paragraph{
    font-size: 18px;
    padding-top: 5px;
-   color: white;
+   color: #333;;
    text-align: center;
 }
 .header{
     font-size: 29px;
     text-align: center;
-    color: white;
+    color: #333;;
 }
 
 #map {
