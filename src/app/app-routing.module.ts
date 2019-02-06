@@ -38,6 +38,7 @@ const routes: Routes = [
   { path: 'warehouseoverview', component: WarehouseOverviewComponent },
   { path: 'stocktracking', component: StockTrackingComponent },
   { path: 'driver-overview', component: DriverOverviewComponent },
+  { path: 'driver-overview/:id', component: DriverOverviewComponent },
   {path:'vehicle-metric', component:VehicleliveMetricComponent},
   {path:'sign-up', component:SignUpComponent},
   {path:'add-tenant',component:AddTenantComponent},

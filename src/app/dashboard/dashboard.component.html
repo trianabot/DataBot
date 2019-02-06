@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body padding-top-12">
-                <span class="fs-29">934 nos</span><br>
+                <span class="fs-29">934</span><br>
                 <span class="fs-15">88%</span><br>
                  <hr>
                 <span class="fs-15">Present</span>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body pt-12">
-                 <span class="fs-29">94 nos</span><br>
+                 <span class="fs-29">94</span><br>
                 <span class="fs-15">9%</span><br>
                <hr>
                 <span class="fs-15">Planned leave</span>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body pt-12">
-                <span class="fs-29">32 nos</span><br>
+                <span class="fs-29">32</span><br>
                 <span class="fs-15">3%</span><br>
                  <hr>
                 <span class="fs-15">Unplanned leave</span>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body padding-top-12">
-                <span class="fs-29">930 nos</span><br>
+                <span class="fs-29">930</span><br>
                 <span class="fs-15">88%</span><br>
                
                 <hr>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body padding-top-12">
-                <span class="fs-29">80 nos</span><br>
+                <span class="fs-29">80</span><br>
                 <span class="fs-15">9%</span><br>
                 <hr>
                 <span class="fs-15">Standby</span>
@@ -96,7 +96,7 @@
             </div>
             <div class="col-md-3">
               <div class="card-body padding-top-12">
-                <span class="fs-29">30 nos</span><br>
+                <span class="fs-29">30</span><br>
                 <span class="fs-15">3%</span><br>
                 <hr>
                 <span class="fs-15">Maintenance</span>
@@ -136,7 +136,7 @@
         <div>
           <div class="col-md-3 padding-0">
             <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '5' ? '#5871b2' : '' }">
-                <span class="fs-40">229 nos</span><br>
+                <span class="fs-40">229 <span class="fs-17">nos</span></span><br>
               <span class="fs-17">22.9%</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
@@ -147,7 +147,7 @@
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
             <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '4' ? '#5871b2' : '' }">
-               <span class="fs-40">262 nos</span><br>
+               <span class="fs-40">262 <span class="fs-17">nos</span></span><br>
               <span class="fs-17">26.2%</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
@@ -158,7 +158,7 @@
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
             <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '3' ? '#5871b2' : '' }">
-             <span class="fs-40">254 nos</span><br>
+             <span class="fs-40">254 <span class="fs-17">nos</span></span><br>
              <span class="fs-17">25.4%</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
@@ -169,7 +169,7 @@
           </div>
           <div class="col-md-3 padding-right-0 padding-left-10">
             <div class="card-body card_wrapper-drivers" [ngStyle]="{'background-color':driverRating == '2' ? '#5871b2' : '' }">
-              <span class="fs-40">255 nos</span><br>
+              <span class="fs-40">255 <span class="fs-17">nos</span></span><br>
               <span class="fs-17">25.5%</span><br>
               <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                 aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star iconback-color" aria-hidden="true">&nbsp;</i><i
@@ -192,7 +192,7 @@
           <div class="card-body bg-color">
               <span class="today-text">Today</span>
             <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image" style="opacity: 0.1;">
-            <button type="button" class="btn btn-primary event-button" ><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
+            <button type="button" class="btn btn-primary event-button" ><span>{{todayevent | number:'1.0-0'}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -204,10 +204,10 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
+                <li class="lirghtdiv-wrapper">{{lastdayevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{thisweekevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{lastmonthavgevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{threshold | number:'1.0-0'}}</li>
               </ul>
             </div>
           </div>
@@ -222,7 +222,7 @@
           <div class="card-body bg-color">
               <span class="today-text">Today</span>
             <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image"  style="opacity: 0.1;">
-            <button type="button" class="btn btn-primary event-button"><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
+            <button type="button" class="btn btn-primary event-button"><span>{{todayevent | number:'1.0-0'}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -234,10 +234,10 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
+                <li class="lirghtdiv-wrapper">{{lastdayevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{thisweekevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{lastmonthavgevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{threshold}}</li>
               </ul>
             </div>
           </div>
@@ -251,7 +251,7 @@
           <div class="card-body bg-color">
               <span class="today-text">Today</span>
             <img src="../../assets/images/Speeding_Truck_Image.jpg" class="background-image"  style="opacity: 0.1;">
-         <button type="button" class="btn btn-primary event-button"><span>{{drivertotalevents.Today}}&nbsp;&nbsp;</span>Events</button>
+         <button type="button" class="btn btn-primary event-button"><span>{{todayevent| number:'1.0-0'}}&nbsp;&nbsp;</span>Events</button>
             <!-- <span>20 </span> -->
             <div style="float:left">
               <ul class="ulleftdiv-wrapper" style="list-style-type: none">
@@ -263,10 +263,10 @@
             </div>
             <div style="float:right">
               <ul class="ulrighttdiv-wrapper" style="list-style-type: none">
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Day']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['This Week']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Last Month Average']}}</li>
-                <li class="lirghtdiv-wrapper">{{drivertotalevents['Threshold']}}</li>
+                <li class="lirghtdiv-wrapper">{{lastdayevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{thisweekevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{lastmonthavgevent | number:'1.0-0'}}</li>
+                <li class="lirghtdiv-wrapper">{{threshold | number:'1.0-0'}}</li>
               </ul>
             </div>
           </div>

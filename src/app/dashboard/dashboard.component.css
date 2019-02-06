@@ -134,12 +134,14 @@ padding-left: 10px
 .ulleftdiv-wrapper{
    position: absolute;
     top: 41%; 
+    padding-left: 23px;
     list-style-type: none"
+    p
 }
 
 .ulrighttdiv-wrapper{
     position: absolute;
-    left: 64%;
+    left: 49%;
     top: 41%; list-style-type: none"
  }
 
