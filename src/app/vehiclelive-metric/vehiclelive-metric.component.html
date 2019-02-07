@@ -1,147 +1,161 @@
-
 <app-header></app-header>
 <div class="my-container">
-<div class="container-fluid">
- <div class="col-md-9">
-    <div class="row pt-0">
-      <div class="col-md-10 pd-0">
-        <div class="col-md-2 plr-2">
-          <div class="form-group">
-            <select id="region" name="region" [(ngModel)]="regiondefaultname" class="form-control dropdown-wrapper" (change)="changeRegion($event)">
-              <option>Region</option>
-              <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-2 plr-2">
-          <div class="form-group">
-              <select id="state" name="state" [(ngModel)]="statedefaultname" class="form-control dropdown-wrapper" (change)="changeState($event)">
-                  <option>State</option>
-                  <option *ngFor="let states of state" [selected]="statedefaultname == states">{{states}}</option>
-                </select> 
-              </div>
-         
-        </div>
-
-        <div class="col-md-2 plr-2">
-          <div class="form-group">
-              <select id="category" name="category" [(ngModel)]="categorydefaultname" class="form-control dropdown-wrapper" (change)="changeCategory($event)">
-                  <option>Category</option>
-                  <option *ngFor="let catg of categories" [selected]="categorydefaultname == catg">{{catg}}</option>
-                </select>
-          </div>
-         </div>
-
-         <div class="col-md-2 plr-2">
+  <div class="container-fluid">
+    <div class="col-md-9">
+      <div class="row pt-0">
+        <div class="col-md-10 pd-0">
+          <div class="col-md-2 plr-2">
             <div class="form-group">
-                <select id="rating" name="Rating" [(ngModel)]="ratingdefaultvalue" class="form-control dropdown-wrapper" (change)="changeRating($event)">
-                    <option>Rating</option>
-                    <option *ngFor="let driverratings of driverrating" [selected]="ratingdefaultvalue == driverratings">{{driverratings}}</option>
-                  </select>  
-                </div>
-           </div>
-        
-             <div class="col-md-2 plr-2">
-                <div class="form-group">
-                    <select id="vehicleid" name="vehicleid" [(ngModel)]="vehicledefaultname" class="form-control dropdown-wrapper" (change)="changeVehicle($event)">
-                        <option>vehicle</option>
-                        <option *ngFor="let vehicleidnos of vehicleidno" [selected]="vehicledefaultname == vehicleidnos">{{vehicleidnos}}</option>
-                      </select>  
-                    </div>
-                  </div>
-     </div>
+              <select id="region" name="region" [(ngModel)]="regiondefaultname" class="form-control dropdown-wrapper"
+                (change)="changeRegion($event)">
+                <option>Region</option>
+                <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
+              </select>
+            </div>
+          </div>
 
-    </div>
+          <div class="col-md-2 plr-2">
+            <div class="form-group">
+              <select id="state" name="state" [(ngModel)]="statedefaultname" class="form-control dropdown-wrapper"
+                (change)="changeState($event)">
+                <option>State</option>
+                <option *ngFor="let states of state" [selected]="statedefaultname == states">{{states}}</option>
+              </select>
+            </div>
 
-    <div class="row">
-      <div class="col-md-5 pd-0">
-       <div class="card">
-                <div class="card-body">
-                  <div class="col-md-4 plr-2 box">
-                    <div class="box-background-color">
-                      <p class="paragraph">Trip Distance</p><br>
-                      <h5 class="header">{{trip}}</h5>
-                      <!-- <span style="font-size: 25px">5678</span> -->
-                    </div>
-      
-                  </div>
-                  <div class="col-md-4 plr-2 box">
-                      <div class="box-background-color">
-                        <p class="paragraph">Deliveries</p><br>
-                        <h5 class="header">{{deliveries}}</h5>
-                        
-                        <!-- <span style="font-size: 25px">5678</span> -->
-                      </div>
-        
-                    </div>
-                    <div class="col-md-4 plr-2 box">
-                        <div class="box-background-color">
-                          <p class="paragraph">Trip Duration</p><br>
-                          <h5 class="header">{{tripduration}} hrs</h5>
-                           <!-- <span style="font-size: 25px">5678</span> -->
-                        </div>
-          
-                      </div>
-      
-                </div>
-              </div>
+          </div>
 
-        <div class="card">
+          <div class="col-md-2 plr-2">
+            <div class="form-group">
+              <select id="category" name="category" [(ngModel)]="categorydefaultname"
+                class="form-control dropdown-wrapper" (change)="changeCategory($event)">
+                <option>Category</option>
+                <option *ngFor="let catg of categories" [selected]="categorydefaultname == catg">{{catg}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-2 plr-2">
+            <div class="form-group">
+              <select id="rating" name="Rating" [(ngModel)]="ratingdefaultvalue" class="form-control dropdown-wrapper"
+                (change)="changeRating($event)">
+                <option>Rating</option>
+                <option *ngFor="let driverratings of driverrating" [selected]="ratingdefaultvalue == driverratings">
+                  {{driverratings}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-2 plr-2">
+            <div class="form-group">
+              <select id="vehicleid" name="vehicleid" [(ngModel)]="vehicledefaultname"
+                class="form-control dropdown-wrapper" (change)="changeVehicle($event)">
+                <option>vehicle</option>
+                <option *ngFor="let vehicleidnos of vehicleidno" [selected]="vehicledefaultname == vehicleidnos">
+                  {{vehicleidnos}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-5 pd-0">
+          <div class="card">
             <div class="card-body">
               <div class="col-md-4 plr-2 box">
                 <div class="box-background-color">
+                  <p class="paragraph">Trip Distance</p><br>
+                  <h5 class="header">{{trip}}</h5>
+                  <!-- <span style="font-size: 25px">5678</span> -->
+                </div>
+
+              </div>
+              <div class="col-md-4 plr-2 box">
+                <div class="box-background-color">
+                  <p class="paragraph">Deliveries</p><br>
+                  <h5 class="header">{{deliveries}}</h5>
+
+                  <!-- <span style="font-size: 25px">5678</span> -->
+                </div>
+
+              </div>
+              <div class="col-md-4 plr-2 box">
+                <div class="box-background-color">
+                  <p class="paragraph">Trip Duration</p><br>
+                  <h5 class="header">{{tripduration}} hrs</h5>
+                  <!-- <span style="font-size: 25px">5678</span> -->
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="col-md-4 plr-2 box">
+                <div [ngClass]=" mpgalert ? 'box-background-alert': 'box-background-color'">
                   <p class="paragraph">Trip Mpg</p><br>
                   <h5 class="header">{{tripmileage}}</h5>
                   <!-- <span style="font-size: 25px">5678</span> -->
                 </div>
-  
+
               </div>
               <div class="col-md-4 plr-2 box">
-                  <div  class="box-background-color">
-                    <p class="paragraph">Engine Offline</p><br>
-                    <h5 class="header">{{engineoffline}} min</h5>
-                    <!-- <span style="font-size: 25px">5678</span> -->
-                  </div>
-    
+                <div class="box-background-color">
+                  <p class="paragraph">Engine Offline</p><br>
+                  <h5 class="header">{{engineoffline}} min</h5>
+                  <!-- <span style="font-size: 25px">5678</span> -->
                 </div>
-                <div class="col-md-4 plr-2 box">
-                    <div class="box-background-color">
-                      <p class="paragraph">Engine IDLE</p><br>
-                      <h5 class="header">{{engineedletime}} min</h5>
-                      <!-- <span style="font-size: 25px">5678</span> -->
-                    </div>
-      
-                  </div>
-  
+
+              </div>
+              <div class="col-md-4 plr-2 box">
+                <div class="box-background-color">
+                  <p class="paragraph">Engine IDLE</p><br>
+                  <h5 class="header">{{engineedletime}} min</h5>
+                  <!-- <span style="font-size: 25px">5678</span> -->
+                </div>
+
+              </div>
+
             </div>
           </div>
 
-      </div>
-      <div class="col-md-7">
-        <div class="row" style="padding-top:11px;text-align: center; color: white">
-          <div class="col-md-4">
+        </div>
+        <div class="col-md-7">
+          <div class="row" style="padding-top:11px;text-align: center; color: white">
+            <div class="col-md-4">
               <div class="col-md-6">
                 <span style="color:darkblue">Fuel</span><br>
                 <span class="fs-18" style="color:darkblue">
-                  45%
+                  {{fuel}}%
                 </span>
               </div>
-                <div class="col-md-6 box-icon">
-                  <img src ="../../assets/iconss/Fuel.png" class="img-icon-fuel">
-                </div>
-             
-          </div>
-          <div class="col-md-4">
-            <div class="col-md-6">
-              <span style="color:darkblue">Temp</span><br>
-              <span class="fs-18" style="color:darkblue">
-                32 C
-              </span>
-            </div>
               <div class="col-md-6 box-icon">
-                <img src ="../../assets/iconss/Temp.png" class="img-icon-temp">
+                <img [src]="fuelalert ? '../../assets/iconss/lowfuel.png' : '../../assets/iconss/Fuel.png'"
+                  class="img-icon-fuel">
               </div>
+              <span class="alert_msg_one" *ngIf="fuelalert">
+                Empty in 50 miles
+              </span>
+
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-6">
+                <span style="color:darkblue">Temp</span><br>
+                <span class="fs-18" style="color:darkblue">
+                  {{temperature}} <sup>o</sup>F
+                </span>
+              </div>
+              <div class="col-md-6 box-icon">
+                <img [src]="tempalert ? '../../assets/iconss/overtemp.png' : '../../assets/iconss/Temp.png'"
+                  class="img-icon-temp">
+              </div>
+              <span class="alert_msg_one" *ngIf="tempalert">
+                Engine Overheating
+              </span>
             </div>
             <div class="col-md-4">
               <div class="col-md-6">
@@ -150,23 +164,26 @@
                   55%
                 </span>
               </div>
-                <div class="col-md-6 box-icon">
-                  <img src ="../../assets/iconss/Battery.png" class="img-icon-battery">
-                </div>
+              <div class="col-md-6 box-icon">
+                <img src="../../assets/iconss/Battery.png" class="img-icon-battery">
               </div>
-        </div>
-        
-       <div class="col-md-6"style="height: 200px;margin-top: -56px;">  
-        <div [chart] = "chartRpm">
-        </div>
-        </div>
-        <div class="col-md-6" style="height: 200px;margin-top: -56px;"> 
-            <div [chart] = "chartSpeed"></div>
-           </div>
-      </div>
+              <span class="alert_msg" *ngIf="batteryalert">
+                Battery looks good
+              </span>
+            </div>
+          </div>
 
-    </div>
-    <!-- <div class="row">
+          <div class="col-md-6" style="height: 200px;margin-top: -56px;">
+            <div [chart]="chartRpm">
+            </div>
+          </div>
+          <div class="col-md-6" style="height: 200px;margin-top: -56px;">
+            <div [chart]="chartSpeed"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- <div class="row">
       <div class="col-md-9 plr-2" style="margin-top: 11px" >
         <div id="map"></div>
         
@@ -175,155 +192,156 @@
     
       </div>
     </div> -->
-  </div>
-  
-  <div class="col-md-3" style="margin-top: 2px;padding-bottom:3px;border-radius: 6px;">
+    </div>
+
+    <div class="col-md-3" style="margin-top: 2px;padding-bottom:3px;border-radius: 6px;">
       <div class="row" style="background-color:#fff;padding-bottom: 12px;">
         <div class="card">
-           <div class="card-body">
-         
-                  <div style="float:left"> 
-                      <img src="../../assets/images/Driver_Image.jpg" alt="Avatar" class="avatar">
-                  </div>
-                    
-                      <div class="pt-22">
-                          <span style="font-size:17px; color:#333;padding-left: 12px">{{drivername}}</span><br>
-                          <span style="color:#333;padding-left: 12px">{{licenceno}}</span><br>
-                          <div *ngIf ="rating ==5">
-                            <span style="padding-left: 12px">
-                              <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                              aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                              class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
-                              aria-hidden="true"></i>
-                          </span>
-                          </div>
-                          <div *ngIf ="rating ==4">
-                            <span style="padding-left: 12px">
-                              <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                              aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                              class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
-                              aria-hidden="true"></i>
-                          </span>
-                          </div>
-                          <div *ngIf ="rating ==3">
-                            <span style="padding-left: 12px">
-                              <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                              aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
-                              class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
-                              aria-hidden="true"></i>
-                          </span>
-                          </div>
-                          
-                          <div *ngIf ="rating ==2">
-                            <span style="padding-left: 12px">
-                              <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
-                              aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
-                              class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
-                              aria-hidden="true"></i>
-                          </span>
-                          </div>
-                          
-                       </div>
+          <div class="card-body">
+
+            <div style="float:left">
+              <img src="../../assets/images/Driver_Image.jpg" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="pt-22">
+              <span style="font-size:17px; color:#333;padding-left: 12px">{{drivername}}</span><br>
+              <span style="color:#333;padding-left: 12px">{{licenceno}}</span><br>
+              <div *ngIf="rating ==5">
+                <span style="padding-left: 12px">
+                  <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true"></i>
+                </span>
+              </div>
+              <div *ngIf="rating ==4">
+                <span style="padding-left: 12px">
+                  <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i
+                    class="fa fa-star default-icon-color" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div *ngIf="rating ==3">
+                <span style="padding-left: 12px">
+                  <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                    class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i
+                    class="fa fa-star default-icon-color" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <div *ngIf="rating ==2">
+                <span style="padding-left: 12px">
+                  <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                    aria-hidden="true">&nbsp;</i><i class="fa fa-star default-icon-color"
+                    aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true"></i>
+                </span>
+              </div>
+
             </div>
           </div>
         </div>
-        <div class="row" style="margin-top: 2px">
-           <div class="card-header" style="font-size:20px;text-align:center;color: white;background-color:#fff;">
-                 <!-- <h5 style="text-align:center ;background-color: #1C6561">Fleet Sheet</h5> -->
-                 <span></span>
-                </div>
-                <div class="card-body" style="background-color: #fff;padding-bottom: 12px;OVERFLOW:overlay;height: 241px;">
-                    <ul class="list-group" *ngFor="let item of address">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="padding-right: 36px;">
-                          {{item.Location}}
-                          <i style="font-size:24px; float:right;" class="fa" [ngStyle]="{'color':item.Status === 'Yes' ? 'green' : 'red' }">&#xf05d;</i>
-                        </li>
-                      </ul>
-                     </div>
-             </div>
-      
+      </div>
+      <div class="row" style="margin-top: 2px">
+        <div class="card-header" style="font-size:20px;text-align:center;color: white;background-color:#fff;">
+          <!-- <h5 style="text-align:center ;background-color: #1C6561">Fleet Sheet</h5> -->
+          <span></span>
+        </div>
+        <div class="card-body" style="background-color: #fff;padding-bottom: 12px;OVERFLOW:overlay;height: 241px;">
+          <ul class="list-group" *ngFor="let item of address">
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="padding-right: 36px;">
+              {{item.Location}}
+              <i style="font-size:24px; float:right;" class="fa"
+                [ngStyle]="{'color':item.Status === 'Yes' ? 'green' : 'red' }">&#xf05d;</i>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
 
     <div class="row">
       <div class="col-md-8 pr pt-15" style="padding-right: 2px;">
         <!-- <div id="map"></div> -->
-        <div class="card-header" style="font-size:20px; color:  white;background-color: #273048;">
-            <!-- <h5 style="text-align:center ;background-color: #1C6561">Route Map</h5> -->
-            <span class="pl-54">Route Map</span>
-           </div>
-           <div class="card-body">
-                 <div id="map"></div>
-           </div>
-        
-       </div>
+        <div class="card-header" style="font-size:18px; color:  white;background-color: #273048;">
+          <!-- <h5 style="text-align:center ;background-color: #1C6561">Route Map</h5> -->
+          <span class="pl-54">Route Map</span>
+        </div>
+        <div class="card-body">
+          <div id="map"></div>
+        </div>
+
+      </div>
       <div class="col-md-2 plr-2 pt-15">
-          <div class="card-header" style="font-size:18px;color: white;background-color:#273048;">
-                
-                <span>Driver Behaviour</span>
-               </div>
-               <div class="card-body" style="background-color:#fff;padding-bottom:22px;">
-                   <ul class="list-group">
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                       Driver Attendance
-                         <span style="color: #333; float: right;">95%</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                         High Speed Events
-                         <span style="color:#333; float: right;">6</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                       Rash Braking Events
-                         <span style="color:#333; float: right;">2</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Mis Routing
-                         <span style="color:#333; float: right;">1</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Total Engine offline
-                        <span style="color:#333; float: right;">.52 Hours</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Rapid Acceleration
-                        <span style="color:#333; float: right;">{{rapidacceleration}}</span>
-                      </li>
-                     </ul>
-               </div>
-            
+        <div class="card-header" style="font-size:18px;color: white;background-color:#273048;">
+
+          <span>Driver Behaviour</span>
+        </div>
+        <div class="card-body" style="background-color:#fff;padding-bottom:22px;">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Driver Attendance
+              <span style="color: #333; float: right;">95%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              High Speed Events
+              <span style="color:#333; float: right;">6</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Harsh Braking Events
+              <span style="color:#333; float: right;">2</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Mis Routing
+              <span style="color:#333; float: right;">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Total Engine offline
+              <span style="color:#333; float: right;">.52 Hours</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Harsh Acceleration
+              <span style="color:#333; float: right;">{{rapidacceleration}}</span>
+            </li>
+          </ul>
+        </div>
+
       </div>
       <div class="col-md-2 pl-2 pt-15">
         <div class="card-header" style="font-size:18px;color: white;background-color:#273048;">
-                 <span>Vehicle</span>
-               </div>
-               <div class="card-body" style="background-color:#fff; padding-bottom: 43px">
-                   <ul class="list-group">
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Total Miles Completed
-                         <span style="color:#333; float: right;">{{totalmilesrun}}</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                         No of Breakdown
-                         <span style="color:#333; float: right;">9575</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                           Flat Tire Events
-                         <span style="color:#333; float: right;">{{flattireevents}}</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                         Last Services
-                         <span style="color:#333; float: right;">{{lastservicedate | date}}</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Last Breakdown on <br>at 123456.25 miles
-                        <span style="color:#333; float: right;margin-top: -16px;">{{lastbreakdown | date}}</span>
-                      </li>
-                     </ul>
-               </div>
-            
-      
+          <span>Vehicle</span>
+        </div>
+        <div class="card-body" style="background-color:#fff; padding-bottom: 43px">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Total Miles Completed
+              <span style="color:#333; float: right;">{{totalmilesrun}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              No of Breakdown
+              <span style="color:#333; float: right;">2</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Flat Tire Events
+              <span style="color:#333; float: right;">{{flattireevents}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Last Services
+              <span style="color:#333; float: right;">{{lastservicedate | date}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Last Breakdown on <br>at 123456.25 miles
+              <span style="color:#333; float: right;margin-top: -16px;">{{lastbreakdown | date}}</span>
+            </li>
+          </ul>
+        </div>
+
+
       </div>
     </div>
 
-</div>
+  </div>
 </div>

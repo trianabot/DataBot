@@ -148,6 +148,27 @@ pl-54{
   
 
   }
+ .alert_msg {
+    color: white;
+    font-size: 9px;
+    border-radius: 10px;
+    padding: 3px 5px;
+    background-color: green;
+  }
+
+  .alert_msg_one{
+    color: white;
+    font-size: 9px;
+    border-radius: 10px;
+    padding: 3px 5px;
+    background-color: red;
+  }
+  .box-background-alert{
+    background-color: red;
+    padding-bottom: 24px;
+    border-radius: 6px;
+    padding-top: 24px;
+  }
   
 
     

@@ -60,11 +60,12 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
 
     regiondefaultname:any;
     statedefaultname:any;
+    selectedItem:number;
 
 
    constructor(public http: HttpClient) { }
      ngOnInit() {
-         this.regiondefaultname ="Midwest",this.statedefaultname ="Michigan"
+         this.regiondefaultname ="West",this.statedefaultname ="Washington"
         this.http.get('../../assets/data/customer-feedback.json').subscribe(data => {
             this.jsondata = data;
             var index: any;
@@ -87,6 +88,15 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
                 if (this.state.indexOf(jsondata[index].State) < 0) {
                     this.state.push(jsondata[index].State);
                 }
+                this.rating = this.jsondata[index]['Avg Review Rating']
+                if (this.rating == "5") {
+                    this.toprateddriveinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index]['Avg Review Rating']});
+                   
+                   }
+                else if (this.rating == "3" || this.rating == "2" || this.rating == "1") {
+                 this.lowrateddriverinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index]['Avg Review Rating']})
+
+              }
             }
         }
 
@@ -95,23 +105,10 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
 
  loadDefaultData(regiondefaultname,jsondata,statedefaultname){
     this.customerinfo =[];
-    this.toprateddriveinfo =[];
-     var index: any;
+    var index: any;
         for (index in jsondata) {
     if (this.jsondata[index].Region === regiondefaultname && this.jsondata[index].State === statedefaultname) {
         this.customerinfo.push({ "customername": jsondata[index]['Customer Name'], "consigmentno": jsondata[index].Consignment })
-     this.rating = jsondata[index].Rating
-
-    if (this.rating == "5") {
-         this.toprateddriveinfo.push({ "drivername":jsondata[index]['Driver Name'] ,"rating": jsondata[index].Rating })
-
-         console.log(this.toprateddriveinfo)
-        
-        }
-     else if (this.rating == "1") {
-        this.lowrateddriverinfo.push({ "drivername": jsondata[index]['Driver Name'] ,"rating":jsondata[index].Rating })
-       
-     }
     }
         this.fivestartratingcount += jsondata[index]['5 Star'];
         this.fourstartratingcount += jsondata[index]['4 Star'];
@@ -133,39 +130,39 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
 
      changeRegion(region) {
         this.regionname = this.regiondefaultname = region.currentTarget.value;
-        this.state = []
+        this.toprateddriveinfo =[];
+        this.lowrateddriverinfo =[];
+        this.state = [];
         var index: any;
         for (index in this.jsondata) {
             if (this.jsondata[index].Region === this.regionname) {
                 if (this.state.indexOf(this.jsondata[index].State) < 0) {
                     this.state.push(this.jsondata[index].State);
                 }
+                this.rating = this.jsondata[index]['Avg Review Rating']
+                if (this.rating == "5") {
+                    this.toprateddriveinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index]['Avg Review Rating']});
+                   
+                   }
+                else if (this.rating == "1" || this.rating == "2" || this.rating == "3") {
+                 this.lowrateddriverinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index]['Avg Review Rating']})
+                   
+               }
             }
+          
         }
-    }
+     }
 
     changeState(state) {
         this.statename =  this.statedefaultname = state.currentTarget.value;
         // this.loadReviewJson(this.regionname,this.statename)
             this.customerinfo =[];
-            this.toprateddriveinfo =[];
-         var index: any;
+            var index: any;
         for (index in this.jsondata) {
             if (this.jsondata[index].Region === this.regiondefaultname && this.jsondata[index].State === this.statename) {
                 this.customerinfo.push({ "customername": this.jsondata[index]['Customer Name'], "consigmentno": this.jsondata[index].Consignment })
-             this.rating = this.jsondata[index].Rating
 
-            if (this.rating == "5") {
-                 this.toprateddriveinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,"rating": this.jsondata[index].Rating })
-
-                 console.log(this.toprateddriveinfo)
-                
-                }
-           else if (this.rating == "1") {
-                this.lowrateddriverinfo.push({ "drivername": this.jsondata[index]['Driver Name'] ,  "rating": this.jsondata[index].Rating })
-               
-           }
-         }
+             }
                 this.fivestartratingcount += this.jsondata[index]['5 Star'];
                 this.fourstartratingcount += this.jsondata[index]['4 Star'];
                 this.threestartratingcount += this.jsondata[index]['3 Star'];
@@ -181,13 +178,17 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
 
          } 
          this.fleetRatingChart(this.fivestarrating,this.dates,this.fourstarrating,this.threestarrating,this.twostartrating,this.onestartrating);
-        
-        
-     }
+         }
     
-    driverDetails(id,item:any){
+  
+
+
+
+
+
+         listClick(id,item:any){
         this.customername = item;
-        this.selectedId= id;
+        this.selectedItem = id;
         var index: any;
         for (index in this.jsondata) {
             if (this.jsondata[index]['Customer Name'] === this.customername) {
@@ -283,7 +284,7 @@ fleetRatingChart(fivestarrating,dates,fourstarrating,threestarrating,twostartrat
                     stacking: 'normal',
                     dataLabels: {
                         enabled: true,
-                        color: 'white'
+                        color: 'black'
                     }
                 }
             },

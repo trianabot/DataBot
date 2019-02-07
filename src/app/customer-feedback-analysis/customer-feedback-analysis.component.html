@@ -19,6 +19,7 @@
             </select>
           </div>
         </div>
+      
       </div>
 
       <!-- Rating Count -->
@@ -28,7 +29,7 @@
             <div class="card ">
               <div class="card-body card_wrapper-drivers">
                 <span class="fs-40">35%</span><br>
-                <span class="fs-17">{{fivestartratingcount}} nos</span><br>
+                <span class="fs-17">{{fivestartratingcount}}</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
                   class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
@@ -40,7 +41,7 @@
             <div class="card">
               <div class="card-body card_wrapper-drivers">
                 <span class="fs-40">35%</span><br>
-                <span class="fs-17">{{fourstartratingcount}} nos</span><br>
+                <span class="fs-17">{{fourstartratingcount}}</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
                   class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
@@ -53,7 +54,7 @@
             <div class="card">
               <div class="card-body card_wrapper-drivers">
                 <span class="fs-40">35%</span><br>
-                <span class="fs-17">{{threestartratingcount}} nos</span><br>
+                <span class="fs-17">{{threestartratingcount}}</span><br>
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
                   class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
@@ -104,8 +105,8 @@
             <div>
              <div class="col-md-7" style="padding: 0px">
                 <div class="customer-review-name">Name</div>
-                <ul class="list-group" *ngFor ="let items of customerinfo">
-                  <li class="listgroup-wrapper list-back-ground-color-2"   (click) =(driverDetails(i,items.customername)) [ngStyle]="{'background-color': i ? 'green' : ''}">{{items.customername}}</li>
+                <ul class="list-group" *ngFor ="let items of customerinfo; let i=index">
+                  <li class="listgroup-wrapper list-back-ground-color-2" (click) ="listClick(i,items.customername)" [ngStyle]="{'background-color': selectedItem == i ? '#ff7675' : ''}">{{items.customername}}</li>
                  </ul>
               </div>
               <div class="col-md-5" style="padding: 0px;">
@@ -141,7 +142,7 @@
                         96%
                       </div>
                       <div class="col-md-4" style="text-align:center" text-wrap>
-                        {{companyterm}} Year with us {{totalexp}} year Exp
+                        {{companyterm}} Year with us,&nbsp;&nbsp;&nbsp; {{totalexp}} year Exp
                       </div>
                 </div>
                 <div class="row padding-details">
@@ -177,7 +178,7 @@
 
         <!--Feedback-->
         <div class="col-md-4" style="padding-left: 2px;padding-right: 3px">
-          <div class="col-md-12" style="padding:0px;background-color: #FFFFFF;padding-bottom: 7px;">
+          <div class="col-md-12" style="padding:0px;background-color: #FFFFFF;height: 296px;">
             <div class="card back-color">
               <div class="card-header" style="background-color:#273048;color: white;padding-bottom:5px;font-size: 18px;">
                   <img src ="../../assets/iconss/feedback.png" class="box-icon">
@@ -226,7 +227,7 @@
             </textarea> 
              </div>
              <div class="col-md-12" style="text-align: center;font-size: 15px">
-              <span>Driver Total Rating :{{drivername}}</span>
+              <span>Driver Total Rating : {{drivername}}</span>
              </div>
              <div class="col-md-8">
                 <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
@@ -328,18 +329,24 @@
         <div class="card-body">
             <ul style="list-style: none;margin-bottom: 0px;background-color: #EFEFEF">
                 <li>
-                   <span  style="font-size: 17px;">Name</span>  <span style="float: right;padding-right: 31px;font-size: 17px">Rating</span>
+                   <span  style="font-size: 17px;">Name</span>  <span style="float: right;padding-right:63px;font-size: 17px">Rating</span>
                   </li>
             </ul>
             <ul class="list-group" *ngFor ="let driverinfo of toprateddriveinfo">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   {{driverinfo.drivername}}
-                  <span style="float:right;">
+                  <span style="float:right;padding-right: 22px;">
                       <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
                   class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color"
                   aria-hidden="true"></i>
                   </span>
+                  <!-- <span style="float:right;padding-right: 22px;" *ngIf ="driverinfo.rating == '4'">
+                    <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star"
+                aria-hidden="true"></i>
+                </span> -->
                 </li>
               </ul>             
  </div>
@@ -353,18 +360,31 @@
         <div class="card-body">
             <ul style="list-style: none;margin-bottom: 0px;background-color: #EFEFEF">
                 <li>
-                   <span  style="font-size: 17px;">Name</span>  <span style="float: right;padding-right: 31px;font-size: 17px">Rating</span>
+                   <span  style="font-size: 17px;">Name</span>  <span style="float:right;padding-right:63px; font-size: 17px">Rating</span>
                   </li>
             </ul>
             <ul class="list-group" *ngFor ="let lowrateddriverinfos of lowrateddriverinfo">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   {{lowrateddriverinfos.drivername}}
-                  <span style="float:right;">
-                      <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
-                  aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
-                  class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
-                  aria-hidden="true"></i>
-                  </span>
+                  <span style="float:right;padding-right:31px" *ngIf ="lowrateddriverinfos.rating =='1'">
+                    <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star default-icon-color"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                aria-hidden="true"></i>
+                </span>
+                <span style="float:right;padding-right:31px" *ngIf ="lowrateddriverinfos.rating =='2'" >
+                    <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star lowRateddrivericon"
+                aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i><i
+                class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+                aria-hidden="true"></i>
+                </span>
+                <span style="float:right;padding-right:31px" *ngIf ="lowrateddriverinfos.rating =='3'">
+                  <i class="fa fa-star lowRateddrivericon" aria-hidden="true"></i> &nbsp;<i class="fa fa-star lowRateddrivericon"
+              aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star lowRateddrivericon" aria-hidden="true">&nbsp;</i><i
+              class="fa fa-star default-icon-color" aria-hidden="true">&nbsp;</i>&nbsp;<i class="fa fa-star default-icon-color"
+              aria-hidden="true"></i>
+              </span>
+
                 </li>
                </ul>
               </div>

@@ -7,8 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private router : Router) { }
+  childmessage : string = "I am passed from Parent to child component"
+  title:any;
+  constructor(private router : Router) { 
+    this.title = localStorage.getItem('title');
+  }
 
   ngOnInit() {
   }
@@ -17,7 +20,8 @@ export class HeaderComponent implements OnInit {
   
   }
   showDashBoard(){
-    this.router.navigate(['/industries'])
+    this.router.navigate(['/industries']);
+    localStorage.removeItem('title');
 
   }
   showSideMenu()

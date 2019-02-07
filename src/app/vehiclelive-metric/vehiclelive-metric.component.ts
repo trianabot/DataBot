@@ -70,6 +70,13 @@ export class VehicleliveMetricComponent implements OnInit {
   speed: any;
   rpm: any;
 
+  fuel:any = 70;
+  temperature:any = 195;
+  fuelalert:any = false;
+  tempalert:any=false;
+  batteryalert: any = true;
+  mpgalert:any = false;
+
 
   constructor(public http: HttpClient) { }
   ngAfterViewInit() {
@@ -77,6 +84,7 @@ export class VehicleliveMetricComponent implements OnInit {
   }
 
   ngOnInit() {
+    var $this = this;
     this.regiondefaultname = 'Midwest'; this.statedefaultname = 'Ohio'; this.categorydefaultname = '91-100', this.ratingdefaultvalue = 4;
     this.vehicledefaultname = 'CAT6257'
     this.http.get('../../assets/data/vehiclemetric.json').subscribe(data => {
@@ -91,6 +99,34 @@ export class VehicleliveMetricComponent implements OnInit {
       this.loadDefaultRegion(this.region, this.jsondata)
       // this.distributors = data['LOCATIONS'];
     });
+    setInterval(function () {
+      var val = 10;
+      var tempval = 1;
+      
+      $this.batteryalert = false;
+      if($this.fuel){
+      $this.fuel -= val;
+      if($this.fuel == 0) {
+      $this.fuel = 70;
+      }else if($this.fuel == 30){
+      $this.fuelalert = true;
+      }else{
+      $this.fuelalert = false;
+      }
+      }
+      
+      if($this.temperature){
+      $this.temperature += tempval;
+      if($this.temperature == 202) {
+      $this.temperature = 195;
+      }else if($this.temperature == 200){
+      $this.tempalert = true;
+      }else{
+      $this.tempalert = false;
+      }
+      }
+      
+      }, 5000);
 
 
     // this.routeMap();
@@ -162,6 +198,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
 
   loadDefaultDriverData(regiondefaultname, statedefaultname, categorydefaultname, jsondata, ratingdefaultvalue, vehicledefaultname) {
+    var $this=this;
     var index: any;
     for (index in this.jsondata) {
       if (jsondata[index].Region === regiondefaultname && jsondata[index].State === statedefaultname &&
@@ -195,6 +232,20 @@ export class VehicleliveMetricComponent implements OnInit {
       }
     }
 
+    setInterval(function () {
+      var value = 1;
+
+      $this.tripmileage = $this.tripmileage;
+      $this.tripmileage -= value;
+      console.log($this.tripmileage);
+      if($this.tripmileage == 11){
+        $this.mpgalert = true;
+      }else if($this.tripmileage == 10){
+        $this.tripmileage= 15;
+        $this.mpgalert = false;
+      }
+
+    }, 2000);
 
   }
 
@@ -423,7 +474,7 @@ export class VehicleliveMetricComponent implements OnInit {
           rotation: 'auto'
         },
         title: {
-          text: 'km/h'
+          text: 'mph'
         },
         plotBands: [{
           from: 0,
@@ -442,10 +493,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
       series: [{
         name: 'Speed',
-        data: [60],
-        tooltip: {
-          valueSuffix: ' km/h'
-        }
+        data: [60]
       }]
 
     };
@@ -461,7 +509,7 @@ export class VehicleliveMetricComponent implements OnInit {
         inc = Math.round((Math.random() - 0.5) * 100);
         newVal = point.y + inc;
 
-        if (newVal < 0 || newVal > 180) {
+        if (newVal < 0 || newVal > 160) {
           newVal = point.y - inc;
         }
 
@@ -471,10 +519,10 @@ export class VehicleliveMetricComponent implements OnInit {
       // RPM
       if ($this.chartRpm) {
         point = $this.chartRpm.ref.series[0].points[0];
-        inc = (Math.random() - 0.5);
+        inc = Math.round((Math.random() - 0.5) * 10);
         newVal = point.y + inc;
 
-        if (newVal < 0 || newVal > 5) {
+        if (newVal < 0 || newVal > 10) {
           newVal = point.y - inc;
         }
 
@@ -557,7 +605,7 @@ export class VehicleliveMetricComponent implements OnInit {
           rotation: 'auto'
         },
         title: {
-          text: 'r/min'
+          text: 'rpm'
         },
         plotBands: [{
           from: 0,
@@ -576,10 +624,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
       series: [{
         name: 'Rpm',
-        data: [4],
-        tooltip: {
-          valueSuffix: ' km/h'
-        }
+        data: [4]
       }]
 
     };

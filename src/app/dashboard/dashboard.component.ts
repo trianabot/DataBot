@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+    
     driverperformancechart: any;
     jsondata: any = []
     categories: any
@@ -97,6 +97,7 @@ export class DashboardComponent implements OnInit {
 
     driverPerformanceChart(categoryone, categorytwo, categorythree, categoryfour, categoryfive, categorysix, categoryseven, categoryeight) {
         var UNDEFINED;
+        var previousPoint = null;
         var $this = this;
         this.options = {
             chart: {
@@ -109,6 +110,7 @@ export class DashboardComponent implements OnInit {
                     drilldown: function (e) {
                         $this.getCategoryEvents(e.seriesOptions.name,e.seriesOptions.data.length);
                     }
+                   
                 }
 
             },
@@ -158,9 +160,16 @@ export class DashboardComponent implements OnInit {
                             click: function (): any {
                                 if (this.x != UNDEFINED) {
                                     $this.getDriver(this.name);
-
+                                    console.log(this);                      
                                     //   $this.router.navigate(['./driver-overview']);
+                                    for (var i = 0; i < this.series.data.length; i++) {
+                                        this.series.data[i].update({ color: '#5871b2' }, true, false);
+                                    }
+                                      this.update({ color: '#1c2337' }, true, false);
+                                      //   $this.router.navigate(['./driver-overview']);
+                                    
                                 }
+                             
                             },
 
 
@@ -237,7 +246,7 @@ export class DashboardComponent implements OnInit {
                         "name": "91-100",
                         "id": "91-100",
                         "data": categoryone,
-                        color: "#5871b2"
+                        color: "#5871b2",
 
 
                     },
@@ -310,17 +319,19 @@ export class DashboardComponent implements OnInit {
     getCategoryEvents(category,avg) {
         var index :any
         this.lastdayevent = 0;
+        this.thisweekevent =0;
+        this.lastmonthavgevent=0;
+        this.thisweekevent =0;
+        this.todayevent =0;
         for(index in this.driverevent){
-
             if(this.driverevent[index].Category == category){
                 this.lastdayevent += this.driverevent[index]['Last Day']/avg;
-                this.thisweekevent = this.drivertotalevents['This Week'] / avg;
-                this.lastmonthavgevent = this.drivertotalevents['Last Month Average'] / avg;
-                this.threshold = this.drivertotalevents['Threshold'];
-                this.todayevent = this.drivertotalevents['Today'] / avg;
+                this.thisweekevent += this.driverevent[index]['This Week']/avg;
+                this.lastmonthavgevent += this.driverevent[index]['Last Month Average']/avg;
+                this.threshold = this.driverevent[index]['Threshold'];
+                this.todayevent += this.driverevent[index]['Today']/avg;
            }
         }
-
     }
 
 

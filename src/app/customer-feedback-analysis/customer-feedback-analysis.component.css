@@ -180,6 +180,7 @@ font-size: 16px;
     float: left;
     margin-left: 21px;
 }
-/* li:active { 
-    background-color: yellow;
+/* .active,li:hover {
+    background-color: #666;
+    color: white;
   } */

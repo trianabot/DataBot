@@ -82,3 +82,16 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: white;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:white;
+}
