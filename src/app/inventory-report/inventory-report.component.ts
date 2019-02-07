@@ -703,7 +703,7 @@ this.interval = setInterval( () => {
       //this.alerts =[alert]
       this.openpopmodeladd()
     
-    },180000)
+    },10000)
 
 };
 

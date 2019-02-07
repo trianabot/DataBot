@@ -22,19 +22,19 @@ export class ReportsComponent implements OnInit {
 
 redirectDashboard(){
 this.router.navigate(['./dashboard']);
-localStorage.setItem('title',"Fleet Route");
+localStorage.setItem('title',"Fleet Overview");
 
  
 }
 
 redirectInventory(){
 this.router.navigate(['./inventory']);
-localStorage.setItem('title',"Inventory");
+localStorage.setItem('title',"Inventory Management");
 }
 
 redirectInventortMap(){
 this.router.navigate(['./inventormap']);
-localStorage.setItem('title',"inventorymap");
+localStorage.setItem('title',"Stock Availability");
 }
 
 redirectwarehouseoverview(){
@@ -43,16 +43,17 @@ redirectwarehouseoverview(){
 
   redirectstocktracking(){
    this.router.navigate(['./stocktracking'])
+   localStorage.setItem('title',"Order Tracking");
   }
   redirectdriveroverview()
   {
     this.router.navigate(['./driver-overview']);
-    localStorage.setItem('title',"Driver Profile");
+    localStorage.setItem('title',"Driver Performance Profile");
    }
   redirectvehicleMetrics()
   {
     this.router.navigate(['./vehicle-metric']);
-    localStorage.setItem('title',"Vehicle Live Metric");
+    localStorage.setItem('title',"Vehicle Live Metrics");
    }
    customerFeedbackAnalysis(){
     this.router.navigate(['./customer-feedback']);
