@@ -881,7 +881,7 @@ export class VehicleliveMetricComponent implements OnInit {
     this.result = this.date;
     $('#calendarModal').modal('hide');
     // $('#messageeModel').modal('show');
-    alert("Your Order has been Successfully Reschedule For Delivery")
+    alert("Your Activity has been scheduled");
 
   }
   scheduleActivity() {

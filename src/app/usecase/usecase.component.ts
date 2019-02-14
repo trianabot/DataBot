@@ -13,7 +13,7 @@ export class UsecaseComponent implements OnInit, OnChanges {
    vehiclerouteTracking:boolean = false;
    showmanufacturing:boolean=false;
    showVechile :boolean =false;
-  reportusecase :boolean;
+  reportusecase :boolean = false;
   reportUseCaseTypeValue:number=0;
   showReport :boolean =false;
   showAssembly:boolean =false;
@@ -28,10 +28,10 @@ export class UsecaseComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-   
+
   }
  ngOnChanges() {
-     
+
 }
   redirect(useCaseType){
     this.reportusecase=true;
@@ -52,7 +52,7 @@ export class UsecaseComponent implements OnInit, OnChanges {
         this.showfleetManagment = false
         this.showAssembly = false;
         this. showEng = false;
-      
+
 
     }
     else if(useCaseType ==3){
@@ -62,7 +62,7 @@ export class UsecaseComponent implements OnInit, OnChanges {
         this.showfleetManagment = false
         this.showAssembly = false;
         this. showEng = false;
-      
+
 
     }
     else if(useCaseType ==4){
@@ -75,7 +75,7 @@ export class UsecaseComponent implements OnInit, OnChanges {
 
     }
 
-  
+
     else if(useCaseType ==6){
     //   this.showVechile = true;
     this.showAssembly = true;
@@ -85,7 +85,7 @@ export class UsecaseComponent implements OnInit, OnChanges {
     this. showEng = false;
     this.showHrms=false;
     }
-    
+
     else if(useCaseType ==7){
       //   this.showVechile = true;
       this. showEng =true;
@@ -94,9 +94,9 @@ export class UsecaseComponent implements OnInit, OnChanges {
       this.fleetMaintaince = false;
       this.showfleetManagment = false
       this.showHrms=false;
-     
+
     }
-  
+
 
    // alert(useCaseType);
    // this.emitShowUseCase.emit(useCaseType);
