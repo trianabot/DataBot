@@ -220,7 +220,7 @@ export class DriverOverviewComponent implements OnInit {
     loadHeatmap(heatdata) {
         this.array = [];
         let duplicatearr = heatdata.slice();
-        duplicatearr.push("8:08", "8:53", "9:02", "8:00");
+        duplicatearr.push("8.08", "8.53", "9.02", "8.00");
         duplicatearr[63] = null;
         for (var j = 0; j < 3; j++) {
             for (var k = 0; k <= 31; k++) {

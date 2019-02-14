@@ -43,6 +43,18 @@ import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { CustomerFeedbackAnalysisComponent } from './customer-feedback-analysis/customer-feedback-analysis.component';
 import * as highstock from 'highcharts/modules/stock.src';
 
+import {AngularDateTimePickerModule} from 'angular2-datetimepicker';
+import { PolticalStaticsComponent } from './poltical-statics/poltical-statics.component';
+import { StateOverviewComponent } from './state-overview/state-overview.component';
+import { BoothinchargeLevelComponent } from './boothincharge-level/boothincharge-level.component';
+import { ForecastTrendAnalysisComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
+
+import {DatabotService } from './core/databot.service';
+
+import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
+import { HrmsUsecase2Component } from './hrms-usecase/hrms-usecase2/hrms-usecase2.component';
+import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component'
+
 
 
 
@@ -72,11 +84,18 @@ import * as highstock from 'highcharts/modules/stock.src';
     AddUserComponent,
     AddDeviceComponent,
     CustomerFeedbackAnalysisComponent,
+    PolticalStaticsComponent,
+    StateOverviewComponent,
+    BoothinchargeLevelComponent,
+    ForecastTrendAnalysisComponent,
+    HrmsUsecase3Component,
+    HrmsUsecase2Component,
+    HrmsUsecase1Component,
     
    
     ],
   imports: [
-    BrowserModule,ChartModule,HttpClientModule,HttpModule,
+    BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,
     AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule, 
     NgCircleProgressModule.forRoot({
       // set defaults here
@@ -89,7 +108,7 @@ import * as highstock from 'highcharts/modules/stock.src';
       maxPercent: 960
     })
   ],
-  providers: [RouteService,{provide: HIGHCHARTS_MODULES,
+  providers: [RouteService,DatabotService,{provide: HIGHCHARTS_MODULES,
     useFactory: () => [ drilldown, treemap,more , Heatmap, solidGauge,highstock]}],
   bootstrap: [AppComponent]
 })

@@ -1,95 +1,154 @@
 <div class="container-fluid" style="padding: 0px">
   <div class="panel panel-default">
-      <div class="panel-body" style="text-align: right;background-color:#5871b2;margin-top: 20px;"><strong style="color:white;">Reports</strong></div>
-    </div>
-  
-    <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==1'>
-      <div class="row">
-        <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectDashboard()">
-            <div class="talkbubble">
+    <div class="panel-body" style="text-align: right;background-color:#5871b2;margin-top: 20px;"><strong
+        style="color:white;">Reports</strong></div>
+  </div>
+
+  <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==1'>
+    <div class="row">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectDashboard()">
+        <div class="talkbubble">
           <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-           <p style="text-align: center; color:#267872">Fleet Overview</p>
-            </div>
+          <p style="text-align: center; color:#267872">Fleet Overview</p>
         </div>
-        
-  
-        <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectdriveroverview()">  
-            <div class="talkbubble">
+      </div>
+
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectdriveroverview()">
+        <div class="talkbubble">
           <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
           <p style="text-align: center;color:#267872 ">Driver Profile</p>
-            </div>
-  
         </div>
-        <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectvehicleMetrics()">  
-            <div class="talkbubble">
+
+      </div>
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectvehicleMetrics()">
+        <div class="talkbubble">
           <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
           <p style="text-align: center;color:#267872">Vehicle Live Metrics</p>
-            </div>
         </div>
-        <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="customerFeedbackAnalysis()">  
-          <div class="talkbubble">
-        <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-        <p style="text-align: center;color:#267872">Customer Feedback Analysis</p>
-          </div>
       </div>
-     
-       </div>
-    </div>
-    <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==2'>
-        <div class="row">
-          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectInventory()">
-              <div class="talkbubble">
-            <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-             <p style="text-align: center; color:#267872">Route Tracking</p>
-              </div>
-          </div>
-          
-    
-          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;">  
-              <div class="talkbubble">
-            <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-            <p style="text-align: center;color:#267872 ">Vehicle Data</p>
-              </div>
-    
-          </div>
-          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;">  
-              <div class="talkbubble">
-            <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-            <p style="text-align: center;color:#267872">Tire Data</p>
-              </div>
-          </div>
-       
-         </div>
-      </div>
-      <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==3'>
-          <div class="row">
-            <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectInventory()">
-                <div class="talkbubble">
-              <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
-               <p style="text-align: center; color:#267872">Inventory Management</p>
-                </div>
-            </div>
-
-            <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectInventortMap()">
-              <div class="talkbubble">
-            <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-             <p style="text-align: center; color:#267872">Stock Availability</p>
-              </div>
-          </div>
-<!-- 
-          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectwarehouseoverview()">
-              <div class="talkbubble">
-            <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-             <p style="text-align: center; color:#267872">Use Case 3</p>
-              </div>
-          </div> -->
-          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;"(click)="redirectstocktracking()">
-            <div class="talkbubble">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="customerFeedbackAnalysis()">
+        <div class="talkbubble">
           <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
-           <p style="text-align: center; color:#267872">Track Order</p>
-            </div>
+          <p style="text-align: center;color:#267872">Customer Feedback Analysis</p>
         </div>
-           </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==2'>
+    <div class="row">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectInventory()">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Route Tracking</p>
         </div>
-        <!-- Example: {{ childExample }} -->
+      </div>
+
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center;color:#267872 ">Vehicle Data</p>
+        </div>
+
+      </div>
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center;color:#267872">Tire Data</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==3'>
+    <div class="row">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectInventory()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Inventory Management</p>
+        </div>
+      </div>
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectInventortMap()">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Stock Availability</p>
+        </div>
+      </div>
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectstocktracking()">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Track Order</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Human Resource-->
+
+  <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==4'>
+    <div class="row">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectHrmsUseCaseOne()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">HRMS=usecase-1</p>
+        </div>
+      </div>
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectHrmsUseCaseTwo()">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">HRMS=usecase-2</p>
+        </div>
+      </div>
+
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectHrmsUseCaseThree()">
+        <div class="talkbubble">
+          <img src="../../assets/hero_Image.jpg" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">HRMS=usecase-3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--Human Resource-->
+
+
+  <!--Assembly-->
+  <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==6'>
+    <div class="row">
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectPolticalStatics()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Andhra pradesh</p>
+        </div>
+      </div>
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectStateOverview()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">State Overview</p>
+        </div>
+      </div>
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectBoothIncharge()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Booth Incharge</p>
+        </div>
+      </div>
+      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectForcastAnalysis()">
+        <div class="talkbubble">
+          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">FORECAST Trend Analysis</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Example: {{ childExample }} -->
 </div>

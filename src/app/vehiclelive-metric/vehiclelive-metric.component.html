@@ -60,7 +60,10 @@
 
       </div>
 
+      <!--DropDown-->
+
       <div class="row">
+        <!--trip info-->
         <div class="col-md-5 pd-0">
           <div class="card">
             <div class="card-body">
@@ -124,6 +127,11 @@
           </div>
 
         </div>
+
+        <!--trip info-->
+
+        <!--chart-->
+
         <div class="col-md-7">
           <div class="row" style="padding-top:11px;text-align: center; color: white">
             <div class="col-md-4">
@@ -181,31 +189,27 @@
             <div [chart]="chartSpeed"></div>
           </div>
         </div>
+        <!--chart-->
 
       </div>
       <!-- <div class="row">
       <div class="col-md-9 plr-2" style="margin-top: 11px" >
         <div id="map"></div>
-        
+
       </div>
       <div class="col-md-3">
-    
+
       </div>
     </div> -->
     </div>
 
-    <div class="col-md-3" style="margin-top: 2px;padding-bottom:3px;border-radius: 6px;">
+    <div class="col-md-3" style="margin-top: 2px;padding-bottom:3px;border-radius: 6px;padding-left: 2px">
       <div class="row" style="background-color:#fff;padding-bottom: 12px;">
         <div class="card">
           <div class="card-body">
 
-            <div style="float:left">
-              <img src="../../assets/images/Driver_Image.jpg" alt="Avatar" class="avatar">
-            </div>
-
-            <div class="pt-22">
-              <span style="font-size:17px; color:#333;padding-left: 12px">{{drivername}}</span><br>
-              <span style="color:#333;padding-left: 12px">{{licenceno}}</span><br>
+            <div>
+              <span style="font-size:17px; color:#333;padding-left: 12px"> Driver Name : {{drivername}}</span><br>
               <div *ngIf="rating ==5">
                 <span style="padding-left: 12px">
                   <i class="fa fa-star icon-color" aria-hidden="true"></i> &nbsp;<i class="fa fa-star icon-color"
@@ -247,18 +251,228 @@
       <div class="row" style="margin-top: 2px">
         <div class="card-header" style="font-size:20px;text-align:center;color: white;background-color:#fff;">
           <!-- <h5 style="text-align:center ;background-color: #1C6561">Fleet Sheet</h5> -->
-          <span></span>
-        </div>
-        <div class="card-body" style="background-color: #fff;padding-bottom: 12px;OVERFLOW:overlay;height: 241px;">
-          <ul class="list-group" *ngFor="let item of address">
+          </div>
+        <div class="card-body" style="background-color: #fff;padding-bottom: 12px;height:238px;overflow: overlay">
+          <!-- <ul class="list-group" *ngFor="let item of address">
             <li class="list-group-item d-flex justify-content-between align-items-center" style="padding-right: 36px;">
               {{item.Location}}
               <i style="font-size:24px; float:right;" class="fa"
                 [ngStyle]="{'color':item.Status === 'Yes' ? 'green' : 'red' }">&#xf05d;</i>
             </li>
-          </ul>
-        </div>
+          </ul> -->
+
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Address</th>
+                <th scope="col">Status</th>
+                <th scope="col">Delivery</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>Delhi</td>
+              <td><button type="button" class="btn btn-primary btn-sm">Delivered</button></td>
+              <td>Ontime</td>
+            </tr>
+            <tr>
+              <td>Delhi</td>
+              <td><button type="button" class="btn btn-primary btn-sm">Delay</button></td>
+              <td>Ontime</td>
+            </tr>
+          </table> -->
+          <div class="col-md-5">
+            <table>
+              <tr>
+                <th>Address</th>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <table>
+              <tr>
+                <th>Status</th>
+              </tr>
+            </table>
+
+          </div>
+          <div class="col-md-3">
+            <table>
+              <tr>
+                <th>Delivery</th>
+              </tr>
+            </table>
+
+          </div>
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationone}}</Span><br>
+
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+            
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimeone}}</span>
+          </div>
+
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationtwo}}</Span>
+
+          </div>
+          <div class="col-md-3 mt-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimetwo}}</span>
+          </div>
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+              <Span> {{locationthree}}</Span>
+
+            </div>
+            <div class="col-md-3 mt-3">
+              <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+            </div>
+            <div class="col-md-3 pt-6">
+              <span>{{schtimethree}}</span>
+            </div>
+
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationfour}}</Span>
+
+          </div>
+          <div class="col-md-3 mt-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimefour}}</span>
+          </div>
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationfive}}</Span>
+
+          </div>
+          <div class="col-md-3 mt-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimefive}}</span>
+          </div>
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationsix}}</Span>
+         </div>
+          <div class="col-md-3 mt-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimesix}}</span>
+          </div>
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+            <Span> {{locationseven}}</Span>
+
+          </div>
+          <div class="col-md-3 mt-3">
+            <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+          </div>
+          <div class="col-md-3 pt-6">
+            <span>{{schtimeseven}}</span>
+          </div>
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+              <Span> {{locationeight}}</Span>
+
+            </div>
+            <div class="col-md-3 mt-3">
+              <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+            </div>
+            <div class="col-md-3 pt-6">
+              <span>{{schtimeeight}}</span>
+            </div>
+
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+              <Span> {{locationnine}}</Span>
+
+            </div>
+            <div class="col-md-3 mt-3">
+              <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+            </div>
+            <div class="col-md-3 pt-6">
+              <span>{{schtimenine}}</span>
+            </div>
+
+            <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+                <Span> {{locationten}}</Span>
+
+              </div>
+              <div class="col-md-3 mt-3">
+                <button type="button" class="btn btn-primary btn-sm">Delivered</button>
+
+              </div>
+              <div class="col-md-3 pt-6">
+                <span>{{schtimeten}}</span>
+              </div>
+
+
+
+          <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+                <Span> New York</Span>
+              </div>
+              <div class="col-md-3" style="padding-top: 3px">
+                <button type="button" class="btn btn-primary btn-sm" style="width:100%">Delay</button>
+
+              </div>
+              <div class="col-md-3 pt-10">
+                <span>10 Min</span>
+              </div>
+
+
+             <div class="col-md-6" style="padding-top: 4px;font-size: 12px">
+                <Span> New York</Span>
+              </div>
+              <div class="col-md-3" style="padding-top: 3px">
+                <button type="button" class="btn btn-primary btn-sm" style="width:100%">Missed</button>
+
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-sm"
+                    (click)="deliveryReschedule($event)" data-toggle="tooltip"  data-placement="top" title="{{result | date:'medium' }}">{{result}}</button>
+              </div>
+
+            </div>
       </div>
+
+      <!--Preventive Maintenance-->
+      <div class="row mt-3 bg-color" style="margin-top:10px;border-radius: 23px;">
+        <div class="col-md-6">
+          <span class="fs-19" style="padding-left: 27px; color: white" >Preventive</span><br>
+          <span class="fs-19" style="padding-left: 21px; color: white">Maintenance</span>
+        </div>
+        <div class="col-md-6">
+          <span class="fs-19" style="color: white">{{prementiveMaintenancearrsort[0].part}}</span><br>
+          <span class="fs-19" style="color: white">{{prementiveMaintenancearrsort[0].date_main}} </span>
+          <span>
+            <button type="button" class="btn btn-primary btn-sm mlt-37" (click) ="prementiveMaintenance()" style="border-radius: 17px;background-color:#EEF1EF"><span style="color:black">more</span></button>
+          </span>
+
+         </div>
+      </div>
+
+
+  <!--close Preventive Maintenance-->
+
 
     </div>
 
@@ -345,3 +559,80 @@
 
   </div>
 </div>
+
+
+<!--Modal-->
+<div class="modal fade" id="calendarModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Schedule Calendar</h4>
+      </div>
+      <div class="modal-body" style="height: 200px">
+        <div class="form-group">
+          <angular2-date-picker class="form-control" id="datetimepicker" [(ngModel)]="date" [settings]="settings"
+            style="padding: 0.2rem 0.1rem"></angular2-date-picker>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="setDate()">Set</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Message Delivery-->
+<div class="modal fade" id="messageeModel" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Prementive Maintenance</h4>
+      </div>
+      <div class="modal-body">
+        <span>Your Order Successfully Reschedule For Delivery":{{result | date:'medium' }}</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Message Delivery-->
+
+<!--Prementive Maintenance-->
+<div class="modal fade" id="maintenanceModel" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width:74%">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Preventive Maintenance</h4>
+      </div>
+      <div class="modal-body" style="height: 250px">
+        <div class="form-group">
+          <div class="row" *ngFor="let item of prementiveMaintenancearrsort" style="padding: 2px">
+              <div class="col-md-4">
+                  <span>{{item.part}}</span>
+                 </div>
+                 <div class="col-md-4">
+                    <span>{{item.date_main}}</span>
+                </div>
+
+                 <div class="col-md-4">
+                  <button type="button" class="btn btn-primary active" (click) ="scheduleActivity()" >Schedule Activity</button>
+                </div>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default">Set</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--Prementive Maintenance-->

@@ -24,6 +24,7 @@
     "@angular/router": "^6.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "angular-highcharts": "^7.0.2",
+    "angular2-datetimepicker": "^1.1.1",
     "bootstrap": "^3.3.7",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",

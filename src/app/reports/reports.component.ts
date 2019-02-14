@@ -54,11 +54,39 @@ redirectwarehouseoverview(){
   {
     this.router.navigate(['./vehicle-metric']);
     localStorage.setItem('title',"Vehicle Live Metrics");
-   }
-   customerFeedbackAnalysis(){
+  }
+  customerFeedbackAnalysis(){
     this.router.navigate(['./customer-feedback']);
     localStorage.setItem('title',"Customer Feedback Analysis");
-   }
+ }
 
+ redirectPolticalStatics(){
+  this.router.navigate(['./poltical-statics']);
+ }
+
+ redirectStateOverview(){
+  this.router.navigate(['./state-overview']);
+ }
+
+ redirectBoothIncharge(){
+  this.router.navigate(['./booth-incharge']);
+
+ }
+
+ redirectForcastAnalysis(){
+  this.router.navigate(['./forecast-analysis']);
+ }
+
+ redirectHrmsUseCaseOne(){
+  this.router.navigate(['./hrms-usecase-1']);
+ }
+
+ redirectHrmsUseCaseTwo(){
+  this.router.navigate(['./hrms-usecase-2']);
+ }
+
+ redirectHrmsUseCaseThree(){
+  this.router.navigate(['./hrms-usecase-3']);
+ }
 
 }

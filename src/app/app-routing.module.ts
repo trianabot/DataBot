@@ -21,6 +21,13 @@ import { AddTenantComponent } from './super-admin/add-tenant/add-tenant.componen
 import { AddUserComponent } from './super-admin/add-user/add-user.component';
 import { AddDeviceComponent } from './super-admin/add-device/add-device.component';
 import { CustomerFeedbackAnalysisComponent } from './customer-feedback-analysis/customer-feedback-analysis.component';
+import { PolticalStaticsComponent } from './poltical-statics/poltical-statics.component';
+import { StateOverviewComponent } from './state-overview/state-overview.component';
+import { BoothinchargeLevelComponent } from './boothincharge-level/boothincharge-level.component';
+import { ForecastTrendAnalysisComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
+import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component';
+import { HrmsUsecase2Component } from './hrms-usecase/hrms-usecase2/hrms-usecase2.component';
+import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -44,7 +51,15 @@ const routes: Routes = [
   {path:'add-tenant',component:AddTenantComponent},
   {path:'add-user', component:AddUserComponent},
   {path:'add-device', component:AddDeviceComponent},
-  {path:'customer-feedback', component:CustomerFeedbackAnalysisComponent}
+  {path:'customer-feedback', component:CustomerFeedbackAnalysisComponent},
+  {path:'poltical-statics', component:PolticalStaticsComponent},
+  {path:'state-overview', component:StateOverviewComponent},
+  {path:'booth-incharge', component:BoothinchargeLevelComponent},
+  {path:'forecast-analysis', component:ForecastTrendAnalysisComponent},
+  {path:'hrms-usecase-1', component:HrmsUsecase1Component},
+  {path:'hrms-usecase-2',component:HrmsUsecase2Component},
+  {path:'hrms-usecase-3',component:HrmsUsecase3Component}
+
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

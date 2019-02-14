@@ -45,6 +45,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '3');
     }
+    else if ((register.value.user == "Politics" || register.value.user == "politics") && register.value.password == "Databot@123") {
+      this.router.navigate(['/industries']);
+      localStorage.setItem('userid', '4');
+    }
+
     else {
       this.modelText = "Wrong Credentials";
       console.log(this.modelText);

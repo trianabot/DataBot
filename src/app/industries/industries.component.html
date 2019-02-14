@@ -7,6 +7,22 @@
 
   <div class="col-md-12 padding:0px" *ngIf="userId == '1'">
     <div class="row">
+        <div class="col-md-2 imgmargin" (click)="showUseCase(3)" *ngIf='!showManufacturing'>
+            <div class="talkbubble">
+              <img src="../../assets/3.png" class="img-center img-responsive">
+              <p style="text-align: center;color:#36567e;font-weight:bold;"> Manufacturing / Supply Chain</p>
+            </div>
+          </div>
+          <div class="col-md-2 imgmargin" *ngIf='showManufacturing'>
+            <div class="talkbubble1">
+              <img src="../../assets/3.png" class="img-center img-responsive">
+              <p style="text-align: center;color:#fff;font-weight:bold;"> Manufacturing / Supply Chain</p>
+            </div>
+    
+          </div>
+
+
+
 
       <div class="col-md-2 imgmargin" (click)="showUseCase(1)" *ngIf='!show'>
         <div class="talkbubble">
@@ -35,7 +51,7 @@
         <div class="talkbubble">
 
           <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#36567e ;font-weight:bold;">Health</p>
+          <p style="text-align: center;color:#36567e ;font-weight:bold;">Finance</p>
 
 
         </div>
@@ -46,7 +62,7 @@
         <div class="talkbubble1">
 
           <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#fff;font-weight:bold; ">Health</p>
+          <p style="text-align: center;color:#fff;font-weight:bold; ">Finance</p>
 
 
         </div>
@@ -54,31 +70,17 @@
       </div>
 
 
-      <div class="col-md-2 imgmargin" (click)="showUseCase(3)" *ngIf='!showManufacturing'>
-        <div class="talkbubble">
-          <img src="../../assets/3.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#36567e;font-weight:bold;"> Manufacturing / Supply Chain</p>
-        </div>
-      </div>
-      <div class="col-md-2 imgmargin" *ngIf='showManufacturing'>
-        <div class="talkbubble1">
-          <img src="../../assets/3.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#fff;font-weight:bold;"> Manufacturing / Supply Chain</p>
-        </div>
-
-      </div>
-
-
-      <div class="col-md-2 imgmargin" (click)="showUseCase(4)" *ngIf='!showTextile'>
+    
+       <div class="col-md-2 imgmargin" (click)="showUseCase(4)" *ngIf='!showTextile'>
         <div class="talkbubble">
           <img src="../../assets/4.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#36567e;font-weight:bold;">Technology</p>
+          <p style="text-align: center;color:#36567e;font-weight:bold;">Human Resource</p>
         </div>
       </div>
       <div class="col-md-2 imgmargin" *ngIf='showTextile'>
         <div class="talkbubble1">
           <img src="../../assets/4.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#fff;font-weight:bold;">Technology</p>
+          <p style="text-align: center;color:#fff;font-weight:bold;">Human Resources</p>
         </div>
 
       </div>
@@ -88,10 +90,24 @@
       <div class="col-md-2 imgmargin" (click)="showUseCase(5)" *ngIf='!showEnergy'>
         <div class="talkbubble">
           <img src="../../assets/5.png" class="img-center img-responsive">
-          <p style="text-align: center;color:#36567e;font-weight:bold;">Energy</p>
+          <p style="text-align: center;color:#36567e;font-weight:bold;">Healthcare</p>
         </div>
       </div>
       <div class="col-md-2 imgmargin" *ngIf='showEnergy'>
+        <div class="talkbubble1">
+          <img src="../../assets/5.png" class="img-center img-responsive">
+          <p style="text-align: center;color:#fff;font-weight:bold;">Healthcare</p>
+        </div>
+
+      </div>
+
+      <div class="col-md-2 imgmargin" (click)="showUseCase(7)" *ngIf='!showEng'>
+        <div class="talkbubble">
+          <img src="../../assets/5.png" class="img-center img-responsive">
+          <p style="text-align: center;color:#36567e;font-weight:bold;">Energy</p>
+        </div>
+      </div>
+      <div class="col-md-2 imgmargin" *ngIf='showEng'>
         <div class="talkbubble1">
           <img src="../../assets/5.png" class="img-center img-responsive">
           <p style="text-align: center;color:#fff;font-weight:bold;">Energy</p>
@@ -99,6 +115,38 @@
 
       </div>
 
+
+
+      
+
+
+      <!-- <div class="col-md-2 imgmargin" (click)="showUseCase(5)" *ngIf='!showEnergy'>
+          <div class="talkbubble">
+            <img src="../../assets/5.png" class="img-center img-responsive">
+            <p style="text-align: center;color:#36567e;font-weight:bold;">Healthcare</p>
+          </div>
+        </div>
+        <div class="col-md-2 imgmargin" *ngIf='showEnergy'>
+          <div class="talkbubble1">
+            <img src="../../assets/5.png" class="img-center img-responsive">
+            <p style="text-align: center;color:#fff;font-weight:bold;">Healthcare</p>
+          </div>
+  
+        </div> -->
+
+      <!-- <div class="col-md-2 imgmargin" (click)="showUseCase(6)" *ngIf='!showpsephology'>
+        <div class="talkbubble">
+          <img src="../../assets/5.png" class="img-center img-responsive">
+          <p style="text-align: center;color:#36567e;font-weight:bold;">psephology</p>
+        </div>
+      </div>
+      <div class="col-md-2 imgmargin" *ngIf='showpsephology'>
+        <div class="talkbubble1">
+          <img src="../../assets/5.png" class="img-center img-responsive">
+          <p style="text-align: center;color:#fff;font-weight:bold;">psephology</p>
+        </div>
+
+      </div> -->
 
     </div>
   </div>
@@ -152,6 +200,31 @@
 
     </div>
   </div>
+
+  <!--Display for Psephology-->
+  <div class="col-md-12 padding:0px" *ngIf="userId == '4'">
+      <div class="row">
+  
+          <div class="col-md-2 imgmargin" (click)="showUseCase(6)" *ngIf='!showpsephology'>
+              <div class="talkbubble">
+                <img src="../../assets/5.png" class="img-center img-responsive">
+                <p style="text-align: center;color:#36567e;font-weight:bold;">Psephology</p>
+              </div>
+            </div>
+            <div class="col-md-2 imgmargin" *ngIf='showpsephology'>
+              <div class="talkbubble1">
+                <img src="../../assets/5.png" class="img-center img-responsive">
+                <p style="text-align: center;color:#fff;font-weight:bold;">Psephology</p>
+              </div>
+      
+            </div>
+  
+      </div>
+    </div>
+
+
+
+
 
 
 </div>

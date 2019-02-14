@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { Chart } from 'angular-highcharts';
 
+declare var $: any;
+
 
 @Component({
   selector: 'app-vehiclelive-metric',
@@ -70,20 +72,85 @@ export class VehicleliveMetricComponent implements OnInit {
   speed: any;
   rpm: any;
 
-  fuel:any = 70;
-  temperature:any = 195;
-  fuelalert:any = false;
-  tempalert:any=false;
+  fuel: any = 70;
+  temperature: any = 195;
+  fuelalert: any = false;
+  tempalert: any = false;
   batteryalert: any = true;
-  mpgalert:any = false;
+  mpgalert: any = false;
+  result: any;
+  value: any;
+
+  timeresult: any;
+  // value:string;
+
+  /**Date and time picker */
+
+  date: Date = new Date();
+  settings = {
+    bigBanner: true,
+    timePicker: true,
+    format: 'dd-MM-yyyy hh:mm a',
+    defaultOpen: false,
+    closeOnSelect: false
+
+  }
+  /**driverschedule */
+  driverschedulejsondata: any;
+  locationone: any;
+  locationtwo: any;
+  locationthree: any;
+  locationfour: any;
+  locationfive: any;
+  locationsix: any;
+  locationseven: any;
+  locationeight: any;
+  locationnine: any;
+  locationten: any;
+  schtimeone: any;
+  schtimetwo: any;
+  schtimethree: any;
+  schtimefour: any;
+  schtimefive: any;
+  schtimesix: any;
+  schtimeseven: any;
+  schtimeeight: any;
+  schtimenine: any;
+  schtimeten: any;
+  /**driverschedule */
+
+  /**preventive maintanance */
+  preventivemaintenancejson: any;
+  prementiveMaintenancearr: any = [];
+  prementiveMaintenancearrsort: any = [];
+
+  axelcheckup: any;
+  nextbreakchange: any;
+  nextoilchangedate: any;
+  axelalignment: any;
+  pollutioncheck: any;
+  batterycheckup: any;
+
+  axelcheckupvalue: any;
 
 
-  constructor(public http: HttpClient) { }
+
+
+
+
+
+
+
+  constructor(public http: HttpClient) {
+    // this.result = this.value
+  }
   ngAfterViewInit() {
 
   }
 
   ngOnInit() {
+    console.log(this.date)
+    this.result = 'Reshedule';
     var $this = this;
     this.regiondefaultname = 'Midwest'; this.statedefaultname = 'Ohio'; this.categorydefaultname = '91-100', this.ratingdefaultvalue = 4;
     this.vehicledefaultname = 'CAT6257'
@@ -102,31 +169,31 @@ export class VehicleliveMetricComponent implements OnInit {
     setInterval(function () {
       var val = 10;
       var tempval = 1;
-      
+
       $this.batteryalert = false;
-      if($this.fuel){
-      $this.fuel -= val;
-      if($this.fuel == 0) {
-      $this.fuel = 70;
-      }else if($this.fuel == 30){
-      $this.fuelalert = true;
-      }else{
-      $this.fuelalert = false;
+      if ($this.fuel) {
+        $this.fuel -= val;
+        if ($this.fuel == 0) {
+          $this.fuel = 70;
+        } else if ($this.fuel == 30) {
+          $this.fuelalert = true;
+        } else {
+          $this.fuelalert = false;
+        }
       }
+
+      if ($this.temperature) {
+        $this.temperature += tempval;
+        if ($this.temperature == 202) {
+          $this.temperature = 195;
+        } else if ($this.temperature == 200) {
+          $this.tempalert = true;
+        } else {
+          $this.tempalert = false;
+        }
       }
-      
-      if($this.temperature){
-      $this.temperature += tempval;
-      if($this.temperature == 202) {
-      $this.temperature = 195;
-      }else if($this.temperature == 200){
-      $this.tempalert = true;
-      }else{
-      $this.tempalert = false;
-      }
-      }
-      
-      }, 5000);
+
+    }, 5000);
 
 
     // this.routeMap();
@@ -198,7 +265,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
 
   loadDefaultDriverData(regiondefaultname, statedefaultname, categorydefaultname, jsondata, ratingdefaultvalue, vehicledefaultname) {
-    var $this=this;
+    var $this = this;
     var index: any;
     for (index in this.jsondata) {
       if (jsondata[index].Region === regiondefaultname && jsondata[index].State === statedefaultname &&
@@ -238,10 +305,10 @@ export class VehicleliveMetricComponent implements OnInit {
       $this.tripmileage = $this.tripmileage;
       $this.tripmileage -= value;
       console.log($this.tripmileage);
-      if($this.tripmileage == 11){
+      if ($this.tripmileage == 11) {
         $this.mpgalert = true;
-      }else if($this.tripmileage == 10){
-        $this.tripmileage= 15;
+      } else if ($this.tripmileage == 10) {
+        $this.tripmileage = 15;
         $this.mpgalert = false;
       }
 
@@ -697,7 +764,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
 
 
-  changeVehicle(name) {
+  changeVehicle(name, axelcheckup) {
     this.vehiclename = this.vehicledefaultname = name.currentTarget.value;
     var index: any;
     for (index in this.jsondata) {
@@ -733,6 +800,109 @@ export class VehicleliveMetricComponent implements OnInit {
 
       }
     }
+
+    this.getSchedule(this.drivername);
+    this.getPreventiveMaintanence(this.vehiclename);
+
+
   }
 
+  getPreventiveMaintanence(vehiclename) {
+    var index: any;
+    this.prementiveMaintenancearr = [];
+    this.http.get('../../assets/data/preventivemaintenance.json').subscribe(data => {
+      this.preventivemaintenancejson = data;
+      for (index in this.preventivemaintenancejson) {
+        if (this.preventivemaintenancejson[index]['Truck ID'] === vehiclename) {
+
+          this.prementiveMaintenancearr.push(
+            { "date_main": this.preventivemaintenancejson[index]['Axle Checkup'], "part": 'Axle Checkup' },
+            { "date_main": this.preventivemaintenancejson[index]['Next Break Change Date'], "part": 'Next Break Change Date' },
+            { "date_main": this.preventivemaintenancejson[index]['Next Oil Change Date'], "part": 'Next Oil Change Date' },
+            { "date_main": this.preventivemaintenancejson[index]['Axel Alignment & Wheel Balancing'], "part": 'Axel Alignment & Wheel Balancing' },
+            { "date_main": this.preventivemaintenancejson[index]['Pollution Check'], "part": 'Pollution Check' },
+            { "date_main": this.preventivemaintenancejson[index]['Battery Check up'], "part": 'Battery Check up' }
+          );
+        }
+
+      }
+
+      this.filterMaintanenceData(this.prementiveMaintenancearr);
+
+    });
+  }
+
+
+  getSchedule(drivernmae) {
+    this.http.get('../../assets/data/driver-schedule.json').subscribe(data => {
+      this.driverschedulejsondata = data;
+      for (var i = 0; i <= this.driverschedulejsondata.length; i++) {
+        if (this.driverschedulejsondata[i].Name === drivernmae) {
+          this.locationone = this.driverschedulejsondata[i]['Location 1'];
+          this.locationtwo = this.driverschedulejsondata[i]['Location 2'];
+          this.locationthree = this.driverschedulejsondata[i]['Location 3'];
+          this.locationfour = this.driverschedulejsondata[i]['Location 4'];
+          this.locationfive = this.driverschedulejsondata[i]['Location 5'];
+          this.locationsix = this.driverschedulejsondata[i]['Location 6'];
+          this.locationseven = this.driverschedulejsondata[i]['Location 7'];
+          this.locationeight = this.driverschedulejsondata[i]['Location 8'];
+          this.locationnine = this.driverschedulejsondata[i]['Location 9'];
+          this.locationten = this.driverschedulejsondata[i]['Location 10'];
+
+          this.schtimeone = this.driverschedulejsondata[i]['Scheduled Time 1'];
+          this.schtimetwo = this.driverschedulejsondata[i]['Scheduled Time 2'];
+          this.schtimethree = this.driverschedulejsondata[i]['Scheduled Time 3'];
+          this.schtimefour = this.driverschedulejsondata[i]['Scheduled Time 4'];
+          this.schtimefive = this.driverschedulejsondata[i]['Scheduled Time 5'];
+          this.schtimesix = this.driverschedulejsondata[i]['Scheduled Time 6'];
+          this.schtimeseven = this.driverschedulejsondata[i]['Scheduled Time 7'];
+          this.schtimeeight = this.driverschedulejsondata[i]['Scheduled Time 8'];
+          this.schtimenine = this.driverschedulejsondata[i]['Scheduled Time 9'];
+          this.schtimeten = this.driverschedulejsondata[i]['Scheduled Time 10'];
+
+
+        }
+
+      }
+      // this.distributors = data['LOCATIONS'];
+    });
+  }
+
+
+
+
+
+  deliveryReschedule(event) {
+    $(".modal-header .modal-title").text();
+    $('#calendarModal').modal('show');
+  }
+
+  setDate() {
+    this.result = this.date;
+    $('#calendarModal').modal('hide');
+    // $('#messageeModel').modal('show');
+    alert("Your Order has been Successfully Reschedule For Delivery")
+
+  }
+  scheduleActivity() {
+    $('#calendarModal').modal('show');
+    $('#maintenanceModel').modal('hide');
+
+  }
+
+
+
+
+  prementiveMaintenance() {
+    $(".modal-header .modal-title").text();
+    $('#maintenanceModel').modal('show');
+  }
+
+  filterMaintanenceData(preventive) {
+    preventive.sort(function (a, b) {
+      // convert date object into number to resolve issue in typescript
+      return +new Date(a.date_main) - +new Date(b.date_main);
+    });
+    this.prementiveMaintenancearrsort = preventive;
+  }
 }

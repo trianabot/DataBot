@@ -181,11 +181,6 @@ export class CustomerFeedbackAnalysisComponent implements OnInit {
          }
     
   
-
-
-
-
-
          listClick(id,item:any){
         this.customername = item;
         this.selectedItem = id;

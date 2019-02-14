@@ -16,6 +16,10 @@ export class UsecaseComponent implements OnInit, OnChanges {
   reportusecase :boolean;
   reportUseCaseTypeValue:number=0;
   showReport :boolean =false;
+  showAssembly:boolean =false;
+  showHrms:boolean=false;
+  showEng:boolean =false;
+  showHealth:boolean =false;
   constructor(private router : Router) {
 
   }
@@ -37,31 +41,64 @@ export class UsecaseComponent implements OnInit, OnChanges {
       this.showfleetManagment = true
         this.fleetMaintaince = false;
          this.showVechile = false
+         this.showAssembly = false;
+         this. showEng = false;
        // this.reportusecase=true;
 
     }
     else if(useCaseType ==2){
-
-      //   this.showVechile = true;
+     //   this.showVechile = true;
         this.fleetMaintaince = true;
         this.showfleetManagment = false
+        this.showAssembly = false;
+        this. showEng = false;
       
 
     }
     else if(useCaseType ==3){
-
       //   this.showVechile = true;
       this.showmanufacturing = true;
         this.fleetMaintaince = false;
         this.showfleetManagment = false
+        this.showAssembly = false;
+        this. showEng = false;
       
 
     }
+    else if(useCaseType ==4){
+      this.showHrms = true;
+      this.showmanufacturing = false;
+        this.fleetMaintaince = false;
+        this.showfleetManagment = false
+        this.showAssembly = false;
+        this. showEng = false;
 
+    }
 
+  
+    else if(useCaseType ==6){
+    //   this.showVechile = true;
+    this.showAssembly = true;
+     this.showmanufacturing = true;
+    this.fleetMaintaince = false;
+    this.showfleetManagment = false
+    this. showEng = false;
+    this.showHrms=false;
+    }
+    
+    else if(useCaseType ==7){
+      //   this.showVechile = true;
+      this. showEng =true;
+      this.showAssembly = true;
+      this.showmanufacturing = true;
+      this.fleetMaintaince = false;
+      this.showfleetManagment = false
+      this.showHrms=false;
+     
+    }
+  
 
-
-    // alert(useCaseType);
+   // alert(useCaseType);
    // this.emitShowUseCase.emit(useCaseType);
 
   }
