@@ -53,7 +53,7 @@ import {DatabotService } from './core/databot.service';
 
 import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
 import { HrmsUsecase2Component } from './hrms-usecase/hrms-usecase2/hrms-usecase2.component';
-import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component'
+import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component';
 
 
 
@@ -61,7 +61,7 @@ import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     UsecaseComponent,
     ReportsComponent,
     HealthComponent,
@@ -91,12 +91,12 @@ import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase
     HrmsUsecase3Component,
     HrmsUsecase2Component,
     HrmsUsecase1Component,
-    
-   
+
+
     ],
   imports: [
     BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,
-    AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule, 
+    AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

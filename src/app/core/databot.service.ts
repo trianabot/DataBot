@@ -10,6 +10,17 @@ export class DatabotService {
   private apiendpoint = environment.apiEndPoint;
 
   constructor(public http: HttpClient) { }
+
+  loadHrdashboard1() {
+    return this.http.get('../../assets/data/HR_Dashboard1.json');
+  }
+
+  loadHrHiringDashboard() {
+    return this.http.get('../../assets/data/Hiring_pipelines (2).json');
+  }
+  loadHiringOnboarding() {
+    return this.http.get('../../assets/data/Onbording_Status.json');
+  }
   clientRegistration(clientdata) {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'

@@ -1,0 +1,36 @@
+.bg{
+  background:#fff;
+  border-radius:5px;
+  padding:10px;
+}
+.padding0
+{
+  padding:0px;
+}
+.mrgn{
+  padding-top:10px;
+  font-size: 15px;
+  padding-bottom:10px;
+  padding-left:10px;
+}
+.font{
+  color:#2a2b2f;
+  font-size:32px;
+  font-weight:bold;
+}
+.progress{
+  background:#ea1651;
+  height:28px;
+}
+.progress-bar{
+  background:#3d7baa;
+}
+#chartdiv{
+
+  width:100%;
+}
+.font1 {
+  color:#2a2b2f;
+  font-size:20px;
+  font-weight:bold;
+}

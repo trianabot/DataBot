@@ -1,1 +1,193 @@
+<div class="clearfix"></div>
 <app-header></app-header>
+<div class="clearfix"></div>
+<div class="container-fluid" style="padding:0 !important;">
+        <div class="col-md-12" style="margin-top:7px;">
+                <div class="clearfix"></div>
+                <div class="col-md-4 " style="padding:3px !important;">
+                        <div class="bg col-md-12" style="padding-top:10px;">
+                                <span class="mrgn">Total employees</span>
+                                <br>  <br>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6">
+                                        <div class="col-md-6">
+                                                <img src="../../../assets/iconss/1_new.png" style="height:41px !important;"
+                                                        class="img-center img-responsive">
+                                                <p style="margin:0px;">Employees</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <span class="font">{{employeecount}}</span>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="col-md-6">
+                                                <img src="../../../assets/iconss/2_new.png" style="height:41px !important;"
+                                                        class="img-center img-responsive">
+                                                <p style="margin:0px;">Permanent</p>
+                                        </div>
+                                        <div class="col-md-6 padding0">
+                                                <span class="font">{{fulltimeemployeeCount}}<img src="../../../assets/iconss/red.png"></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                        <span style="color:#7282a7"><span style="color:red;">-4% </span> vs
+                                                        Previous year</span>
+                                                      </div>
+                                </div>
+                                <div class="col-md-6" style="margin-top:12px;">
+                                        <div class="col-md-6">
+                                                <img src="../../../assets/iconss/3_new.png" style="height:41px !important;"
+                                                        class="img-center img-responsive">
+                                                <p style="margin:0px;">Contract</p>
+                                        </div>
+                                        <div class="col-md-6 padding0">
+                                                <span class="font">{{contractemployeeCount}}<img src="../../../assets/iconss/green.png"></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                        <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                                      </div>
+                                </div>
+                                <div class="col-md-6" style="margin-top:12px;margin-bottom:6px;">
+                                        <div class="col-md-6">
+                                                <img src="../../../assets/iconss/4_new.png" style="height:41px !important;"
+                                                        class="img-center img-responsive">
+                                                <p style="margin:0px;">Trainees</p>
+                                        </div>
+                                        <div class="col-md-6 padding0">
+                                                <span class="font">{{traineeemployeeCount}}<img src="../../../assets/iconss/green.png"></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                        <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                                      </div>
+                                </div>
+
+                        </div>
+                </div>
+                <div class="col-md-4" style="padding:3px !important;">
+                        <div class="bg col-md-12" style="padding-top:10px;">
+                                <div class="mrgn" style="padding:0px;margin-bottom:26px;">Gender</div>
+                            <div class="clearfix"></div>
+                                <div class="col-md-4">
+                                        <img src="../../../assets/iconss/5_new.png" style="width:30px;"
+                                                class="img-center img-responsive">
+                                </div>
+                                <div class="col-md-4 text-center">
+                                        <span>Head Count</span><br>
+                                        <span class="font">{{employeecount}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                        <img src="../../../assets/iconss/6_new.png" style="width:30px;"
+                                                class="img-center img-responsive">
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress">
+                                        <div class="progress-bar" style="width:70%"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6">
+                                        <span class="font" (click)="getMaleEmployeeAvg();">{{maleemployeeCount}}</span>
+                                </div>
+                                <div class="col-md-6 text-right" style="margin-bottom:15px;">
+                                        <span class="font" (click)="getFemaleEmployeeAvg();">{{femaleemployeeCount}}</span>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-4" style="padding:3px !important;">
+
+                        <div class="bg col-md-12">
+                                        <span class="mrgn">Bands</span>
+
+                                <div [chart]="stockagingchart" >
+                                </div>
+
+                        </div>
+
+                </div>
+        </div>
+        <div>
+
+                <div class="col-md-12">
+                        <div class="col-md-8" style="padding:3px !important;">
+
+                          <div class="col-md-12" style="background: #fff;">
+                            <span  class="mrgn">Department wise break-up</span>
+                                <div style="margin-bottom:10px;">
+                                        <div [chart]="stockchartcategories">
+                                        </div>
+                                </div>
+                              </div>
+
+
+                                <div class="col-md-12" style="background:#fff;padding:20px 0px;margin-top:10px;">
+                                  <div>
+                                      <span  class="mrgn">{{category}}</span>
+                                  </div>
+
+                                        <div class="col-md-3 text-center">
+                                                <img src="../../../assets/iconss/8_new.png"
+                                                        style="width:45px !important;margin:auto;height:45px;"
+                                                        class="img-center img-responsive">
+                                                <span>Avg Salary</span>
+                                                <br>
+                                                <span class="font1">${{averageSalary | number : '1.2-2'}}k <img src="../../../assets/iconss/green.png"></span>
+                                                <br>
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                                <img src="../../../assets/iconss/9_new.png"
+                                                        style="width:45px !important;margin:auto;height:45px;"
+                                                        class="img-center img-responsive">
+                                                <span>Avg Experience</span>
+                                                <br>
+                                                <span class="font1">{{averageExperience | number : '1.2-2'}} Yrs <img src="../../../assets/iconss/red.png"></span>
+                                                <br>
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                                <img src="../../../assets/iconss/10_new.png"
+                                                        style="width:45px !important;margin:auto;height:45px;"
+                                                        class="img-center img-responsive">
+                                                <span>Attrition Rate</span>
+                                                <br>
+                                                <span class="font1">{{averageattritionRate | number : '1.2-2'}}% <img src="../../../assets/iconss/green.png"></span>
+                                                <br>
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                                <img src="../../../assets/iconss/11_new.png"
+                                                        style="width:45px !important;margin:auto;height:45px;"
+                                                        class="img-center img-responsive">
+                                                <span>Satisfaction</span>
+                                                <br>
+                                                <span class="font1">{{averageSatisfaction |number : '1.2-2'}} <img src="../../../assets/iconss/red.png"></span>
+                                                <br>
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                        Previous year</span>
+                                        </div>
+
+                                </div>
+
+                        </div>
+                        <div class="col-md-4" style="padding:0px 4px !important;">
+                          <div class="bg">
+                            <span  class="mrgn">Hired vs Left for this Qtr</span>
+                            <span class="float-right" style="float:right;" (click)="goToHrmsUsecase2()">click</span>
+                                <div [chart]="negativStack">
+                                </div>
+                              </div>
+                        </div>
+
+
+
+                </div>
+
+
+        </div>
+</div>
