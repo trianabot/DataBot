@@ -7,6 +7,10 @@
 {
   padding:0px;
 }
+
+.padding-top{
+  padding-top: 11px
+}
 .mrgn{
   padding-top:10px;
   font-size: 15px;
@@ -15,12 +19,14 @@
 }
 .font{
   color:#2a2b2f;
-  font-size:32px;
+  font-size:19px;
   font-weight:bold;
 }
 .progress{
   background:#ea1651;
-  height:28px;
+  height:10px;
+  border-radius: 7px;
+   margin-bottom:0px;
 }
 .progress-bar{
   background:#3d7baa;
@@ -33,4 +39,47 @@
   color:#2a2b2f;
   font-size:20px;
   font-weight:bold;
+}
+.employee_chart{
+  background-color: #EAEAEA;
+}
+
+  .cardactiveclass{
+    background-color: #f9f9f9!important;
+    border-bottom: 1px solid palevioletred;
+
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }px
+
+.fs-19-margin{
+  font-size: 19px;
+  margin-top: 4
+}
+
+.overview-txt{
+     font-size: 21px;
+    background-color : #fff;
+    padding-bottom: 8px;
+    margin-top: 4px;
+   border-radius: -3px;
+    border-radius: 5px;
+}
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 250px;
+  font-size: 19px;
+  color: #fff;
+  line-height: 41px;
+  text-align: center;
+  background: #3D7BAA;
+}
+
+.band-circle{
+  text-align: center;padding-left: 12px
 }

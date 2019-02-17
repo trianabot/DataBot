@@ -21,6 +21,15 @@ export class DatabotService {
   loadHiringOnboarding() {
     return this.http.get('../../assets/data/Onbording_Status.json');
   }
+
+  loadAttritionData(){
+    return this.http.get('../../assets/data/Attrition_List.json');
+  }
+
+  loadEthnicityData(){
+    return this.http.get('../../assets/data/ethnicity.json');
+  }
+
   clientRegistration(clientdata) {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'

@@ -1,30 +1,33 @@
-import { Component, OnInit,Input, OnChanges } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Component, OnInit,Input, OnChanges, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
-export class ReportsComponent implements OnInit {
-  
+export class ReportsComponent implements OnInit, OnDestroy {
+
   constructor(private router : Router) { }
   @Input('ReportUseCaseType') ReportUseCaseType: number=0;
-   
- 
+
+
 
   ngOnInit() {
   }
   ngOnChanges() {
 
   }
-  
+  ngOnDestroy(){
+
+  }
+
 
 redirectDashboard(){
 this.router.navigate(['./dashboard']);
 localStorage.setItem('title',"Fleet Overview");
 
- 
+
 }
 
 redirectInventory(){

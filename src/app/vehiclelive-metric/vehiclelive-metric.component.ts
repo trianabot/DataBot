@@ -30,22 +30,22 @@ export class VehicleliveMetricComponent implements OnInit {
 
   categoryname: any;
   vehicleidno: any = [];
-  trucknumber: any[]
+  trucknumber: any[];
   statename: any;
   regionname: any;
   performanc: any;
   vehiclename: any;
   vehicleid: any;
   truckidno: any;
-  driverinformation: any = []
+  driverinformation: any = [];
 
   /**JSON BINDING */
-  drivername: any
+  drivername: any;
   trip: any;
   deliveries: any;
   tripduration: any;
   tripmileage: any;
-  engineoffline: any
+  engineoffline: any;
   engineedletime: any;
   totalmilesrun: any;
   lastservicedate: any;
@@ -59,7 +59,7 @@ export class VehicleliveMetricComponent implements OnInit {
   rapidacceleration: any;
   address: any[];
   /**Map */
-  location: any = []
+  location: any = [];
   /**Default Name*/
 
   regiondefaultname: any;
@@ -94,7 +94,7 @@ export class VehicleliveMetricComponent implements OnInit {
     defaultOpen: false,
     closeOnSelect: false
 
-  }
+  };
   /**driverschedule */
   driverschedulejsondata: any;
   locationone: any;
@@ -133,14 +133,8 @@ export class VehicleliveMetricComponent implements OnInit {
 
   axelcheckupvalue: any;
 
-
-
-
-
-
-
-
-
+  selectedItem:any;
+  selectedButton = {};
   constructor(public http: HttpClient) {
     // this.result = this.value
   }
@@ -149,11 +143,11 @@ export class VehicleliveMetricComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.date)
+    console.log(this.date);
     this.result = 'Reshedule';
     var $this = this;
     this.regiondefaultname = 'Midwest'; this.statedefaultname = 'Ohio'; this.categorydefaultname = '91-100', this.ratingdefaultvalue = 4;
-    this.vehicledefaultname = 'CAT6257'
+    this.vehicledefaultname = 'CAT6257';
     this.http.get('../../assets/data/vehiclemetric.json').subscribe(data => {
       this.jsondata = data;
       var index: any;
@@ -163,7 +157,7 @@ export class VehicleliveMetricComponent implements OnInit {
         }
 
       }
-      this.loadDefaultRegion(this.region, this.jsondata)
+      this.loadDefaultRegion(this.region, this.jsondata);
       // this.distributors = data['LOCATIONS'];
     });
     setInterval(function () {
@@ -213,7 +207,7 @@ export class VehicleliveMetricComponent implements OnInit {
         }
       }
     }
-    this.loadDefaultCategory(this.regiondefaultname, this.statedefaultname, this.jsondata)
+    this.loadDefaultCategory(this.regiondefaultname, this.statedefaultname, this.jsondata);
   }
 
   loadDefaultCategory(regiondefaultname, statedefaultname, jsondata) {
@@ -230,7 +224,7 @@ export class VehicleliveMetricComponent implements OnInit {
       }
 
     }
-    this.loadDefaultRating(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata)
+    this.loadDefaultRating(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata);
 
   }
   loadDefaultRating(regiondefaultname, statedefaultname, categorydefaultname, jsondata) {
@@ -245,10 +239,10 @@ export class VehicleliveMetricComponent implements OnInit {
         }
       }
     }
-    this.loadDefaultVehicle(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata, this.ratingdefaultvalue)
+    this.loadDefaultVehicle(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata, this.ratingdefaultvalue);
   }
   loadDefaultVehicle(regiondefaultname, statedefaultname, categorydefaultname, jsondata, ratingdefaultvalue) {
-    var index: any
+    var index: any;
     for (index in jsondata) {
       if (jsondata[index].Region === regiondefaultname && jsondata[index].State === statedefaultname &&
         jsondata[index].Category === categorydefaultname && jsondata[index].Rating == ratingdefaultvalue) {
@@ -260,7 +254,7 @@ export class VehicleliveMetricComponent implements OnInit {
       }
 
     }
-    this.loadDefaultDriverData(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata, this.ratingdefaultvalue, this.vehicledefaultname)
+    this.loadDefaultDriverData(this.regiondefaultname, this.statedefaultname, this.categorydefaultname, jsondata, this.ratingdefaultvalue, this.vehicledefaultname);
   }
 
 
@@ -271,30 +265,30 @@ export class VehicleliveMetricComponent implements OnInit {
       if (jsondata[index].Region === regiondefaultname && jsondata[index].State === statedefaultname &&
         this.jsondata[index].Category === categorydefaultname && this.jsondata[index].Rating == ratingdefaultvalue && this.jsondata[index]['Truck ID'] === vehicledefaultname) {
 
-        this.drivername = this.jsondata[index]['Name']
-        this.licenceno = this.jsondata[index]['Vehicle Licence ID']
-        this.rating = this.jsondata[index]['Rating']
-        this.trip = this.jsondata[index]['Trip Miles']
-        this.deliveries = this.jsondata[index]['Deliveries Completed']
-        this.tripduration = this.jsondata[index]['Trip Duration']
-        this.tripmileage = this.jsondata[index]['Trip Mileage']
-        this.engineoffline = this.jsondata[index]['Engine Offline']
-        this.engineedletime = this.jsondata[index]['Engine Idle Time']
-        this.totalmilesrun = this.jsondata[index]['Total Miles Run']
-        this.lastservicedate = this.jsondata[index]['Last Service Date']
-        this.milesrunssinceservice = this.jsondata[index]['Miles Run since Serviced']
-        this.flattireevents = this.jsondata[index]['Flat Tire Events']
-        this.lastbreakdown = this.jsondata[index]['Last Breakdown On']
-        this.planneddeliveries = this.jsondata[index]['Planned Deliveries']
-        this.deliverescompleted = this.jsondata[index]['Deliveries Completed']
-        this.rapidacceleration = this.jsondata[index]['Rapid Acceleration']
-        this.address = this.jsondata[index].Address
-        this.location = this.jsondata[index].Locations
-        this.speed = this.jsondata[index].Speed
-        this.rpm = this.jsondata[index].Rpm
-        this.loadMap()
-        this.loadGuage(this.speed)
-        this.loadGaugerpm(this.rpm)
+        this.drivername = this.jsondata[index]['Name'];
+        this.licenceno = this.jsondata[index]['Vehicle Licence ID'];
+        this.rating = this.jsondata[index]['Rating'];
+        this.trip = this.jsondata[index]['Trip Miles'];
+        this.deliveries = this.jsondata[index]['Deliveries Completed'];
+        this.tripduration = this.jsondata[index]['Trip Duration'];
+        this.tripmileage = this.jsondata[index]['Trip Mileage'];
+        this.engineoffline = this.jsondata[index]['Engine Offline'];
+        this.engineedletime = this.jsondata[index]['Engine Idle Time'];
+        this.totalmilesrun = this.jsondata[index]['Total Miles Run'];
+        this.lastservicedate = this.jsondata[index]['Last Service Date'];
+        this.milesrunssinceservice = this.jsondata[index]['Miles Run since Serviced'];
+        this.flattireevents = this.jsondata[index]['Flat Tire Events'];
+        this.lastbreakdown = this.jsondata[index]['Last Breakdown On'];
+        this.planneddeliveries = this.jsondata[index]['Planned Deliveries'];
+        this.deliverescompleted = this.jsondata[index]['Deliveries Completed'];
+        this.rapidacceleration = this.jsondata[index]['Rapid Acceleration'];
+        this.address = this.jsondata[index].Address;
+        this.location = this.jsondata[index].Locations;
+        this.speed = this.jsondata[index].Speed;
+        this.rpm = this.jsondata[index].Rpm;
+        this.loadMap();
+        this.loadGuage(this.speed);
+        this.loadGaugerpm(this.rpm);
 
       }
     }
@@ -321,7 +315,7 @@ export class VehicleliveMetricComponent implements OnInit {
   loadMap() {
     this.http.get('../../assets/data/location.json').subscribe(res => {
       var newmapdata = res;
-      console.log(newmapdata)
+      console.log(newmapdata);
       this.routeMap(newmapdata);
     });
   }
@@ -716,7 +710,7 @@ export class VehicleliveMetricComponent implements OnInit {
   }
 
   changeState(state) {
-    this.statename = this.statedefaultname = state.currentTarget.value
+    this.statename = this.statedefaultname = state.currentTarget.value;
     // console.log(this.categories);
     var index: any;
     this.categories = [];
@@ -766,35 +760,36 @@ export class VehicleliveMetricComponent implements OnInit {
 
   changeVehicle(name, axelcheckup) {
     this.vehiclename = this.vehicledefaultname = name.currentTarget.value;
+    this.result = 'Reschedule';
     var index: any;
     for (index in this.jsondata) {
       if (this.jsondata[index].Region === this.regiondefaultname && this.jsondata[index].State === this.statedefaultname &&
         this.jsondata[index].Category === this.categorydefaultname && this.jsondata[index].Rating == this.ratingdefaultvalue && this.jsondata[index]['Truck ID'] === this.vehiclename) {
 
-        this.drivername = this.jsondata[index]['Name']
-        this.licenceno = this.jsondata[index]['Vehicle Licence ID']
-        this.rating = this.jsondata[index]['Rating']
-        this.trip = this.jsondata[index]['Trip Miles']
-        this.deliveries = this.jsondata[index]['Deliveries Completed']
-        this.tripduration = this.jsondata[index]['Trip Duration']
-        this.tripmileage = this.jsondata[index]['Trip Mileage']
-        this.engineoffline = this.jsondata[index]['Engine Offline']
-        this.engineedletime = this.jsondata[index]['Engine Idle Time']
-        this.totalmilesrun = this.jsondata[index]['Total Miles Run']
-        this.lastservicedate = this.jsondata[index]['Last Service Date']
-        this.milesrunssinceservice = this.jsondata[index]['Miles Run since Serviced']
-        this.flattireevents = this.jsondata[index]['Flat Tire Events']
-        this.lastbreakdown = this.jsondata[index]['Last Breakdown On']
-        this.planneddeliveries = this.jsondata[index]['Planned Deliveries']
-        this.deliverescompleted = this.jsondata[index]['Deliveries Completed']
-        this.rapidacceleration = this.jsondata[index]['Rapid Acceleration']
-        this.address = this.jsondata[index].Address
-        this.location = this.jsondata[index].Locations
-        this.speed = this.jsondata[index].Speed
-        this.rpm = this.jsondata[index].Rpm
-        this.loadMap()
-        this.loadGuage(this.speed)
-        this.loadGaugerpm(this.rpm)
+        this.drivername = this.jsondata[index]['Name'];
+        this.licenceno = this.jsondata[index]['Vehicle Licence ID'];
+        this.rating = this.jsondata[index]['Rating'];
+        this.trip = this.jsondata[index]['Trip Miles'];
+        this.deliveries = this.jsondata[index]['Deliveries Completed'];
+        this.tripduration = this.jsondata[index]['Trip Duration'];
+        this.tripmileage = this.jsondata[index]['Trip Mileage'];
+        this.engineoffline = this.jsondata[index]['Engine Offline'];
+        this.engineedletime = this.jsondata[index]['Engine Idle Time'];
+        this.totalmilesrun = this.jsondata[index]['Total Miles Run'];
+        this.lastservicedate = this.jsondata[index]['Last Service Date'];
+        this.milesrunssinceservice = this.jsondata[index]['Miles Run since Serviced'];
+        this.flattireevents = this.jsondata[index]['Flat Tire Events'];
+        this.lastbreakdown = this.jsondata[index]['Last Breakdown On'];
+        this.planneddeliveries = this.jsondata[index]['Planned Deliveries'];
+        this.deliverescompleted = this.jsondata[index]['Deliveries Completed'];
+        this.rapidacceleration = this.jsondata[index]['Rapid Acceleration'];
+        this.address = this.jsondata[index].Address;
+        this.location = this.jsondata[index].Locations;
+        this.speed = this.jsondata[index].Speed;
+        this.rpm = this.jsondata[index].Rpm;
+        this.loadMap();
+        this.loadGuage(this.speed);
+        this.loadGaugerpm(this.rpm);
         // this.routeMap(this.location)
 
 
@@ -878,13 +873,15 @@ export class VehicleliveMetricComponent implements OnInit {
   }
 
   setDate() {
-    this.result = this.date;
+    this.result = this.date.toLocaleString();
     $('#calendarModal').modal('hide');
     // $('#messageeModel').modal('show');
     alert("Your Activity has been scheduled");
 
   }
-  scheduleActivity() {
+  scheduleActivity(id,item) {
+    // this.selectedItem = id;
+    this.selectedButton[id]= !this.selectedButton[id];
     $('#calendarModal').modal('show');
     $('#maintenanceModel').modal('hide');
 

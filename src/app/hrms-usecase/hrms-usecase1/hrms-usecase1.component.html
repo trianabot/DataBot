@@ -2,16 +2,24 @@
 <app-header></app-header>
 <div class="clearfix"></div>
 <div class="container-fluid" style="padding:0 !important;">
+        <div class="col-md-12">
+                <div class="col-md-12 overview-txt">
+                        <span>Overview</span>
+                </div>
+
+        </div>
+
         <div class="col-md-12" style="margin-top:7px;">
                 <div class="clearfix"></div>
                 <div class="col-md-4 " style="padding:3px !important;">
                         <div class="bg col-md-12" style="padding-top:10px;">
                                 <span class="mrgn">Total employees</span>
-                                <br>  <br>
+                                <br> <br>
                                 <div class="clearfix"></div>
                                 <div class="col-md-6">
                                         <div class="col-md-6">
-                                                <img src="../../../assets/iconss/1_new.png" style="height:41px !important;"
+                                                <img src="../../../assets/iconss/1_new.png"
+                                                        style="height:45px !important;"
                                                         class="img-center img-responsive">
                                                 <p style="margin:0px;">Employees</p>
                                         </div>
@@ -21,111 +29,367 @@
                                 </div>
                                 <div class="col-md-6">
                                         <div class="col-md-6">
-                                                <img src="../../../assets/iconss/2_new.png" style="height:41px !important;"
+                                                <img src="../../../assets/iconss/2_new.png"
+                                                        style="height:45px !important;"
                                                         class="img-center img-responsive">
                                                 <p style="margin:0px;">Permanent</p>
                                         </div>
                                         <div class="col-md-6 padding0">
-                                                <span class="font">{{fulltimeemployeeCount}}<img src="../../../assets/iconss/red.png"></span>
+                                                <span class="font">{{fulltimeemployeeCount}}<img
+                                                                src="../../../assets/iconss/red.png"></span>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div>
-                                        <span style="color:#7282a7"><span style="color:red;">-4% </span> vs
+                                                <span style="color:#7282a7"><span style="color:red;">-4% </span> vs
                                                         Previous year</span>
-                                                      </div>
+                                        </div>
                                 </div>
-                                <div class="col-md-6" style="margin-top:12px;">
+                                <div class="col-md-6" style="margin-top:41px;">
                                         <div class="col-md-6">
-                                                <img src="../../../assets/iconss/3_new.png" style="height:41px !important;"
+                                                <img src="../../../assets/iconss/3_new.png"
+                                                        style="height:41px !important;"
                                                         class="img-center img-responsive">
                                                 <p style="margin:0px;">Contract</p>
                                         </div>
                                         <div class="col-md-6 padding0">
-                                                <span class="font">{{contractemployeeCount}}<img src="../../../assets/iconss/green.png"></span>
+                                                <span class="font">{{contractemployeeCount}}<img
+                                                                src="../../../assets/iconss/green.png"></span>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div>
-                                        <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
-                                                      </div>
+                                        </div>
                                 </div>
-                                <div class="col-md-6" style="margin-top:12px;margin-bottom:6px;">
+                                <div class="col-md-6" style="margin-top:41px;margin-bottom:6px;">
                                         <div class="col-md-6">
-                                                <img src="../../../assets/iconss/4_new.png" style="height:41px !important;"
+                                                <img src="../../../assets/iconss/4_new.png"
+                                                        style="height:41px !important;"
                                                         class="img-center img-responsive">
                                                 <p style="margin:0px;">Trainees</p>
                                         </div>
                                         <div class="col-md-6 padding0">
-                                                <span class="font">{{traineeemployeeCount}}<img src="../../../assets/iconss/green.png"></span>
+                                                <span class="font">{{traineeemployeeCount}}<img
+                                                                src="../../../assets/iconss/green.png"></span>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div>
-                                        <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
+                                                <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
-                                                      </div>
+                                        </div>
                                 </div>
 
                         </div>
                 </div>
+                <!--First col-md-4 open-->
                 <div class="col-md-4" style="padding:3px !important;">
                         <div class="bg col-md-12" style="padding-top:10px;">
-                                <div class="mrgn" style="padding:0px;margin-bottom:26px;">Gender</div>
-                            <div class="clearfix"></div>
-                                <div class="col-md-4">
-                                        <img src="../../../assets/iconss/5_new.png" style="width:30px;"
+                                <!-- <div class="mrgn" style="padding:0px;margin-bottom:26px;">Gender</div> -->
+                                <!--Gender-->
+                                <div class="col-md-12" style="margin-bottom: 18px;">
+                                 <div class="col-md-4">
+                                        <img src="../../../assets/iconss/5_new.png" style="width:24px;"
                                                 class="img-center img-responsive">
                                 </div>
                                 <div class="col-md-4 text-center">
-                                        <span>Head Count</span><br>
-                                        <span class="font">{{employeecount}}</span>
+                                        <!-- <span>Head Count</span><br>
+                                        <span class="font">{{employeecount}}</span> -->
+                                        <span>Gender</span>
                                 </div>
                                 <div class="col-md-4">
-                                        <img src="../../../assets/iconss/6_new.png" style="width:30px;"
+                                        <img src="../../../assets/iconss/6_new.png" style="width:24px;float: right;;"
                                                 class="img-center img-responsive">
                                 </div>
+
                                 <div class="clearfix"></div>
-                                <div class="progress">
+
+                                <div class="progress" style="margin-top: 2px;">
                                         <div class="progress-bar" style="width:70%"></div>
+                                        
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="col-md-6">
-                                        <span class="font" (click)="getMaleEmployeeAvg();">{{maleemployeeCount}}</span>
+
+                                <div class="col-md-4" style="margin-top:2px;cursor: pointer;">
+                                        <span style="font-weight:bold"  (click)="getMaleEmployeeAvg();">{{maleemployeeCount}}</span>
+                                        <!-- <span>189</span> -->
                                 </div>
-                                <div class="col-md-6 text-right" style="margin-bottom:15px;">
-                                        <span class="font" (click)="getFemaleEmployeeAvg();">{{femaleemployeeCount}}</span>
+                                <div class="col-md-4">
+                                        
+                                </div>
+
+                                <div class="col-md-4 text-right" style="margin-top:2px;cursor: pointer;">
+                                        <span style="font-weight:bold"  (click)="getFemaleEmployeeAvg();">{{femaleemployeeCount}}</span>
+                                        <!-- <span class="fs-19-margin">111</span> -->
                                 </div>
                         </div>
+
+                                <!--Age-->
+                                <div class="col-md-12" style="margin-bottom:22px;">
+                                 <div class="col-md-4">
+                                <span>18-25</span> 
+
+                                </div>
+                                <div class="col-md-2">
+                                <span>26-30</span>
+                                </div>
+                                <div class="col-md-2">
+                                 <span >31-35</span>
+
+                                </div>
+                                <div class="col-md-2">
+                                 <span>36-40</span>     
+
+                                 </div>
+                                 <div class="col-md-2">
+                                 <span> > 40</span>       
+
+                                 </div>
+       
+
+                                <div class="clearfix"></div>
+                                <div class="progress" style="margin-top: 2px;">
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width: 40%;background-color:#3D7BAA" aria-valuenow="41"
+                                                aria-valuemin="0" aria-valuemax="41"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:36%;background-color :#F7C13B" aria-valuenow="42"
+                                                aria-valuemin="42" aria-valuemax="77"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:18%;background-color :#E932FF" aria-valuenow="78"
+                                                aria-valuemin="78" aria-valuemax="94"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:5%;background-color: #EA1652" aria-valuenow="95"
+                                                aria-valuemin="95" aria-valuemax="98"></div>
+                                                <div class="progress-bar" role="progressbar"
+                                                style="width:1%;background-color:#3D7BAA" aria-valuenow="99"
+                                                aria-valuemin="99" aria-valuemax="100"></div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-md-2" style="margin-top:2px">
+                                 {{eighteentwentyfive}}
+                                 
+                                </div>
+                                <div class="col-md-2" style="margin-top:2px">
+                                 {{twentyfivethirty}}
+                                
+                                </div>
+
+                                <div class="col-md-2 text-right"
+                                        style="margin-top:2px;">
+                                        {{thirtyonetothirtyfive}}
+                                       
+                                </div>
+                                <div class="col-md-2 text-right" style="margin-top:2px;">
+                                        {{thirtysixtofourty}}
+                             
+                                </div>
+                                <div class="col-md-4 text-right" style="margin-top:2px;">
+                                        {{greaterfoutry}}
+                                
+                                 </div>
+                        </div>
+
+                                <!--AgeClose-->
+
+                                <div class="col-md-12">
+                                <!--Ethnicity-->
+                                <div class="clearfix"></div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4 text-center">
+                                     <span>Ethnicity</span>
+                                        
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                
+
+                                <div class="clearfix"></div>
+                                <div class="progress" style="margin-top: 2px;">
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:20%;background-color:#3D7BAA;" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="20"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:17%;background-color :#42505d" aria-valuenow="21"
+                                                aria-valuemin="21" aria-valuemax="37"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:23%;background-color :#2CB065" aria-valuenow="37"
+                                                aria-valuemin="38" aria-valuemax="60"></div>
+                                        <div class="progress-bar" role="progressbar"
+                                                style="width:20%;background-color:#EA1652" aria-valuenow="61"
+                                                aria-valuemin="61" aria-valuemax="80"></div>
+                                                <div class="progress-bar" role="progressbar"
+                                                style="width:20%;background-color:#42506D" aria-valuenow="81"
+                                                aria-valuemin="81" aria-valuemax="100"></div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-md-2" style="margin-top:2px;text-align: center">
+                                        <span>Whites</span><br>
+                                        <span>204</span>
+                                </div>
+                                <div class="col-md-2" style="margin-top:2ps;text-align: center">
+                                        <span>African American</span><br>
+                                        <span>165</span>
+                                </div>
+
+                                <div class="col-md-2 text-right" style="margin-top:2px;">
+                                        <span>Latin American</span><br>
+                                        <span>232</span>
+
+                                </div>
+                                <div class="col-md-2 text-right" style="margin-top:2px">
+                                  <span>Asian</span><br>
+                                 <span>197</span>
+
+                                </div>
+                                <div class="col-md-2 text-right" style="margin-top:2px">
+                                 <span>Other</span><br>
+                                 <span>202</span>
+
+                                </div>
+
+                                <!--Ethnicity-->
+                          </div>
                 </div>
+                </div>
+                <!--First col-md-4  close-->
+                <!--Chart-->
                 <div class="col-md-4" style="padding:3px !important;">
-
                         <div class="bg col-md-12">
-                                        <span class="mrgn">Bands</span>
+                                <span class="mrgn">Education</span>
+                                  <div class="col-md-12 padding-top" style="margin-bottom: 15px">
+                                        <div class="progress" style="margin-top: 2px;">
+                                                <div class="progress-bar" role="progressbar"
+                                                        style="width: 33%;background-color:#3D7BAA" aria-valuenow="24"
+                                                        aria-valuemin="0" aria-valuemax="33"></div>
+                                                <div class="progress-bar" role="progressbar"
+                                                        style="width:38%;background-color :#F7C13B" aria-valuenow="33"
+                                                        aria-valuemin="66" aria-valuemax="66"></div>
+                                                <div class="progress-bar" role="progressbar"
+                                                        style="width:29%;background-color :#EA1651" aria-valuenow="66"
+                                                        aria-valuemin="66" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-4"
+                                                style="margin-top:2px;text-align: center">
+                                                <!-- <span class="font" (click)="getMaleEmployeeAvg();">{{maleemployeeCount}}</span> -->
+                                                <span>Graduation</span> <br>
+                                                <span>{{grad}}</span>
+                                        </div>
+                                        <div class="col-md-5"
+                                                style="margin-top:2px;text-align: center">
+                                                <!-- <span class="font" (click)="getMaleEmployeeAvg();">{{maleemployeeCount}}</span> -->
+                                                <span>Post Graduation</span> <br>
+                                                <span>{{postgra}}</span>
+                                        </div>
 
-                                <div [chart]="stockagingchart" >
+                                        <div class="col-md-3 text-right"
+                                                style="margin-top:2px;text-align: center;padding: 0px">
+                                                <!-- <span class="font" (click)="getFemaleEmployeeAvg();">{{femaleemployeeCount}}</span> -->
+                                                <span>Under Graduate</span> <br>
+                                                <span>{{undergrad}}</span>
+                                        </div>
+                                </div>
+
+                               
+                                <div class="col-md-12 padding-top">
+                                        <div>
+                                         <span>Bands</span>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                                <span class="band-circle" >B1</span>
+                                                <div class="circle" style="background-color:#3D7BAA">55</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <span class="band-circle">B2</span>
+                                                <div class="circle" style="background-color: #42506d">65</div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                                <span  class="band-circle">B3</span>
+                                                <div class="circle" style="background-color:#F7C13B">45</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <span  class="band-circle">B4</span>
+                                                <div class="circle" style="background-color:#EA1651">35</div>
+                                        </div>
+
+                                </div>
+                                <div class="col-md-12">
+                                        <div class="col-md-3">
+                                                <span  class="band-circle">B5</span>
+                                                <div class="circle" style="background-color:#E932FF">55</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <span  class="band-circle">B6</span>
+                                                <div class="circle" style="background-color:#2CAFC4">55</div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                                <span  class="band-circle">B7</span>
+                                                <div class="circle" style="background-color:#EA1651">55</div>
+                                        </div>
+
                                 </div>
 
                         </div>
 
                 </div>
+                <!--Chart claose-->
         </div>
-        <div>
+        <!--First col-md-12 close-->
 
+        <div>
                 <div class="col-md-12">
                         <div class="col-md-8" style="padding:3px !important;">
 
-                          <div class="col-md-12" style="background: #fff;">
-                            <span  class="mrgn">Department wise break-up</span>
-                                <div style="margin-bottom:10px;">
-                                        <div [chart]="stockchartcategories">
+                                <div class="col-md-12" style="background: #fff;">
+                                        <span class="mrgn">Departments</span>
+                                        <div style="margin-bottom:10px;">
+                                                <div [chart]="stockchartcategories">
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-md-4 padding0">
+                                                                <div class="card employee_chart"style="padding-bottom: 2px;"
+                                                                        [ngClass]="{cardactiveclass: isCardActive(1)}"
+                                                                        (click)="setDepatmentActive(1)">
+                                                                        <div class="card-body">
+                                                                                <p  style="text-align: center">Department</p>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-4 padding0">
+                                                                <div class="card employee_chart" style="padding-bottom: 2px;"
+                                                                        [ngClass]="{cardactiveclass: isCardActive(2)}"
+                                                                        (click)="setDemographicActive(2)">
+                                                                        <div class="card-body">
+                                                                                <p style="text-align: center">Ethnicity</p>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-4 padding0">
+                                                                <div class="card employee_chart" style="padding-bottom: 2px;"
+                                                                        [ngClass]="{cardactiveclass: isCardActive(3)}"
+                                                                        (click)="setAgeActive(3)">
+                                                                        <div class="card-body">
+                                                                                <p style="text-align: center">Age</p>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
                                         </div>
                                 </div>
-                              </div>
 
 
                                 <div class="col-md-12" style="background:#fff;padding:20px 0px;margin-top:10px;">
-                                  <div>
-                                      <span  class="mrgn">{{category}}</span>
-                                  </div>
+                                        <div>
+                                                <span class="mrgn">{{category}}</span>
+                                        </div>
 
                                         <div class="col-md-3 text-center">
                                                 <img src="../../../assets/iconss/8_new.png"
@@ -133,7 +397,8 @@
                                                         class="img-center img-responsive">
                                                 <span>Avg Salary</span>
                                                 <br>
-                                                <span class="font1">${{averageSalary | number : '1.2-2'}}k <img src="../../../assets/iconss/green.png"></span>
+                                                <span class="font1">${{averageSalary | number : '1.2-2'}}k <img
+                                                                src="../../../assets/iconss/green.png"></span>
                                                 <br>
                                                 <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
@@ -144,18 +409,20 @@
                                                         class="img-center img-responsive">
                                                 <span>Avg Experience</span>
                                                 <br>
-                                                <span class="font1">{{averageExperience | number : '1.2-2'}} Yrs <img src="../../../assets/iconss/red.png"></span>
+                                                <span class="font1">{{averageExperience | number : '1.2-2'}} Yrs <img
+                                                                src="../../../assets/iconss/red.png"></span>
                                                 <br>
                                                 <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
                                         </div>
-                                        <div class="col-md-3 text-center">
+                                        <div class="col-md-3 text-center" (click)="openAttritionTable();">
                                                 <img src="../../../assets/iconss/10_new.png"
                                                         style="width:45px !important;margin:auto;height:45px;"
                                                         class="img-center img-responsive">
                                                 <span>Attrition Rate</span>
                                                 <br>
-                                                <span class="font1">{{averageattritionRate | number : '1.2-2'}}% <img src="../../../assets/iconss/green.png"></span>
+                                                <span class="font1">{{averageattritionRate | number : '1.2-2'}}% <img
+                                                                src="../../../assets/iconss/green.png"></span>
                                                 <br>
                                                 <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
@@ -166,7 +433,8 @@
                                                         class="img-center img-responsive">
                                                 <span>Satisfaction</span>
                                                 <br>
-                                                <span class="font1">{{averageSatisfaction |number : '1.2-2'}} <img src="../../../assets/iconss/red.png"></span>
+                                                <span class="font1">{{averageSatisfaction |number : '1.2-2'}} <img
+                                                                src="../../../assets/iconss/red.png"></span>
                                                 <br>
                                                 <span style="color:#7282a7"><span style="color:#3fd767;">+4% </span> vs
                                                         Previous year</span>
@@ -176,12 +444,14 @@
 
                         </div>
                         <div class="col-md-4" style="padding:0px 4px !important;">
-                          <div class="bg">
-                            <span  class="mrgn">Hired vs Left for this Qtr</span>
-                            <span class="float-right" style="float:right;" (click)="goToHrmsUsecase2()">click</span>
-                                <div [chart]="negativStack">
+                                <div class="bg" style="padding-bottom: 48px;">
+                                        <span class="mrgn">Hired vs Left for this Qtr</span>
+                                        <!-- <span class="float-right" style="float:right;"
+                                                (click)="goToHrmsUsecase2()">click</span> -->
+                                            <img src ="../../../assets/hrmsimg/right-d-png.png"(click)="goToHrmsUsecase2()" style="width:12%;float: right">    
+                                        <div [chart]="negativStack">
+                                        </div>
                                 </div>
-                              </div>
                         </div>
 
 
@@ -189,5 +459,36 @@
                 </div>
 
 
+        </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Attrition Rate</h4>
+                        </div>
+                        <div class="modal-body">
+                                <div class="row card">
+                                        <table class="table">
+                                                <thead>
+                                                        <tr>
+                                                                <th scope="col"
+                                                                        *ngFor="let header of tableAttritionHeaders">
+                                                                        {{header}}</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr *ngFor="let row of attritionData">
+                                                                <td *ngFor="let col of tableAttritionHeaders">
+                                                                        {{row[col]}}</td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
         </div>
 </div>

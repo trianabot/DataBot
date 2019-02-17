@@ -280,14 +280,14 @@
               <td>Ontime</td>
             </tr>
           </table> -->
-          <div class="col-md-5">
+          <div class="col-md-6">
             <table>
               <tr>
                 <th>Address</th>
               </tr>
             </table>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <table>
               <tr>
                 <th>Status</th>
@@ -310,7 +310,7 @@
           </div>
           <div class="col-md-3">
             <button type="button" class="btn btn-primary btn-sm">Delivered</button>
-            
+
 
           </div>
           <div class="col-md-3 pt-6">
@@ -456,16 +456,17 @@
 
       <!--Preventive Maintenance-->
       <div class="row mt-3 bg-color" style="margin-top:10px;border-radius: 23px;">
-        <div class="col-md-6">
-          <span class="fs-19" style="padding-left: 27px; color: white" >Preventive</span><br>
+        <div class="col-md-4">
+          <span class="fs-19" style="padding-left: 27px; color: white">Preventive</span><br>
           <span class="fs-19" style="padding-left: 21px; color: white">Maintenance</span>
         </div>
         <div class="col-md-6">
-          <span class="fs-19" style="color: white">{{prementiveMaintenancearrsort[0].part}}</span><br>
-          <span class="fs-19" style="color: white">{{prementiveMaintenancearrsort[0].date_main}} </span>
-          <span>
+          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0].part}}</span><br>
+          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0].date_main}} </span>
+         </div>
+         <div class="col-md-2">
+
             <button type="button" class="btn btn-primary btn-sm mlt-37" (click) ="prementiveMaintenance()" style="border-radius: 17px;background-color:#EEF1EF"><span style="color:black">more</span></button>
-          </span>
 
          </div>
       </div>
@@ -612,7 +613,7 @@
       </div>
       <div class="modal-body" style="height: 250px">
         <div class="form-group">
-          <div class="row" *ngFor="let item of prementiveMaintenancearrsort" style="padding: 2px">
+          <div class="row" *ngFor="let item of prementiveMaintenancearrsort; let i= index" style="padding: 2px">
               <div class="col-md-4">
                   <span>{{item.part}}</span>
                  </div>
@@ -621,7 +622,7 @@
                 </div>
 
                  <div class="col-md-4">
-                  <button type="button" class="btn btn-primary active" (click) ="scheduleActivity()" >Schedule Activity</button>
+                  <button type="button" class="btn btn-primary active" (click) ="scheduleActivity(i,item)" > {{selectedButton[i] ? 'Scheduled' : 'Schedule Activity'}}</button>
                 </div>
 
 

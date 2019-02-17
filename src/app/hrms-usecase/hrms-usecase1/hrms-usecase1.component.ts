@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { Highcharts } from 'angular-highcharts';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+declare var $: any;
 
 @Component({
   selector: 'app-hrms-usecase1',
@@ -38,14 +40,47 @@ export class HrmsUsecase1Component implements OnInit {
   averageattritionRate: any;
   averageSatisfaction: any;
   category:any;
+  cardSelected: any;
+  tableAttritionHeaders = [];
+  attritionData:any;
+  ethnicityData:any;
+  /**Age group */
+  eighteentwentyfive:any;
+  twentyfivethirty:any;
+  thirtyonetothirtyfive:any;
+  thirtysixtofourty:any;
+  greaterfoutry:any;
 
-  constructor(public databotService: DatabotService, public router: Router) {
+  grad:any;
+  postgra:any;
+  undergrad:any;
+
+
+
+
+ /**Age group */
+
+
+  constructor(public databotService: DatabotService, public router: Router,public http: HttpClient) {
 
     this.hiredChart();
   }
 
   ngOnInit() {
+    this.cardSelected = 1;
     this.loadJsonData();
+    this.loadAttritionRate();
+    this.loadEthnicityData();
+    this.eighteentwentyfive =409;
+    this.twentyfivethirty = 356;
+    this.thirtyonetothirtyfive =175;
+    this.thirtysixtofourty =48;
+    this.greaterfoutry =12;
+    this.grad = 700;
+    this.postgra=168;
+    this.undergrad =132;
+
+
   }
 
   loadJsonData() {
@@ -56,20 +91,35 @@ export class HrmsUsecase1Component implements OnInit {
       this.filterData(data);
       this.filterBandData(data);
       this.filterAverageData(data);
-      this.filterChartData(data);
+      this.departmentChart(data);
     });
+
   }
 
-  filterChartData(jsondata) {
-    var itbandone = 0;
-    for (var i = 0; i < jsondata.length; i++) {
-      if (jsondata[i]['Department'] == 'IT' && jsondata[i]['Employee Band'] == 1) {
-        itbandone += 1;
+
+ loadAttritionRate(){
+    this.databotService.loadAttritionData().subscribe(data => {
+      this.attritionData = data;
+     
+      let responseData = data[0];
+      for (var key in responseData) {
+        if (responseData.hasOwnProperty(key)) {
+            this.tableAttritionHeaders.push(key);
+        }
       }
-    }
-    console.log(itbandone);
-    this.departmentChart(itbandone);
+    })
   }
+
+  loadEthnicityData(){
+    this.http.get('../../assets/data/ethnicity.json').subscribe(data => {
+      this.ethnicityData = data;
+      // alert(JSON.stringify(this.ethnicityData))
+    });
+ 
+
+  }
+
+
 
   filterBandData(banddata) {
     for (var i = 0; i < banddata.length; i++) {
@@ -208,106 +258,276 @@ export class HrmsUsecase1Component implements OnInit {
     var UNDEFINED;
     this.options = {
       chart: {
-        type: 'column',
-        height: 205,
-        style: {
-          fontFamily: 'Ubuntu,sans-serif'
-        }
-
+          type: 'column',
+          height:200
       },
       title: {
-        text: ''
+          text: '',
+
       },
       xAxis: {
-        type: 'category',
-        labels: {
-          enabled: true
-        }
+          categories:["Admin","Accounting","IT","Marketing","Sales","Legal"]
       },
       yAxis: {
-        title: { text: '' },
+          min: 0,
+          title: {
+              text: ''
+          },
+          stackLabels: {
+              enabled: true,
+              style: {
+                  fontWeight: 'bold',
+                  color: 'gray'
+              }
+          },
+          gridLineColor: 'transparent',
+          labels:{
+              enabled:false
+           },
 
-        stackLabels: {
-          enabled: true,
-          style: {
-            fontWeight: 'bold',
-            color: 'red'
-          }
-        },
-        gridLineColor: 'transparent',
+
       },
-      legend: {
+
+      credits: {
         enabled: false
+    },
+      legend: {
+         enabled:false
+      },
+      tooltip: {
+          headerFormat: '<b>{point.x}</b><br/>',
+          pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
       },
       plotOptions: {
-        series: {
-          dataLabels: {
-            enabled: true,
-            format: '{point.y:.1f}'
-          },
-          point: {
-            events: {
-              click: function (): any {
-                if (this.x != UNDEFINED) {
-                  $this.getAverageData(this.name, this.y);
-                  for (var i = 0; i < this.series.data.length; i++) {
-                    this.series.data[i].update({ color: '#5871b2' }, true, false);
-                  }
-                  this.update({ color: '#1c2337' }, true, false);
-                  //   $this.router.navigate(['./driver-overview']);
-
-                }
-
-              },
-
-
-            }
+          column: {
+              stacking: 'normal',
+              dataLabels: {
+                  enabled: false,
+                  color: 'black'
+              }
           }
-        }
       },
       series: [
         {
-          name: 'Categories',
-          data: [
-            {
-              name: 'IT',
-              y: 296,
-              color: '#7282a7'
-            },
-            {
-              name: 'Accounting',
-              y: 167,
-              color: '#7282a7'
-            },
-            {
-              name: 'Marketing',
-              y: 166,
-              color: '#7282a7'
-            },
-            {
-              name: 'Sales',
-              y: 104,
-              color: '#7282a7'
-            },
-            {
-              name: 'Admin',
-              y: 128,
-              color: '#7282a7'
-            },
-            {
-              name: 'Legal',
-              y: 139,
-              color: '#7282a7'
-            }
-          ]
-        }
-      ],
-      credits: {
-        enabled: null
-      }
-    };
+          name: 'Band 1',
+          data: [31,42,52,43,16,28],
+          color: '#3D7BAA'
+        },
+        {
+          name: 'Band 2',
+          data: [37,31,52,23,30,24],
+          color: '#42506D'
+        },
+        {
+          name: 'Band 3',
+          data: [31,31,75,44,19,35],
+          color: '#F7C13B'
+        },
+        {
+          name: 'Band 4',
+          data: [29,29,35,26,10,25],
+          color: '#EA1651'
+        },
+        {
+          name: 'Band 5',
+          data: [0,18,33,15,16,13],
+          color: '#E932FF'
+        },
+        {
+          name: 'Band 6',
+          data: [0,10,27,10,7,10],
+          color: '#2CAFC4'
+        },
+        {
+          name: 'Band 7',
+          data: [0,6,22,5,6,4],
+          color: '#3D7BAA'
+    }
+  ]
+  };
     this.stockchartcategories = new Chart(this.options);
   }
+
+  ethinicityChart(itbandone) {
+    var $this = this;
+    var UNDEFINED;
+    this.options = {
+      chart: {
+          type: 'column',
+          height:200
+      },
+      title: {
+          text: '',
+
+      },
+      xAxis: {
+          categories:["Admin","Accounting","IT","Marketing","Sales","Legal"]
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: ''
+          },
+          stackLabels: {
+              enabled: true,
+              style: {
+                  fontWeight: 'bold',
+                  color: 'gray'
+              }
+          },
+          gridLineColor: 'transparent',
+          labels:{
+              enabled:false
+           },
+
+
+      },
+
+      credits: {
+        enabled: false
+    },
+      legend: {
+         enabled:false
+      },
+      tooltip: {
+          headerFormat: '<b>{point.x}</b><br/>',
+          pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              dataLabels: {
+                  enabled: false,
+                  color: 'black'
+              }
+          }
+      },
+      series: [
+        {
+          name: 'White',
+          data: [23,35,58,40,21,27],
+          color: '#3D7BAA'
+        },
+        {
+          name: 'Africian Americian',
+          data: [60,28,52,31,14,25],
+          color: '#42506D'
+        },
+        {
+          name: 'Latin Americian',
+          data: [32,40,62,39,26,33],
+          color: '#F7C13B'
+        },
+        {
+          name: 'Asian',
+          data: [27,35,57,30,18,30],
+          color: '#EA1651'
+        },
+        {
+          name: 'Other',
+          data: [30,29,67,26,25,25],
+          color: '#E932FF'
+        },
+      
+  ]
+  };
+    this.stockchartcategories = new Chart(this.options);
+  }
+
+
+  ageGroupChart(itbandone) {
+    var $this = this;
+    var UNDEFINED;
+    this.options = {
+      chart: {
+          type: 'column',
+          height:200
+      },
+      title: {
+          text: '',
+
+      },
+      xAxis: {
+          categories:["Admin","Accounting","IT","Marketing","Sales","Legal"]
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: ''
+          },
+          stackLabels: {
+              enabled: true,
+              style: {
+                  fontWeight: 'bold',
+                  color: 'gray'
+              }
+          },
+          gridLineColor: 'transparent',
+          labels:{
+              enabled:false
+           },
+
+
+      },
+
+      credits: {
+        enabled: false
+    },
+      legend: {
+         enabled:false
+      },
+      tooltip: {
+          headerFormat: '<b>{point.x}</b><br/>',
+          pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              dataLabels: {
+                  enabled: false,
+                  color: 'black'
+              }
+          }
+      },
+      series: [
+        {
+          name: '18-25',
+          data: [68,73,104,66,46,52],
+          color: '#3D7BAA'
+        },
+        {
+          name: '26-30',
+          data: [51,55,103,67,27,53],
+          color: '#42506D'
+        },
+        {
+          name: '31-35',
+          data: [9,31,57,24,24,30],
+          color: '#F7C13B'
+        },
+        {
+          name: '35-40',
+          data: [0,7,22,7,3,4],
+          color: '#EA1651'
+        },
+        {
+          name: 'Above 40',
+          data: [0,1,7,2,2,0],
+          color: '#E932FF'
+        },
+      
+  ]
+  };
+    this.stockchartcategories = new Chart(this.options);
+  }
+
+
+
+
+
+
+
+
   hiredChart() {
     var categories = [
       "IT",
@@ -370,6 +590,9 @@ export class HrmsUsecase1Component implements OnInit {
           }
         }
       },
+      credits: {
+        enabled: false
+    },
 
       plotOptions: {
         series: {
@@ -499,6 +722,30 @@ export class HrmsUsecase1Component implements OnInit {
 
   goToHrmsUsecase2(){
     this.router.navigate(['/hrms-usecase-2']);
+  }
+
+  isCardActive(item: any) {
+    return this.cardSelected === item;
+  }
+
+
+  setDepatmentActive(item:any){
+    this.cardSelected = item;
+    this.departmentChart(item);
+  }
+
+  setDemographicActive(item:any){
+    this.cardSelected = item;
+    this.ethinicityChart(item);
+  }
+
+  setAgeActive(item:any){
+    this.cardSelected = item;
+    this.ageGroupChart(item);
+  }
+
+  openAttritionTable(){
+    $('#myModal').modal('show');
   }
 
 }

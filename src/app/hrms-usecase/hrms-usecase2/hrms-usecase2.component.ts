@@ -17,6 +17,7 @@ export class HrmsUsecase2Component implements OnInit {
   yieldratioChart: any;
   options: any;
   isClicked: boolean = false;
+  selectedItem:number;
   constructor(private http: HttpClient, public databotService: DatabotService) {
     this.onboardingDetaols = [
       {
@@ -266,8 +267,9 @@ export class HrmsUsecase2Component implements OnInit {
     this.costofHiringChart = new Chart(this.options);
   }
 
-  onClickHiring(data) {
+  onClickHiring(id,data) {
     this.isClicked = true;
+    this.selectedItem = id;
     this.hiringPlanObjData = data;
     console.log("Data coming from", this.hiringPlanObjData);
   }

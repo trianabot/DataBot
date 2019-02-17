@@ -16,7 +16,7 @@ export class IndustriesComponent implements OnInit {
   showEnergy:boolean = false;
   usecase :boolean =false;
   health:boolean = false;
-  showpsephology:boolean = false; 
+  showpsephology:boolean = false;
    UseCaseTypeValue:number=0;
   showreport:boolean = false;
   userId: any;
@@ -31,7 +31,7 @@ export class IndustriesComponent implements OnInit {
  // @Output() emitShowUseCase = new EventEmitter();
 
   showUseCase(useCaseType){
-    this.usecase=true;
+
    this.UseCaseTypeValue=useCaseType;
    if(useCaseType==1){
     this.show = true
@@ -41,6 +41,7 @@ export class IndustriesComponent implements OnInit {
    this.showEnergy = false;
    this.showpsephology = false;
    this.showEng =false;
+   this.usecase=true;
 
    }
     else if(useCaseType ==2){
@@ -52,6 +53,7 @@ export class IndustriesComponent implements OnInit {
     this.showEnergy = false;
     this.showpsephology = false;
     this.showEng =false;
+    this.usecase=true;
 
      }
     else if(useCaseType ==3){
@@ -62,6 +64,7 @@ export class IndustriesComponent implements OnInit {
  this.showEnergy = false;
  this.showpsephology = false;
  this.showEng =false;
+ this.usecase=true;
  }
 
  else if(useCaseType ==4){
@@ -72,6 +75,7 @@ export class IndustriesComponent implements OnInit {
        this.showManufacturing = false;
        this.showpsephology = false;
        this.showEng =false;
+       this.usecase=true;
     }
 
     else if(useCaseType ==5){
@@ -82,6 +86,7 @@ export class IndustriesComponent implements OnInit {
    this.showTextile = false;
    this.showpsephology = false;
    this.showEng =false;
+   this.usecase=true;
 
  }
  else if(useCaseType ==6){
@@ -92,6 +97,7 @@ export class IndustriesComponent implements OnInit {
   this.showManufacturing = false;
   this.showTextile = false;
   this.showEng =false;
+  this.usecase=true;
 
 }
 
@@ -103,12 +109,13 @@ else if(useCaseType ==7){
   this.showHealth = false;
   this.showManufacturing = false;
   this.showTextile = false;
- 
+  this.usecase=true;
+
 
 }
 
 
-         
+
 
     // alert(useCaseType);
    // this.emitShowUseCase.emit(useCaseType);
