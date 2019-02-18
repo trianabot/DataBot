@@ -55,9 +55,44 @@ export class HrmsUsecase1Component implements OnInit {
   postgra:any;
   undergrad:any;
 
+  whiteEthnicity:any;
+  africanamericanEthnicity:any;
+  latinAmericanEthnicity:any;
+  asianEthnicity:any;
+  otherEthnicity:any;
 
 
+  bandOneCount:any;
+  bandTwoCount:any;
+  bandThreeCount:any;
+  bandFourCount:any;
+  bandFiveCount:any;
+  bandSixCount:any;
+  bandSevenCount:any;
 
+  malepercent:any;
+  femaleperecent:any;
+
+  gradPercent:any;
+  undergradPercent:any;
+  postGraduatePercent:any;
+
+  whiteEthinPercent:any;
+  africanAmericanPercent:any;
+  latinAmericanPercent:any;
+  asianPercent:any;
+  otherPercent:any;
+
+  eighteenTwentyPercent:any;
+  twentysixthirtyPercent:any;
+  thirtyonefivePercent:any;
+  thirtySixfortyPercent:any;
+  greaterFortyPercent:any;
+
+  selected = false;
+  selectedFemale = false;
+  selectedband1 = false;
+  default =true;
  /**Age group */
 
 
@@ -71,16 +106,6 @@ export class HrmsUsecase1Component implements OnInit {
     this.loadJsonData();
     this.loadAttritionRate();
     this.loadEthnicityData();
-    this.eighteentwentyfive =409;
-    this.twentyfivethirty = 356;
-    this.thirtyonetothirtyfive =175;
-    this.thirtysixtofourty =48;
-    this.greaterfoutry =12;
-    this.grad = 700;
-    this.postgra=168;
-    this.undergrad =132;
-
-
   }
 
   loadJsonData() {
@@ -100,7 +125,7 @@ export class HrmsUsecase1Component implements OnInit {
  loadAttritionRate(){
     this.databotService.loadAttritionData().subscribe(data => {
       this.attritionData = data;
-     
+
       let responseData = data[0];
       for (var key in responseData) {
         if (responseData.hasOwnProperty(key)) {
@@ -115,7 +140,7 @@ export class HrmsUsecase1Component implements OnInit {
       this.ethnicityData = data;
       // alert(JSON.stringify(this.ethnicityData))
     });
- 
+
 
   }
 
@@ -144,6 +169,20 @@ export class HrmsUsecase1Component implements OnInit {
   }
 
   filterData(hrdata) {
+    this.africanamericanEthnicity = 0;
+    this.whiteEthnicity = 0;
+    this.latinAmericanEthnicity = 0;
+    this.asianEthnicity = 0;
+    this.otherEthnicity = 0;
+    this.postgra = 0;
+    this.undergrad = 0;
+    this.grad = 0;
+    this.eighteentwentyfive =0;
+    this.twentyfivethirty = 0;
+    this.thirtyonetothirtyfive =0;
+    this.thirtysixtofourty =0;
+    this.greaterfoutry =0;
+
     for (var i = 0; i < hrdata.length; i++) {
       if (hrdata[i]['Employement'] == 'Full Time') {
         this.fulltimeemployee.push(hrdata[i]['Employement']);
@@ -160,12 +199,66 @@ export class HrmsUsecase1Component implements OnInit {
       if (hrdata[i]['Gender'] == 'Female') {
         this.femaleemployee.push(hrdata[i]['Gender']);
       }
+      if(hrdata[i]['Ethinicity'] == 'African American'){
+        this.africanamericanEthnicity+=1;
+      }
+      if(hrdata[i]['Ethinicity'] == 'White'){
+        this.whiteEthnicity+=1;
+      }
+      if(hrdata[i]['Ethinicity'] == 'Latin American'){
+        this.latinAmericanEthnicity+=1;
+      }
+      if(hrdata[i]['Ethinicity'] == 'Asian'){
+        this.asianEthnicity+=1;
+      }
+      if(hrdata[i]['Ethinicity'] == 'Others'){
+        this.otherEthnicity +=1;
+      }
+      if(hrdata[i]['Education'] == 'Under Graduate'){
+        this.undergrad +=1;
+      }
+      if(hrdata[i]['Education'] == 'Post Graduate'){
+        this.postgra +=1;
+      }
+      if(hrdata[i]['Education'] == 'Graduate'){
+        this.grad +=1;
+      }
+      if(hrdata[i]['Age Group'] >= 18  && hrdata[i]['Age Group'] <= 25){
+        this.eighteentwentyfive += 1;
+      }
+      if(hrdata[i]['Age Group'] >= 26  && hrdata[i]['Age Group'] <= 30){
+        this.twentyfivethirty += 1;
+      }
+      if(hrdata[i]['Age Group'] >= 31  && hrdata[i]['Age Group'] <= 35){
+        this.thirtyonetothirtyfive += 1;
+      }
+      if(hrdata[i]['Age Group'] >= 36  && hrdata[i]['Age Group'] <= 40){
+        this.thirtysixtofourty += 1;
+      }
+      if(hrdata[i]['Age Group'] > 40){
+        this.greaterfoutry += 1;
+      }
     }
     this.traineeemployeeCount = this.traineeemployee.length;
     this.fulltimeemployeeCount = this.fulltimeemployee.length;
     this.contractemployeeCount = this.contractemployee.length;
     this.femaleemployeeCount = this.femaleemployee.length;
     this.maleemployeeCount = this.maleemployee.length;
+    this.malepercent = (this.maleemployeeCount/1000)*100+"%";
+    this.femaleperecent = (this.femaleemployeeCount/1000)*100+"%";
+    this.gradPercent = (this.grad/1000)*100+"%";
+    this.undergradPercent = (this.undergrad/1000)*100+"%";
+    this.postGraduatePercent = (this.postgra/1000)*100+"%";
+    this.whiteEthinPercent = (this.whiteEthnicity/1000)*100+"%";
+    this.africanAmericanPercent = (this.africanamericanEthnicity/1000)*100+"%";;
+    this.latinAmericanPercent = (this.latinAmericanEthnicity/1000)*100+"%";;
+    this.asianPercent = (this.asianEthnicity/1000)*100+"%";
+    this.otherPercent = (this.otherEthnicity/1000)*100+"%";
+    this.eighteenTwentyPercent = (this.eighteentwentyfive/1000)*100+"%";
+    this.twentysixthirtyPercent = (this.twentyfivethirty/1000)*100+"%";
+    this.thirtyonefivePercent = (this.thirtyonetothirtyfive/1000)*100+"%";
+    this.thirtySixfortyPercent = (this.thirtysixtofourty/1000)*100+"%";
+    this.greaterFortyPercent = (this.greaterfoutry/1000)*100+"%";
   }
 
   filterAverageData(avgdata) {
@@ -188,70 +281,13 @@ export class HrmsUsecase1Component implements OnInit {
   }
 
   bandChart(oneband, twoband, threeband, fourband, fiveband, sixband, sevenband) {
-    var $this = this;
-    this.options = {
-      chart: {
-        type: 'pie',
-        height: 200,
-        options3d: {
-          enabled: true,
-          alpha: 45,
-
-        },
-        style: {
-          fontFamily: 'Ubuntu,sans-serif'
-        }
-
-      },
-      title: {
-        text: ''
-      },
-      credits: {
-        enabled: null
-      },
-
-      plotOptions: {
-        pie: {
-          innerSize: 40,
-          depth: 20,
-          dataLabels: {
-            enabled: false
-          },
-          showInLegend: true,
-          point: {
-            events: {
-              click: function (): any {
-                $this.getPieAvgData(this.name, this.y);
-              },
-            }
-          }
-        }
-      },
-
-
-      series: [{
-        name: "",
-        data: [
-          { name: '1', y: oneband.length, color: '#3d7baa' },
-          { name: '2', y: twoband.length, color: '#ea1651' },
-          { name: '3', y: threeband.length, color: '#f7c13b' },
-          { name: '4', y: fourband.length, color: '#fe0000' },
-          { name: '5', y: fiveband.length, color: '#40c5d6' },
-          { name: '6', y: sixband.length, color: '#e932ff' },
-          { name: '7', y: sevenband.length, color: '#40ec58' },
-
-          // ['Year',5, ],
-          // ['one month', 2],
-          // ['Six Month', 7],
-          // ['One Year', 9],
-
-        ]
-      }]
-
-
-
-    };
-    this.stockagingchart = new Chart(this.options);
+      this.bandOneCount = oneband.length;
+      this.bandTwoCount = twoband.length;
+      this.bandThreeCount = threeband.length;
+      this.bandFourCount = fourband.length;
+      this.bandFiveCount = fiveband.length;
+      this.bandSixCount = sixband.length;
+      this.bandSevenCount = sevenband.length;
   }
   departmentChart(itbandone) {
     var $this = this;
@@ -428,7 +464,7 @@ export class HrmsUsecase1Component implements OnInit {
           data: [30,29,67,26,25,25],
           color: '#E932FF'
         },
-      
+
   ]
   };
     this.stockchartcategories = new Chart(this.options);
@@ -515,18 +551,11 @@ export class HrmsUsecase1Component implements OnInit {
           data: [0,1,7,2,2,0],
           color: '#E932FF'
         },
-      
+
   ]
   };
     this.stockchartcategories = new Chart(this.options);
   }
-
-
-
-
-
-
-
 
   hiredChart() {
     var categories = [
@@ -654,6 +683,7 @@ export class HrmsUsecase1Component implements OnInit {
   getAverageData(dep, count) {
     var index: any
     this.category = dep;
+    this.default = false;
     this.averageSalary = 0;
     this.averageExperience = 0;
     this.averageattritionRate = 0;
@@ -668,9 +698,9 @@ export class HrmsUsecase1Component implements OnInit {
     }
   }
 
-  getPieAvgData(band, count) {
-    // console.log(band + "" + count);
-    this.category = band;
+  getBandAvgData(band,count) {
+    this.default = false;
+    this.category = "Band"+' '+':'+' '+band;
     var index: any
     this.averageSalary = 0;
     this.averageExperience = 0;
@@ -688,7 +718,9 @@ export class HrmsUsecase1Component implements OnInit {
 
   getMaleEmployeeAvg(){
     var index: any
-    this.category = "Male";
+    this.default = false;
+    this.category = "Gender"+' '+':'+' '+"Male";
+    this.selected =  true;
     this.averageSalary = 0;
     this.averageExperience = 0;
     this.averageattritionRate = 0;
@@ -704,8 +736,9 @@ export class HrmsUsecase1Component implements OnInit {
   }
 
   getFemaleEmployeeAvg(){
-    this.category = "Female";
-    var index: any
+    this.default = false;
+    this.category = "Gender"+' '+':'+' '+"Female";
+    var index: any;
     this.averageSalary = 0;
     this.averageExperience = 0;
     this.averageattritionRate = 0;
@@ -716,6 +749,78 @@ export class HrmsUsecase1Component implements OnInit {
         this.averageExperience += this.hrdashboardData[index]['Experience'] / this.femaleemployeeCount;
         this.averageattritionRate += this.hrdashboardData[index]['Attrition rate'] / this.femaleemployeeCount;
         this.averageSatisfaction += this.hrdashboardData[index]['Satisfaction Index'] / this.femaleemployeeCount;
+      }
+    }
+  }
+
+  getEduAverage(category,count){
+    this.default = false;
+    this.category = "Education"+' '+':'+' '+category;
+    var index: any;
+    this.averageSalary = 0;
+    this.averageExperience = 0;
+    this.averageattritionRate = 0;
+    this.averageSatisfaction = 0;
+    for (index in this.hrdashboardData) {
+      if (this.hrdashboardData[index]['Education'] == category) {
+        this.averageSalary += this.hrdashboardData[index]['Salary'] / count;
+        this.averageExperience += this.hrdashboardData[index]['Experience'] / count;
+        this.averageattritionRate += this.hrdashboardData[index]['Attrition rate'] / count;
+        this.averageSatisfaction += this.hrdashboardData[index]['Satisfaction Index'] / count;
+      }
+    }
+  }
+
+  getAgeAverage(min,max,count){
+    this.default = false;
+    this.category = "Age"+' '+':'+' '+min+'-'+max;
+    var index: any
+    this.averageSalary = 0;
+    this.averageExperience = 0;
+    this.averageattritionRate = 0;
+    this.averageSatisfaction = 0;
+    for (index in this.hrdashboardData) {
+      if (this.hrdashboardData[index]['Age Group'] >= min && this.hrdashboardData[index]['Age Group'] <= max) {
+        this.averageSalary += this.hrdashboardData[index]['Salary'] / count;
+        this.averageExperience += this.hrdashboardData[index]['Experience'] / count;
+        this.averageattritionRate += this.hrdashboardData[index]['Attrition rate'] / count;
+        this.averageSatisfaction += this.hrdashboardData[index]['Satisfaction Index'] / count;
+      }
+    }
+  }
+
+  getAgeAverageForty(value,count){
+    this.default = false;
+    this.category = "Age"+' '+':'+' '+value;
+    var index: any
+    this.averageSalary = 0;
+    this.averageExperience = 0;
+    this.averageattritionRate = 0;
+    this.averageSatisfaction = 0;
+    for (index in this.hrdashboardData) {
+      if (this.hrdashboardData[index]['Age Group'] > value) {
+        this.averageSalary += this.hrdashboardData[index]['Salary'] / count;
+        this.averageExperience += this.hrdashboardData[index]['Experience'] / count;
+        this.averageattritionRate += this.hrdashboardData[index]['Attrition rate'] / count;
+        this.averageSatisfaction += this.hrdashboardData[index]['Satisfaction Index'] / count;
+      }
+    }
+  }
+
+  getAvgForEthinicity(value, count){
+    this.default = false;
+    this.category = "Ethnicity"+' '+':'+' '+value;
+    var index: any
+    this.averageSalary = 0;
+    this.averageExperience = 0;
+    this.averageattritionRate = 0;
+    this.averageSatisfaction = 0;
+    for (index in this.hrdashboardData) {
+      if (this.hrdashboardData[index]['Ethinicity'] == value) {
+        this.averageSalary += this.hrdashboardData[index]['Salary'] / count;
+        this.averageExperience += this.hrdashboardData[index]['Experience'] / count;
+        this.averageattritionRate += this.hrdashboardData[index]['Attrition rate'] / count;
+        this.averageSatisfaction += this.hrdashboardData[index]['Satisfaction Index'] / count;
       }
     }
   }

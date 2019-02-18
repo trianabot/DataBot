@@ -40,7 +40,7 @@
 
     <div class="col-md-12 padding:0px">
       <div class="row">
-        <div class="col-md-2 imgmargin">
+        <div class="col-md-2 imgmargin" (click)="redirect(2)">
             <div class="talkbubble">
             <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
 
@@ -83,13 +83,23 @@
     <div class="col-md-12">
       <div class="row">
         <!--Production-->
-        <div class="col-md-2 imgmargin">
-          <div class="talkbubble">
-            <img src="../../assets/3.png" class="img-center img-responsive">
-
-            <p style="text-align: center; color:#267872;font-weight:bold;">Production</p>
+        <div class="col-md-2 imgmargin" (click)="redirect(8)" *ngIf='!showProduction'>
+            <div class="talkbubble">
+              <img src="../../assets/3.png" class="img-center img-responsive">
+  
+              <p style="text-align: center; color:#267872;font-weight:bold;">Production</p>
+            </div>
           </div>
-        </div>
+          <div class="col-md-2 imgmargin" *ngIf='showProduction'>
+  
+            <div class="talkbubble1">
+              <img src="../../assets/3.png" class="img-center img-responsive">
+  
+              <p style="text-align: center; color:#fff;font-weight:bold;">Production</p>
+            </div>
+          </div>
+       
+
         <!--Production-->
 
         <!--Inventory-->
@@ -108,6 +118,7 @@
             <p style="text-align: center; color:#fff;font-weight:bold;">Inventory Management</p>
           </div>
         </div>
+
         <div class="col-md-2 imgmargin">
             <div class="talkbubble">
               <img src="../../assets/3.png" class="img-center img-responsive">
@@ -167,18 +178,27 @@
 
 
 
-  <div *ngIf='UseCaseType==5' (click)="redirect(5)" >
+  <div *ngIf='UseCaseType==5'>
       <div class="col-md-12 padding:0px">
           <div class="row">
-            <div class="col-md-2 imgmargin">
+            <div class="col-md-2 imgmargin" (click)="redirect(5)" *ngIf='!showHealthAnalysis'>
                 <div class="talkbubble">
                 <img src="../../assets/5.png" class="img-center img-responsive">
 
                  <p style="text-align: center; color:#267872;font-weight:bold;">Supplies</p>
-        </div>
+            </div>
               </div>
+              <div class="col-md-2 imgmargin" *ngIf='showHealthAnalysis'>
 
-          <div class="col-md-2 imgmargin" (click)="redirect(5)">
+                  <div class="talkbubble1">
+                    <img src="../../assets/22.png" class="img-center img-responsive">
+          
+                    <p style="text-align: center; color:#fff;font-weight:bold;">Supplies</p>
+                  </div>
+                </div>
+
+
+          <div class="col-md-2 imgmargin">
                 <div class="talkbubble">
                 <img src="../../assets/5.png" class="img-center img-responsive">
                 <p style="text-align: center;color:#267872 ;font-weight:bold;">Billing</p>

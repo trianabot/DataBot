@@ -82,14 +82,35 @@ redirectwarehouseoverview(){
 
  redirectHrmsUseCaseOne(){
   this.router.navigate(['./hrms-usecase-1']);
+  localStorage.setItem('title',"HR Overview");
+
+
  }
 
  redirectHrmsUseCaseTwo(){
   this.router.navigate(['./hrms-usecase-2']);
+  localStorage.setItem('title',"Hiring Module");
  }
 
  redirectHrmsUseCaseThree(){
   this.router.navigate(['./hrms-usecase-3']);
+ }
+
+ redirectHealthAnalytics(){
+  this.router.navigate(['./healthcare-analytics']);
+  localStorage.setItem('title',"Health Care Analytics");
+ }
+
+ redirectFinanceExpense(){
+  this.router.navigate(['./finance-expense']);
+  localStorage.setItem('title',"Expense Analytics");
+
+ }
+
+ redirectProductManagment(){
+  this.router.navigate(['./project-managment']);
+  localStorage.setItem('title',"Project Managment");
+
  }
 
 }

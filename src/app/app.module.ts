@@ -54,6 +54,9 @@ import {DatabotService } from './core/databot.service';
 import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
 import { HrmsUsecase2Component } from './hrms-usecase/hrms-usecase2/hrms-usecase2.component';
 import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component';
+import { HealthCareAnalyticsComponent } from './healthcare-usecase/health-care-analytics/health-care-analytics.component';
+import { ExpenseAnalyticsComponent } from './finance-usecase/expense-analytics/expense-analytics.component';
+import { ProjectManagmentComponent } from './manufacturing-usecase/project-managment/project-managment.component';
 
 
 
@@ -91,6 +94,9 @@ import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase
     HrmsUsecase3Component,
     HrmsUsecase2Component,
     HrmsUsecase1Component,
+    HealthCareAnalyticsComponent,
+    ExpenseAnalyticsComponent,
+    ProjectManagmentComponent,
 
 
     ],

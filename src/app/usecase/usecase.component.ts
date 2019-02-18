@@ -21,6 +21,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   showHrms:boolean=false;
   showEng:boolean =false;
   showHealth:boolean =false;
+  showProduction:boolean=false;
   constructor(private router : Router) {
 
   }
@@ -41,6 +42,8 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   this.showHrms=false;
   this.showEng =false;
   this.showHealth =false;
+  this.showProduction =false;
+
 }
 ngOnDestroy() {
 console.log("Destroy");
@@ -55,6 +58,7 @@ console.log("Destroy");
          this.showVechile = false
          this.showAssembly = false;
          this. showEng = false;
+         this.showProduction =false;
        // this.reportusecase=true;
 
     }
@@ -64,9 +68,9 @@ console.log("Destroy");
         this.showfleetManagment = false
         this.showAssembly = false;
         this. showEng = false;
+        this.showProduction =false;
 
-
-    }
+  }
     else if(useCaseType ==3){
       //   this.showVechile = true;
       this.showmanufacturing = true;
@@ -74,9 +78,10 @@ console.log("Destroy");
         this.showfleetManagment = false
         this.showAssembly = false;
         this. showEng = false;
+        this.showHrms = false;
+        this.showProduction =false;
 
-
-    }
+     }
     else if(useCaseType ==4){
       this.showHrms = true;
       this.showmanufacturing = false;
@@ -84,7 +89,7 @@ console.log("Destroy");
         this.showfleetManagment = false
         this.showAssembly = false;
         this. showEng = false;
-
+        this.showProduction =false;
     }
 
 
@@ -96,6 +101,7 @@ console.log("Destroy");
     this.showfleetManagment = false
     this. showEng = false;
     this.showHrms=false;
+    this.showProduction =false;
     }
 
     else if(useCaseType ==7){
@@ -103,6 +109,18 @@ console.log("Destroy");
       this. showEng =true;
       this.showAssembly = true;
       this.showmanufacturing = true;
+      this.fleetMaintaince = false;
+      this.showfleetManagment = false
+      this.showHrms=false;
+      this.showProduction =false;
+
+    }
+
+    else if(useCaseType ==8){
+      this.showProduction = true;
+      this. showEng =false;
+      this.showAssembly = false;
+      this.showmanufacturing =false;
       this.fleetMaintaince = false;
       this.showfleetManagment = false
       this.showHrms=false;

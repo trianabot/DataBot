@@ -46,3 +46,7 @@ img.cardimage1,img.cardimage2 ,img.cardimage3 ,img.cardimage4,img.cardimage5{
 .phrmsfont{
   position: relative;
   }
+
+  .pointer-class{
+    cursor: pointer;
+  }

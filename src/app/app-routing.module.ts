@@ -28,6 +28,9 @@ import { ForecastTrendAnalysisComponent } from './forecast-trend-analysis/foreca
 import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase1.component';
 import { HrmsUsecase2Component } from './hrms-usecase/hrms-usecase2/hrms-usecase2.component';
 import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
+import { HealthCareAnalyticsComponent } from './healthcare-usecase/health-care-analytics/health-care-analytics.component';
+import { ExpenseAnalyticsComponent } from './finance-usecase/expense-analytics/expense-analytics.component';
+import { ProjectManagmentComponent } from './manufacturing-usecase/project-managment/project-managment.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -58,7 +61,10 @@ const routes: Routes = [
   {path:'forecast-analysis', component:ForecastTrendAnalysisComponent},
   {path:'hrms-usecase-1', component:HrmsUsecase1Component},
   {path:'hrms-usecase-2',component:HrmsUsecase2Component},
-  {path:'hrms-usecase-3',component:HrmsUsecase3Component}
+  {path:'hrms-usecase-3',component:HrmsUsecase3Component},
+  {path:'healthcare-analytics', component:HealthCareAnalyticsComponent},
+  {path:'finance-expense', component:ExpenseAnalyticsComponent},
+  {path:'project-managment',component:ProjectManagmentComponent}
 
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'angular-highcharts';
 import { Highcharts } from 'angular-highcharts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hrms-usecase2',
@@ -18,7 +19,7 @@ export class HrmsUsecase2Component implements OnInit {
   options: any;
   isClicked: boolean = false;
   selectedItem:number;
-  constructor(private http: HttpClient, public databotService: DatabotService) {
+  constructor(private http: HttpClient, public databotService: DatabotService,private router : Router) {
     this.onboardingDetaols = [
       {
         "Onbording": 10,
@@ -162,7 +163,7 @@ export class HrmsUsecase2Component implements OnInit {
               color: '#a8b3cf'
             },
             {
-              name: 'Employee Referal',
+              name: 'Employee Referral',
               y: 10,
               color: '#a8b3cf'
             },
@@ -243,7 +244,7 @@ export class HrmsUsecase2Component implements OnInit {
               color: '#a8b3cf'
             },
             {
-              name: 'Employee Referal',
+              name: 'Employee Referral',
               y: 1500,
               color: '#a8b3cf'
             },
@@ -272,6 +273,10 @@ export class HrmsUsecase2Component implements OnInit {
     this.selectedItem = id;
     this.hiringPlanObjData = data;
     console.log("Data coming from", this.hiringPlanObjData);
+  }
+
+  hrmsOverview(){
+    this.router.navigate(['./hrms-usecase-1']);
   }
 
 }

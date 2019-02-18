@@ -11,7 +11,7 @@
   },
   {
     "Department": "Legal",
-    "Position": "B2-Law Grad",
+    "Position": "B2 - Law Grad",
     "date": "10-Apr-18",
     "avg days to hire": 13,
     "cost of hiring": 495,
@@ -81,7 +81,7 @@
   },
   {
     "Department": "Legal",
-    "Position": "B1 -Law Trainee",
+    "Position": "B1 - Law Trainee",
     "date": "12-Mar-18",
     "avg days to hire": 14,
     "cost of hiring": 337,
@@ -101,7 +101,7 @@
   },
   {
     "Department": "Marketing",
-    "Position": "B2-Sales Executive",
+    "Position": "B2 - Sales Executive",
     "date": "27-Mar-18",
     "avg days to hire": 10,
     "cost of hiring": 417,
@@ -111,7 +111,7 @@
   },
   {
     "Department": "Marketing",
-    "Position": "B4-Sales Manager",
+    "Position": "B4 - Sales Manager",
     "date": "17-Apr-19",
     "avg days to hire": 14,
     "cost of hiring": 171,
@@ -121,7 +121,7 @@
   },
   {
     "Department": "Accounting",
-    "Position": "B2- Accounts Receivables",
+    "Position": "B2 - Accounts Receivables",
     "date": "2-Dec-18",
     "avg days to hire": 8,
     "cost of hiring": 498,
@@ -131,7 +131,7 @@
   },
   {
     "Department": "Admin",
-    "Position": "B4-Floor Manager",
+    "Position": "B4 - Floor Manager",
     "date": "23-Dec-18",
     "avg days to hire": 15,
     "cost of hiring": 123,
@@ -141,7 +141,7 @@
   },
   {
     "Department": "IT",
-    "Position": "B4- SAP Hana Developer",
+    "Position": "B4 - SAP Hana Developer",
     "date": "22-Apr-19",
     "avg days to hire": 15,
     "cost of hiring": 381,
@@ -151,7 +151,7 @@
   },
   {
     "Department": "Accounting",
-    "Position": "B3- Functional Consultant",
+    "Position": "B3 - Functional Consultant",
     "date": "19-Apr-19",
     "avg days to hire": 9,
     "cost of hiring": 494,
@@ -161,7 +161,7 @@
   },
   {
     "Department": "Marketing",
-    "Position": "B3- Ad Developer",
+    "Position": "B3 - Ad Developer",
     "date": "30-Apr-18",
     "avg days to hire": 11,
     "cost of hiring": 406,
@@ -171,7 +171,7 @@
   },
   {
     "Department": "IT",
-    "Position": "B4- SQL - Sr. Developer",
+    "Position": "B4 - SQL - Sr. Developer",
     "date": "22-Oct-18",
     "avg days to hire": 7,
     "cost of hiring": 188,
@@ -191,7 +191,7 @@
   },
   {
     "Department": "IT",
-    "Position": "B3- Java Developer",
+    "Position": "B3 - Java Developer",
     "date": "29-Aug-18",
     "avg days to hire": 11,
     "cost of hiring": 422,
