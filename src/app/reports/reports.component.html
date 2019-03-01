@@ -159,30 +159,33 @@
   <!--Assembly-->
   <div class="col-md-12 padding:0px" *ngIf='ReportUseCaseType==6'>
     <div class="row">
+        <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectStateOverview()">
+            <div class="talkbubble">
+              <img src="../../assets/images/state-overview.bmp" class="img-center img-responsive img-Radius">
+              <p style="text-align: center; color:#267872">State Overview</p>
+            </div>
+          </div>
+          <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectForcastAnalysis()">
+              <div class="talkbubble">
+                <img src="../../assets/images/forecastanalysis.bmp" class="img-center img-responsive img-Radius">
+                <p style="text-align: center; color:#267872">Trend Analysis</p>
+              </div>
+            </div>
+
       <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectPolticalStatics()">
         <div class="talkbubble">
-          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
-          <p style="text-align: center; color:#267872">Andhra pradesh</p>
+          <img src="../../assets/images/What if Analysis.bmp" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Predective Analysis</p>
         </div>
       </div>
-      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectStateOverview()">
-        <div class="talkbubble">
-          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
-          <p style="text-align: center; color:#267872">State Overview</p>
-        </div>
-      </div>
+    
       <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectBoothIncharge()">
         <div class="talkbubble">
-          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
-          <p style="text-align: center; color:#267872">Booth Incharge</p>
+          <img src="../../assets/images/Booth-Incharge.bmp" class="img-center img-responsive img-Radius">
+          <p style="text-align: center; color:#267872">Demographic Survey</p>
         </div>
       </div>
-      <div class="col-md-2" id="fleet_hover" style="margin-top: 13px;" (click)="redirectForcastAnalysis()">
-        <div class="talkbubble">
-          <img src="../../assets/inventory_managment.png" class="img-center img-responsive img-Radius">
-          <p style="text-align: center; color:#267872">FORECAST Trend Analysis</p>
-        </div>
-      </div>
+     
 
     </div>
   </div>

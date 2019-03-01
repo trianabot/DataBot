@@ -30,6 +30,23 @@ export class DatabotService {
     return this.http.get('../../assets/data/ethnicity.json');
   }
 
+  loadPoliticsData(){
+    return this.http.get('../../assets/data/politics.json')
+  }
+  
+  loadPoliticsTrendDistrict(){
+    return this.http.get('../../assets/data/Dist_final.json');
+  }
+
+  loadPoliticsTrendAssembly(){
+    return this.http.get('../../assets/data/Constituency_Final.json');
+  }
+
+  loadPoliticsTrendBooth(){
+    return this.http.get('../../assets/data/booth_json_final.json');
+  }
+
+
   clientRegistration(clientdata) {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'

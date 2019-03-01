@@ -144,7 +144,7 @@ export class VehicleliveMetricComponent implements OnInit {
 
   ngOnInit() {
     
-    this.result = 'Reshedule';
+    this.result = 'reshedule';
     var $this = this;
     this.regiondefaultname = 'Midwest'; this.statedefaultname = 'Ohio'; this.categorydefaultname = '91-100', this.ratingdefaultvalue = 4;
     this.vehicledefaultname = 'CAT6257';
