@@ -1,0 +1,26 @@
+[
+    {
+        "Industry" :"Manufacturing",
+         "UseCase":["Production","Inventory Management","Performance","Inventory Forecasting"]
+    },
+    {
+        "Industry" :"Transportation",
+         "UseCase":["Telematics","Fleet Track"]
+    },
+    {
+        "Industry" :"Finance",
+         "UseCase":["Reporting","Forecasting"]
+    },
+    {
+        "Industry" :"Human Resources",
+         "UseCase":["Work Force","Statistics"]
+    },
+    {
+        "Industry" :"Health Care",
+         "UseCase":["Supplies","Billing"]
+    },
+    {
+        "Industry" :"Energy",
+         "UseCase":["Consumption","Management"]
+    }
+]

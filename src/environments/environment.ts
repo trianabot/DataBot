@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiEndPoint: "http://localhost:4000",
+  // apiEndPoint: "http://localhost:4000",
+  apiEndPoint: "http://ec2-54-175-125-60.compute-1.amazonaws.com:4000",
+  
 };
 
 /*

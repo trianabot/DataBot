@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { trigger, style, state, transition, animate, animation, keyframes } from '@angular/animations';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { DatabotService } from '../core/databot.service';
 declare var $: any;
 @Component({
   selector: 'app-login',
@@ -13,7 +16,7 @@ export class LoginComponent implements OnInit {
   userName: any;
   password: any;
   modelText: any;
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router,public databotService: DatabotService,private spinner: NgxSpinnerService) { }
   login: FormGroup;
   ngOnInit() {
 
@@ -24,36 +27,47 @@ export class LoginComponent implements OnInit {
 
 
   register(register) {
-    // if(this.userName =="Demo" && this.password =="Demo123"){
-
-    // }
-    // console.log(register.value)
+    this.spinner.show();
+    console.log(register.value)
     this.modelText = '';
     if (register.value.user == "" || register.value.password == "") {
       this.modelText = "Please enter username or password";
       console.log(this.modelText);
       $('#myModal').modal('show');
+      this.spinner.hide();
     }
-    else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@123") {
+    else if (register.value.user != "" && register.value.password != ""){
+      let body = {
+        emailId:register.value.user,
+        password:register.value.password
+      }
+      console.log(body);
+      this.databotService.userLogin(body).subscribe(data => {
+        console.log(data);
+        if(data['success'] == true){
+          localStorage.setItem("userId",data['userData']['userId']);
+          localStorage.setItem("userRole",data['userData']['role']);
+          localStorage.setItem("userName", data['userData']['userName']);
+          this.router.navigate(['./industries']);
+         
 
-      this.router.navigate(['/industries']);
-      localStorage.setItem('userid', '1');
-    } else if ((register.value.user == "Telematics" || register.value.user == "telematics") && register.value.password == "Databot@123") {
-      this.router.navigate(['/industries']);
-      localStorage.setItem('userid', '2');
-    } else if ((register.value.user == "Supplychain" || register.value.user == "supplychain") && register.value.password == "Databot@123") {
-      this.router.navigate(['/industries']);
-      localStorage.setItem('userid', '3');
+        }else if(data['success'] == false){
+          this.modelText = data['msg'];
+          $('#myModal').modal('show');
+          this.spinner.hide();
+        }
+      },(err)=> {
+        console.log(JSON.stringify(err['error']['message'])+"this is error");
+        this.modelText = err['error']['message'];
+        $('#myModal').modal('show');
+        this.spinner.hide();
+       } )
     }
-    else if ((register.value.user == "Politics" || register.value.user == "politics") && register.value.password == "Databot@123") {
-      this.router.navigate(['/industries']);
-      localStorage.setItem('userid', '4');
-    }
-
     else {
       this.modelText = "Wrong Credentials";
       console.log(this.modelText);
       $('#myModal').modal('show');
+      this.spinner.hide();
 
     }
 

@@ -46,6 +46,10 @@ export class DatabotService {
     return this.http.get('../../assets/data/booth_json_final.json');
   }
 
+  loadUseCase(){
+    return this.http.get('../../assets/data/usecase.json');
+  }
+
 
   clientRegistration(clientdata) {
     let httpHeaders = new HttpHeaders({
@@ -56,6 +60,8 @@ export class DatabotService {
     };
     return this.http.post(this.apiendpoint + '/user/registertenant', JSON.stringify(clientdata), options);
   }
+
+
 
 
   userRegistration(userdata) {
@@ -78,5 +84,14 @@ export class DatabotService {
     return this.http.post(this.apiendpoint + '/user/login', JSON.stringify(loginData), options);
   }
 
+  getUserDetails(userData) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.apiendpoint + '/user/getuserdata', JSON.stringify(userData), options);
+  }
 
 }

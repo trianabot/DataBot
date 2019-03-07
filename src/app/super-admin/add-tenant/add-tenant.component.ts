@@ -4,6 +4,9 @@ import { CustomValidators } from './../../../validators/customvalidator';
 import { EmailValidator } from './../../../validators/email';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import * as $ from 'jquery';
+declare var $: any;
 
 @Component({
   selector: 'app-add-tenant',
@@ -11,22 +14,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-tenant.component.css']
 })
 export class AddTenantComponent implements OnInit {
+  usecasejsonData:any;
+  usecaseName:any =[];
+  useCaseType:any =[];
   clientForm: FormGroup;
-  organizationCategories = [
-    "Manufacturing/Supply chain",
-    "Transportation",
-    "Finance",
-    "Human Resource",
-    "Health Care"
-  ];
+  organizationCategories :any = [];
+  industryusecasearr :any =[];
+  selectedValue :any;
+  modelText: any;
+
+
+  
   clientRegister= {}  as ClientRegister;
-  constructor(private formBuilder: FormBuilder, public databotService: DatabotService) { }
+  constructor(private formBuilder: FormBuilder, public databotService: DatabotService,private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.clientForm = this.formBuilder.group({
+    
+ 
+  
+
+      this.clientForm = this.formBuilder.group({
       organizationName: ['', Validators.compose([Validators.required,Validators.minLength(4)])],
       contactNumber: ['', Validators.compose([Validators.required,Validators.minLength(4)])],
-      organizationCategory: ['', Validators.compose([Validators.required])],
+      industries: [''],
+      industriesUseCase: [''],
       officialMailId: ['', Validators.compose([Validators.required,Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i), EmailValidator.checkEmail])],
       adminName: ['', Validators.compose([Validators.required,Validators.minLength(4)])],
       password: ['', Validators.compose([Validators.required, CustomValidators.patternValidator(/\d/, {
@@ -60,16 +71,62 @@ export class AddTenantComponent implements OnInit {
       // check whether our password and confirm password match
       validator: CustomValidators.passwordMatchValidator
     });
+
+    this.loaduseCase();
+ }
+
+  loaduseCase(){
+    this.databotService.loadUseCase().subscribe(data => {
+      this.usecasejsonData = data;
+      var index: any;
+      for (index in this.usecasejsonData) {
+       if (this.organizationCategories.indexOf(this.usecasejsonData[index].Industry) < 0) {
+          this.organizationCategories.push(this.usecasejsonData[index].Industry);
+           }
+         }
+     });
   }
 
+  changeIndustry(usecase){
+    
+    this.useCaseType =[];
+    var index: any;
+    this.usecaseName = usecase.currentTarget.value;
+    console.log(this.usecaseName);
+   for (index in this.usecasejsonData) {
+      if (this.usecasejsonData[index].Industry === this.usecaseName) {
+
+        if (this.useCaseType.indexOf(this.usecasejsonData[index].UseCase) < 0) {
+          this.useCaseType = this.usecasejsonData[index].UseCase;
+
+         
+            } 
+        }
+    }
+  }
+
+
   onSubmit() {
-    this.clientRegister.adminId = "5f94cd80-cd06-4f6f-a50e-66c356252328";
+    this.spinner.show();
+  //   setTimeout(() => {
+  //     /** spinner ends after 5 seconds */
+  //     this.spinner.hide();
+  // }, 5000);
+    let industries:any = [];
+    let industriesUseCase:any =[];
+    let usecases:any = [];
+    industries.push(this.clientForm.value.industries);
+    usecases.push(this.clientForm.value.industriesUseCase)
+    industriesUseCase.push({"industryName": this.clientForm.value.industries,
+                        "industriesUsecase":usecases});
+    this.clientRegister.adminId = localStorage.getItem('userId');
     this.clientRegister.adminName = this.clientForm.value.adminName;
     this.clientRegister.organizationName = this.clientForm.value.organizationName;
-    this.clientRegister.organizationCode = "5f94cd80-cd06-4f6f-a50e-66c356252328";
-    this.clientRegister.organizationCategory = this.clientForm.value.organizationCategory;
+    this.clientRegister.industries = industries;
+    this.clientRegister.industriesUsecase = industriesUseCase;
     this.clientRegister.contactNumber = this.clientForm.value.contactNumber;
-    this.clientRegister.adminRole = "Client";
+    this.clientRegister.adminRole = 'Business';
+    this.clientRegister.role = 'Client';
     this.clientRegister.emailId = this.clientForm.value.officialMailId;
     this.clientRegister.alternativeEmailId = this.clientForm.value.alternativeEmail;
     this.clientRegister.userName = this.clientForm.value.userName;
@@ -80,9 +137,24 @@ export class AddTenantComponent implements OnInit {
     ];
 
     console.log(this.clientRegister);
+   
     this.databotService.clientRegistration(this.clientRegister).subscribe(data => {
-      console.log(data);
+      
+     console.log(data['message']);
+    
+     this.modelText = data['message'];
+     $('#myModal').modal('show');
+     this.spinner.hide();
+      
+    },(err)=> {
+      console.log(JSON.stringify(err['error']['message'])+"this is error");
+      this.modelText = err['error']['message'];
+    $('#myModal').modal('show');
+    this.spinner.hide();
     })
-  }
+    // this.modelText = "Registration Successful";
+    // $('#myModal').modal('show');
+    
+     }
 
 }

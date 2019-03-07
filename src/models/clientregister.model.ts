@@ -1,9 +1,10 @@
 export interface ClientRegister {
   adminId: String;
 	organizationName: String;
-	organizationCode: String;
-	organizationCategory: String;
+	industries: Array<string>;
+	industriesUsecase:Array<{industryName: String, industriesUsecase: Array<String>}>;
 	adminName: String;
+	role: String;
 	adminRole: String;
 	emailId: String;
 	contactNumber: String;
@@ -14,8 +15,11 @@ export interface ClientRegister {
 };
 
 export interface UserRegister {
-  organizationId: String;
+  clientId: String;
 	userName: String;
+	role: String;
+	industries: Array<string>;
+	industriesUsecase:Array<{industryName: String, industriesUsecase: Array<String>}>;
 	firstName: String;
 	lastName: String;
 	emailId: String;

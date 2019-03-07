@@ -62,6 +62,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -101,12 +102,13 @@ import { Ng5SliderModule } from 'ng5-slider';
     ExpenseAnalyticsComponent,
     ProjectManagmentComponent,
     DataingestionComponent,
+ 
 
 
     ],
   imports: [
     BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,FileUploadModule,NgxPaginationModule,Ng5SliderModule,
-    AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule,
+    AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule,NgxSpinnerModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

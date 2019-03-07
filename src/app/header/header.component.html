@@ -9,7 +9,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="navheader"><a href="#" style="color:white"><span class="glyphicon glyphicon-user navheader"></span>
-              User Name</a></li>
+              {{userName}}</a></li>
           <li><button type="button" class="btn btn-primary btn-xs" style="margin: 14px;background-color: #273048;;border: 0px;" (click)="logOut()">Log
               Out</button></li>
         </ul>
@@ -27,9 +27,13 @@
 <!--Side Menu-->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  
+<div *ngIf ="addClient">
   <a [routerLink]="['/add-tenant']">Add Client</a>
+</div> 
+
+<div *ngIf ="addUser">
   <a [routerLink]="['/add-user']" >Add User</a>
-  <a [routerLink]="['/add-device']">Add Device</a>
+</div>
+  <!-- <a [routerLink]="['/add-device']">Add Device</a> -->
   <a [routerLink]="['/data-ingestion']">Data Ingestion Platform</a>
   </div>

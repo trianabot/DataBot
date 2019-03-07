@@ -6,33 +6,37 @@
 
   <div class="col-md-12 padding:0px" *ngIf='UseCaseType==1'>
     <div class="row">
-      <div class="col-md-2 imgmargin" (click)="redirect(1)" *ngIf='!showfleetManagment'>
-        <div class="talkbubble">
-          <img src="../../assets/22.png" class="img-center img-responsive">
+      <div *ngIf="telematics">
+        <div class="col-md-2 imgmargin" (click)="redirect(1)" *ngIf='!showfleetManagment'>
+          <div class="talkbubble">
+            <img src="../../assets/22.png" class="img-center img-responsive">
 
-          <p style="text-align: center; color:#267872;font-weight:bold;">Telematics</p>
+            <p style="text-align: center; color:#267872;font-weight:bold;">Telematics</p>
+          </div>
+        </div>
+        <div class="col-md-2 imgmargin" *ngIf='showfleetManagment'>
+
+          <div class="talkbubble1">
+            <img src="../../assets/22.png" class="img-center img-responsive">
+
+            <p style="text-align: center; color:#fff;font-weight:bold;">Telematics</p>
+          </div>
         </div>
       </div>
-      <div class="col-md-2 imgmargin" *ngIf='showfleetManagment'>
 
-        <div class="talkbubble1">
-          <img src="../../assets/22.png" class="img-center img-responsive">
-
-          <p style="text-align: center; color:#fff;font-weight:bold;">Telematics</p>
+      <!--Fleet Track-->
+      <div *ngIf="fleettrack">
+        <div class="col-md-2 imgmargin">
+          <div class="talkbubble">
+            <img src="../../assets/22.png" class="img-center img-responsive">
+            <p style="text-align: center;color:#267872;font-weight:bold;">Fleet Track</p>
+          </div>
         </div>
       </div>
-
-          <!--Fleet Track-->
-          <div class="col-md-2 imgmargin">
-              <div class="talkbubble">
-              <img src="../../assets/22.png" class="img-center img-responsive">
-              <p style="text-align: center;color:#267872;font-weight:bold;">Fleet Track</p>
-         </div>
-            </div>
-        <!--Fleet Track-->
+      <!--Fleet Track-->
 
 
-     </div>
+    </div>
 
   </div>
 
@@ -40,39 +44,25 @@
 
     <div class="col-md-12 padding:0px">
       <div class="row">
-        <div class="col-md-2 imgmargin" (click)="redirect(2)">
+        <div *ngIf="reporting">
+          <div class="col-md-2 imgmargin" (click)="redirect(2)">
             <div class="talkbubble">
-            <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
-
-             <p style="text-align: center; color:#267872;font-weight:bold;">Reporting</p>
-    </div>
-          </div>
-          <!-- <div class="col-md-2 imgmargin">
-
-            <div class="talkbubble1">
               <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
 
-               <p style="text-align: center; color:#fff;font-weight:bold;">Reporting</p>
-      </div>
-          </div>   -->
+              <p style="text-align: center; color:#267872;font-weight:bold;">Reporting</p>
+            </div>
+          </div>
+        </div>
 
-
-
-        <div class="col-md-2 imgmargin">
+        <div *ngIf="forecasting">
+          <div class="col-md-2 imgmargin">
             <div class="talkbubble">
-            <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
-            <p style="text-align: center;color:#267872 ;font-weight:bold;">Forecasting</p>
-    </div>
+              <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
+              <p style="text-align: center;color:#267872 ;font-weight:bold;">Forecasting</p>
+            </div>
 
           </div>
-
-        <!-- <div class="col-md-2 imgmargin">
-            <div class="talkbubble1">
-              <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
-              <p style="text-align: center;color:#fff ;font-weight:bold;">Forecasting</p>
-      </div>
-
-          </div> -->
+        </div>
       </div>
 
     </div>
@@ -83,26 +73,28 @@
     <div class="col-md-12">
       <div class="row">
         <!--Production-->
+        <div *ngIf ="production">
         <div class="col-md-2 imgmargin" (click)="redirect(8)" *ngIf='!showProduction'>
-            <div class="talkbubble">
-              <img src="../../assets/3.png" class="img-center img-responsive">
-  
-              <p style="text-align: center; color:#267872;font-weight:bold;">Production</p>
-            </div>
+          <div class="talkbubble">
+            <img src="../../assets/3.png" class="img-center img-responsive">
+
+            <p style="text-align: center; color:#267872;font-weight:bold;">Production</p>
           </div>
-          <div class="col-md-2 imgmargin" *ngIf='showProduction'>
-  
-            <div class="talkbubble1">
-              <img src="../../assets/3.png" class="img-center img-responsive">
-  
-              <p style="text-align: center; color:#fff;font-weight:bold;">Production</p>
-            </div>
+        </div>
+        <div class="col-md-2 imgmargin" *ngIf='showProduction'>
+
+          <div class="talkbubble1">
+            <img src="../../assets/3.png" class="img-center img-responsive">
+
+            <p style="text-align: center; color:#fff;font-weight:bold;">Production</p>
           </div>
-       
+        </div>
+      </div>
 
         <!--Production-->
 
         <!--Inventory-->
+        <div *ngIf ="inventorymanagement">
         <div class="col-md-2 imgmargin" (click)="redirect(3)" *ngIf='!showmanufacturing'>
           <div class="talkbubble">
             <img src="../../assets/3.png" class="img-center img-responsive">
@@ -118,23 +110,27 @@
             <p style="text-align: center; color:#fff;font-weight:bold;">Inventory Management</p>
           </div>
         </div>
-
+      </div>
+      <div *ngIf ="performance">
         <div class="col-md-2 imgmargin">
-            <div class="talkbubble">
-              <img src="../../assets/3.png" class="img-center img-responsive">
+          <div class="talkbubble">
+            <img src="../../assets/3.png" class="img-center img-responsive">
 
-              <p style="text-align: center; color:#267872;font-weight:bold;">Performance</p>
-            </div>
+            <p style="text-align: center; color:#267872;font-weight:bold;">Performance</p>
           </div>
-          <!--Forecasting-->
-          <div class="col-md-2 imgmargin">
-            <div class="talkbubble">
-              <img src="../../assets/3.png" class="img-center img-responsive">
+        </div>
+      </div>
+        <!--Forecasting-->
+        <div *ngIf ="invforecasting">
+        <div class="col-md-2 imgmargin">
+          <div class="talkbubble">
+            <img src="../../assets/3.png" class="img-center img-responsive">
 
-              <p style="text-align: center; color:#267872;font-weight:bold;">Forecasting</p>
-            </div>
+            <p style="text-align: center; color:#267872;font-weight:bold;">Forecasting</p>
           </div>
-          <!--Forecasting-->
+        </div>
+      </div>
+        <!--Forecasting-->
 
 
 
@@ -145,70 +141,74 @@
 
   </div>
 
- <div *ngIf='UseCaseType==4'>
-      <div class="col-md-12 padding:0px" >
-          <div class="row">
-            <div class="col-md-2 imgmargin" (click)="redirect(4)" *ngIf='!showHrms'>
-                <div class="talkbubble">
-                <img src="../../assets/4.png" class="img-center img-responsive">
+  <div *ngIf='UseCaseType==4'>
+    <div class="col-md-12 padding:0px">
+      <div class="row">
+        <div *ngIf ="workforce">
+        <div class="col-md-2 imgmargin" (click)="redirect(4)" *ngIf='!showHrms'>
+          <div class="talkbubble">
+            <img src="../../assets/4.png" class="img-center img-responsive">
 
-                 <p style="text-align: center; color:#267872;font-weight:bold;">Work Force</p>
+            <p style="text-align: center; color:#267872;font-weight:bold;">Work Force</p>
+          </div>
         </div>
-              </div>
-              <div class="col-md-2 imgmargin" *ngIf='showHrms'>
-                <div class="talkbubble1">
-                  <img src="../../assets/4.png" class="img-center img-responsive">
-                  <p style="text-align: center; color:#fff;font-weight:bold;">Work Force</p>
-                </div>
-              </div>
-
-
-          <div class="col-md-2 imgmargin">
-                <div class="talkbubble">
-                <img src="../../assets/4.png" class="img-center img-responsive">
-                <p style="text-align: center;color:#267872 ;font-weight:bold;">Statistics</p>
+        <div class="col-md-2 imgmargin" *ngIf='showHrms'>
+          <div class="talkbubble1">
+            <img src="../../assets/4.png" class="img-center img-responsive">
+            <p style="text-align: center; color:#fff;font-weight:bold;">Work Force</p>
+          </div>
         </div>
+      </div>
 
-              </div>
-
-           </div>
+      <div *ngIf ="statistics">
+        <div class="col-md-2 imgmargin">
+          <div class="talkbubble">
+            <img src="../../assets/4.png" class="img-center img-responsive">
+            <p style="text-align: center;color:#267872 ;font-weight:bold;">Statistics</p>
+          </div>
 
         </div>
+      </div>
+      </div>
+
+    </div>
   </div>
 
 
 
   <div *ngIf='UseCaseType==5'>
-      <div class="col-md-12 padding:0px">
-          <div class="row">
-            <div class="col-md-2 imgmargin" (click)="redirect(5)" *ngIf='!showHealthAnalysis'>
-                <div class="talkbubble">
-                <img src="../../assets/5.png" class="img-center img-responsive">
+    <div class="col-md-12 padding:0px">
+      <div class="row">
+        <div *ngIf ="supplies">
+        <div class="col-md-2 imgmargin" (click)="redirect(5)" *ngIf='!showHealthAnalysis'>
+          <div class="talkbubble">
+            <img src="../../assets/5.png" class="img-center img-responsive">
 
-                 <p style="text-align: center; color:#267872;font-weight:bold;">Supplies</p>
-            </div>
-              </div>
-              <div class="col-md-2 imgmargin" *ngIf='showHealthAnalysis'>
+            <p style="text-align: center; color:#267872;font-weight:bold;">Supplies</p>
+          </div>
+        </div>
+        <div class="col-md-2 imgmargin" *ngIf='showHealthAnalysis'>
 
-                  <div class="talkbubble1">
-                    <img src="../../assets/22.png" class="img-center img-responsive">
-          
-                    <p style="text-align: center; color:#fff;font-weight:bold;">Supplies</p>
-                  </div>
-                </div>
+          <div class="talkbubble1">
+            <img src="../../assets/22.png" class="img-center img-responsive">
 
+            <p style="text-align: center; color:#fff;font-weight:bold;">Supplies</p>
+          </div>
+        </div>
+      </div>
 
+        <div *ngIf ="billing">
           <div class="col-md-2 imgmargin">
-                <div class="talkbubble">
-                <img src="../../assets/5.png" class="img-center img-responsive">
-                <p style="text-align: center;color:#267872 ;font-weight:bold;">Billing</p>
-        </div>
-
-              </div>
-
-           </div>
+          <div class="talkbubble">
+            <img src="../../assets/5.png" class="img-center img-responsive">
+            <p style="text-align: center;color:#267872 ;font-weight:bold;">Billing</p>
+          </div>
 
         </div>
+      </div>
+      </div>
+
+    </div>
   </div>
 
   <!--Assembly-->
@@ -240,6 +240,7 @@
   <div *ngIf='UseCaseType==7'>
     <div class="col-md-12">
       <div class="row">
+        <div *ngIf ="consumption">
         <div class="col-md-2 imgmargin" (click)="redirect(7)">
           <div class="talkbubble">
             <img src="../../assets/5.png" class="img-center img-responsive">
@@ -247,7 +248,9 @@
             <p style="text-align: center; color:#267872;font-weight:bold;">Consumption</p>
           </div>
         </div>
+      </div>
 
+      <div *ngIf ="Management" >
         <div class="col-md-2 imgmargin" (click)="redirect(7)">
           <div class="talkbubble">
             <img src="../../assets/5.png" class="img-center img-responsive">
@@ -255,25 +258,249 @@
             <p style="text-align: center; color:#267872;font-weight:bold;">Management</p>
           </div>
         </div>
-
+      </div>
       </div>
     </div>
 
-    <!-- <div class="col-md-2 imgmargin" *ngIf='showEng'>
-      <div class="talkbubble1">
-        <img src="../../assets/5.png" class="img-center img-responsive">
-        <p style="text-align: center; color:#fff;font-weight:bold;">Management</p>
-      </div>
-    </div> -->
-
   </div>
+<!--Energy-->
+
+<!--Super Admin-->
+
+<div *ngIf ="superadmin">
+    <div class="col-md-12 padding:0px" *ngIf='UseCaseType==1'>
+        <div class="row">
+          <div>
+            <div class="col-md-2 imgmargin" (click)="redirect(1)" *ngIf='!showfleetManagment'>
+              <div class="talkbubble">
+                <img src="../../assets/22.png" class="img-center img-responsive">
+    
+                <p style="text-align: center; color:#267872;font-weight:bold;">Telematics</p>
+              </div>
+            </div>
+            <div class="col-md-2 imgmargin" *ngIf='showfleetManagment'>
+    
+              <div class="talkbubble1">
+                <img src="../../assets/22.png" class="img-center img-responsive">
+    
+                <p style="text-align: center; color:#fff;font-weight:bold;">Telematics</p>
+              </div>
+            </div>
+          </div>
+    
+          <!--Fleet Track-->
+          <div>
+            <div class="col-md-2 imgmargin">
+              <div class="talkbubble">
+                <img src="../../assets/22.png" class="img-center img-responsive">
+                <p style="text-align: center;color:#267872;font-weight:bold;">Fleet Track</p>
+              </div>
+            </div>
+          </div>
+          <!--Fleet Track-->
+    
+    
+        </div>
+    
+      </div>
+      <div *ngIf='UseCaseType==2'>
+
+          <div class="col-md-12 padding:0px">
+            <div class="row">
+              <div>
+                <div class="col-md-2 imgmargin" (click)="redirect(2)">
+                  <div class="talkbubble">
+                    <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
+      
+                    <p style="text-align: center; color:#267872;font-weight:bold;">Reporting</p>
+                  </div>
+                </div>
+              </div>
+      
+              <div>
+                <div class="col-md-2 imgmargin">
+                  <div class="talkbubble">
+                    <img src="../../assets/HospitalIcon.png" class="img-center img-responsive">
+                    <p style="text-align: center;color:#267872 ;font-weight:bold;">Forecasting</p>
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+      
+          </div>
+      
+        </div>
+        <div *ngIf='UseCaseType==3'>
+            <div class="col-md-12">
+              <div class="row">
+                <!--Production-->
+                <div>
+                <div class="col-md-2 imgmargin" (click)="redirect(8)" *ngIf='!showProduction'>
+                  <div class="talkbubble">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#267872;font-weight:bold;">Production</p>
+                  </div>
+                </div>
+                <div class="col-md-2 imgmargin" *ngIf='showProduction'>
+        
+                  <div class="talkbubble1">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#fff;font-weight:bold;">Production</p>
+                  </div>
+                </div>
+              </div>
+        
+                <!--Production-->
+        
+                <!--Inventory-->
+                <div>
+                <div class="col-md-2 imgmargin" (click)="redirect(3)" *ngIf='!showmanufacturing'>
+                  <div class="talkbubble">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#267872;font-weight:bold;">Inventory Management</p>
+                  </div>
+                </div>
+                <div class="col-md-2 imgmargin" *ngIf='showmanufacturing'>
+        
+                  <div class="talkbubble1">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#fff;font-weight:bold;">Inventory Management</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="col-md-2 imgmargin">
+                  <div class="talkbubble">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#267872;font-weight:bold;">Performance</p>
+                  </div>
+                </div>
+              </div>
+                <!--Forecasting-->
+                <div>
+                <div class="col-md-2 imgmargin">
+                  <div class="talkbubble">
+                    <img src="../../assets/3.png" class="img-center img-responsive">
+        
+                    <p style="text-align: center; color:#267872;font-weight:bold;">Forecasting</p>
+                  </div>
+                </div>
+              </div>
+                <!--Forecasting-->
+        
+        
+        
+              </div>
+            </div>
+            <!--Inventory-->
+            <!--Performance-->
+        
+          </div>
+
+          <div *ngIf='UseCaseType==4'>
+              <div class="col-md-12 padding:0px">
+                <div class="row">
+                  <div>
+                  <div class="col-md-2 imgmargin" (click)="redirect(4)" *ngIf='!showHrms'>
+                    <div class="talkbubble">
+                      <img src="../../assets/4.png" class="img-center img-responsive">
+          
+                      <p style="text-align: center; color:#267872;font-weight:bold;">Work Force</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 imgmargin" *ngIf='showHrms'>
+                    <div class="talkbubble1">
+                      <img src="../../assets/4.png" class="img-center img-responsive">
+                      <p style="text-align: center; color:#fff;font-weight:bold;">Work Force</p>
+                    </div>
+                  </div>
+                </div>
+          
+                <div>
+                  <div class="col-md-2 imgmargin">
+                    <div class="talkbubble">
+                      <img src="../../assets/4.png" class="img-center img-responsive">
+                      <p style="text-align: center;color:#267872 ;font-weight:bold;">Statistics</p>
+                    </div>
+          
+                  </div>
+                </div>
+                </div>
+          
+              </div>
+            </div>
+            <div *ngIf='UseCaseType==5'>
+                <div class="col-md-12 padding:0px">
+                  <div class="row">
+                    <div>
+                    <div class="col-md-2 imgmargin" (click)="redirect(5)" *ngIf='!showHealthAnalysis'>
+                      <div class="talkbubble">
+                        <img src="../../assets/5.png" class="img-center img-responsive">
+            
+                        <p style="text-align: center; color:#267872;font-weight:bold;">Supplies</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 imgmargin" *ngIf='showHealthAnalysis'>
+            
+                      <div class="talkbubble1">
+                        <img src="../../assets/22.png" class="img-center img-responsive">
+            
+                        <p style="text-align: center; color:#fff;font-weight:bold;">Supplies</p>
+                      </div>
+                    </div>
+                  </div>
+            
+                    <div>
+                      <div class="col-md-2 imgmargin">
+                      <div class="talkbubble">
+                        <img src="../../assets/5.png" class="img-center img-responsive">
+                        <p style="text-align: center;color:#267872 ;font-weight:bold;">Billing</p>
+                      </div>
+            
+                    </div>
+                  </div>
+                  </div>
+            
+                </div>
+              </div>
+              <div *ngIf='UseCaseType==7'>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div>
+                      <div class="col-md-2 imgmargin" (click)="redirect(7)">
+                        <div class="talkbubble">
+                          <img src="../../assets/5.png" class="img-center img-responsive">
+              
+                          <p style="text-align: center; color:#267872;font-weight:bold;">Consumption</p>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <div>
+                      <div class="col-md-2 imgmargin" (click)="redirect(7)">
+                        <div class="talkbubble">
+                          <img src="../../assets/5.png" class="img-center img-responsive">
+              
+                          <p style="text-align: center; color:#267872;font-weight:bold;">Management</p>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+              
+                </div>
 
 
 
+</div>
 
-  <!--Energy-->
-
-
+<!--Super Admin-->
 </div>
 <!--Assembly-->
 
