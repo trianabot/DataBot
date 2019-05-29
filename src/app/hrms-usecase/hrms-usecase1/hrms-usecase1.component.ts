@@ -93,6 +93,7 @@ export class HrmsUsecase1Component implements OnInit {
   selectedFemale = false;
   selectedband1 = false;
   default =true;
+  api:any;
  /**Age group */
 
 
@@ -102,10 +103,29 @@ export class HrmsUsecase1Component implements OnInit {
   }
 
   ngOnInit() {
+
+    this.api = localStorage.getItem("HR Overview");
+    console.log(this.api);
+    if(localStorage.getItem("HR Overview") != undefined){
+      this.loadDatafromStorage();
+    }else if(localStorage.getItem("HR Overview") == null){
+      this.loadJsonData();
+    }
     this.cardSelected = 1;
-    this.loadJsonData();
     this.loadAttritionRate();
     this.loadEthnicityData();
+  }
+
+  loadDatafromStorage(){
+    this.http.get(this.api).subscribe(data => {
+      console.log(data);
+      this.hrdashboardData = data;
+      this.employeecount = this.hrdashboardData.length;
+      this.filterData(data);
+      this.filterBandData(data);
+      this.filterAverageData(this.hrdashboardData);
+      this.departmentChart(data);
+    });
   }
 
   loadJsonData() {
@@ -115,7 +135,7 @@ export class HrmsUsecase1Component implements OnInit {
       this.employeecount = this.hrdashboardData.length;
       this.filterData(data);
       this.filterBandData(data);
-      this.filterAverageData(data);
+      this.filterAverageData(this.hrdashboardData);
       this.departmentChart(data);
     });
 
@@ -262,21 +282,24 @@ export class HrmsUsecase1Component implements OnInit {
   }
 
   filterAverageData(avgdata) {
+    var index: any
     var averageSal = 0;
     var averageExp = 0;
     var attrRate = 0;
     var satisRate = 0;
-    for (var i = 0; i < avgdata.length; i++) {
+    console.log(avgdata);
+    for (var i=0;i<avgdata.length;i++) {
       averageSal += avgdata[i]['Salary'];
-      averageExp += avgdata[i]['Experience'];
-      attrRate += avgdata[i]['Attrition rate'];
-      satisRate += avgdata[i]['Satisfaction Index'];
+      averageExp +=  avgdata[i]['Experience'];
+      attrRate +=  avgdata[i]['Attrition rate'];
+      satisRate +=  avgdata[i]['Satisfaction Index'];
     }
 
     this.averageSalary = averageSal / this.employeecount;
     this.averageExperience = averageExp / this.employeecount;
     this.averageattritionRate = attrRate / this.employeecount;
     this.averageSatisfaction = satisRate / this.employeecount;
+    console.log(this.averageSalary);
 
   }
 

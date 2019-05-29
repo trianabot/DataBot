@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   addUser :boolean = false;
   userRole:any;
 
-  constructor(private router : Router) { 
+  constructor(private router : Router) {
     this.title = localStorage.getItem('title');
     this.userName = localStorage.getItem('userName');
   }
@@ -38,7 +38,11 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this.router.navigate(['/login']);
-  
+    localStorage.removeItem("HR Overview");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userName");
+
   }
   showDashBoard(){
     this.router.navigate(['/industries']);
@@ -47,7 +51,7 @@ export class HeaderComponent implements OnInit {
   }
   showSideMenu()
   {
-   
+
     document.getElementById("mySidenav").style.width = "250px";
   }
 

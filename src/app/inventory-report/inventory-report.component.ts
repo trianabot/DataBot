@@ -62,7 +62,7 @@ export class InventoryReportComponent implements OnInit {
 
 
   constructor(public http: HttpClient, private ngZone: NgZone) {
-
+    console.log(localStorage.getItem("Inventory Management"));
     /** Column chart categories */
     this.stockchartcategories = new Chart({
       chart: {

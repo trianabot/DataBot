@@ -52,10 +52,10 @@ export class IndustriesComponent implements OnInit {
   constructor(private router: Router, public databotservice: DatabotService) {
     this.userloginid = localStorage.getItem('userId');
     this.userRole = localStorage.getItem('userRole');
-   
+
     console.log(this.userloginid);
 
-   
+
   }
 
   ngOnInit() {
@@ -124,24 +124,39 @@ export class IndustriesComponent implements OnInit {
       switch (industiesusecase[index]['industryName']) {
         case 'Manufacturing':
           this.manufacturingusecase = industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.manufacturingusecase);
           break;
         case 'Transportation':
           this.transportationusecase =industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.transportationusecase);
           break;
         case 'Finance':
           this.financeusecase = industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.financeusecase);
           break;
         case 'Human Resources':
           this.hrusecase = industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.hrusecase);
           break;
         case 'Health Care':
           this.healthcareusecase = industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.healthcareusecase);
           break;
         case 'Energy':
           this.energyusecase = industiesusecase[index]['industriesUsecase'];
+          this.getDashboards(this.energyusecase);
           break;
       }
     }
+  }
+
+  getDashboards(usecases){
+      for(var i=0;i<usecases.length;i++){
+        let usecases =  [];
+        usecases.push(usecases[i]);
+      }
+      console.log(usecases);
+      localStorage["usecases"] = JSON.stringify(usecases);
   }
 
   loaduseCase() {
