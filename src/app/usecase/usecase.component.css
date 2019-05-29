@@ -42,25 +42,27 @@
 .img-center {
     display: block;
     margin: 0 auto;
+    height:105px;
 }
 .talkbubble {
-    border-right:1px solid #3d4e7b;
+    /* border-right:1px solid #3d4e7b; */
     padding:15px;
+  
 }
 .talkbubble:hover {
     /* width: 120px; */
    padding:15px;
-    background: #3d4e7b;
+    /* background: #3d4e7b; */
     position: relative;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px; 
   
   }
-  .talkbubble:hover p {
+  /* .talkbubble:hover p {
       color:#fff !important;
-  }
+  } */
   .talkbubble:hover:before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     right: -14px;
     top: -24px;
@@ -74,13 +76,13 @@
   .talkbubble1 {
     /* width: 120px; */
    padding:15px;
-    background: #3d4e7b;
+    /* background: #3d4e7b; */
     position: relative;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px; 
   }
   .talkbubble1:before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     right: -14px;
     top: -23px;
@@ -94,6 +96,14 @@
 
   .imgmargin{
     margin-top:13px
+ }
+
+ .txtcolor{
+   color:#1E428A
+ }
+
+ .padding-top{
+   padding-top: 29px
  }
  
  

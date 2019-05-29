@@ -33,23 +33,23 @@
     
     }
     .talkbubble {
-        border-right:1px solid #273048;
+        /* border-right:1px solid #273048; */
         padding:15px;
     }
-    .talkbubble:hover {
-        /* width: 120px; */
+    /* .talkbubble:hover {
+        width: 120px;
        padding:15px;
         background: #273048;
         position: relative;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px; 
       
-      }
-      .talkbubble:hover p {
+      } */
+      /* .talkbubble:hover p {
           color:#fff !important;
-      }
+      } */
       .talkbubble:hover:before {
-        content: "";
+        /* content: ""; */
         position: absolute;
         right: -14px;
         top: -24px;
@@ -63,13 +63,13 @@
       .talkbubble1 {
         /* width: 120px; */
        padding:15px;
-        background: #273048;
+        /* background: #273048; */
         position: relative;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px; 
       }
       .talkbubble1:before {
-        content: "";
+        /* content: ""; */
         position: absolute;
         right: -14px;
         top: -24px;
@@ -157,6 +157,7 @@
     .img-center {
         display: block;
         margin: 0 auto;
+        height: 105px;
         
     }
     
@@ -167,5 +168,10 @@
        margin-top:13px
     }
     
-    
-    
+    .p{
+        margin-top: 5px;
+    }
+    /* .divhover:hover {
+        background-color: yellow;
+      }
+     */
