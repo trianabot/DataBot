@@ -2,49 +2,49 @@
 
 <div class="container-fluid">
   <div class="row header-section">
-      <span>Data Ingestion Platform</span>
+    <span>Data Ingestion Platform</span>
   </div>
 
   <div class="row">
-      
-      <div class="col-md-12">
-          <div class="row card">
-              <div class="col-sm-10">
-                  <h4>Upload Section</h4>
-                  <div id="fileSelector">
-                      <input type="file" name="fileUplaod" id="fileUpload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                      multiple ng2FileSelect [uploader]="uploader">
-                  </div>
-                  <div>
-                      <div class="row uploadList" *ngFor="let item of uploader.queue">
-                          <div class="col-sm-4">{{item.file.name}}</div>
-                          <div class="col-sm-4">
-                              <div class="progress">
-                                  <div class="progress-bar bg-success"
-                                  [ngStyle]="{'width':item.progress+'%'}"></div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4">
-                                  <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
-                                  <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row" *ngIf="uploader?.queue?.length > 0">
-                          <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
-                  </div>
+
+    <div class="col-md-12">
+      <div class="row card">
+        <div class="col-sm-10">
+          <h4>Upload Section</h4>
+          <div id="fileSelector">
+            <input type="file" name="fileUplaod" id="fileUpload"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              multiple ng2FileSelect [uploader]="uploader">
+          </div>
+          <div>
+            <div class="row uploadList" *ngFor="let item of uploader.queue">
+              <div class="col-sm-4">{{item.file.name}}</div>
+              <div class="col-sm-4">
+                <div class="progress">
+                  <div class="progress-bar bg-success" [ngStyle]="{'width':item.progress+'%'}"></div>
+                </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-sm-4">
+                <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
+                <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="uploader?.queue?.length > 0">
+            <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
+          </div>
+        </div>
+        <!-- <div class="col-md-2">
                 <div class="form-group" style="margin-top: 30px;">
                   <select id="region" name="region" placeholder="Region" class="form-control dropdown-wrapper" (change)="changeValue($event)">
                     <option>Select Api</option>
                     <option *ngFor="let item of apiArray">{{item}}</option>
                   </select>
                 </div>
-              </div>
-          </div>
+              </div> -->
+      </div>
 
-          <div class="row card">
+      <!-- <div class="row card">
             <h4>Data</h4>
             <table class="table">
               <thead>
@@ -59,10 +59,88 @@
               </tbody>
               <pagination-controls (pageChange)="p = $event" *ngIf="tableHeaders.length>0"></pagination-controls>
             </table>
+          </div> -->
+    </div>
+    <div class="col-md-12">
+      <div class="row card">
+        <div class="col-md-4">
+          <ul
+            style="list-style: none;margin-bottom: 1px;text-align: center;font-size: 20px;color: white;background-color: #273048;padding-bottom: 7px; cursor: pointer;">
+            <li>Api List For Selection</li>
+          </ul>
+          <ul class="list-group" *ngFor="let item of apiArray">
+            <li class="list-group-item" style="cursor: pointer" (click)="apiList(item)">{{item}}</li>
+
+          </ul>
+        </div>
+        <div class="col-md-4" style="text-align: center;top: 53px">
+          <i class="fa fa-angle-double-right" style="font-size:114px;color:#273048"></i>
+        </div>
+        <div class="col-md-4">
+          <ul
+            style="list-style: none; margin-bottom: 1px;text-align: center;font-size: 20px;color: white;background-color: #273048;padding-bottom: 7px;">
+            <li>DashBoard List For Selection</li>
+          </ul>
+          <div *ngIf="dashBoardArray.length!=0">
+            <ul class="list-group" *ngFor="let dashBoardArrays of dashBoardArray">
+              <li class="list-group-item" (click)="dashBoardList(dashBoardArrays)" style="cursor: pointer">
+                {{dashBoardArrays}}</li>
+            </ul>
           </div>
+          <div *ngIf="dashBoardArray.length==0">
+            <ul>
+
+              <li class="list-group-item">No Dashboards Assigned</li>
+
+            </ul>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <p style="color:red" style="cursor: pointer">Selected Api : &nbsp;&nbsp;{{selectedApi}}</p>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+          <p style="color:red" style="cursor: pointer">Selected DashBoard : &nbsp;&nbsp;{{selectedDashBoard}}</p>
+        </div>
+
+        <div class="col-md-11"></div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-primary" style="width:100%;background-color: #273048"
+            (click)="showgotoDashBoard(selectedDashBoard,selectedApi)">Add</button>
+        </div>
+
+
       </div>
-      <!--Drop Down-->
-     
-      <!--Drop Down-->
+    </div>
+    <div class="col-md-12" *ngIf="showTable">
+
+      <div class="row card">
+        <table class="table" style="display: table">
+          <thead>
+            <tr>
+              <th>Api</th>
+              <th>DashBoard</th>
+              <th>Go to DashBoard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of selectedApiList">
+              <td>{{item.api}}</td>
+              <td>{{item.dashboard}}</td>
+              <td><button type="button" class="btn btn-success" style="background-color: #273048;border: none">Go to
+                  DashBoard</button>
+              </td>
+            </tr>
+          </tbody>
+          <pagination-controls (pageChange)="p = $event" *ngIf="tableHeaders.length>0"></pagination-controls>
+        </table>
+      </div>
+
+    </div>
+
+
   </div>
 </div>

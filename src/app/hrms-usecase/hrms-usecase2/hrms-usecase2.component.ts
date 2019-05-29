@@ -89,20 +89,17 @@ export class HrmsUsecase2Component implements OnInit {
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem("HR Hiring Machine"));
     //Onbording_Status
     this.databotService.loadHrHiringDashboard().subscribe(data => {
       this.hiringPlan = data;
       this.hiringPlanObjData = data[2];
       this.isClicked = true;
-      console.log(" this.hiringPlan ", this.hiringPlan);
     });
     this.databotService.loadHiringOnboarding().subscribe(data => {
       this.onboardingDetaols = data;
-
-      console.log("  this.onboardingDetaols ", this.onboardingDetaols);
     });
 
-    this.onboardingDetaols;
     this.loadyieldChart();
     this.loadHiringChart();
   }
