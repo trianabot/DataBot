@@ -46,20 +46,20 @@
     padding:15px;
 }
 
-.talkbubble:hover {
-    /* width: 120px; */
+/* .talkbubble:hover {
+    width: 120px;
    padding:15px;
     background: #5871b2;
     position: relative;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 
-  }
-  .talkbubble:hover p {
+  } */
+  /* .talkbubble:hover p {
       color:#fff !important;
-  }
+  } */
   .talkbubble:hover:before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     right: -14px;
     top: -23px;
@@ -73,4 +73,8 @@
 
   .pointer-class{
     cursor: pointer;
+  }
+
+  .padding-top{
+    padding-top: 29px
   }
