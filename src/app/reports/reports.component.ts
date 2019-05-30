@@ -25,42 +25,33 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
 redirectDashboard(){
 this.router.navigate(['./dashboard']);
-localStorage.setItem('title',"Fleet Overview");
-
-
 }
 
 redirectInventory(){
 this.router.navigate(['./inventory']);
-localStorage.setItem('title',"Inventory Management");
 }
 
 redirectInventortMap(){
 this.router.navigate(['./inventormap']);
-localStorage.setItem('title',"Stock Availability");
 }
 
 redirectwarehouseoverview(){
-  this.router.navigate(['./warehouseoverview'])
+  this.router.navigate(['./warehouseoverview']);
   }
 
   redirectstocktracking(){
-   this.router.navigate(['./stocktracking'])
-   localStorage.setItem('title',"Order Tracking");
+   this.router.navigate(['./stocktracking']);
   }
   redirectdriveroverview()
   {
     this.router.navigate(['./driver-overview']);
-    localStorage.setItem('title',"Driver Performance Profile");
    }
   redirectvehicleMetrics()
   {
     this.router.navigate(['./vehicle-metric']);
-    localStorage.setItem('title',"Vehicle Live Metrics");
   }
   customerFeedbackAnalysis(){
     this.router.navigate(['./customer-feedback']);
-    localStorage.setItem('title',"Customer Feedback Analysis");
  }
 
  redirectPolticalStatics(){
@@ -82,14 +73,10 @@ redirectwarehouseoverview(){
 
  redirectHrmsUseCaseOne(){
   this.router.navigate(['./hrms-usecase-1']);
-  localStorage.setItem('title',"HR Overview");
-
-
  }
 
  redirectHrmsUseCaseTwo(){
   this.router.navigate(['./hrms-usecase-2']);
-  localStorage.setItem('title',"Hiring Module");
  }
 
  redirectHrmsUseCaseThree(){
@@ -98,19 +85,14 @@ redirectwarehouseoverview(){
 
  redirectHealthAnalytics(){
   this.router.navigate(['./healthcare-analytics']);
-  localStorage.setItem('title',"Health Care Analytics");
  }
 
  redirectFinanceExpense(){
   this.router.navigate(['./finance-expense']);
-  localStorage.setItem('title',"Expense Analytics");
-
  }
 
  redirectProductManagment(){
   this.router.navigate(['./project-managment']);
-  localStorage.setItem('title',"Project Managment");
-
  }
 
 }

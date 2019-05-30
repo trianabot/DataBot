@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 declare const google: any;
 import { HttpClient } from '@angular/common/http';
 declare var $: any;
@@ -8,7 +9,7 @@ declare var $: any;
   templateUrl: './inventory-map.component.html',
   styleUrls: ['./inventory-map.component.css']
 })
-export class InventoryMapComponent implements OnInit {
+export class InventoryMapComponent implements OnInit, OnDestroy {
   dist = true;
   trackorder = false;
   selected: any
@@ -40,7 +41,7 @@ export class InventoryMapComponent implements OnInit {
   stockitem: any;
   sparepart:any;
   selectedItem:any;
-  
+
   categorydefaultname:any;
   stockItemdefaultname:any;
   sparepartdefaultname: any;
@@ -48,9 +49,17 @@ export class InventoryMapComponent implements OnInit {
   sparevalue:any ="Battery"
 
 
-  constructor(public http: HttpClient) {this.categorydefaultname ="M Category";
-  this.stockItemdefaultname ="M559";
-  this.sparepartdefaultname ="Battery"}
+  constructor(public http: HttpClient, public route: ActivatedRoute) {
+    var heading = this.route.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem('title',"Stock Availability");
+    }else{
+      localStorage.setItem("title",heading);
+    }
+    this.categorydefaultname ="M Category";
+    this.stockItemdefaultname ="M559";
+    this.sparepartdefaultname ="Battery"
+}
 
   ngOnInit() {
     // this.categoryname = 'D Category';
@@ -62,27 +71,31 @@ export class InventoryMapComponent implements OnInit {
 
         if (this.categories.indexOf(this.jsondata[index].Category) < 0) {
           this.categories.push(this.jsondata[index].Category);
-          
+
 
         }
         this.loaddefaultcategory(this.categories,this.jsondata)
       }
      });
-   
+
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("title");
   }
 
   loaddefaultcategory(category,jsondata){
-  
+
     // this.getsparenames(categoryname)
     var index: any;
     this.stockitem = [];
     this.sparepart = [];
     for (index in this.jsondata) {
       if (jsondata[index].Category === this.categorydefaultname) {
-          
+
         if (this.stockitem.indexOf(jsondata[index].Item) < 0) {
           this.stockitem.push(jsondata[index].Item);
-         } 
+         }
         }
     }
 
@@ -108,7 +121,7 @@ loaddefaulteStock(jsondata,categorydefaultname,stockItemdefaultname){
 
 defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefaultname){
   var index: any;
-  //  this.sparepart = [];   
+  //  this.sparepart = [];
   for (index in jsondata) {
     if (jsondata[index].Item === stockItemdefaultname && jsondata[index].Category === categorydefaultname && jsondata[index].Spare === sparepartdefaultname) {
       this.availability =this.jsondata[index].Availabilty
@@ -119,7 +132,7 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
 }
 
   changecategory(category) {
-   
+
     var categoryname = this.categorydefaultname = category.currentTarget.value;
    var index: any;
     this.stockitem = [];
@@ -129,13 +142,13 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
 
         if (this.stockitem.indexOf(this.jsondata[index].Item) < 0) {
           this.stockitem.push(this.jsondata[index].Item);
-         } 
+         }
         }
     }
    }
 
    changeStock(item) {
-    
+
     var stockitemname = this.selectedItem = item.currentTarget.value;
      var index: any;
     this.sparepart = [];
@@ -145,7 +158,7 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
           this.sparepart.push(this.jsondata[index].Spare);
           // console.log(this.sparepart)
           // alert(this.sparepart)
-          
+
 
           }
       }
@@ -162,11 +175,11 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
         this.distributors = this.jsondata[index].Locations
           this.loadmap(this.distributors)
 
-     
+
 
       }
     }
-    
+
   }
 
 

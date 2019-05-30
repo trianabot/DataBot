@@ -1,4 +1,5 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
 import { style } from '@angular/animations';
@@ -14,7 +15,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: './inventory-report.component.html',
   styleUrls: ['./inventory-report.component.css']
 })
-export class InventoryReportComponent implements OnInit {
+export class InventoryReportComponent implements OnInit, OnDestroy {
   foods: any;
   livechart = true;
   historicalchart = false;
@@ -61,8 +62,13 @@ export class InventoryReportComponent implements OnInit {
 
 
 
-  constructor(public http: HttpClient, private ngZone: NgZone) {
-
+  constructor(public http: HttpClient, private ngZone: NgZone, public route: ActivatedRoute) {
+    var heading = this.route.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem('title',"Inventory Management");
+    }else{
+      localStorage.setItem("title",heading);
+    }
     /** Column chart categories */
     this.stockchartcategories = new Chart({
       chart: {
@@ -349,6 +355,10 @@ export class InventoryReportComponent implements OnInit {
 
 
 
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("title");
   }
   loadDefaultData(inventorydefault) {
     for (let i = 0; i < inventorydefault.length; i++) {

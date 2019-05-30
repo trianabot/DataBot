@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import * as Highcharts from 'highcharts';
 import { chart } from 'highcharts';
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './driver-overview.component.html',
     styleUrls: ['./driver-overview.component.css']
 })
-export class DriverOverviewComponent implements OnInit {
+export class DriverOverviewComponent implements OnInit,OnDestroy {
     driveranalytics = true;
     selected: any;
     driverattendance = false;
@@ -64,7 +64,12 @@ export class DriverOverviewComponent implements OnInit {
     paramasid: any;
 
     constructor(public http: HttpClient, private route: ActivatedRoute) {
-
+        var heading = this.route.snapshot.queryParamMap.get("title");
+        if(heading == null || heading == ""){
+          localStorage.setItem('title',"Driver Performance Profile");
+        }else{
+          localStorage.setItem("title",heading);
+        }
     }
 
     ngOnInit() {
@@ -82,15 +87,12 @@ export class DriverOverviewComponent implements OnInit {
                 }
 
             }
-            
-                this.loadDefaultRegion(this.regiondefaultname, this.jsondata); 
-         
-
-            
-
+                this.loadDefaultRegion(this.regiondefaultname, this.jsondata);
         });
+    }
 
-
+    ngOnDestroy(){
+      localStorage.removeItem("title");
     }
 
     loadDefaultRegion(regiondefaultname, jsondata) {
@@ -380,7 +382,7 @@ export class DriverOverviewComponent implements OnInit {
                     "rashbreaking": this.jsondata[index]['Rash Breaking'], "idletime": this.jsondata[index]['Idle Item'], "vehicletype": this.jsondata[index]['Vehcile Type']
                 })
                 //  this.drivername = this.jsondata[index]['Name']
-                //        this.xasis = this.jsondata[index]['X Axis'] 
+                //        this.xasis = this.jsondata[index]['X Axis']
                 //        this.yaxis = this.jsondata[index]['Y Axis']
                 // this.loadSpline(this.xasis,this.yaxis);
 

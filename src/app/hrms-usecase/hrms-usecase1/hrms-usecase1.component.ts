@@ -1,8 +1,8 @@
 import { DatabotService } from './../../core/databot.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { Highcharts } from 'angular-highcharts';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 declare var $: any;
 
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './hrms-usecase1.component.html',
   styleUrls: ['./hrms-usecase1.component.css']
 })
-export class HrmsUsecase1Component implements OnInit {
+export class HrmsUsecase1Component implements OnInit, OnDestroy {
   stockchartcategories: any;
   negativStack: any;
   stockagingchart: any;
@@ -96,8 +96,13 @@ export class HrmsUsecase1Component implements OnInit {
  /**Age group */
 
 
-  constructor(public databotService: DatabotService, public router: Router,public http: HttpClient) {
-
+  constructor(public databotService: DatabotService, public router: Router,public http: HttpClient, public route: ActivatedRoute) {
+    var heading = this.route.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem('title',"HR Overview");
+    }else{
+      localStorage.setItem("title",heading);
+    }
     this.hiredChart();
   }
 
@@ -106,6 +111,10 @@ export class HrmsUsecase1Component implements OnInit {
     this.loadJsonData();
     this.loadAttritionRate();
     this.loadEthnicityData();
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("title");
   }
 
   loadJsonData() {

@@ -29,23 +29,24 @@ export class LoginComponent implements OnInit {
     // }
     // console.log(register.value)
     this.modelText = '';
+    localStorage.removeItem("title");
     if (register.value.user == "" || register.value.password == "") {
       this.modelText = "Please enter username or password";
       console.log(this.modelText);
       $('#myModal').modal('show');
     }
-    else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@123") {
+    else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@12345") {
 
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '1');
-    } else if ((register.value.user == "Telematics" || register.value.user == "telematics") && register.value.password == "Databot@123") {
+    } else if ((register.value.user == "Telematics" || register.value.user == "telematics") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '2');
-    } else if ((register.value.user == "Supplychain" || register.value.user == "supplychain") && register.value.password == "Databot@123") {
+    } else if ((register.value.user == "Supplychain" || register.value.user == "supplychain") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '3');
     }
-    else if ((register.value.user == "Politics" || register.value.user == "politics") && register.value.password == "Databot@123") {
+    else if ((register.value.user == "Politics" || register.value.user == "politics") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '4');
     }

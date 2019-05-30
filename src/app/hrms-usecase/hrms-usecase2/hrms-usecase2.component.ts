@@ -1,16 +1,16 @@
 import { DatabotService } from './../../core/databot.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'angular-highcharts';
 import { Highcharts } from 'angular-highcharts';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hrms-usecase2',
   templateUrl: './hrms-usecase2.component.html',
   styleUrls: ['./hrms-usecase2.component.css']
 })
-export class HrmsUsecase2Component implements OnInit {
+export class HrmsUsecase2Component implements OnInit, OnDestroy {
   onboardingDetaols: any;
   hiringPlan: any
   hiringPlanObjData: any;
@@ -19,7 +19,13 @@ export class HrmsUsecase2Component implements OnInit {
   options: any;
   isClicked: boolean = false;
   selectedItem:number;
-  constructor(private http: HttpClient, public databotService: DatabotService,private router : Router) {
+  constructor(private http: HttpClient, public databotService: DatabotService,private router : Router, public route: ActivatedRoute) {
+    var heading = this.route.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem('title',"Hiring Module");
+    }else{
+      localStorage.setItem("title",heading);
+    }
     this.onboardingDetaols = [
       {
         "Onbording": 10,
@@ -106,6 +112,11 @@ export class HrmsUsecase2Component implements OnInit {
     this.loadyieldChart();
     this.loadHiringChart();
   }
+
+  ngOnDestroy(){
+    localStorage.removeItem("title");
+  }
+
   loadyieldChart() {
     this.options = {
       chart: {

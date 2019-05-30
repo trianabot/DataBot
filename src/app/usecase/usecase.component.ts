@@ -22,6 +22,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   showEng:boolean =false;
   showHealth:boolean =false;
   showProduction:boolean=false;
+  showHealthAnalysis:boolean=false;
   constructor(private router : Router) {
 
   }
@@ -43,6 +44,8 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   this.showEng =false;
   this.showHealth =false;
   this.showProduction =false;
+  this.showHealthAnalysis = false;
+  
 
 }
 ngOnDestroy() {
@@ -91,6 +94,18 @@ console.log("Destroy");
         this. showEng = false;
         this.showProduction =false;
     }
+
+    else if(useCaseType ==5){
+      this.showHealthAnalysis = true;
+      this.showHrms = false;
+      this.showmanufacturing = false;
+        this.fleetMaintaince = false;
+        this.showfleetManagment = false
+        this.showAssembly = false;
+        this. showEng = false;
+        this.showProduction =false;
+    }
+
 
 
     else if(useCaseType ==6){

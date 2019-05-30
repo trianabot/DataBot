@@ -1,7 +1,7 @@
 .navheader{
     color: white;
     }
-    
+
     .panel-heading {
         padding:0px;
         border-bottom: 0px;
@@ -14,23 +14,23 @@
         box-shadow: 0 1px 1px rgba(0,0,0,.05);
         border: 0px solid transparent;
     }
-    
+
     .shape:after {
         border-top: 100px solid red;
         border-left: 50px solid transparent;
         border-right: 50px solid transparent;
         height: 0;
-        
+
     }
     .shape {
         width: 200px;
         height: 200px;
          border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px; 
+        border-bottom-right-radius: 25px;
         background: red;
         /* transform: perspective(10px) rotateX(-2deg);*/
-       
-    
+
+
     }
     .talkbubble {
         border-right:1px solid #273048;
@@ -42,8 +42,8 @@
         background: #273048;
         position: relative;
         border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px; 
-      
+        border-bottom-right-radius: 25px;
+
       }
       .talkbubble:hover p {
           color:#fff !important;
@@ -66,7 +66,7 @@
         background: #273048;
         position: relative;
         border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px; 
+        border-bottom-right-radius: 25px;
       }
       .talkbubble1:before {
         content: "";
@@ -80,7 +80,7 @@
         height: 0;
         /* width: 100%; */
       }
-    
+
     .topt {
         border-top: 43px solid red;
         border-left: 14px solid transparent;
@@ -100,12 +100,12 @@
         margin-right: auto;
         margin-left: auto;
     } */
-    
+
     .topnav {
         overflow: hidden;
         background-color:#155f57;
     }
-    
+
     /* Style the search box inside the navigation bar */
     .topnav input[type=text] {
         float: right;
@@ -118,7 +118,7 @@
          border: 1px solid  #155f57;
         border-radius: 3px;
     }
-    
+
     /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
     @media screen and (max-width: 600px) {
         .topnav a, .topnav input[type=text] {
@@ -133,15 +133,15 @@
             border: 1px solid #ccc;
         }
     }
-    
+
     .menudiv {
         width: 35px;
         height: 5px;
         background-color: black;
         margin: 6px 0;
     }
-    
-    
+
+
       .vl {
         border-left: 1px solid #6c950f;
         height: 194px;
@@ -151,21 +151,29 @@
         margin-top: 18px;
         top: 0;
     }
-    
-    
-    
+
+
+
     .img-center {
         display: block;
         margin: 0 auto;
-        
+
     }
-    
+
     #fleet_hover:hover, #health_hover:hover{
         background-color:grey;
     }
     .imgmargin{
        margin-top:13px
     }
-    
-    
-    
+
+    .blur-wrapper{
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .pointer-class{
+      cursor: pointer;
+    }
+
+

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import { Chart } from 'angular-highcharts';
 import { Chain, analyzeAndValidateNgModules } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
-    
+export class DashboardComponent implements OnInit, OnDestroy {
+
     driverperformancechart: any;
     jsondata: any = []
     categories: any
@@ -46,7 +46,18 @@ export class DashboardComponent implements OnInit {
     eventcategory:any;
     driverCount:any;
 
-    constructor(public http: HttpClient, public router: Router) { }
+    constructor(public http: HttpClient, public router: Router, public route: ActivatedRoute) {
+      var heading = this.route.snapshot.queryParamMap.get('title');
+      if(heading == null || heading == ""){
+        localStorage.setItem('title',"Fleet Overview");
+      }else{
+        localStorage.setItem("title",heading);
+      }
+    }
+
+    ngOnDestroy(){
+      localStorage.removeItem("title");
+    }
 
     ngOnInit() {
 
@@ -110,7 +121,7 @@ export class DashboardComponent implements OnInit {
                     drilldown: function (e) {
                         $this.getCategoryEvents(e.seriesOptions.name,e.seriesOptions.data.length);
                     }
-                   
+
                 }
 
             },
@@ -160,16 +171,16 @@ export class DashboardComponent implements OnInit {
                             click: function (): any {
                                 if (this.x != UNDEFINED) {
                                     $this.getDriver(this.name);
-                                    console.log(this);                      
+                                    console.log(this);
                                     //   $this.router.navigate(['./driver-overview']);
                                     for (var i = 0; i < this.series.data.length; i++) {
                                         this.series.data[i].update({ color: '#5871b2' }, true, false);
                                     }
                                       this.update({ color: '#1c2337' }, true, false);
                                       //   $this.router.navigate(['./driver-overview']);
-                                    
+
                                 }
-                             
+
                             },
 
 
@@ -347,7 +358,7 @@ export class DashboardComponent implements OnInit {
             this.todayevent = this.driverevent[index]['Today'];
 
             }
-            
+
         }
 
     }

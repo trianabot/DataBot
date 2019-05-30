@@ -4,31 +4,164 @@
       <div class="container-fluid" style="background-color: #1c2337;">
         <div class="navbar-header">
 
-          <a class="navbar-brand navheader" (click)="showDashBoard()">Client Logo</a>
+          <a class="navbar-brand navheader pointer-class" (click)="showDashBoard()">Client Logo</a>
         </div>
 
         <ul class="nav navbar-nav navbar-right">
           <li class="navheader"><a href="#" style="color:white"><span class="glyphicon glyphicon-user navheader"></span>
               User Name</a></li>
-          <li><button type="button" class="btn btn-primary btn-xs" style="margin: 14px;background-color: #273048;;border: 0px;" (click)="logOut()">Log
+          <li><button type="button" class="btn btn-primary btn-xs"
+              style="margin: 14px;background-color: #273048;;border: 0px;" (click)="logOut()">Log
               Out</button></li>
         </ul>
       </div>
     </nav>
   </div>
   <div class="topnav">
-      <i class="fa fa-bars" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;" (click)="showSideMenu()"></i>
-     <i class="fa fa-home" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;" (click)="showDashBoard()"></i>
-      <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span>
+    <i class="fa fa-bars pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
+      (click)="showSideMenu()"></i>
+    <i class="fa fa-home pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
+      (click)="showDashBoard()"></i>
+    <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span>
     <input type="text" placeholder=" Search.." style="background-color:#4A587D">
   </div>
 
 </div>
 <!--Side Menu-->
 <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+
   <a [routerLink]="['/add-tenant']">Add Client</a>
-  <a [routerLink]="['/add-user']" >Add User</a>
+  <a [routerLink]="['/add-user']">Add User</a>
   <a [routerLink]="['/add-device']">Add Device</a>
+  <a [routerLink]="['/data-ingestion']">Data Ingestion Platform</a>
+  <button class="dropdown-btn">Industries
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container" *ngIf="userId == '1'">
+    <div id="MainMenu">
+      <div class="list-group panel">
+        <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Transportation<i class="fa fa-caret-down"></i></a>
+        <div class="collapse" id="demo3">
+          <a href="#SubMenu1" class="list-group-item usecase-class" data-toggle="collapse"
+            data-parent="#SubMenu1">Telematics<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu1">
+            <a [routerLink]="['/dashboard']" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
+              Overview</a>
+            <a [routerLink]="['/driver-overview']" [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu1">Driver Profile</a>
+            <a [routerLink]="['/vehicle-metric']" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu1">Vehicle Live Metrics</a>
+            <a [routerLink]="['/customer-feedback']" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu1">Customer Feedback Analysis</a>
+          </div>
+        </div>
+        <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Manufacturing<i class="fa fa-caret-down"></i></a>
+        <div class="collapse" id="demo4">
+          <a href="#SubMenu2" class="list-group-item usecase-class" data-toggle="collapse"
+            data-parent="#SubMenu2">Production<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu2">
+            <a [routerLink]="['/project-managment']" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu2">Project Management</a>
+          </div>
+          <a href="#SubMenu3" class="list-group-item usecase-class" data-toggle="collapse"
+            data-parent="#SubMenu3">Inventory Management<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu3">
+            <a [routerLink]="['/inventory']" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
+              Management</a>
+            <a [routerLink]="['/inventormap']" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
+              Availability</a>
+            <a [routerLink]="['/stocktracking']" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
+              Order</a>
+          </div>
+        </div>
+
+        <a href="#demo5" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Finance<i class="fa fa-caret-down"></i></a>
+        <div class="collapse" id="demo5">
+          <a href="#SubMenu4" class="list-group-item usecase-class" data-toggle="collapse"
+            data-parent="#SubMenu4">Reporting<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu4">
+            <a [routerLink]="['/finance-expense']" [queryParams]="{title: 'Expense Analytics'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu4">Expensive Analytics</a>
+          </div>
+        </div>
+
+        <a href="#demo6" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Human Resource<i class="fa fa-caret-down"></i></a>
+        <div class="collapse" id="demo6">
+          <a href="#SubMenu5" class="list-group-item usecase-class" data-toggle="collapse" data-parent="#SubMenu5">Work
+            Force<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu5">
+            <a [routerLink]="['/hrms-usecase-1']" [queryParams]="{title: 'HR Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
+              Overview</a>
+            <a [routerLink]="['/hrms-usecase-2']" [queryParams]="{title: 'Hiring Module'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
+              Hiring Module</a>
+          </div>
+        </div>
+
+        <a href="#demo7" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Health Care<i class="fa fa-caret-down"></i></a>
+        <div class="collapse" id="demo7">
+          <a href="#SubMenu6" class="list-group-item usecase-class" data-toggle="collapse"
+            data-parent="#SubMenu6">Supplies<i class="fa fa-caret-down"></i></a>
+          <div class="collapse list-group-submenu" id="SubMenu6">
+            <a [routerLink]="['/healthcare-analytics']" [queryParams]="{title: 'Health Care Analytics'}" class="list-group-item dashboard-class"
+              data-parent="#SubMenu6">Health Care Analytics</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="dropdown-container" *ngIf="userId == '2'">
+    <div id="MainMenu">
+      <div class="list-group panel">
+        <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Transportation<i class="fa fa-caret-down"></i></a>
+          <div class="collapse" id="demo3">
+            <a href="#SubMenu1" class="list-group-item usecase-class" data-toggle="collapse"
+              data-parent="#SubMenu1">Telematics<i class="fa fa-caret-down"></i></a>
+            <div class="collapse list-group-submenu" id="SubMenu1">
+              <a [routerLink]="['/dashboard']" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
+                Overview</a>
+              <a [routerLink]="['/driver-overview']" [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
+                data-parent="#SubMenu1">Driver Profile</a>
+              <a [routerLink]="['/vehicle-metric']" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
+                data-parent="#SubMenu1">Vehicle Live Metrics</a>
+              <a [routerLink]="['/customer-feedback']" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
+                data-parent="#SubMenu1">Customer Feedback Analysis</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="dropdown-container" *ngIf="userId == '3'">
+    <div id="MainMenu">
+      <div class="list-group panel">
+        <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse"
+          data-parent="#MainMenu">Manufacturing<i class="fa fa-caret-down"></i></a>
+          <div class="collapse" id="demo4">
+            <a href="#SubMenu2" class="list-group-item usecase-class" data-toggle="collapse"
+              data-parent="#SubMenu2">Production<i class="fa fa-caret-down"></i></a>
+            <div class="collapse list-group-submenu" id="SubMenu2">
+              <a [routerLink]="['/project-managment']" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
+                data-parent="#SubMenu2">Project Management</a>
+            </div>
+            <a href="#SubMenu3" class="list-group-item usecase-class" data-toggle="collapse"
+              data-parent="#SubMenu3">Inventory Management<i class="fa fa-caret-down"></i></a>
+            <div class="collapse list-group-submenu" id="SubMenu3">
+              <a [routerLink]="['/inventory']" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
+                Management</a>
+              <a [routerLink]="['/inventormap']" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
+                Availability</a>
+              <a [routerLink]="['/stocktracking']" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
+                Order</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +9,44 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   childmessage : string = "I am passed from Parent to child component"
   title:any;
-  constructor(private router : Router) { 
-    this.title = localStorage.getItem('title');
+  userId:any;
+  constructor(private router : Router) {
+    this.userId = localStorage.getItem('userid');
+    console.log(this.userId);
+    if(localStorage.getItem('title') == "" || localStorage.getItem('title')== null || localStorage.getItem('title')== undefined){
+      this.title = '';
+    }else{
+      this.title = localStorage.getItem('title');
+    }
+
   }
 
   ngOnInit() {
+   this.loadIndustries();
+
+
+}
+
+loadIndustries(){
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+  var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
   }
+  });
+}
+  }
+
   logOut(){
     this.router.navigate(['/login']);
-  
+  localStorage.removeItem('title');
   }
   showDashBoard(){
     this.router.navigate(['/industries']);
@@ -26,7 +55,7 @@ export class HeaderComponent implements OnInit {
   }
   showSideMenu()
   {
-   
+
     document.getElementById("mySidenav").style.width = "250px";
   }
 

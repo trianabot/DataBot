@@ -6,7 +6,7 @@
      border-top-right-radius: 0px;
 }
 .panel {
-     margin-bottom: 0px; 
+     margin-bottom: 0px;
      border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
     border: 0px solid transparent;
@@ -52,8 +52,8 @@
     background: #5871b2;
     position: relative;
     border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px; 
-  
+    border-bottom-right-radius: 25px;
+
   }
   .talkbubble:hover p {
       color:#fff !important;
@@ -69,4 +69,8 @@
     border-right: 14px solid transparent;
     height: 0;
     /* width: 100%; */
+  }
+
+  .pointer-class{
+    cursor: pointer;
   }

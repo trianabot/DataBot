@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { chart, SolidGaugeChart } from 'highcharts';
 declare const google: any;
 import * as Highcharts from 'highcharts';
@@ -14,7 +15,7 @@ declare var $: any;
   templateUrl: './vehiclelive-metric.component.html',
   styleUrls: ['./vehiclelive-metric.component.css']
 })
-export class VehicleliveMetricComponent implements OnInit {
+export class VehicleliveMetricComponent implements OnInit, OnDestroy {
   returnchart: any;
   chartSpeed: any;
   chartRpm: any;
@@ -135,7 +136,13 @@ export class VehicleliveMetricComponent implements OnInit {
 
   selectedItem:any;
   selectedButton = {};
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public route: ActivatedRoute) {
+    var heading = this.route.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem("title","Vehicle Live Metrics");
+    }else{
+      localStorage.setItem("title",heading);
+    }
     // this.result = this.value
   }
   ngAfterViewInit() {
@@ -143,8 +150,8 @@ export class VehicleliveMetricComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.result = 'Reshedule';
+
+    this.result = 'reshedule';
     var $this = this;
     this.regiondefaultname = 'Midwest'; this.statedefaultname = 'Ohio'; this.categorydefaultname = '91-100', this.ratingdefaultvalue = 4;
     this.vehicledefaultname = 'CAT6257';
@@ -191,6 +198,10 @@ export class VehicleliveMetricComponent implements OnInit {
 
 
     // this.routeMap();
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem("title");
   }
 
   loadDefaultRegion(region, jsondata) {

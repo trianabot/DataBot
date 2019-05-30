@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class="row header-section">
+      <span>Data Ingestion Platform</span>
+  </div>
+
+  <div class="row">
+      
+      <div class="col-md-12">
+          <div class="row card">
+              <div class="col-sm-10">
+                  <h4>Upload Section</h4>
+                  <div id="fileSelector">
+                      <input type="file" name="fileUplaod" id="fileUpload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                      multiple ng2FileSelect [uploader]="uploader">
+                  </div>
+                  <div>
+                      <div class="row uploadList" *ngFor="let item of uploader.queue">
+                          <div class="col-sm-4">{{item.file.name}}</div>
+                          <div class="col-sm-4">
+                              <div class="progress">
+                                  <div class="progress-bar bg-success"
+                                  [ngStyle]="{'width':item.progress+'%'}"></div>
+                              </div>
+                          </div>
+                          <div class="col-sm-4">
+                                  <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
+                                  <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row" *ngIf="uploader?.queue?.length > 0">
+                          <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group" style="margin-top: 30px;">
+                  <select id="region" name="region" placeholder="Region" class="form-control dropdown-wrapper" (change)="changeValue($event)">
+                    <option>Select Api</option>
+                    <option *ngFor="let item of apiArray">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+
+          <div class="row card">
+            <h4>Data</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let header of tableHeaders">{{header}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of tableData | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <td *ngFor="let col of tableHeaders">{{row[col]}}</td>
+                </tr>
+              </tbody>
+              <pagination-controls (pageChange)="p = $event" *ngIf="tableHeaders.length>0"></pagination-controls>
+            </table>
+          </div>
+      </div>
+      <!--Drop Down-->
+     
+      <!--Drop Down-->
+  </div>
+</div>

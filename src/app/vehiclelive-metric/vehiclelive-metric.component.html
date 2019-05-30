@@ -431,7 +431,7 @@
                 <Span> New York</Span>
               </div>
               <div class="col-md-3" style="padding-top: 3px">
-                <button type="button" class="btn btn-primary btn-sm" style="width:100%">Delay</button>
+                <button type="button" class="btn btn-primary btn-sm" style="width:100%">Delayed</button>
 
               </div>
               <div class="col-md-3 pt-10">
@@ -461,8 +461,8 @@
           <span class="fs-19" style="padding-left: 21px; color: white">Maintenance</span>
         </div>
         <div class="col-md-6">
-          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0].part}}</span><br>
-          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0].date_main}} </span>
+          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0]?.part}}</span><br>
+          <span  style="color: white;font-size: 12px;text-align: center">{{prementiveMaintenancearrsort[0]?.date_main}} </span>
          </div>
          <div class="col-md-2">
 
@@ -510,7 +510,7 @@
               <span style="color:#333; float: right;">2</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Mis Routing
+              Misrouting
               <span style="color:#333; float: right;">1</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -536,7 +536,7 @@
               <span style="color:#333; float: right;">{{totalmilesrun}}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              No of Breakdown
+              No of Breakdowns
               <span style="color:#333; float: right;">2</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -548,7 +548,7 @@
               <span style="color:#333; float: right;">{{lastservicedate | date}}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Last Breakdown on <br>at 123456.25 miles
+              Last Breakdown <br>at 123456.25 miles
               <span style="color:#333; float: right;margin-top: -16px;">{{lastbreakdown | date}}</span>
             </li>
           </ul>
@@ -615,10 +615,10 @@
         <div class="form-group">
           <div class="row" *ngFor="let item of prementiveMaintenancearrsort; let i= index" style="padding: 2px">
               <div class="col-md-4">
-                  <span>{{item.part}}</span>
+                  <span>{{item?.part}}</span>
                  </div>
                  <div class="col-md-4">
-                    <span>{{item.date_main}}</span>
+                    <span>{{item?.date_main}}</span>
                 </div>
 
                  <div class="col-md-4">

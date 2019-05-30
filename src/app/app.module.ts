@@ -44,10 +44,10 @@ import { CustomerFeedbackAnalysisComponent } from './customer-feedback-analysis/
 import * as highstock from 'highcharts/modules/stock.src';
 
 import {AngularDateTimePickerModule} from 'angular2-datetimepicker';
-import { PolticalStaticsComponent } from './poltical-statics/poltical-statics.component';
-import { StateOverviewComponent } from './state-overview/state-overview.component';
-import { BoothinchargeLevelComponent } from './boothincharge-level/boothincharge-level.component';
-import { ForecastTrendAnalysisComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
+import { PolticalStaticsComponent } from './politics-usecase/poltical-statics/poltical-statics.component';
+import { StateOverviewComponent } from './politics-usecase/state-overview/state-overview.component';
+import { BoothinchargeLevelComponent } from './politics-usecase/boothincharge-level/boothincharge-level.component';
+import { ForecastTrendAnalysisComponent } from './politics-usecase/forecast-trend-analysis/forecast-trend-analysis.component';
 
 import {DatabotService } from './core/databot.service';
 
@@ -57,7 +57,10 @@ import { HrmsUsecase1Component } from './hrms-usecase/hrms-usecase1/hrms-usecase
 import { HealthCareAnalyticsComponent } from './healthcare-usecase/health-care-analytics/health-care-analytics.component';
 import { ExpenseAnalyticsComponent } from './finance-usecase/expense-analytics/expense-analytics.component';
 import { ProjectManagmentComponent } from './manufacturing-usecase/project-managment/project-managment.component';
-
+import { DataingestionComponent } from './dataingestion/dataingestion/dataingestion.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 
@@ -97,11 +100,12 @@ import { ProjectManagmentComponent } from './manufacturing-usecase/project-manag
     HealthCareAnalyticsComponent,
     ExpenseAnalyticsComponent,
     ProjectManagmentComponent,
+    DataingestionComponent,
 
 
     ],
   imports: [
-    BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,
+    BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,FileUploadModule,NgxPaginationModule,Ng5SliderModule,
     AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule,
     NgCircleProgressModule.forRoot({
       // set defaults here

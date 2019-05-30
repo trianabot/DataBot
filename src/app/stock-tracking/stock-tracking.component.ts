@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 declare const google: any;
 import { HttpClient } from '@angular/common/http';
 import { IfStmt } from '@angular/compiler';
@@ -10,7 +11,7 @@ declare var $: any;
   templateUrl: './stock-tracking.component.html',
   styleUrls: ['./stock-tracking.component.css']
 })
-export class StockTrackingComponent implements OnInit {
+export class StockTrackingComponent implements OnInit, OnDestroy {
   jsondata: any;
   dist = true;
   trackorder = false;
@@ -51,20 +52,28 @@ export class StockTrackingComponent implements OnInit {
   sparepartdefaultname: any;
 
   selectedcategory:any
- 
 
 
-  
-  constructor(public http: HttpClient, public route: RouteService) { this.categorydefaultname ="M Category";
-  this.stockItemdefaultname ="M559";
-  this.sparepartdefaultname ="Battery" }
+
+
+  constructor(public http: HttpClient, public route: RouteService, public actroute: ActivatedRoute) {
+    var heading = this.actroute.snapshot.queryParamMap.get("title");
+    if(heading == null || heading == ""){
+      localStorage.setItem('title',"Order Tracking");
+    }else{
+      localStorage.setItem("title",heading);
+    }
+    this.categorydefaultname ="M Category";
+    this.stockItemdefaultname ="M559";
+    this.sparepartdefaultname ="Battery";
+}
 
   ngOnInit() {
 
-    
+
     // this.categoryname = 'D Category';
     this.stockname =1
-  
+
     this.http.get('../../assets/data/stock.json').subscribe(data => {
       this.jsondata = data
 
@@ -83,18 +92,22 @@ export class StockTrackingComponent implements OnInit {
     });
     this.loadmap();
    }
+
+   ngOnDestroy(){
+     localStorage.removeItem("title");
+   }
   loaddefaultcategory(category,jsondata){
-  
+
     // this.getsparenames(categoryname)
     var index: any;
     this.stockitem = [];
     this.sparepart = [];
     for (index in this.jsondata) {
       if (jsondata[index].Category === this.categorydefaultname) {
-          
+
         if (this.stockitem.indexOf(jsondata[index].Item) < 0) {
           this.stockitem.push(jsondata[index].Item);
-         } 
+         }
         }
     }
 
@@ -113,7 +126,7 @@ loaddefaulteStock(jsondata,categorydefaultname,stockItemdefaultname){
           this.sparepart.push(jsondata[index].Spare);
 
           // console.log(this.jsondata[index].sparepart)
-        
+
 
         }
       }
@@ -123,7 +136,7 @@ loaddefaulteStock(jsondata,categorydefaultname,stockItemdefaultname){
 
 defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefaultname){
   var index: any;
-  // this.sparepart = [];   
+  // this.sparepart = [];
   for (index in jsondata) {
     if (jsondata[index].Item === stockItemdefaultname && jsondata[index].Category === categorydefaultname && jsondata[index].Spare === sparepartdefaultname) {
     //  this.loadmap();
@@ -142,13 +155,13 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
 
         if (this.stockitem.indexOf(this.jsondata[index].Item) < 0) {
           this.stockitem.push(this.jsondata[index].Item);
-         } 
+         }
         }
     }
-   
+
   }
 
-  
+
 
   changeStock(item) {
     var stockitemname = this.selectedItem = item.currentTarget.value;
@@ -159,9 +172,9 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
         if (this.sparepart.indexOf(this.jsondata[index].Spare) < 0) {
           this.sparepart.push(this.jsondata[index].Spare);
 
-          
+
           // console.log(this.jsondata[index].sparepart)
-        
+
 
         }
       }
@@ -176,7 +189,7 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
      this.loadmap();
       }
     }
-    
+
   }
 
 
@@ -203,12 +216,12 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
 
 
 loadmap(){
- 
- 
+
+
   this.http.get('../../assets/data/location.json').subscribe(res => {
     var newmapdata = res;
-   
-  
+
+
     this.newMapData(newmapdata);
   });
 }
@@ -254,7 +267,7 @@ newMapData(newmapdata) {
       scaledSize: new google.maps.Size(30, 30),
       // The origin for this image is (0, 0).
     };
-    
+
 
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(lat, long),
@@ -270,12 +283,12 @@ newMapData(newmapdata) {
     // var infowindow = new google.maps.InfoWindow({
     //   content: '<b><p style="color:red;text-weight:bold">Tire Position:' + JSON.stringify(tirepos) + '</p></b>' +
     //     '<b><p style="color:red;text-weight:bold">Tire Pressure:' + JSON.stringify(tirepsi) + '</p></b>'
-      
+
 
     // });
     var infowindow1 = new google.maps.InfoWindow({
       content: '<b><p style="color:black">1</p>'
-      
+
 
     });
     // infowindow.open(map, marker);
@@ -302,7 +315,7 @@ newMapData(newmapdata) {
           map: map,
         };
 
-       
+
         var poly = new google.maps.Polyline(polylineoptns);
         poly.setPath(path);
 
@@ -344,7 +357,7 @@ newMapData(newmapdata) {
         travelMode: google.maps.DirectionsTravelMode.DRIVING
       };
 
-    
+
       m_get_directions_route(request, lat_lng);
 
     }
