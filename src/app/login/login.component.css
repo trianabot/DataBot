@@ -1,6 +1,6 @@
 .bg{
-
-  background-image: url('../../assets/background_Image.jpg')
+  background-image: url('../../assets/images/background_image.png.jpg');
+  background-repeat: no-repeat;
 }
 header {
   position: relative;
@@ -43,15 +43,14 @@ header .overlay {
   z-index: 1;
 }
 .card{
-height: 270px;
-
-margin-bottom: auto;
-width: 400px;
-margin-top:5px;
-margin:auto;
-/* background-color: rgba(0,0,0,0.5) !important; */
-padding:15px;
-font-family: Ubuntu;
+  height: 270px;
+  margin-bottom: auto;
+  width: 56%;
+  margin-top: 5px;
+  margin: auto;
+  padding: 11px;
+  padding-right: 180px;
+  font-family: Ubuntu;
 }
 .clr {
   color:#00b26f;
@@ -115,21 +114,30 @@ margin-left: 15px;
 margin-right: 5px;
 }
 
-.login_btn{
+/* .login_btn{
 color: #fff;
 background-color: transparent;
 width: 100px;
-/* border:1px solid  #00b66b; */
+/* border:1px solid  #00b66b; 
 border-radius:15px;
 margin-top:20px;
+} */
+.login_btn[_ngcontent-c1] {
+  color: #fff;
+  /* background-color: transparent; */
+  width: 107px;
+  border-radius: 0px;
+  background-color: lightgray;
+  text-align: center;
 }
+
 .card-header{
   margin-top:25px;
 }
-.login_btn:hover{
+/* .login_btn:hover{
 color: black;
 background-color: white;
-}
+} */
 .form-control {
   color:#fff;
 }
@@ -143,13 +151,44 @@ margin-left: 4px;
 
 /*png image section*/
 .image_section {
-  padding-left: 191px
+  /* padding-left: 94px */
+  padding-left: 0px;
+    margin: 11px;
+    margin-bottom: 0px;
+    margin-top: -24px;
+    padding-right: 160px;
 }
-.image_section img {
+/* .image_section img {
   /* padding-left: 191px; */
-  width: 75px;
+  /* width: 75px;
   margin: 24px;
+} */ 
+
+/*new image section changes*/
+.image_section h6 {
+  text-align: center;
+  color: #fff;
+  padding: 0px;
+  padding-bottom: 15px;
+  font-size: 15px;
 }
+.color{
+  color:#fff !important;
+  margin-bottom:40px;
+  font-weight:bold;
+}
+.image_section img{
+  width: 130px;
+    margin: 19px;
+    height: 119px;
+    margin: 0px;
+    margin-left: -16px;
+    margin-top: 49px;
+    /* margin-right: 1px; */
+    padding: 0px;
+    padding-right: 0px;
+}
+
 
 @media (pointer: coarse) and (hover: none) {
   header {

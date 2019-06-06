@@ -1,92 +1,114 @@
 <header class="bg">
-    <div class="overlay"></div>
-    <!-- <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+  <div class="overlay"></div>
+  <!-- <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
       <source src="../assets/videos/cb5.mp4" type="video/mp4">
         
     </video> -->
-    <div>
-         
+  <div>
+
+  </div>
+
+
+  <div class="container h-100">
+    <div style="text-align:center;margin-top:6%;margin-bottom:2%;padding-top: 150px;">
+      <img style="height: 117px;width: 79%;padding-left: 111px;margin-left: -268px;margin-right: -19px;" src="../assets/images/databotheader.png">
+      <br>
+      <!-- <span style="color:#dbdfdc;padding-top:10px;font-family: Ubuntu;font-size: 11px;">Your data ingestion  platform</span> -->
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="image_section">
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/manufacturing-header-icon.png">
+            <h6> Manfacutring </h6>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/bill-2-blue-circle.png">
+            <h6> Transportation </h6>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/Finance1.png">
+            <h6> Finance </h6>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/human resources1.png">
+            <h6> Human Capital </h6>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/health-care.png">
+            <h6> Healthcare </h6>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <img src="../../assets/images/energy-icon.png">
+            <h6> Energy </h6>
+          </div>
+        </div>
+      </div>
     </div>
 
-    
-    <div class="container h-100">
+    <div class="d-flex text-center h-100" style="height:76% !important;">
+      <div class="my-auto w-100 text-white">
+        <div class="d-flex justify-content-center h-100">
+          <div class="card">
+            <div class="card-header">
+              <h4 style="color:#fff;">Sign In</h4>
 
-        <div style="text-align:center;margin-top:9%;margin-bottom:2%;"><img style="width:45%;" src="../assets/images/dataagilelogo.png"><br>
-        <!-- <span style="color:#dbdfdc;padding-top:10px;font-family: Ubuntu;font-size: 11px;">Your data ingestion  platform</span> -->
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="image_section">
-                    <img src="../../assets//images/manufacturing-header-icon.png">
-                    <img src="../../assets//images/bill-2-blue-circle.png">
-                  <img src="../../assets//images/BelTech-2018-ICONS-Webside-Schedule-Machine-Learning.png">
-                    <img src="../../assets//images/human resources1.png">
-                    <img src="../../assets//images/Databotics_247535611.png">
-                    <img src="../../assets//images/Finance1.png">
-                </div>
             </div>
-        </div>
-
-      <div class="d-flex text-center h-100"  style="height:76% !important;">
-        <div class="my-auto w-100 text-white">
-          <div class="d-flex justify-content-center h-100">
-            <div class="card">
-              <div class="card-header">
-                <h4 style="color:#fff;">Sign In</h4>
-               
-              </div>
-              <div class="card-body">
-                <form #myForm="ngForm" (ngSubmit)="register(myForm)" >
-                  <div class="form-group col-md-12">
-                  <label class="col-md-3 p-0 clr" style="color:white">User name</label>
+            <div class="card-body">
+              <form #myForm="ngForm" (ngSubmit)="register(myForm)">
+                <div class="form-group col-md-12">
+                  <label class="col-md-3 p-0 clr" style="color:white">User Name:</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" name="user" [(ngModel)] = "userName">
-                    </div>
+                    <input type="text" class="form-control" name="user" [(ngModel)]="userName">
                   </div>
-                  <div class="form-group col-md-12">
-                    <label class="col-md-3 p-0 clr" style="color:white">Password</label>
-                    <div class="col-md-9">  <div class="col-md-9"></div>
-                    <input type="password" class="form-control" name ="password" [(ngModel)] = "password">
-                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label class="col-md-3 p-0 clr" style="color:white">Password</label>
+                  <div class="col-md-9">
+                    <div class="col-md-9"></div>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="password">
                   </div>
-                  <!-- <div class="row  remember">
+                </div>
+                <!-- <div class="row  remember">
                     <input type="checkbox">Remember Me
                   </div> -->
-                  <div class="form-group">
-                    <input type="submit"   class="btn float-right login_btn">
-                   </div>
-                  <!-- <pre>{{myForm.value | json}}</pre> -->
-                </form>
-              </div>
-              <div>
-              
-                  <img src="../../assets/images/Footer-icon.png" style="width: 100%;">
-  
-              </div>
-             
+                <div class="form-group">
+                  <input type="submit" class="btn float-right login_btn" value="ENTER">
+                </div>
+                <!-- <pre>{{myForm.value | json}}</pre> -->
+              </form>
             </div>
+            <div>
+
+              <img src="../../assets/images/databoticsfooter.png" style="width:650px;">
+              <div class="footer_content">
+                  <h4 class="color"> Business Intelligence - IoT - Data Analytics </h4>
+              </div>
+            </div>
+            
+
           </div>
-          
         </div>
+
       </div>
     </div>
+  </div>
 
 </header>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-            <!-- <h4 class="modal-title">Modal Header</h4> -->
-          </div>
-          <div class="modal-body">
-            <p style="text-align: center">{{modelText}}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <!-- <h4 class="modal-title">Modal Header</h4> -->
+      </div>
+      <div class="modal-body">
+        <p style="text-align: center">{{modelText}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  
+  </div>
+</div>

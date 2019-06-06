@@ -32,6 +32,10 @@ import { HealthCareAnalyticsComponent } from './healthcare-usecase/health-care-a
 import { ExpenseAnalyticsComponent } from './finance-usecase/expense-analytics/expense-analytics.component';
 import { ProjectManagmentComponent } from './manufacturing-usecase/project-managment/project-managment.component';
 import { DataingestionComponent } from './dataingestion/dataingestion/dataingestion.component';
+import { BoothinchargeComponent } from './boothincharge-level/boothincharge-level.component'; 
+import { ForecastTrendComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
+import { PolticalComponent } from './poltical-statics/poltical-statics.component';
+import { StateOverComponent } from './state-overview/state-overview.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -66,8 +70,11 @@ const routes: Routes = [
   {path:'healthcare-analytics', component:HealthCareAnalyticsComponent},
   {path:'finance-expense', component:ExpenseAnalyticsComponent},
   {path:'project-managment',component:ProjectManagmentComponent},
-  {path:'data-ingestion', component:DataingestionComponent}
-
+  {path:'data-ingestion', component:DataingestionComponent},
+  {path: 'boothincharge', component:BoothinchargeComponent},
+  {path: 'forecasttrend', component: ForecastTrendComponent},
+  {path: 'political', component:PolticalComponent},
+  {path: 'stateover', component: StateOverComponent}
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit,Input, OnChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,10 +10,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   constructor(private router : Router) { }
   @Input('ReportUseCaseType') ReportUseCaseType: number=0;
+  @Output() open: EventEmitter<any> = new EventEmitter(); 
 
 
 
   ngOnInit() {
+    
   }
   ngOnChanges() {
 
@@ -95,4 +97,8 @@ redirectwarehouseoverview(){
   this.router.navigate(['./project-managment']);
  }
 
+
+ getPrevious(){
+  this.open.emit(this.ReportUseCaseType);
+ }
 }

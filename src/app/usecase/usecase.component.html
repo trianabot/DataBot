@@ -344,7 +344,7 @@
 <!--Assembly-->
 
 
-<app-reports [ReportUseCaseType]="reportUseCaseTypeValue" *ngIf="reportusecase"></app-reports>
+<app-reports [ReportUseCaseType]="reportUseCaseTypeValue" (open)="onOpen($event)" *ngIf="reportusecase"></app-reports>
 <router-outlet></router-outlet>
 <!-- <app-reports></app-reports> -->
 <!-- <app-vehicledata *ngIf="showVechile"></app-vehicledata> -->

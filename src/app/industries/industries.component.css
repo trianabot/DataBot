@@ -37,6 +37,9 @@
         padding:15px;
     }
     /* .talkbubble:hover {
+        opacity: 10
+    } */
+    /* .talkbubble:hover {
         width: 120px;
        padding:15px;
         background: #273048;
@@ -45,9 +48,11 @@
         border-bottom-right-radius: 25px;
 
       } */
-      /* .talkbubble:hover p {
-          color:#fff !important;
-      } */
+      .talkbubble:hover {
+        background-color:#1E428A;
+        color:white;
+      }
+      
       .talkbubble:hover:before {
         /* content: ""; */
         position: absolute;

@@ -49,6 +49,11 @@ import { StateOverviewComponent } from './politics-usecase/state-overview/state-
 import { BoothinchargeLevelComponent } from './politics-usecase/boothincharge-level/boothincharge-level.component';
 import { ForecastTrendAnalysisComponent } from './politics-usecase/forecast-trend-analysis/forecast-trend-analysis.component';
 
+import { BoothinchargeComponent } from './boothincharge-level/boothincharge-level.component'; 
+import { ForecastTrendComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
+import { PolticalComponent } from './poltical-statics/poltical-statics.component';
+import { StateOverComponent } from './state-overview/state-overview.component';
+
 import {DatabotService } from './core/databot.service';
 
 import { HrmsUsecase3Component } from './hrms-usecase/hrms-usecase3/hrms-usecase3.component';
@@ -101,7 +106,10 @@ import { Ng5SliderModule } from 'ng5-slider';
     ExpenseAnalyticsComponent,
     ProjectManagmentComponent,
     DataingestionComponent,
-
+    BoothinchargeComponent,
+    ForecastTrendComponent,
+    PolticalComponent,
+    StateOverComponent
 
     ],
   imports: [

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './boothincharge-level.component.html',
   styleUrls: ['./boothincharge-level.component.css']
 })
-export class BoothinchargeLevelComponent implements OnInit {
+export class BoothinchargeComponent implements OnInit {
   boothjsondata :any;
   district:any =[];
   assembly:any =[];

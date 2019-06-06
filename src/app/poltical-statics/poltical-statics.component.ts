@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './poltical-statics.component.html',
   styleUrls: ['./poltical-statics.component.css']
 })
-export class PolticalStaticsComponent implements OnInit {
+export class PolticalComponent implements OnInit {
 
   constructor() { }
 

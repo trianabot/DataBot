@@ -24,6 +24,8 @@
       (click)="showDashBoard()"></i>
     <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span>
     <input type="text" placeholder=" Search.." style="background-color:#4A587D">
+    <button style="float: right" (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
+    <!-- <a routerLink="" routerLinkActive="active">Back</a> -->
   </div>
 
 </div>

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './state-overview.component.html',
   styleUrls: ['./state-overview.component.css']
 })
-export class StateOverviewComponent implements OnInit {
+export class StateOverComponent implements OnInit {
 
   constructor() { }
 

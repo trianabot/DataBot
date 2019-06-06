@@ -6,7 +6,7 @@ declare var $: any;
   templateUrl: './forecast-trend-analysis.component.html',
   styleUrls: ['./forecast-trend-analysis.component.css']
 })
-export class ForecastTrendAnalysisComponent implements OnInit {
+export class ForecastTrendComponent implements OnInit {
 
   constructor() { }
 

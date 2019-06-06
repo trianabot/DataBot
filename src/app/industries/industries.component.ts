@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
 declare function require(path: string);
 import { Router } from '@angular/router';
 
@@ -7,188 +7,111 @@ import { Router } from '@angular/router';
   templateUrl: './industries.component.html',
   styleUrls: ['./industries.component.css']
 })
-export class IndustriesComponent implements OnInit {
+export class IndustriesComponent implements OnInit, OnChanges {
   someProperty = false;
-  show:boolean = false;
-  showHealth :boolean=false
-  showManufacturing : boolean = false;
+  show: boolean = false;
+  showHealth: boolean = false;
+  showManufacturing: boolean = false;
   showTextile: boolean = false;
-  showEnergy:boolean = false;
-  usecase :boolean =false;
-  health:boolean = false;
-  showpsephology:boolean = false;
-   UseCaseTypeValue:number=0;
-  showreport:boolean = false;
+  showEnergy: boolean = false;
+  usecase: boolean = false;
+  health: boolean = false;
+  showpsephology: boolean = false;
+  UseCaseTypeValue: any = 0;
+  showreport: boolean = false;
   userId: any;
-  showEng:boolean=false;
+  showEng: boolean = false;
 
-  constructor(private router : Router) {this.userId = localStorage.getItem('userid') }
-
-  ngOnInit() {
-    // alert(this.UseCaseTypeValue)
-
-  }
- // @Output() emitShowUseCase = new EventEmitter();
-
-  showUseCase(useCaseType){
-
-   this.UseCaseTypeValue=useCaseType;
-   if(useCaseType==1){
-    this.show = true
-   this.showHealth = false
-   this.showManufacturing = false
-   this.showTextile = false;
-   this.showEnergy = false;
-   this.showpsephology = false;
-   this.showEng =false;
-   this.usecase=true;
-
-   }
-    else if(useCaseType ==2){
-
-     this.showHealth = true
-    this.show = false
-    this.showManufacturing = false;
-    this.showTextile = false;
-    this.showEnergy = false;
-    this.showpsephology = false;
-    this.showEng =false;
-    this.usecase=true;
-
-     }
-    else if(useCaseType ==3){
- this.showManufacturing = true
- this.show = false
- this.showHealth = false;
- this.showTextile = false;
- this.showEnergy = false;
- this.showpsephology = false;
- this.showEng =false;
- this.usecase=true;
- }
-
- else if(useCaseType ==4){
-      this.showTextile = true
-       this.show = false
-       this.showHealth = false;
-       this.showEnergy = false;
-       this.showManufacturing = false;
-       this.showpsephology = false;
-       this.showEng =false;
-       this.usecase=true;
+  constructor(private router: Router) {
+     this.userId = localStorage.getItem('userid');
     }
 
-    else if(useCaseType ==5){
-   this.showEnergy = true;
-   this.show = false
-   this.showHealth = false;
-   this.showManufacturing = false;
-   this.showTextile = false;
-   this.showpsephology = false;
-   this.showEng =false;
-   this.usecase=true;
+  ngOnInit() {
+    var usecase = sessionStorage.getItem('usecase');
+    this.showUseCase(usecase);
+  }
+  ngOnChanges() {
+    var usecase = sessionStorage.getItem('usecase');
+    this.showUseCase(usecase);
+  }
 
- }
- else if(useCaseType ==6){
-  this.showpsephology = true;
-  this.showEnergy = false;
-  this.show = false
-  this.showHealth = false;
-  this.showManufacturing = false;
-  this.showTextile = false;
-  this.showEng =false;
-  this.usecase=true;
+  showUseCase(useCaseType) {  
+      this.UseCaseTypeValue = useCaseType;
+      sessionStorage.setItem('usecase', this.UseCaseTypeValue);
+    if (useCaseType == 1) {
+      this.show = true
+      this.showHealth = false
+      this.showManufacturing = false
+      this.showTextile = false;
+      this.showEnergy = false;
+      this.showpsephology = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
+    else if (useCaseType == 2) {
+      this.showHealth = true
+      this.show = false
+      this.showManufacturing = false;
+      this.showTextile = false;
+      this.showEnergy = false;
+      this.showpsephology = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
+    else if (useCaseType == 3) {
+      this.showManufacturing = true
+      this.show = false
+      this.showHealth = false;
+      this.showTextile = false;
+      this.showEnergy = false;
+      this.showpsephology = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
 
-}
+    else if (useCaseType == 4) {
+      this.showTextile = true
+      this.show = false
+      this.showHealth = false;
+      this.showEnergy = false;
+      this.showManufacturing = false;
+      this.showpsephology = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
 
-else if(useCaseType ==7){
-  this.showEng =true;
-  this.showpsephology = false;
-  this.showEnergy = false;
-  this.show = false
-  this.showHealth = false;
-  this.showManufacturing = false;
-  this.showTextile = false;
-  this.usecase=true;
+    else if (useCaseType == 5) {
+      this.showEnergy = true;
+      this.show = false
+      this.showHealth = false;
+      this.showManufacturing = false;
+      this.showTextile = false;
+      this.showpsephology = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
+    else if (useCaseType == 6) {
+      this.showpsephology = true;
+      this.showEnergy = false;
+      this.show = false
+      this.showHealth = false;
+      this.showManufacturing = false;
+      this.showTextile = false;
+      this.showEng = false;
+      this.usecase = true;
+    }
 
-
-}
-
-
-
-
-    // alert(useCaseType);
-   // this.emitShowUseCase.emit(useCaseType);
+    else if (useCaseType == 7) {
+      this.showEng = true;
+      this.showpsephology = false;
+      this.showEnergy = false;
+      this.show = false
+      this.showHealth = false;
+      this.showManufacturing = false;
+      this.showTextile = false;
+      this.usecase = true;
+    }
 
   }
-//   redirect() {
-//     //this.selected ===itemindex;
-//    this.router.navigate(['./usecase']);
-//    // this.someProperty = true
-//   //  this.usecase = true;
-//    this.health = false;
-//    this.show = true
-//    this.showHealth = false
-//    this.showManufacturing = false
-//    this.showTextile = false;
-//    this.showEnergy = false
-
-//   }
-//   redirectHealth() {
-//    this.router.navigate(['./health']);
-//   // this.someProperty = true
-//   // this.usecase = false
-//   // this.health = true;
-//  this.showHealth = true
-//  this.show = false
-//  this.showManufacturing = false;
-//  this.showTextile = false;
-//  this.showEnergy = false;
-//  }
-
-//  redirectHealthleave() {
-//    this.router.navigate(['./health']);
-//  // this.someProperty = true
-//  this.showHealth = false
-//  this.show = false;
-//  this.showManufacturing = false;
-//  this.showTextile = false;
-//  this.showEnergy = false;
-//  }
-
-
-//  redirectManufacturing() {
-//    this.router.navigate(['./manufacturing']);
-//  // this.someProperty = true
-//  this.showManufacturing = true
-//  this.show = false
-//  this.showHealth = false;
-//  this.showTextile = false;
-//  this.showEnergy = false;
-
-//  }
-
-//  redirectTextile() {
-//    this.router.navigate(['./textile']);
-//  // this.someProperty = true
-//  this.showTextile = true
-//  this.show = false
-//  this.showHealth = false;
-//  this.showEnergy = false;
-//  this.showManufacturing = false;
-
-//  }
-
-//  redirectEnergy() {
-//    this.router.navigate(['./energy']);
-//  // this.someProperty = true
-//  this.showEnergy = true;
-//  this.show = false
-//  this.showHealth = false;
-//  this.showManufacturing = false;
-//  this.showTextile = false;
-
-//  }
-
 
 }
