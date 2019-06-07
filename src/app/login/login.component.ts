@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
     // console.log(register.value)
     this.modelText = '';
     localStorage.removeItem("title");
+
     if (register.value.user == "" || register.value.password == "") {
       this.modelText = "Please enter username or password";
-      console.log(this.modelText);
       $('#myModal').modal('show');
     }
     else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@12345") {
@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
 
     else {
       this.modelText = "Wrong Credentials";
-      console.log(this.modelText);
       $('#myModal').modal('show');
 
     }
