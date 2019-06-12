@@ -20,11 +20,26 @@
   <div class="topnav">
     <i class="fa fa-bars pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
       (click)="showSideMenu()"></i>
-    <i class="fa fa-home pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
-      (click)="showDashBoard()"></i>
+    <!-- <i class="fa fa-home pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
+      (click)="showDashBoard()"></i> -->
+    <h6 style="color:white; padding: 4px;    margin-top: -33px;
+    margin-bottom: 10px;
+    margin-right: 13.5in !important;
+    font-size: 20px;
+    margin-left: -41px;
+    padding-left: 26px;
+    text-align: center;"
+    (click)="showDashBoard()"> Home </h6>
     <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span>
+    
+    
     <input type="text" placeholder=" Search.." style="background-color:#4A587D">
-    <button style="float: right" (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
+    <!-- <button style="float: right;" (click)="previousUrl()" *ngIf="backUrl"> <img src="../../assets/images/back_button.png" style="vertical-align: middle;
+      height: 35px;"></button> -->
+    <button style="float: right;
+    height: 29px;
+    margin-top: 3px;
+    width: 44px;" (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
     <!-- <a routerLink="" routerLinkActive="active">Back</a> -->
   </div>
 
@@ -33,10 +48,11 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 
-  <a [routerLink]="['/add-tenant']">Add Client</a>
-  <a [routerLink]="['/add-user']">Add User</a>
-  <a [routerLink]="['/add-device']">Add Device</a>
-  <a [routerLink]="['/data-ingestion']">Data Ingestion Platform</a>
+  <a [routerLink]="['/add-tenant']" routerLinkActive="active" 
+  >Add Client</a>
+  <a [routerLink]="['/add-user']" routerLinkActive="active">Add User</a>
+  <a [routerLink]="['/add-device']" routerLinkActive="active">Add Device</a>
+  <a [routerLink]="['/data-ingestion']" routerLinkActive="active">Data Ingestion Platform</a>
   <button class="dropdown-btn">Industries
     <i class="fa fa-caret-down"></i>
   </button>
@@ -45,72 +61,72 @@
       <div class="list-group panel">
         <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Transportation<i class="fa fa-caret-down"></i></a>
-        <div class="collapse" id="demo3">
+        <div class="collapse" id="demo3" [routerLinkActive]="'in'">
           <a href="#SubMenu1" class="list-group-item usecase-class" data-toggle="collapse"
             data-parent="#SubMenu1">Telematics<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu1">
-            <a [routerLink]="['/dashboard']" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
+            <a [routerLink]="['/dashboard']" routerLinkActive="active" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
               Overview</a>
-            <a [routerLink]="['/driver-overview']" [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/driver-overview']" routerLinkActive="active" [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu1">Driver Profile</a>
-            <a [routerLink]="['/vehicle-metric']" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/vehicle-metric']" routerLinkActive="active" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu1">Vehicle Live Metrics</a>
-            <a [routerLink]="['/customer-feedback']" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/customer-feedback']" routerLinkActive="active" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu1">Customer Feedback Analysis</a>
           </div>
         </div>
         <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Manufacturing<i class="fa fa-caret-down"></i></a>
-        <div class="collapse" id="demo4">
+        <div class="collapse" id="demo4" [routerLinkActive]="'in'">
           <a href="#SubMenu2" class="list-group-item usecase-class" data-toggle="collapse"
             data-parent="#SubMenu2">Production<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu2">
-            <a [routerLink]="['/project-managment']" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/project-managment']" routerLinkActive="active" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu2">Project Management</a>
           </div>
           <a href="#SubMenu3" class="list-group-item usecase-class" data-toggle="collapse"
             data-parent="#SubMenu3">Inventory Management<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu3">
-            <a [routerLink]="['/inventory']" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
+            <a [routerLink]="['/inventory']" routerLinkActive="active" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
               Management</a>
-            <a [routerLink]="['/inventormap']" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
+            <a [routerLink]="['/inventormap']" routerLinkActive="active" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
               Availability</a>
-            <a [routerLink]="['/stocktracking']" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
+            <a [routerLink]="['/stocktracking']" routerLinkActive="active" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
               Order</a>
           </div>
         </div>
 
         <a href="#demo5" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Finance<i class="fa fa-caret-down"></i></a>
-        <div class="collapse" id="demo5">
+        <div class="collapse" id="demo5" [routerLinkActive]="'in'">
           <a href="#SubMenu4" class="list-group-item usecase-class" data-toggle="collapse"
             data-parent="#SubMenu4">Reporting<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu4">
-            <a [routerLink]="['/finance-expense']" [queryParams]="{title: 'Expense Analytics'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/finance-expense']" routerLinkActive="active" [queryParams]="{title: 'Expense Analytics'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu4">Expensive Analytics</a>
           </div>
         </div>
 
         <a href="#demo6" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Human Resource<i class="fa fa-caret-down"></i></a>
-        <div class="collapse" id="demo6">
+        <div class="collapse" id="demo6" [routerLinkActive]="'in'">
           <a href="#SubMenu5" class="list-group-item usecase-class" data-toggle="collapse" data-parent="#SubMenu5">Work
             Force<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu5">
-            <a [routerLink]="['/hrms-usecase-1']" [queryParams]="{title: 'HR Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
+            <a [routerLink]="['/hrms-usecase-1']" routerLinkActive="active" [queryParams]="{title: 'HR Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
               Overview</a>
-            <a [routerLink]="['/hrms-usecase-2']" [queryParams]="{title: 'Hiring Module'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
+            <a [routerLink]="['/hrms-usecase-2']" routerLinkActive="active" [queryParams]="{title: 'Hiring Module'}" class="list-group-item dashboard-class" data-parent="#SubMenu5">HR
               Hiring Module</a>
           </div>
         </div>
 
         <a href="#demo7" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Health Care<i class="fa fa-caret-down"></i></a>
-        <div class="collapse" id="demo7">
+        <div class="collapse" id="demo7" [routerLinkActive]="'in'">
           <a href="#SubMenu6" class="list-group-item usecase-class" data-toggle="collapse"
             data-parent="#SubMenu6">Supplies<i class="fa fa-caret-down"></i></a>
           <div class="collapse list-group-submenu" id="SubMenu6">
-            <a [routerLink]="['/healthcare-analytics']" [queryParams]="{title: 'Health Care Analytics'}" class="list-group-item dashboard-class"
+            <a [routerLink]="['/healthcare-analytics']" routerLinkActive="active" [queryParams]="{title: 'Health Care Analytics'}" class="list-group-item dashboard-class"
               data-parent="#SubMenu6">Health Care Analytics</a>
           </div>
         </div>
@@ -122,17 +138,17 @@
       <div class="list-group panel">
         <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Transportation<i class="fa fa-caret-down"></i></a>
-          <div class="collapse" id="demo3">
+          <div class="collapse" id="demo3" [routerLinkActive]="'in'">
             <a href="#SubMenu1" class="list-group-item usecase-class" data-toggle="collapse"
               data-parent="#SubMenu1">Telematics<i class="fa fa-caret-down"></i></a>
             <div class="collapse list-group-submenu" id="SubMenu1">
-              <a [routerLink]="['/dashboard']" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
+              <a [routerLink]="['/dashboard']" routerLinkActive="active" [queryParams]="{title: 'Fleet Overview'}" class="list-group-item dashboard-class" data-parent="#SubMenu1">Fleet
                 Overview</a>
-              <a [routerLink]="['/driver-overview']" [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
+              <a [routerLink]="['/driver-overview']" routerLinkActive="active"  [queryParams]="{title: 'Driver Performance Profile'}" class="list-group-item dashboard-class"
                 data-parent="#SubMenu1">Driver Profile</a>
-              <a [routerLink]="['/vehicle-metric']" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
+              <a [routerLink]="['/vehicle-metric']" routerLinkActive="active" [queryParams]="{title: 'Vehicle Live Metrics'}" class="list-group-item dashboard-class"
                 data-parent="#SubMenu1">Vehicle Live Metrics</a>
-              <a [routerLink]="['/customer-feedback']" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
+              <a [routerLink]="['/customer-feedback']" routerLinkActive="active" [queryParams]="{title: 'Customer Feedback Analysis'}" class="list-group-item dashboard-class"
                 data-parent="#SubMenu1">Customer Feedback Analysis</a>
             </div>
           </div>
@@ -144,21 +160,21 @@
       <div class="list-group panel">
         <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse"
           data-parent="#MainMenu">Manufacturing<i class="fa fa-caret-down"></i></a>
-          <div class="collapse" id="demo4">
+          <div class="collapse" id="demo4" [routerLinkActive]="'in'">
             <a href="#SubMenu2" class="list-group-item usecase-class" data-toggle="collapse"
               data-parent="#SubMenu2">Production<i class="fa fa-caret-down"></i></a>
             <div class="collapse list-group-submenu" id="SubMenu2">
-              <a [routerLink]="['/project-managment']" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
+              <a [routerLink]="['/project-managment']" routerLinkActive="active" [queryParams]="{title: 'Project Managment'}" class="list-group-item dashboard-class"
                 data-parent="#SubMenu2">Project Management</a>
             </div>
             <a href="#SubMenu3" class="list-group-item usecase-class" data-toggle="collapse"
               data-parent="#SubMenu3">Inventory Management<i class="fa fa-caret-down"></i></a>
-            <div class="collapse list-group-submenu" id="SubMenu3">
-              <a [routerLink]="['/inventory']" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
+            <div class="collapse list-group-submenu" id="SubMenu3"  [routerLinkActive]="['in']">
+              <a [routerLink]="['/inventory']" routerLinkActive="active" [queryParams]="{title: 'Inventory Management'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Inventory
                 Management</a>
-              <a [routerLink]="['/inventormap']" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
+              <a [routerLink]="['/inventormap']" routerLinkActive="active" [queryParams]="{title: 'Stock Availability'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Stock
                 Availability</a>
-              <a [routerLink]="['/stocktracking']" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
+              <a [routerLink]="['/stocktracking']" routerLinkActive="active" [queryParams]="{title: 'Order Tracking'}" class="list-group-item dashboard-class" data-parent="#SubMenu3">Track
                 Order</a>
             </div>
           </div>

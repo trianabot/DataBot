@@ -49,10 +49,37 @@
 
       } */
       .talkbubble:hover {
-        background-color:#1E428A;
+        /* background-color:#1E428A; */
+        
+
         color:white;
       }
+
+   
+      #aks:hover {
+        content: url('../../assets/images/manufacturing.png');
+        }
+    
+    #aks1:hover {
+        content: url('../../assets/images/Truck-image.png');
+    }
+
+    #aks2:hover {
+        content: url('../../assets/images/Finance.png');
+    }
       
+    #aks3:hover {
+        content: url('../../assets/images/human_resources.png');
+    }
+
+    #aks4:hover {
+        content: url('../../assets/images/healthcare.png');
+    }
+
+    #aks5:hover {
+        content: url('../../assets/images/energy.png');
+    }
+
       .talkbubble:hover:before {
         /* content: ""; */
         position: absolute;
@@ -162,7 +189,7 @@
     .img-center {
         display: block;
         margin: 0 auto;
-        height: 105px;
+        height: 100px;
 
     }
 

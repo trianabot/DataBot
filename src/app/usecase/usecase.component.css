@@ -43,6 +43,7 @@
   display: block;
   margin: 0 auto;
   height: 105px;
+  margin-left: 100px;
 }
 .talkbubble {
   /* border-right:1px solid #3d4e7b; */
@@ -114,4 +115,17 @@ margin-top:13px
 }
 .txtcolor{
 color:#1E428A;
+}
+
+
+#aks6:hover {
+  content: url('../../assets/images/supply.png');
+}
+
+#aks7:hover {
+  content: url('../../assets/images/production.png');
+}
+
+#showfleet:hover {
+  content: url('../../assets/images/telematic.png');
 }

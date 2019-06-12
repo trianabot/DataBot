@@ -769,7 +769,7 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
 
 
 
-  changeVehicle(name, axelcheckup) {
+  changeVehicle(name) {
     this.vehiclename = this.vehicledefaultname = name.currentTarget.value;
     this.result = 'Reschedule';
     var index: any;

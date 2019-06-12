@@ -12,4 +12,7 @@ export class PolticalComponent implements OnInit {
   ngOnInit() {
   }
 
+  demographic(event){
+
+  }
 }

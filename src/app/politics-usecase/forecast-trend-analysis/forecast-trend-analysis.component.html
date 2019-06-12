@@ -19,7 +19,7 @@
         <select id="districtname" class="dropdown-bg-color" name="districtname" [(ngModel)]="distdefaultname"
           placeholder="DistrictName" class="form-control dropdown-wrapper" (change)="changeDistrict($event)">
           <option> District Name</option>
-          <option *ngFor="let dist of district" [selected]="distdefaultname == dist">{{dist}}</option>
+          <!-- <option *ngFor="let dist of district" [selected]="distdefaultname == dist">{{dist}}</option> -->
         </select>
       </div>
     </div>
@@ -28,8 +28,8 @@
         <select id="assemblyname" class="dropdown-bg-color" name="assemblyname" [(ngModel)]="asseblydefaultname"
           placeholder="Booth Incharge Name" class="form-control dropdown-wrapper" (change)="changeAssembly($event)">
           <option></option>
-          <option *ngFor="let assemblys of assemblynew" [selected]="asseblydefaultname == assemblys">{{assemblys}}
-          </option>
+          <!-- <option *ngFor="let assemblys of assemblynew" [selected]="asseblydefaultname == assemblys">{{assemblys}}
+          </option> -->
         </select>
       </div>
 

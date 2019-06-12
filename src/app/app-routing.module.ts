@@ -40,7 +40,8 @@ import { StateOverComponent } from './state-overview/state-overview.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'industries', component: IndustriesComponent },
+  { path: 'industries', component: IndustriesComponent, runGuardsAndResolvers: 'always'},
+  { path: 'industries/:id', component: IndustriesComponent, runGuardsAndResolvers: 'always'},
   { path: 'health', component: HealthComponent },
   { path: 'manufacturing', component: ManfacturingComponent },
   { path: 'textile', component: TextileComponent },
@@ -74,12 +75,12 @@ const routes: Routes = [
   {path: 'boothincharge', component:BoothinchargeComponent},
   {path: 'forecasttrend', component: ForecastTrendComponent},
   {path: 'political', component:PolticalComponent},
-  {path: 'stateover', component: StateOverComponent}
+  {path: 'stateover', component: StateOverComponent}, 
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash : true})],
+  imports: [RouterModule.forRoot(routes,{useHash : true,  onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

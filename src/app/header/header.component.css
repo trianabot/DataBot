@@ -3,6 +3,13 @@
     background-color:#20283d;
 }
 
+.active{
+  color:red !important; 
+}
+a:active {
+  color: red !important;
+}
+
 /* Style the search box inside the navigation bar */
 .topnav input[type=text] {
     float: right;
@@ -232,3 +239,4 @@
 .pointer-class{
   cursor: pointer;
 }
+

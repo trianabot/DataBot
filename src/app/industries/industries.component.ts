@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
 declare function require(path: string);
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-industries',
@@ -22,22 +22,49 @@ export class IndustriesComponent implements OnInit, OnChanges {
   userId: any;
   showEng: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
      this.userId = localStorage.getItem('userid');
+     route.params.subscribe(val => {
+       if(val.id == 'home')
+    { 
+    var usecase = localStorage.removeItem('usecase');
+    this.usecase = false;
+    }else {
+    var usecase1 = localStorage.getItem('usecase');
+    this.showUseCase(usecase1);
+    }
+     })
+    
     }
 
   ngOnInit() {
-    var usecase = sessionStorage.getItem('usecase');
-    this.showUseCase(usecase);
+  
   }
   ngOnChanges() {
-    var usecase = sessionStorage.getItem('usecase');
-    this.showUseCase(usecase);
+    const jsonString: string = this.route.snapshot.queryParamMap.get('homepage');
+    if(jsonString)
+    {
+    var usecase = localStorage.removeItem('usecase');
+    this.usecase = false;
+    }else {
+      
+    var usecase1 = localStorage.getItem('usecase');
+    this.showUseCase(usecase1);
+    }
   }
 
-  showUseCase(useCaseType) {  
+  showUseCase(useCaseType) {
+    
+    this.router.navigate(['/industries'], {
+      queryParams: {
+        id: null,
+      },
+      queryParamsHandling: 'merge'
+    })
+
       this.UseCaseTypeValue = useCaseType;
-      sessionStorage.setItem('usecase', this.UseCaseTypeValue);
+      //sessionStorage.setItem('usecase', this.UseCaseTypeValue);
+      localStorage.setItem('usecase',this.UseCaseTypeValue);
     if (useCaseType == 1) {
       this.show = true
       this.showHealth = false

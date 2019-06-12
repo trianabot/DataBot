@@ -16,6 +16,12 @@ export class ForecastTrendComponent implements OnInit {
     });
    
   }
+  changeDistrict(event){
+
+  }
+  changeAssembly(event){
+
+  }
 
 
 }

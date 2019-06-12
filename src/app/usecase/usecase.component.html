@@ -11,17 +11,19 @@
       </div>
       <div class="col-md-4 imgmargin pointer-class" (click)="redirect(1)" *ngIf='!showfleetManagment'>
         <div class="talkbubble">
-          <img src="../../assets/images/telematic.png" class="img-center img-responsive">
+          <img src="../../assets/images/telematic_gray.png" id="showfleet" class="img-center img-responsive">
 
-          <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px">Telematics</p>
+          <div class="col-md-9" style="text-align: justify; width: 65%">
+          <p style="text-align: center; color:#8F9094;font-weight:bold;margin-top: 26px">Telematics</p>
           <span class="txtcolor">
-            <p style="text-align: justify">
+            <p style="text-align: justify; color: #8F9094">
               Measure driver behavior,driver performance,
               ensure route optimazation,service verification,
               gather customer feedback with custom KPI's
               and self serving prescriptive.
             </p>
             </span>
+          </div>
         </div>
       </div>
       <div class="col-md-4 imgmargin pointer-class" *ngIf='showfleetManagment'>
@@ -29,6 +31,7 @@
         <div class="talkbubble1">
           <img src="../../assets/images/telematic.png" class="img-center img-responsive">
 
+          <div class="col-md-9" style="text-align: justify; width: 65%">
           <p style="text-align: center; color:#1E428A;;font-weight:bold;margin-top: 26px">Telematics</p>
           <span class="txtcolor">
               Measure driver behavior,driver performance,
@@ -36,6 +39,7 @@
               gather customer feedback with custom KPI's
               and self serving prescriptive.
             </span>
+          </div>
         </div>
       </div>
 
@@ -43,8 +47,10 @@
           <div class="col-md-4 imgmargin blur-wrapper">
               <div class="talkbubble">
               <img src="../../assets/images/fleet.png" class="img-center img-responsive">
+              <div class="col-md-9" style="text-align: justify">
               <p style="text-align: center;color:#1E428A;font-weight:bold;margin-top: 26px;">Fleetmatics</p>
-         </div>
+                </div>
+            </div>
             </div>
         <!--Fleet Track-->
         <div class="col-md-2">
@@ -63,13 +69,24 @@
         <div class="col-md-2">
 
         </div>
-        <div class="col-md-4 imgmargin pointer-class" (click)="redirect(2)">
+        <div class="col-md-4 imgmargin pointer-class" (click)="redirect(2)" *ngIf="!fleetMaintaince">
             <div class="talkbubble">
-            <img src="../../assets/images/Reporting.png" class="img-center img-responsive">
+            <img src="../../assets/images/Reporting_gray.png" class="img-center img-responsive">
 
-             <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Reporting</p>
-    </div>
+            <div class="col-md-9" style="text-align: justify">
+             <p style="text-align: center; color:#8F9094;font-weight:bold;margin-top: 26px;">Reporting</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4 imgmargin pointer-class" *ngIf="fleetMaintaince">
+          <div class="talkbubble">
+          <img src="../../assets/images/Reporting.png" class="img-center img-responsive">
+
+          <div class="col-md-9" style="text-align: justify">
+           <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Reporting</p>
+            </div>
           </div>
+      </div>
           <!-- <div class="col-md-2 imgmargin">
 
             <div class="talkbubble1">
@@ -84,8 +101,10 @@
         <div class="col-md-4 imgmargin blur-wrapper">
             <div class="talkbubble">
             <img src="../../assets/images/Cashflow-icon-blue-2017.png" class="img-center img-responsive">
+            <div class="col-md-9" style="text-align: justify">
             <p style="text-align: center;color:#1E428A ;font-weight:bold;margin-top: 26px;">Forecasting</p>
-    </div>
+              </div>
+          </div>
 
           </div>
 
@@ -115,27 +134,30 @@
         <!--Production-->
         <div class="col-md-4 imgmargin pointer-class" (click)="redirect(8)" *ngIf='!showProduction'>
             <div class="talkbubble">
-              <img src="../../assets/images/supply chain.png" class="img-center img-responsive">
+              <img src="../../assets/images/supply_chain.png" id="aks6" class="img-center img-responsive">
 
-              <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px">Supply Chain</p>
-              <span class="txtcolor">
+              <div class="col-md-9" style="text-align: justify">
+              <p style="text-align: center; color:#8F9094;font-weight:bold;margin-top: 26px">Supply Chain</p>    
+              <span class="txtcolor" style="color: #8F9094">
                   Optimize the delivery process and 
                   save time and money with real time access to 
                   inventory levels,logistics data and market performance.
-                </span>
+              </span>
+            </div>
             </div>
           </div>
           <div class="col-md-4 imgmargin pointer-class" *ngIf='showProduction'>
 
             <div class="talkbubble1">
-              <img src="../../assets/images/supply chain.png" class="img-center img-responsive">
-
+              <img src="../../assets/images/supply.png" class="img-center img-responsive">
+              <div class="col-md-9" style="text-align: justify">
               <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px">Supply Chain</p>
               <span class="txtcolor">
                   Optimize the delivery process and 
                   save time and money with real time access to 
                   inventory levels,logistics data and market performance.
                 </span>
+                </div>
             </div>
           </div>
 
@@ -145,14 +167,15 @@
         <!--Inventory-->
         <div class="col-md-4 imgmargin pointer-class" (click)="redirect(3)" *ngIf='!showmanufacturing'>
           <div class="talkbubble">
-            <img src="../../assets/images/production.png" class="img-center img-responsive">
-
-            <p style="text-align: center; color:#1E428A;font-weight:bold; margin-top: 26px">Production</p>
-            <span class="txtcolor">
+            <img src="../../assets/images/production_gray.png" id="aks7" class="img-center img-responsive">
+            <div class="col-md-9" style="text-align: justify">
+            <p style="text-align: center; color:#8F9094;font-weight:bold; margin-top: 26px">Production</p>
+            <span class="txtcolor" style="color: #8F9094">
                 Optimize production with real time insight on cost, quality, performance
                 
                 and project timelines to reduce levels of lag and/or waste. 
               </span>
+            </div>
           </div>
         </div>
         <div class="col-md-4 imgmargin pointer-class" *ngIf='showmanufacturing'>
@@ -160,12 +183,14 @@
           <div class="talkbubble1">
             <img src="../../assets/images/production.png" class="img-center img-responsive">
 
+            <div class="col-md-9" style="text-align: justify">
             <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px">Production</p>
             <span class="txtcolor">
                 Optimize production with real time insight on cost, quality, performance
                 
                 and project timelines to reduce levels of lag and/or waste. 
               </span>
+              </div>
           </div>
         </div>
 
@@ -203,15 +228,18 @@
             </div>
             <div class="col-md-4 imgmargin pointer-class" (click)="redirect(4)" *ngIf='!showHrms'>
                 <div class="talkbubble">
-                <img src="../../assets/images//human-capital.png" class="img-center img-responsive">
-
-                 <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Human Capital</p>
-        </div>
+                <img src="../../assets/images/human_capital.png" class="img-center img-responsive">
+                <div class="col-md-9" style="text-align: justify">
+                 <p style="text-align: center; color:#8F9094;font-weight:bold;margin-top: 26px;">Human Capital</p>
+                  </div>
+                </div>
               </div>
               <div class="col-md-4 imgmargin pointer-class" *ngIf='showHrms'>
                 <div class="talkbubble1">
                   <img src="../../assets/images/human-capital.png" class="img-center img-responsive">
+                  <div class="col-md-9" style="text-align: justify">
                   <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Human Capital</p>
+                  </div>
                 </div>
               </div>
 
@@ -219,8 +247,10 @@
           <div class="col-md-4 imgmargin blur-wrapper">
                 <div class="talkbubble">
                 <img src="../../assets/images/humanresource-vendormanager.png" class="img-center img-responsive">
+                <div class="col-md-9" style="text-align: justify">
                 <p style="text-align: center;color:#1E428A ;font-weight:bold;margin-top: 26px;">Vendor Manager</p>
-        </div>
+                  </div>
+              </div>
 
               </div>
 
@@ -242,17 +272,19 @@
             </div>
             <div class="col-md-4 imgmargin pointer-class" (click)="redirect(5)" *ngIf='!showHealthAnalysis'>
                 <div class="talkbubble">
-                <img src="../../assets/images/healthcare analytics.png" class="img-center img-responsive">
-
-                 <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Healthcare Analytics</p>
-            </div>
+                <img src="../../assets/images/healthcare_analytics.png" class="img-center img-responsive">
+                <div class="col-md-9" style="text-align: justify">
+                 <p style="text-align: center; color:#8F9094;font-weight:bold;margin-top: 26px;">Healthcare Analytics</p>
+                  </div>
+                </div>
               </div>
               <div class="col-md-4 imgmargin pointer-class" *ngIf='showHealthAnalysis'>
 
                   <div class="talkbubble1">
                     <img src="../../assets/images/healthcare analytics.png" class="img-center img-responsive">
-
+                    <div class="col-md-9" style="text-align: justify">
                     <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Healthcare Analytics</p>
+                      </div>
                   </div>
                 </div>
 
@@ -260,8 +292,10 @@
           <div class="col-md-4 imgmargin blur-wrapper">
                 <div class="talkbubble">
                 <img src="../../assets/images/healthcare billing.png" class="img-center img-responsive">
+                <div class="col-md-9" style="text-align: justify">
                 <p style="text-align: center;color:#1E428A ;font-weight:bold;margin-top: 26px;">Healthcare Billing</p>
-        </div>
+                  </div>
+              </div>
 
               </div>
               <div class="col-md-2">
@@ -281,7 +315,9 @@
           <div class="talkbubble">
             <img src="../../assets/5.png" class="img-center img-responsive">
 
+            <div class="col-md-9" style="text-align: justify">
             <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Assembly</p>
+              </div>
           </div>
         </div>
 
@@ -291,7 +327,9 @@
     <div class="col-md-2 imgmargin pointer-class" *ngIf='showAssembly'>
       <div class="talkbubble1">
         <img src="../../assets/5.png" class="img-center img-responsive">
+        <div class="col-md-9" style="text-align: justify">
         <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Assembly</p>
+          </div>
       </div>
     </div>
 
@@ -308,16 +346,18 @@
         <div class="col-md-4 imgmargin blur-wrapper" (click)="redirect(7)">
           <div class="talkbubble">
             <img src="../../assets/images/energy consumption.png" class="img-center img-responsive">
-
+            <div class="col-md-9" style="text-align: justify">
             <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Consumption</p>
+              </div>
           </div>
         </div>
 
         <div class="col-md-4 imgmargin blur-wrapper" (click)="redirect(7)">
           <div class="talkbubble">
             <img src="../../assets/images/energy management.png" class="img-center img-responsive">
-
+            <div class="col-md-9" style="text-align: justify">
             <p style="text-align: center; color:#1E428A;font-weight:bold;margin-top: 26px;">Management</p>
+              </div>
           </div>
         </div>
         <div class="col-md-2">

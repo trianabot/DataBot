@@ -200,3 +200,31 @@ margin-left: 4px;
     display: none;
   }
 }
+
+@media screen and (min-width: 768px) and (max-width: 1366px)  {
+  .container {
+    width: 1200px;
+    padding: 0 0px 0px;
+  }
+
+  .image_section img{
+    width: 130px;
+    margin: 19px;
+    height: 119px;
+    margin: 0px;
+    margin-left: -6px;
+    margin-top: 49px;
+    padding: 0px;
+    padding-right: 0px;
+  }
+}
+
+@media  (min-width: 992px)
+{
+  .col-md-12 {
+    width: 106%;
+}
+
+
+}
+

@@ -53,7 +53,8 @@ export class ForecastTrendAnalysisComponent implements OnInit {
   infrastructure_latest: any = [];
   law_latest: any = [];
   governance_latest: any = []
-
+  distdefaultname: any;
+  asseblydefaultname: any;
   constructor(public http: HttpClient,public databotService: DatabotService) { }
 
   ngOnInit() {

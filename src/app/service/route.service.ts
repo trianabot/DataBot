@@ -23,9 +23,7 @@ export class RouteService {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
-        //console.log("Previous Url ", this.previousUrl);
         this.currentUrl = event.url;
-        //console.log("current Url ", this.currentUrl);
       }
     });
 
@@ -39,13 +37,7 @@ export class RouteService {
     return this.currentUrl;
   }
 
-  // loadDataforVehicle() {
-  //   return this.http.get<any[]>('..')
-   
-    
-  //   }
     private handleError(err: HttpErrorResponse) {
-      //console.log(err.message);
       return Observable.throw(err.message);
   }
 }

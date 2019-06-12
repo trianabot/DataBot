@@ -12,21 +12,18 @@ export class ReportsComponent implements OnInit, OnDestroy {
   @Input('ReportUseCaseType') ReportUseCaseType: number=0;
   @Output() open: EventEmitter<any> = new EventEmitter(); 
 
-
-
   ngOnInit() {
-    
   }
   ngOnChanges() {
-
   }
   ngOnDestroy(){
-
   }
 
 
 redirectDashboard(){
 this.router.navigate(['./dashboard']);
+document.getElementById("mySidenav").style.width = "250px";
+this.open.emit('open');
 }
 
 redirectInventory(){

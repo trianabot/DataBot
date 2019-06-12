@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import * as $ from 'jquery';
 import { Chart } from 'angular-highcharts';
 import { Chain, analyzeAndValidateNgModules } from '@angular/compiler';
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     todayevent: any;
     eventcategory:any;
     driverCount:any;
-
+    @Output() sideNav = new EventEmitter();
     constructor(public http: HttpClient, public router: Router, public route: ActivatedRoute) {
       var heading = this.route.snapshot.queryParamMap.get('title');
       if(heading == null || heading == ""){
@@ -356,28 +356,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.lastmonthavgevent = this.driverevent[index]['Last Month Average'];
             this.threshold = this.driverevent[index]['Threshold'];
             this.todayevent = this.driverevent[index]['Today'];
-
             }
-
         }
-
     }
 
 
     getDriverCount(driverName) {
         var index :any;
-        // this.driverName = driverName
          this.http.get('../../assets/data/driverinfo.json').subscribe(data => {
             this.driverRating = data
             for(index in this.driverRating){
                 if (this.driverRating[index].Name == driverName ) {
                     this.driverRating = this.driverRating[index].Rating
-
                 }
             }
-
-
         })
     }
-
+    
+    //output sidebar active
+        sidenavChanged() {
+            this.sideNav.emit('open');
+        }
+    
 }
