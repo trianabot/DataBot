@@ -117,7 +117,7 @@ margin-top:13px
 color:#1E428A;
 }
 
-
+/* 
 #aks6:hover {
   content: url('../../assets/images/supply.png');
 }
@@ -126,6 +126,153 @@ color:#1E428A;
   content: url('../../assets/images/production.png');
 }
 
+#aks8:hover {
+  content: url('../../assets/images/Reporting.png');
+}
+
+#aks9:hover {
+  content: url('../../assets/images/human-capital.png');
+}
+
+#aks10:hover {
+  content: url('../../assets/images/healthcareAna.png');
+}
+
 #showfleet:hover {
   content: url('../../assets/images/telematic.png');
+} */
+
+/*supply chain hover settings*/
+.talkbubble.supplyChain p{
+  color:#8F9094;
+  font-weight: bold;
 }
+
+.talkbubble.supplyChain span{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.supplyChain:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+.talkbubble.supplyChain:hover span{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+.talkbubble.supplyChain:hover img{
+  content: url('../../assets/images/supply.png');
+}
+
+/*production hover settings*/
+.talkbubble.producTion p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.producTion span{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.producTion:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+.talkbubble.producTion:hover span{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+.talkbubble.producTion:hover img{
+  content: url('../../assets/images/production.png');
+}
+
+/*Telematics hover settings*/
+
+.talkbubble.Telematics p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.Telematics span{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.Telematics:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+.talkbubble.Telematics:hover span{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+.talkbubble.Telematics:hover img{
+  content: url('../../assets/images/telematic.png');
+}
+
+/*Reporting hover settings*/
+
+.talkbubble.reporting p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+
+.talkbubble.reporting:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+
+.talkbubble.reporting:hover img{
+  content: url('../../assets/images/Reporting.png');
+}
+
+/*Human Capital hover settings*/
+.talkbubble.humanCapital p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+
+.talkbubble.humanCapital:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+
+.talkbubble.humanCapital:hover img{
+  content: url('../../assets/images/human-capital.png');
+}
+
+
+/*Health care hover settings*/
+.talkbubble.healthCare p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+
+.talkbubble.healthCare:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+
+.talkbubble.healthCare:hover img{
+  content: url('../../assets/images/healthcareAna.png');
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 768px)  {
+   
+  .img-center {
+    display: block;
+    height: 105px;
+    margin-left: 55px;
+  }
+  }

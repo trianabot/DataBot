@@ -56,29 +56,30 @@
       }
 
    
-      #aks:hover {
+      /* #aks:hover {
         content: url('../../assets/images/manufacturing.png');
         }
-    
-    #aks1:hover {
+     */
+      
+    /* #aks1:hover {
         content: url('../../assets/images/Truck-image.png');
-    }
-
+    } */
+/* 
     #aks2:hover {
         content: url('../../assets/images/Finance.png');
     }
-      
-    #aks3:hover {
+       */
+    /* #aks3:hover {
         content: url('../../assets/images/human_resources.png');
-    }
+    } */
 
-    #aks4:hover {
+    /* #aks4:hover {
         content: url('../../assets/images/healthcare.png');
-    }
+    } */
 
-    #aks5:hover {
+    /* #aks5:hover {
         content: url('../../assets/images/energy.png');
-    }
+    } */
 
       .talkbubble:hover:before {
         /* content: ""; */
@@ -208,5 +209,94 @@
     .pointer-class{
       cursor: pointer;
     }
+
+
+
+.talkbubble.manufacture p {
+    color:#8F9094;
+    font-weight: bold;
+}
+
+.talkbubble.manufacture:hover p {
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.manufacture:hover img{
+    content: url('../../assets/images/manufacturing.png');
+}
+
+.talkbubble.transport p{
+    color:#8F9094;
+    font-weight: bold;
+}
+
+
+.talkbubble.transport:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.transport:hover img{
+    content: url('../../assets/images/Truck-image.png');
+}
+
+.talkbubble.finance p{
+    color:#8F9094;
+    font-weight: bold;
+}
+
+.talkbubble.finance:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.finance:hover img{
+    content: url('../../assets/images/Finance.png');
+}
+
+.talkbubble.humanResource p{
+    color:#8F9094;
+    font-weight: bold;
+}
+
+.talkbubble.humanResource:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.humanResource:hover img{
+    content: url('../../assets/images/human_resources.png');
+}
+
+.talkbubble.healthCare p{
+    color:#8F9094;
+    font-weight: bold;
+}
+
+.talkbubble.healthCare:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.healthCare:hover img{
+    content: url('../../assets/images/healthcare.png');
+}
+
+
+.talkbubble.energy p{
+    color:#8F9094;
+    font-weight: bold;
+}
+
+.talkbubble.energy:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
+
+.talkbubble.energy:hover img{
+    content: url('../../assets/images/energy.png');
+}
+
 
 

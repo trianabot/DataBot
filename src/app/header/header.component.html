@@ -17,29 +17,26 @@
       </div>
     </nav>
   </div>
+  
+  
   <div class="topnav">
-    <i class="fa fa-bars pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
-      (click)="showSideMenu()"></i>
-    <!-- <i class="fa fa-home pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
-      (click)="showDashBoard()"></i> -->
-    <h6 style="color:white; padding: 4px;    margin-top: -33px;
-    margin-bottom: 10px;
-    margin-right: 13.5in !important;
-    font-size: 20px;
-    margin-left: -41px;
-    padding-left: 26px;
-    text-align: center;"
-    (click)="showDashBoard()"> Home </h6>
+      <div class="row"> 
+          <div class="col-xs-12 col-sm-6 col-md-6"> 
+              <i class="fa fa-bars pointer-class" aria-hidden="true" style="font-size:26px;color:white; margin-left:24px;padding: 4px;"
+              (click)="showSideMenu()"></i>
+            <h6 (click)="showDashBoard()"> Home </h6>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6"> 
+              <button (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
+              <input type="text" placeholder=" Search.." style="background-color:#4A587D">
+          </div>
+        </div>
+
+    
     <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span>
     
+   
     
-    <input type="text" placeholder=" Search.." style="background-color:#4A587D">
-    <!-- <button style="float: right;" (click)="previousUrl()" *ngIf="backUrl"> <img src="../../assets/images/back_button.png" style="vertical-align: middle;
-      height: 35px;"></button> -->
-    <button style="float: right;
-    height: 29px;
-    margin-top: 3px;
-    width: 44px;" (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
     <!-- <a routerLink="" routerLinkActive="active">Back</a> -->
   </div>
 
