@@ -94,7 +94,7 @@ export class HrmsUsecase1Component implements OnInit, OnDestroy {
   selectedband1 = false;
   default =true;
  /**Age group */
-
+ title: any;
 
   constructor(public databotService: DatabotService, public router: Router,public http: HttpClient, public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
@@ -103,6 +103,13 @@ export class HrmsUsecase1Component implements OnInit, OnDestroy {
     }else{
       localStorage.setItem("title",heading);
     }
+
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
+    }
+
     this.hiredChart();
   }
 

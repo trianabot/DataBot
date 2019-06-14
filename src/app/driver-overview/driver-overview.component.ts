@@ -62,6 +62,7 @@ export class DriverOverviewComponent implements OnInit,OnDestroy {
     heatmapdata: any = [];
     array: any = [];
     paramasid: any;
+    title: any;
 
     constructor(public http: HttpClient, private route: ActivatedRoute) {
         var heading = this.route.snapshot.queryParamMap.get("title");
@@ -70,6 +71,13 @@ export class DriverOverviewComponent implements OnInit,OnDestroy {
         }else{
           localStorage.setItem("title",heading);
         }
+
+        if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+            this.title = '';
+          } else {
+            this.title = localStorage.getItem('title');
+          }
+    
     }
 
     ngOnInit() {

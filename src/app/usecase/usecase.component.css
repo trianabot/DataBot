@@ -45,6 +45,13 @@
   height: 105px;
   margin-left: 100px;
 }
+
+.talkbubble.reporting img {
+  display: block;
+  margin: 0 auto;
+  height: 105px;
+  margin-left: 80px;
+}
 .talkbubble {
   /* border-right:1px solid #3d4e7b; */
   padding:15px;
@@ -113,9 +120,9 @@ padding-top: 29px
 .imgmargin{
 margin-top:13px
 }
-.txtcolor{
+/* .txtcolor{
 color:#1E428A;
-}
+} */
 
 /* 
 #aks6:hover {
@@ -267,6 +274,8 @@ color:#1E428A;
 .talkbubble.healthCare:hover img{
   content: url('../../assets/images/healthcareAna.png');
 }
+
+
 
 @media only screen and (max-width: 1024px) and (min-width: 768px)  {
    

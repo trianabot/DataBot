@@ -133,7 +133,7 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
   batterycheckup: any;
 
   axelcheckupvalue: any;
-
+  title: any;
   selectedItem:any;
   selectedButton = {};
   constructor(public http: HttpClient,public route: ActivatedRoute) {
@@ -143,6 +143,14 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
     }else{
       localStorage.setItem("title",heading);
     }
+
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
+    }
+
+
     // this.result = this.value
   }
   ngAfterViewInit() {

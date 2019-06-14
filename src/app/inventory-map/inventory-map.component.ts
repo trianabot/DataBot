@@ -47,7 +47,7 @@ export class InventoryMapComponent implements OnInit, OnDestroy {
   sparepartdefaultname: any;
   availability:any;
   sparevalue:any ="Battery"
-
+  title: any;
 
   constructor(public http: HttpClient, public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
@@ -59,6 +59,12 @@ export class InventoryMapComponent implements OnInit, OnDestroy {
     this.categorydefaultname ="M Category";
     this.stockItemdefaultname ="M559";
     this.sparepartdefaultname ="Battery"
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
+    }
+
 }
 
   ngOnInit() {

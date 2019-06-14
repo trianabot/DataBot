@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     options: any;
 
     driverninetohundred: any;
-
+    title: any;
     lastdayevent: any;
     thisweekevent: any;
     lastmonthavgevent: any;
@@ -53,6 +53,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }else{
         localStorage.setItem("title",heading);
       }
+
+      if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+        this.title = '';
+      } else {
+        this.title = localStorage.getItem('title');
+      }
+
     }
 
     ngOnDestroy(){

@@ -23,7 +23,9 @@ export class IndustriesComponent implements OnInit, OnChanges {
   showEng: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) {
-     this.userId = localStorage.getItem('userid');
+
+    this.userId = localStorage.getItem('userid');
+    
      route.params.subscribe(val => {
        if(val.id == 'home')
     { 

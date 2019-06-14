@@ -8,7 +8,7 @@ import { RouteService } from '../service/route.service';
 })
 export class HeaderComponent implements OnInit {
   childmessage: string = "I am passed from Parent to child component"
-  title: any;
+  //title: any;
   userId: any;
   previous: any;
   backUrl: Boolean = false;
@@ -16,11 +16,11 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private routerService: RouteService) {
 
     this.userId = localStorage.getItem('userid');
-    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
-      this.title = '';
-    } else {
-      this.title = localStorage.getItem('title');
-    }
+    // if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+    //   this.title = '';
+    // } else {
+    //   this.title = localStorage.getItem('title');
+    // }
 
 
   }

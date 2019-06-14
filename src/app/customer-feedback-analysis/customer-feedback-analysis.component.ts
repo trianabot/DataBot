@@ -63,7 +63,7 @@ export class CustomerFeedbackAnalysisComponent implements OnInit, OnDestroy {
   statedefaultname: any;
   selectedItem: number;
 
-
+  title: any;
   constructor(public http: HttpClient, public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
     if(heading ==  null || heading == ""){
@@ -71,6 +71,13 @@ export class CustomerFeedbackAnalysisComponent implements OnInit, OnDestroy {
     }else{
       localStorage.setItem("title", heading);
     }
+
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
+    }
+
 
   }
   ngOnInit() {
