@@ -57,54 +57,59 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     //sessionStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
     localStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
     if (useCaseType == 1) {
-      this.showfleetManagment = true;
-      this.fleetMaintaince = false;
-      this.showVechile = false
-      this.showAssembly = false;
-      this.showEng = false;
-      this.showProduction = false;
+      this.router.navigate(['/telematicsusecase']);
+      // this.showfleetManagment = true;
+      // this.fleetMaintaince = false;
+      // this.showVechile = false
+      // this.showAssembly = false;
+      // this.showEng = false;
+      // this.showProduction = false;
       // this.reportusecase=true;
 
     }
     else if (useCaseType == 2) {
+      this.router.navigate(['/reportusecase']);
       //   this.showVechile = true;
-      this.fleetMaintaince = true;
-      this.showfleetManagment = false
-      this.showAssembly = false;
-      this.showEng = false;
-      this.showProduction = false;
+      // this.fleetMaintaince = true;
+      // this.showfleetManagment = false
+      // this.showAssembly = false;
+      // this.showEng = false;
+      // this.showProduction = false;
 
     }
     else if (useCaseType == 3) {
       //   this.showVechile = true;
-      this.showmanufacturing = true;
-      this.fleetMaintaince = false;
-      this.showfleetManagment = false
-      this.showAssembly = false;
-      this.showEng = false;
-      this.showHrms = false;
-      this.showProduction = false;
+      // this.showmanufacturing = true;
+      // this.fleetMaintaince = false;
+      // this.showfleetManagment = false
+      // this.showAssembly = false;
+      // this.showEng = false;
+      // this.showHrms = false;
+      // this.showProduction = false;
 
+      this.router.navigate(['/productionusecase']);
     }
     else if (useCaseType == 4) {
-      this.showHrms = true;
-      this.showmanufacturing = false;
-      this.fleetMaintaince = false;
-      this.showfleetManagment = false
-      this.showAssembly = false;
-      this.showEng = false;
-      this.showProduction = false;
+      // this.showHrms = true;
+      // this.showmanufacturing = false;
+      // this.fleetMaintaince = false;
+      // this.showfleetManagment = false
+      // this.showAssembly = false;
+      // this.showEng = false;
+      // this.showProduction = false;
+      this.router.navigate(['/humancapital']);
     }
 
     else if (useCaseType == 5) {
-      this.showHealthAnalysis = true;
-      this.showHrms = false;
-      this.showmanufacturing = false;
-      this.fleetMaintaince = false;
-      this.showfleetManagment = false
-      this.showAssembly = false;
-      this.showEng = false;
-      this.showProduction = false;
+      this.router.navigate(['/healthusecase']);
+      // this.showHealthAnalysis = true;
+      // this.showHrms = false;
+      // this.showmanufacturing = false;
+      // this.fleetMaintaince = false;
+      // this.showfleetManagment = false
+      // this.showAssembly = false;
+      // this.showEng = false;
+      // this.showProduction = false;
     }
 
 
@@ -133,14 +138,14 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     else if (useCaseType == 8) {
-      this.showProduction = true;
-      this.showEng = false;
-      this.showAssembly = false;
-      this.showmanufacturing = false;
-      this.fleetMaintaince = false;
-      this.showfleetManagment = false
-      this.showHrms = false;
-
+      // this.showProduction = true;
+      // this.showEng = false;
+      // this.showAssembly = false;
+      // this.showmanufacturing = false;
+      // this.fleetMaintaince = false;
+      // this.showfleetManagment = false
+      // this.showHrms = false;
+      this.router.navigate(['/supplyusercase']);
     }
     //console.log(useCaseType);
   }

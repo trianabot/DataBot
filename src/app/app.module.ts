@@ -66,6 +66,12 @@ import { DataingestionComponent } from './dataingestion/dataingestion/dataingest
 import { FileUploadModule } from 'ng2-file-upload';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
+import { ProdutionusecaseComponent } from './produtionusecase/produtionusecase.component';
+import { SupplyusercomponentComponent } from './supplyusercomponent/supplyusercomponent.component';
+import { TelematicsusercomponentComponent } from './telematicsusercomponent/telematicsusercomponent.component';
+import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/humancapitalusecomponent.component';
+import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
+import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
 
 
 
@@ -109,7 +115,13 @@ import { Ng5SliderModule } from 'ng5-slider';
     BoothinchargeComponent,
     ForecastTrendComponent,
     PolticalComponent,
-    StateOverComponent
+    StateOverComponent,
+    ProdutionusecaseComponent,
+    SupplyusercomponentComponent,
+    TelematicsusercomponentComponent,
+    HumancapitalusecomponentComponent,
+    ReportusecasecomponentComponent,
+    HealthusecasecomponentComponent
 
     ],
   imports: [

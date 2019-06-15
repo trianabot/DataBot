@@ -164,8 +164,6 @@ defaultSparePart(jsondata,categorydefaultname,stockItemdefaultname,sparepartdefa
           this.sparepart.push(this.jsondata[index].Spare);
           // console.log(this.sparepart)
           // alert(this.sparepart)
-
-
           }
       }
     }
@@ -211,6 +209,7 @@ loadmap(distributors) {
       scaledSize: new google.maps.Size(50, 50),
       // The origin for this image is (0, 0).
     };
+
     for (i = 0; i < distributors.length; i++) {
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(distributors[i].latitude, distributors[i].longtitude),

@@ -36,6 +36,12 @@ import { BoothinchargeComponent } from './boothincharge-level/boothincharge-leve
 import { ForecastTrendComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
 import { PolticalComponent } from './poltical-statics/poltical-statics.component';
 import { StateOverComponent } from './state-overview/state-overview.component';
+import { ProdutionusecaseComponent } from './produtionusecase/produtionusecase.component';
+import { SupplyusercomponentComponent } from './supplyusercomponent/supplyusercomponent.component';
+import { TelematicsusercomponentComponent } from './telematicsusercomponent/telematicsusercomponent.component';
+import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/humancapitalusecomponent.component';
+import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
+import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -76,6 +82,12 @@ const routes: Routes = [
   {path: 'forecasttrend', component: ForecastTrendComponent},
   {path: 'political', component:PolticalComponent},
   {path: 'stateover', component: StateOverComponent}, 
+  {path: 'productionusecase', component: ProdutionusecaseComponent},
+  {path: 'supplyusercase', component: SupplyusercomponentComponent},
+  {path: 'telematicsusecase', component: TelematicsusercomponentComponent},
+  {path: 'humancapital', component: HumancapitalusecomponentComponent},
+  {path: 'reportusecase', component: ReportusecasecomponentComponent},
+  {path: 'healthusecase', component: HealthusecasecomponentComponent}
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

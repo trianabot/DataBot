@@ -9,7 +9,27 @@
 a:active {
   color: red !important;
 }
-
+.navbar-brand{
+  font-size:14px !important;
+}
+.menu-css{
+  font-size:16px;color:white; margin-left:14px;
+ 
+  float:left;
+  /* padding: 4px; */
+}
+.home-css{
+  color:#fff;
+  padding-left:12px;
+  
+}
+.p-top-bottom{
+  padding-top:3px;
+  padding-bottom:3px;
+}
+.p-top{
+  padding-top:10px;
+}
 /* Style the search box inside the navigation bar */
 .topnav input[type=text] {
     float: right;
@@ -23,6 +43,13 @@ a:active {
     border-radius: 3px;
 }
 
+#topHeading {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 6px;
+  letter-spacing: 2px;
+}
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
@@ -242,13 +269,13 @@ a:active {
 
 /* Top nav bar */
 .topnav h6 {
-  color:white; padding: 4px;    margin-top: -33px;
+  /* color:white; padding: 4px;    margin-top: -33px;
             margin-bottom: 10px;
             margin-right: 13.5in !important;
             font-size: 20px;
             margin-left: 40px;
             padding-left: 26px;
-            text-align: center;
+            text-align: center; */
 }
 
 .topnav button {

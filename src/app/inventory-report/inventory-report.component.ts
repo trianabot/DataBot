@@ -379,9 +379,6 @@ export class InventoryReportComponent implements OnInit, OnDestroy {
         this.getHistoricalChart(this.sampleHistoricChartData);
         this.getStockaging(this.categoryname, this.stockAgingChartData);
         this.settimeinterval();
-
-
-
       }
     }
   }
@@ -606,6 +603,7 @@ export class InventoryReportComponent implements OnInit, OnDestroy {
 
     });
   }
+
   getStockaging(value, chartsdata) {
     this.stockagingchart = new Chart({
       chart: {
@@ -654,6 +652,7 @@ export class InventoryReportComponent implements OnInit, OnDestroy {
 
     });
   }
+
   //** Open Model**/
   openModal() {
     this.display = 'block';

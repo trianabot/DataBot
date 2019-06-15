@@ -1,4 +1,4 @@
-<app-header (sidenavChange)='sidenavChanged()'></app-header>
+<!-- <app-header (sidenavChange)='sidenavChanged()'></app-header> -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -280,4 +280,27 @@
 
     </div>
 
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <div [chart]="chartSpeed">
+            </div>
+            <h5> Fule Consumption </h5>
+            
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <div [chart]="chartSpeed1">
+          </div> 
+          <h5> Maintainance </h5>
+          
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <div [chart]="chartSpeed2"></div> 
+          <h5> Performance </h5>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    
 </div>

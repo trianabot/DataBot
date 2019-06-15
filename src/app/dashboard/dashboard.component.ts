@@ -5,7 +5,7 @@ import { Chain, analyzeAndValidateNgModules } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
 import { Router, ActivatedRoute } from '@angular/router';
-
+declare const google: any;
 
 @Component({
     selector: 'app-dashboard',
@@ -45,6 +45,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     todayevent: any;
     eventcategory:any;
     driverCount:any;
+    chartSpeed: any;
+    chartSpeed1: any;
+    chartSpeed2: any;
+    map: any;
     @Output() sideNav = new EventEmitter();
     constructor(public http: HttpClient, public router: Router, public route: ActivatedRoute) {
       var heading = this.route.snapshot.queryParamMap.get('title');
@@ -67,17 +71,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.http.get('../../assets/data/driver.json').subscribe(data => {
-            this.jsondata = data
-            console.log(this.jsondata)
+            this.jsondata = data;
             for (var i = 0; i < this.jsondata.length; i++) {
                 if (this.jsondata[i].Category == "91-100") {
                     this.categoryone.push({ name: this.jsondata[i].Name, y: this.jsondata[i].Peroformance })
-
-
-
-
                 }
                 else if (this.jsondata[i].Category == "81-90") {
                     this.categorytwo.push({ name: this.jsondata[i].Name, y: this.jsondata[i].Peroformance })
@@ -108,9 +106,92 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 this.categorysix, this.categoryseven, this.categoryeight)
 
         })
+
+        this.mapLocation();
         this.getDriverEvents();
+        this.gaugeChart();
+        this.gaugeChart1();
+        this.gaugeChart2();
 
+    }
+    mapLocation(){
+        this.http.get('../../assets/data/fleetLocation.json').subscribe(data => {
+            var mapdata = data;
+            this.loadmap(mapdata)
+        });
+    }
 
+    loadmap(mapdata){
+            //console.log(mapdata);
+        var $this = this;
+        this.map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(34.051, -86.045),
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          streetViewControl: false
+        });
+    
+        var infowindow = new google.maps.InfoWindow();
+        var marker;
+        var i;
+        var image = {
+          url: '../../assets/images/warehouse.png',
+          scaledSize: new google.maps.Size(50, 50),
+        };
+    
+        for (i = 0; i < mapdata.length; i++) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(mapdata[i].Latitude, mapdata[i].Longitude),
+            map: this.map,
+            icon:image
+          });
+          attachSecretMessage(marker,  mapdata[i].Latitude, mapdata[i].Longitude);
+        }
+    
+        function attachSecretMessage(marker, lat, long) {
+          var geocoder = new google.maps.Geocoder();
+          marker.addListener('click', function () {
+            var latlong1 = new google.maps.LatLng(lat, long);
+            geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+              if (status == 'OK') {
+    
+                var currentLocation = res[0].address_components[2].long_name;
+                // $this.city = currentLocation;
+                // $this.state = res[0].address_components[4].long_name;
+                // $this.country = res[0].address_components[5].long_name;
+    
+                // $this.esttime = est;
+                infowindow = new google.maps.InfoWindow({
+                  content: '<b><p style="color:blue;text-weight:bold">' + currentLocation + '</p></b>'
+             
+                });
+             
+                // alert(this.warehousename)
+                infowindow.open(this.map, marker);
+    
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+              }
+              marker.addListener('mouseout', function() {
+                infowindow.close(marker.get('map'), marker);
+              });
+            });
+          });
+    
+    
+          marker.addListener('dblclick', function (mouseEvent) {
+            // alert('Right click triggered');
+            // this.map.setCenter(this.position);
+            $(".modal-header .modal-title").text(this.title);
+            //  $(".modal-body #modalLatLng").text(this.position);
+            $('#myModal').modal('show');
+    
+    
+          });
+        }
+    
+    
     }
 
     driverPerformanceChart(categoryone, categorytwo, categorythree, categoryfour, categoryfive, categorysix, categoryseven, categoryeight) {
@@ -328,11 +409,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.lastmonthavgevent = this.drivertotalevents['Last Month Average'] / 1000;
             this.threshold = this.drivertotalevents['Threshold'];
             this.todayevent = this.drivertotalevents['Today'] / 1000;
-
-
         })
     }
-
 
     getCategoryEvents(category,avg) {
         var index :any
@@ -384,5 +462,369 @@ export class DashboardComponent implements OnInit, OnDestroy {
         sidenavChanged() {
             this.sideNav.emit('open');
         }
+
+    //dummy gauge chart
+    gaugeChart(){
+        var $this = this;
+        this.options = {
+          chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            // spacing: [0, 0, 0, 0],
+            backgroundColor: null,
+          },
+          credits: {
+            enabled: false
+          },
+    
+          title: {
+            text: ''
+          },
+    
+          pane: {
+            startAngle: -150,
+            endAngle: 150,
+            background: [{
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#FFF'],
+                  [1, '#333']
+                ]
+              },
+              borderWidth: 0,
+              outerRadius: '109%'
+            }, {
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#333'],
+                  [1, '#FFF']
+                ]
+              },
+              borderWidth: 1,
+              outerRadius: '107%'
+            }, {
+              // default background
+            }, {
+              backgroundColor: '#DDD',
+              borderWidth: 0,
+              outerRadius: '105%',
+              innerRadius: '103%'
+            }]
+          },
+    
+          // the value axis
+          yAxis: {
+            min: 0,
+            max: 180,
+    
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+    
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+              step: 2,
+              rotation: 'auto'
+            },
+            title: {
+              text: 'mph'
+            },
+            plotBands: [{
+              from: 0,
+              to: 90,
+              color: '#DF5353' // red
+            }, {
+              from: 90,
+              to: 130,
+              color: '#DDDF0D' // yellow
+            }, {
+              from: 130,
+              to: 200,
+              color: '#55BF3B' // green
+            }]
+          },
+    
+          series: [{
+            name: 'Speed',
+            data: [60]
+          }]
+    
+        };
+        this.chartSpeed = new Chart(this.options);
+        setInterval(function () {
+          // Speed
+          var point,
+            newVal,
+            inc;
+    
+          if ($this.chartSpeed) {
+            point = $this.chartSpeed.ref.series[0].points[0];
+            inc = Math.round((Math.random() - 0.5) * 100);
+            newVal = point.y + inc;
+    
+            if (newVal < 0 || newVal > 160) {
+              newVal = point.y - inc;
+            }
+    
+            point.update(newVal);
+          }
+    
+          
+        }, 2000);
+    }
+
+     //dummy gauge chart
+     gaugeChart1(){
+        var $this = this;
+        this.options = {
+          chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            // spacing: [0, 0, 0, 0],
+            backgroundColor: null,
+          },
+          credits: {
+            enabled: false
+          },
+    
+          title: {
+            text: ''
+          },
+    
+          pane: {
+            startAngle: -150,
+            endAngle: 150,
+            background: [{
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#FFF'],
+                  [1, '#333']
+                ]
+              },
+              borderWidth: 0,
+              outerRadius: '109%'
+            }, {
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#333'],
+                  [1, '#FFF']
+                ]
+              },
+              borderWidth: 1,
+              outerRadius: '107%'
+            }, {
+              // default background
+            }, {
+              backgroundColor: '#DDD',
+              borderWidth: 0,
+              outerRadius: '105%',
+              innerRadius: '103%'
+            }]
+          },
+    
+          // the value axis
+          yAxis: {
+            min: 0,
+            max: 180,
+    
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+    
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+              step: 2,
+              rotation: 'auto'
+            },
+            title: {
+              text: 'mph'
+            },
+            plotBands: [{
+              from: 0,
+              to: 90,
+              color: '#DF5353' // red
+            }, {
+              from: 90,
+              to: 130,
+              color: '#DDDF0D' // yellow
+            }, {
+              from: 130,
+              to: 200,
+              color: '#55BF3B' // green
+            }]
+          },
+    
+          series: [{
+            name: 'Speed',
+            data: [60]
+          }]
+    
+        };
+        this.chartSpeed1 = new Chart(this.options);
+        setInterval(function () {
+          // Speed
+          var point,
+            newVal,
+            inc;
+    
+          if ($this.chartSpeed1) {
+            point = $this.chartSpeed1.ref.series[0].points[0];
+            inc = Math.round((Math.random() - 0.5) * 100);
+            newVal = point.y + inc;
+    
+            if (newVal < 0 || newVal > 160) {
+              newVal = point.y - inc;
+            }
+    
+            point.update(newVal);
+          }
+    
+          
+        }, 2000);
+    }
+
+    //dummy gauge chart
+    gaugeChart2(){
+        var $this = this;
+        this.options = {
+          chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            // spacing: [0, 0, 0, 0],
+            backgroundColor: null,
+          },
+          credits: {
+            enabled: false
+          },
+    
+          title: {
+            text: ''
+          },
+    
+          pane: {
+            startAngle: -150,
+            endAngle: 150,
+            background: [{
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#FFF'],
+                  [1, '#333']
+                ]
+              },
+              borderWidth: 0,
+              outerRadius: '109%'
+            }, {
+              backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                  [0, '#333'],
+                  [1, '#FFF']
+                ]
+              },
+              borderWidth: 1,
+              outerRadius: '107%'
+            }, {
+              // default background
+            }, {
+              backgroundColor: '#DDD',
+              borderWidth: 0,
+              outerRadius: '105%',
+              innerRadius: '103%'
+            }]
+          },
+    
+          // the value axis
+          yAxis: {
+            min: 0,
+            max: 180,
+    
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+    
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+              step: 2,
+              rotation: 'auto'
+            },
+            title: {
+              text: 'mph'
+            },
+            plotBands: [{
+              from: 0,
+              to: 90,
+              color: '#DF5353' // red
+            }, {
+              from: 90,
+              to: 130,
+              color: '#DDDF0D' // yellow
+            }, {
+              from: 130,
+              to: 200,
+              color: '#55BF3B' // green
+            }]
+          },
+    
+          series: [{
+            name: 'Speed',
+            data: [60]
+          }]
+    
+        };
+        this.chartSpeed2 = new Chart(this.options);
+        setInterval(function () {
+          // Speed
+          var point,
+            newVal,
+            inc;
+    
+          if ($this.chartSpeed2) {
+            point = $this.chartSpeed2.ref.series[0].points[0];
+            inc = Math.round((Math.random() - 0.5) * 100);
+            newVal = point.y + inc;
+    
+            if (newVal < 0 || newVal > 160) {
+              newVal = point.y - inc;
+            }
+    
+            point.update(newVal);
+          }
+    
+          
+        }, 2000);
+    }
+
     
 }

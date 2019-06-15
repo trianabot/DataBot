@@ -257,3 +257,9 @@ hr {
     left: 16%;
     color: white;
 }
+
+
+#map {
+    height:329px;
+    width: 100%
+  }
