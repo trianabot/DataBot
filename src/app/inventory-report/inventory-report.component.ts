@@ -57,7 +57,8 @@ export class InventoryReportComponent implements OnInit, OnDestroy {
   alertarr: any[];
   interval: any
   modelarr: any[]
-  showpopmodel: boolean = false
+  showpopmodel: boolean = false;
+  title: any;
 
 
 
@@ -69,6 +70,13 @@ export class InventoryReportComponent implements OnInit, OnDestroy {
     }else{
       localStorage.setItem("title",heading);
     }
+
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
+    }
+
     /** Column chart categories */
     this.stockchartcategories = new Chart({
       chart: {

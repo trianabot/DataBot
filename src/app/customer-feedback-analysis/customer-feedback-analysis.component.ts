@@ -67,7 +67,7 @@ export class CustomerFeedbackAnalysisComponent implements OnInit, OnDestroy {
   constructor(public http: HttpClient, public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
     if(heading ==  null || heading == ""){
-      localStorage.setItem('title',"Customer Feedback Analysis");
+      localStorage.setItem('title',"Customer Feedback");
     }else{
       localStorage.setItem("title", heading);
     }

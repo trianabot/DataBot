@@ -139,7 +139,7 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
   constructor(public http: HttpClient,public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
     if(heading == null || heading == ""){
-      localStorage.setItem("title","Vehicle Live Metrics");
+      localStorage.setItem("title","Route Optimization");
     }else{
       localStorage.setItem("title",heading);
     }
@@ -487,6 +487,8 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
         plotShadow: false,
         // spacing: [0, 0, 0, 0],
         backgroundColor: null,
+        width:250,
+        height:250
 
 
       },
@@ -621,6 +623,8 @@ export class VehicleliveMetricComponent implements OnInit, OnDestroy {
         plotShadow: false,
         // spacing: [50, 50, 50, 50],
         backgroundColor: null,
+        width:250,
+        height:250
 
       },
       credits: {

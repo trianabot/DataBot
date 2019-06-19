@@ -42,6 +42,7 @@ import { TelematicsusercomponentComponent } from './telematicsusercomponent/tele
 import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/humancapitalusecomponent.component';
 import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
 import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
+import { FleetmaticusescomponentComponent } from './fleetmaticusescomponent/fleetmaticusescomponent.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -87,7 +88,8 @@ const routes: Routes = [
   {path: 'telematicsusecase', component: TelematicsusercomponentComponent},
   {path: 'humancapital', component: HumancapitalusecomponentComponent},
   {path: 'reportusecase', component: ReportusecasecomponentComponent},
-  {path: 'healthusecase', component: HealthusecasecomponentComponent}
+  {path: 'healthusecase', component: HealthusecasecomponentComponent},
+  {path: 'fleetmatic', component: FleetmaticusescomponentComponent}
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

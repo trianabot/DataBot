@@ -65,6 +65,8 @@ export class InventoryMapComponent implements OnInit, OnDestroy {
       this.title = localStorage.getItem('title');
     }
 
+   
+
 }
 
   ngOnInit() {

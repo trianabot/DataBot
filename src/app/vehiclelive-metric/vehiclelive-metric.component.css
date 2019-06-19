@@ -3,6 +3,10 @@
  .pd-0{
   padding: 0px
  }
+ h3{
+  font-size:18px !important;
+  margin-top: 10px !important;
+}
  .pt-0{
   padding-top: 2px
  }
@@ -15,6 +19,9 @@
  }
  .pr-2{
   padding-left: 2px
+}
+.p-0{
+  padding:0px !important;
 }
 .pt-15{
   padding-top:7px
@@ -234,6 +241,17 @@ background-color: #267872
   border-radius: 3px;
 }
 
+
+@media only screen and (max-width: 1920px) and (min-width: 1080px)  {
+   
+  .card-header {
+    font-size: 18px;
+    color: white;
+    background-color: #273048;
+    padding-top: 0px;
+
+  }
+  }
 
 
 

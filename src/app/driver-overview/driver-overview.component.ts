@@ -67,7 +67,7 @@ export class DriverOverviewComponent implements OnInit,OnDestroy {
     constructor(public http: HttpClient, private route: ActivatedRoute) {
         var heading = this.route.snapshot.queryParamMap.get("title");
         if(heading == null || heading == ""){
-          localStorage.setItem('title',"Driver Performance Profile");
+          localStorage.setItem('title',"Driver Performance");
         }else{
           localStorage.setItem("title",heading);
         }

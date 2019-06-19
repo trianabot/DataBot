@@ -51,7 +51,8 @@ export class StockTrackingComponent implements OnInit, OnDestroy {
   stockItemdefaultname:any;
   sparepartdefaultname: any;
 
-  selectedcategory:any
+  selectedcategory:any;
+  title: any; 
 
 
 
@@ -62,6 +63,12 @@ export class StockTrackingComponent implements OnInit, OnDestroy {
       localStorage.setItem('title',"Order Tracking");
     }else{
       localStorage.setItem("title",heading);
+    }
+
+    if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
+      this.title = '';
+    } else {
+      this.title = localStorage.getItem('title');
     }
     this.categorydefaultname ="M Category";
     this.stockItemdefaultname ="M559";

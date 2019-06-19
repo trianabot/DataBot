@@ -5,7 +5,9 @@ body{
     font-family: 'Ubuntu', sans-serif !important;
    
 }
-
+h3{
+  font-size:18px !important;
+}
 
  /* .my-container{
     width: 100%;

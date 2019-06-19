@@ -40,7 +40,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
     }
 
   ngOnInit() {
-  
+    
   }
   ngOnChanges() {
     const jsonString: string = this.route.snapshot.queryParamMap.get('homepage');
@@ -65,8 +65,9 @@ export class IndustriesComponent implements OnInit, OnChanges {
     })
 
       this.UseCaseTypeValue = useCaseType;
+      localStorage.setItem('usecase', this.UseCaseTypeValue);
+      //console.log(this.UseCaseTypeValue);
       //sessionStorage.setItem('usecase', this.UseCaseTypeValue);
-      localStorage.setItem('usecase',this.UseCaseTypeValue);
     if (useCaseType == 1) {
       this.show = true
       this.showHealth = false

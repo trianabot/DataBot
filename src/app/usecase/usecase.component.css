@@ -11,7 +11,9 @@
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
   border: 0px solid transparent;
 }
-
+.width-content{
+  width:298px;margin:auto !important
+}
 .panel-body {
   padding: 4px;
 }
@@ -102,7 +104,7 @@
 }
 
 .imgmargin{
-  margin-top:0px
+  margin-top:70px !important;
 }
 
 .blur-wrapper{
@@ -163,16 +165,16 @@ color:#1E428A;
 
 .talkbubble.supplyChain span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.supplyChain:hover p{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .talkbubble.supplyChain:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.supplyChain:hover img{
@@ -187,7 +189,7 @@ color:#1E428A;
 
 .talkbubble.reporting span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.reporting:hover p{
@@ -196,13 +198,28 @@ color:#1E428A;
 }
 .talkbubble.reporting:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
+
 
 .talkbubble.Fleetmat.blur-wrapper span {
   color: #8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
+
+.talkbubble.Fleetmat.blur-wrapper:hover p{
+  color:#1E428A;
+  /* font-weight: bold; */
+}
+.talkbubble.Fleetmat.blur-wrapper:hover span{
+  color:#1E428A;
+  /* font-weight: bold; */
+}
+
+.talkbubble.Fleetmat.blur-wrapper:hover img{
+  content: url('../../assets/images/supply.png');
+}
+
 /*human resource*/
 .talkbubble.humanCapital p{
   color:#8F9094;
@@ -211,7 +228,7 @@ color:#1E428A;
 
 .talkbubble.humanCapital span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.humanCapital:hover p{
@@ -220,15 +237,15 @@ color:#1E428A;
 }
 .talkbubble.humanCapital:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .talkbubble.vendor.blur-wrapper span {
   color: #8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .talkbubble .consumption  .blur-wrapper span{
   color: #8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 /*production hover settings*/
 .talkbubble.producTion p{
@@ -238,7 +255,7 @@ color:#1E428A;
 
 .talkbubble.producTion span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.producTion:hover p{
@@ -247,7 +264,7 @@ color:#1E428A;
 }
 .talkbubble.producTion:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.producTion:hover img{
@@ -263,7 +280,7 @@ color:#1E428A;
 
 .talkbubble.Telematics span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.Telematics:hover p{
@@ -272,11 +289,36 @@ color:#1E428A;
 }
 .talkbubble.Telematics:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.Telematics:hover img{
   content: url('../../assets/images/telematic.png');
+}
+
+/* Fleet Hover Settings */
+
+.talkbubble.FleetMatics p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+.talkbubble.FleetMatics span{
+  color:#8F9094;
+  /* font-weight: bold; */
+}
+
+.talkbubble.FleetMatics:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+.talkbubble.FleetMatics:hover span{
+  color:#1E428A;
+  /* font-weight: bold; */
+}
+
+.talkbubble.FleetMatics:hover img{
+  content: url('../../assets/images/fleet.png');
 }
 
 /*Reporting hover settings*/
@@ -311,7 +353,7 @@ color:#1E428A;
 
 
 .talkbubble.humanCapital:hover img{
-  content: url('../../assets/images/human-capital.png');
+  content: url('../../assets/images/humanresource-vendormanager.png');
 }
 
 
@@ -327,30 +369,30 @@ color:#1E428A;
 
 .talkbubble.healthCare span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.healthCare:hover p{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .talkbubble.healthCare:hover span{
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.Fleetmat.blur-wrapper span{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .talkbubble.Telematics .txtcolor :hover {
   color:#1E428A;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .talkbubble.healthCare .txtcolor{
   color:#8F9094;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 

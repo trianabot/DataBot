@@ -38,8 +38,9 @@ export class HeaderComponent implements OnInit {
   }
 
   previousUrl() {
-    const referrer = this.routerService.getPreviousUrl();
-    this.previous = this.router.navigate([`/industries`]);
+    // const referrer = this.routerService.getPreviousUrl();
+   //this.router.navigate(['/industries']);
+   this.router.navigate(['./industries']);
   }
 
   loadIndustries() {

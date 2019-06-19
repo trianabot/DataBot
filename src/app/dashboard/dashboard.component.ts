@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(public http: HttpClient, public router: Router, public route: ActivatedRoute) {
       var heading = this.route.snapshot.queryParamMap.get('title');
       if(heading == null || heading == ""){
-        localStorage.setItem('title',"Fleet Overview");
+        localStorage.setItem('title',"Driver Behavior");
       }else{
         localStorage.setItem("title",heading);
       }
@@ -475,6 +475,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             plotShadow: false,
             // spacing: [0, 0, 0, 0],
             backgroundColor: null,
+            height: 200
           },
           credits: {
             enabled: false
@@ -576,7 +577,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             if (newVal < 0 || newVal > 160) {
               newVal = point.y - inc;
             }
-    
             point.update(newVal);
           }
     
@@ -596,6 +596,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             plotShadow: false,
             // spacing: [0, 0, 0, 0],
             backgroundColor: null,
+            height: 200
           },
           credits: {
             enabled: false
@@ -717,6 +718,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             plotShadow: false,
             // spacing: [0, 0, 0, 0],
             backgroundColor: null,
+            height: 200
           },
           credits: {
             enabled: false

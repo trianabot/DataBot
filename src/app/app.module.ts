@@ -72,6 +72,11 @@ import { TelematicsusercomponentComponent } from './telematicsusercomponent/tele
 import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/humancapitalusecomponent.component';
 import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
 import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
+import { FleetmaticusescomponentComponent } from './fleetmaticusescomponent/fleetmaticusescomponent.component';
+import { VehiclebehaviorComponent } from './vehiclebehavior/vehiclebehavior.component';
+import { VehicleperformanceComponent } from './vehicleperformance/vehicleperformance.component';
+import { VehiclerouteComponent } from './vehicleroute/vehicleroute.component';
+import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.component';
 
 
 
@@ -121,7 +126,12 @@ import { HealthusecasecomponentComponent } from './healthusecasecomponent/health
     TelematicsusercomponentComponent,
     HumancapitalusecomponentComponent,
     ReportusecasecomponentComponent,
-    HealthusecasecomponentComponent
+    HealthusecasecomponentComponent,
+    FleetmaticusescomponentComponent,
+    VehiclebehaviorComponent,
+    VehicleperformanceComponent,
+    VehiclerouteComponent,
+    VehiclecustomerComponent
 
     ],
   imports: [
