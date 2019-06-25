@@ -14,6 +14,19 @@
     padding-left: 24px;
     padding-bottom: 22px;
 }
+.p-0{
+    padding:0px !important;
+  }
+  .dropdown-label{
+   
+    line-height: 26px;
+    font-size: 12px;
+    text-align: left;
+    padding-right: 3px !important;
+  }
+  .m-0{
+    margin:0px !important;
+  }
 h3{
     font-size:18px !important;
     margin-top: 10px !important;

@@ -16,6 +16,9 @@
   .txt-color{
     color: white
   }
+  ul.nav.nav-tabs.card-header-tabs.tabsnew li a {
+    border: 1px solid #ccc;
+}
   .btnpanel{
       /* float: right; */
       background-color: #fe2626;

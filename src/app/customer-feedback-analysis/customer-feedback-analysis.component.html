@@ -8,22 +8,32 @@
 </div>
 
   <div class="col-md-12" style="padding: 0px">
-    <div class="col-md-9">
+    <div class="col-md-12" style="padding: 0px">
       <div class="row" style="margin-top: 4px;">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="form-group">
+              <div class="row m-0">
+                  <span class="dropdown-label col-md-3 p-0"> Regions</span>
+                  <div class="col-md-9 p-0">
             <select id="region" name="region" [(ngModel)]="regiondefaultname" class="form-control dropdown-wrapper" (change)="changeRegion($event)">
                 <option>Region</option>
                 <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
             </select>
+            </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="form-group">
+              <div class="row m-0">
+                  <span class="dropdown-label col-md-2 p-0"> State</span>
+                  <div class="col-md-10 p-0">
             <select id="state" name="state" [(ngModel)]="statedefaultname" class="form-control dropdown-wrapper" (change)="changeState($event)">
                 <option>State</option>
               <option *ngFor="let states of state" [selected]="statedefaultname == states" >{{states}}</option>
             </select>
+            </div>
+            </div>
           </div>
         </div>
       
