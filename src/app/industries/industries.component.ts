@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnChanges, HostListener } from '@angular/core';
 declare function require(path: string);
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -23,35 +23,37 @@ export class IndustriesComponent implements OnInit, OnChanges {
   showEng: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) {
-
     this.userId = localStorage.getItem('userid');
     
-     route.params.subscribe(val => {
-       if(val.id == 'home')
-    { 
-    var usecase = localStorage.removeItem('usecase');
-    this.usecase = false;
-    }else {
-    var usecase1 = localStorage.getItem('usecase');
-    this.showUseCase(usecase1);
-    }
-     })
+    route.params.subscribe(val => {
+      if (val.id == 'home') {
+        //var usecase = localStorage.removeItem('usecase');
+        var usecase = sessionStorage.removeItem('usecase');
+        sessionStorage.removeItem('reportusecase');
+        this.usecase = false;
+      } else {
+        //var usecase1 = localStorage.getItem('usecase');
+        var usecase1 = sessionStorage.getItem('usecase');
+        this.showUseCase(usecase1);
+      }
+    });
+
     
     }
 
   ngOnInit() {
-    
   }
   ngOnChanges() {
     const jsonString: string = this.route.snapshot.queryParamMap.get('homepage');
     if(jsonString)
     {
-    var usecase = localStorage.removeItem('usecase');
-    this.usecase = false;
-    }else {
-      
-    var usecase1 = localStorage.getItem('usecase');
-    this.showUseCase(usecase1);
+      //var usecase = localStorage.removeItem('usecase');
+      var usecase = sessionStorage.removeItem('usecase');
+     this.usecase = false;
+    }else { 
+      //var usecase1 = localStorage.getItem('usecase');
+      var usecase1 = sessionStorage.getItem('usecase');
+      this.showUseCase(usecase1);
     }
   }
 
@@ -65,9 +67,8 @@ export class IndustriesComponent implements OnInit, OnChanges {
     })
 
       this.UseCaseTypeValue = useCaseType;
-      localStorage.setItem('usecase', this.UseCaseTypeValue);
-      //console.log(this.UseCaseTypeValue);
-      //sessionStorage.setItem('usecase', this.UseCaseTypeValue);
+      //localStorage.setItem('usecase',this.UseCaseTypeValue);
+      sessionStorage.setItem('usecase', this.UseCaseTypeValue);
     if (useCaseType == 1) {
       this.show = true
       this.showHealth = false
@@ -144,4 +145,8 @@ export class IndustriesComponent implements OnInit, OnChanges {
 
   }
 
+  // @HostListener("window:onbeforeunload",["$event"])
+  // clearLocalStorage(event){
+  //   localStorage.removeItem('usecase');
+  // }
 }

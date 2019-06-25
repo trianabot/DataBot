@@ -30,8 +30,10 @@
               <h5 id="topHeading"> DATABOTICS IOT PLATFORM </h5>
           </div>
           <div class="col-xs-12 col-sm-4 col-md-4 p-top-bottom"> 
-              <button (click)="previousUrl()"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
+<div style="float:right">
+              <button (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
               <input type="text" placeholder=" Search.." style="background-color:#4A587D">
+</div>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Router, OutletContext } from '@angular/router';
+import { Component, OnInit, Input, OnChanges, OnDestroy, Output, EventEmitter, HostListener } from '@angular/core';
+import { Router, OutletContext, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usecase',
@@ -7,9 +7,12 @@ import { Router, OutletContext } from '@angular/router';
   styleUrls: ['./usecase.component.css']
 })
 export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
+
+
   // showChild=false;
   @Input('UseCaseType') UseCaseType: number = 0;
   @Output() open: EventEmitter<any> = new EventEmitter();
+
   showfleetManagment: boolean = false;
   fleetMaintaince: boolean = false;
   vehiclerouteTracking: boolean = false;
@@ -25,41 +28,30 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   showProduction: boolean = false;
   showHealthAnalysis: boolean = false;
   showmatics: boolean = false;
-  constructor(private router: Router) {
 
+  constructor(private router: Router, private route: ActivatedRoute) {
+    //   var reportCase1 = sessionStorage.getItem('reportusecase');
+    // this.showdivSection(reportCase1);
   }
 
   ngOnInit() {
-    //var reportusecase = sessionStorage.getItem('reportusecase')
-    var reportusecase = localStorage.getItem('reportusecase');
-    //console.log("Usecase", reportusecase);
-    this.redirect(reportusecase);
+    // var reportusecase = sessionStorage.getItem('reportusecase')
+    // //var reportusecase = localStorage.getItem('reportusecase');
+    // //console.log("Usecase", reportusecase);
+    // this.redirect(reportusecase);
+    // this.showfleetManagment = false;    
   }
+
   ngOnChanges() {
-    this.showfleetManagment = false;
-    this.fleetMaintaince = false;
-    this.vehiclerouteTracking = false;
-    this.showmanufacturing = false;
-    this.showVechile = false;
-    this.reportUseCaseTypeValue = 0;
-    this.showReport = false;
-    this.showAssembly = false;
-    this.showHrms = false;
-    this.showEng = false;
-    this.showHealth = false;
-    this.showProduction = false;
-    this.showHealthAnalysis = false;
-    this.showmatics = false;
+  
   }
   ngOnDestroy() {
     //console.log("Destroy");
   }
   redirect(useCaseType) {
-    this.reportusecase = true;
+    //this.reportusecase = true;
     this.reportUseCaseTypeValue = useCaseType;
-    // console.log("Report Use Case",this.reportUseCaseTypeValue);
-    //sessionStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
-    localStorage.setItem('reportusecase', this.reportUseCaseTypeValue);
+    sessionStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
     
     if (useCaseType == 1) {
       this.router.navigate(['/telematicsusecase']);

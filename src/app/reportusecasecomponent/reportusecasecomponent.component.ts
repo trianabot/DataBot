@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reportusecasecomponent',
   templateUrl: './reportusecasecomponent.component.html',
@@ -10,11 +10,12 @@ export class ReportusecasecomponentComponent implements OnInit {
   selected: any;
   expenseAnalysis = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
       this.selected = 1;
   }
+
 
   setactiveProject(item: any) {
     this.expenseAnalysis = true;

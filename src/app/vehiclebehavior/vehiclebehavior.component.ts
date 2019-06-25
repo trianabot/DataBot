@@ -5,6 +5,7 @@ import { Chain, analyzeAndValidateNgModules } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
 import { Router, ActivatedRoute } from '@angular/router';
+import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
 declare const google: any;
 
 @Component({
@@ -202,6 +203,7 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
             chart: {
                 type: 'column',
                 height: 300,
+              
                 events: {
                     drillup: function (e) {
                         $this.getDriverEvents();
@@ -224,9 +226,15 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
                 scrollbar: {
                     enabled: true
                 },
-                color: "#FFFFFF"
+                color: "#FFFFFF",
+                labels: {
+                  style: {
+                      color: '#753ead'
+                  }
+              }
 
             },
+
             title: {
                 text: ''
 
@@ -251,8 +259,11 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
                 series: {
                     dataLabels: {
                         enabled: true,
-                        format: '{point.y}'
-
+                        format: '<span style="color:#753ead">{point.y}</span>',
+                        style:{
+                          color: 'red',
+                          textDecoration:"none"
+                       }
                      },
                     point: {
                         events: {
@@ -286,6 +297,7 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
             "series": [
                 {
                     "name": "Driver",
+                 
 
                     "data": [
                         {
@@ -340,6 +352,9 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
                 }
             ],
             "drilldown": {
+              activeAxisLabelStyle: {
+               color:'#753ead'
+            },
                 "series": [
                     {
                         "name": "91-100",
@@ -539,20 +554,20 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
               rotation: 'auto'
             },
             title: {
-              text: 'mph'
+              text: 'mpg'
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     
@@ -660,20 +675,20 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
               rotation: 'auto'
             },
             title: {
-              text: 'mph'
+              text: 'Days'
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     
@@ -786,16 +801,16 @@ export class VehiclebehaviorComponent implements OnInit, OnDestroy {
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     

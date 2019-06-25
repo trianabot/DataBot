@@ -539,20 +539,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
               rotation: 'auto'
             },
             title: {
-              text: 'mph'
+              text: 'mpg'
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     
@@ -660,20 +660,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
               rotation: 'auto'
             },
             title: {
-              text: 'mph'
+              text: 'Days'
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     
@@ -786,16 +786,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
             },
             plotBands: [{
               from: 0,
-              to: 90,
-              color: '#DF5353' // red
+              to: 40,
+              color: '#55BF3B' // red
             }, {
-              from: 90,
-              to: 130,
+              from: 40,
+              to: 120,
               color: '#DDDF0D' // yellow
             }, {
-              from: 130,
+              from: 120,
               to: 200,
-              color: '#55BF3B' // green
+              color: '#DF5353' // green
             }]
           },
     

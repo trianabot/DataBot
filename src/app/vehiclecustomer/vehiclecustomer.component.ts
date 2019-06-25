@@ -67,7 +67,7 @@ export class VehiclecustomerComponent implements OnInit, OnDestroy {
   constructor(public http: HttpClient, public route: ActivatedRoute) {
     var heading = this.route.snapshot.queryParamMap.get("title");
     if(heading ==  null || heading == ""){
-      localStorage.setItem('title',"Customer Feedback");
+      localStorage.setItem('title',"Driver Feedback");
     }else{
       localStorage.setItem("title", heading);
     }

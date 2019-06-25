@@ -23,45 +23,64 @@
  
      </div>
      <div class="row">
-         <div class="col-md-2 pr-0">
-             <div class="form-group">
-              <select id="region" name="region" [(ngModel)]="regiondefaultname"  class="form-control dropdown-wrapper"
-                   (change)="changeRegion($event)">
-                   <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
-                 </select>
-               </div>
-         </div>
-         <div class="col-md-2 pr-0 pl-3">
-             <div class="form-group">
- 
-                 <select id="state" name="state" [(ngModel)]="statedefaultname"  class="form-control dropdown-wrapper"
-                   (change)="changeState($event)">
-                   <option>State</option>
-                   <option *ngFor="let states of state" [selected]="statedefaultname == states">{{states}}</option>
-                 </select>
-               </div>
-         </div>
-         <div class="col-md-2 pr-0 pl-3">
-             <div class="form-group">
-                 <select id="category" name="category" [(ngModel)]="categorydefaultname" class="form-control dropdown-wrapper"
-                   (change)="changeCategory($event)">
-                   <option> Performance Category</option>
-                   <option *ngFor="let catg of categories" [selected]="categorydefaultname == catg">{{catg}}</option>
-                 </select>
-               </div>
-         </div>
- 
-         <div class="col-md-2 pl-3">
-             <div class="form-group">
-             <select id="rating" name="rating" [(ngModel)]="ratingdefaultname"  class="form-control dropdown-wrapper"
-                   (change)="changeRating($event)">
-                   <option> Customer Rating</option>
-                   <option *ngFor="let ratings of rating" [selected]="ratingdefaultname == ratings">{{ratings}}</option>
-                 </select>
-               </div>
-         </div>
-     </div>
- 
+        <div class="col-md-2 pr-0">
+            <div class="form-group">
+<div class="row m-0">
+    <span class="dropdown-label col-md-3 p-0"> Region</span>
+    <div class="col-md-9 p-0">
+    <select id="region" name="region" [(ngModel)]="regiondefaultname"  class="form-control dropdown-wrapper"
+                      (change)="changeRegion($event)">
+                      <option *ngFor="let regions of region" [selected]="regiondefaultname == regions">{{regions}}</option>
+                    </select>
+                    </div>
+</div>
+             
+              </div>
+        </div>
+        <div class="col-md-2 pr-0 pl-3">
+            <div class="form-group">
+                <div class="row m-0">
+<span class="dropdown-label  col-md-3 p-0"> State</span>
+<div class="col-md-9 p-0">
+                <select id="state" name="state" [(ngModel)]="statedefaultname"  class="form-control dropdown-wrapper"
+                  (change)="changeState($event)">
+                  <!-- <option  value="state">State</option> -->
+                  <option *ngFor="let states of state" [selected]="statedefaultname == states">{{states}}</option>
+                </select>
+              </div>
+              </div>
+              </div>
+        </div>
+        <div class="col-md-3 pr-0 pl-3">
+            <div class="form-group">
+                <div class="row m-0">
+                <span class="dropdown-label col-md-5 p-0"> Performance Category</span>
+                <div class="col-md-7 p-0">
+                <select id="category" name="category" [(ngModel)]="categorydefaultname" class="form-control dropdown-wrapper"
+                  (change)="changeCategory($event)">
+                  <!-- <option> Performance Category</option> -->
+                  <option *ngFor="let catg of categories" [selected]="categorydefaultname == catg">{{catg}}</option>
+                </select>
+              </div>
+              </div>
+              </div>
+        </div>
+
+        <div class="col-md-3 pl-3">
+            <div class="form-group">
+                <div class="row m-0">
+                <span class="dropdown-label col-md-4 p-0">  Customer Rating &nbsp;</span>
+                <div class="col-md-8 p-0">
+            <select id="rating" name="rating" [(ngModel)]="ratingdefaultname"  class="form-control dropdown-wrapper"
+                  (change)="changeRating($event)">
+                  <!-- <option> Customer Rating</option> -->
+                  <option *ngFor="let ratings of rating" [selected]="ratingdefaultname == ratings">{{ratings}}</option>
+                </select>
+                </div>
+                </div>
+              </div>
+        </div>
+    </div>
      <div class="row" *ngFor = "let item of response">
          <div class="col-md-4 pr-0">
             <div class="card" style="height:353px; background-color: #ffffff; border-bottom: 1px solid #273048;">
