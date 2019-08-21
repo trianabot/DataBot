@@ -64,12 +64,13 @@
         </div>
       </div>
 </div> -->
-<!-- <div class="container-fluid">
+<div class="container-fluid">
   <div class="row m-0">
       <div class="col-md-2 text-center padding0">
           <span class="topsectiontext">Driver</span>
-          <select class="dropdownWidth" name="Fleet" (change)="vehicleDDChange($event)">
+          <select class="dropdownWidth" name="Fleet" [(ngModel)]="drivername" (change)="vehicleDDChange($event)">
               <option style="font: bold" selected disabled value="-1">Select Driver</option>
+              <option> {{drivername}} </option>
               <option *ngFor="let option of mapdata" value="{{option.deviceNbr}}">{{option.personName}}</option>
           </select>
 
@@ -219,7 +220,8 @@
                      <img src="../../assets/7icon.png">
                  </div>
                  <div class="col-md-10 padding0">
-                      <span>{{(drivername) ? drivername : '- -'}}</span><br>
+                      <span>{{(driver) ? driver : '- -'}}</span><br>
+                      <!-- <span>Engineer LCVs</span> -->
                  </div>
             </div>
        </div>
@@ -268,6 +270,7 @@
 
        </div>
    </div>
+   <!-----row3-->
    <div class="row m-0 m-t-15">
         <div class="col-md-3 padding0">
             <div class="a-r-4 b-c-4 p-7">
@@ -339,79 +342,4 @@
         </div>
    </div>
 
-</div> -->
-<div class="container-fluid">
-  <div class="row m-0">
-    <div class="col-md-2">
-         <div class="row m-0">
-               <div class="col-md-12 padding0 t-a">
-                    <span> {{(drivetime) ? drivetime : '- -'}} </span><br>
-                    <span>Drive Time</span>
-               </div>
-               <div class="col-md-12 padding0">
-                    <img class="img" src="../../assets/distance.png">
-               </div>
-         </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> {{(distance) ? distance : '- -'}} </span><br>
-                         <span>Distance Travelled</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> {{(idlingtime) ? idlingtime : '- -'}} </span><br>
-                         <span>Idling</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Speeding</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Hard Braking</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Acceleration</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-  </div>
-  <div class="row m-0 m-t-10">
-      <div class="col-md-12 padding0">
-          <div id='map' class="col-md-12"></div>
-      </div>
-  </div>
 </div>

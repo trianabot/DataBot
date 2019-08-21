@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DatabotService {
   private apiendpoint = environment.apiEndPoint;
+  private linxupEndpoint = environment.linxupEndPoint;
 
   constructor(public http: HttpClient) { }
 
@@ -33,7 +34,7 @@ export class DatabotService {
   loadPoliticsData(){
     return this.http.get('../../assets/data/politics.json')
   }
-  
+
   loadPoliticsTrendDistrict(){
     return this.http.get('../../assets/data/Dist_final.json');
   }
@@ -78,5 +79,87 @@ export class DatabotService {
     return this.http.post(this.apiendpoint + '/user/login', JSON.stringify(loginData), options);
   }
 
+  /** Get the devices for the user */
 
+  getDevices(userdata) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/login', JSON.stringify(userdata), options);
+  }
+
+  /** Get the current location of the vehicle or device */
+
+  getCurrentPostition(body) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/map', JSON.stringify(body), options);
+  }
+
+  /** Get the historical data of particular vehicle or device */
+
+  getVehicleHistory(body) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/hist', JSON.stringify(body), options);
+  }
+
+  /** Get the stops of the devices or vehicles */
+
+  getVehicleStops(body) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/stops', JSON.stringify(body), options);
+  }
+
+  /** Get vehicle trips data */
+
+  getVehicleTrips(body) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/trips', JSON.stringify(body), options);
+  }
+
+  /**Get vehicle advanced trips */
+
+  getVehicleAdvancedTrips(body) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Encoding': 'application/gzip'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return this.http.post(this.linxupEndpoint + '/advancedTrips', JSON.stringify(body), options);
+  }
 }

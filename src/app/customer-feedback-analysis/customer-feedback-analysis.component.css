@@ -18,7 +18,7 @@
     padding:0px !important;
   }
   .dropdown-label{
-   
+
     line-height: 26px;
     font-size: 12px;
     text-align: left;
@@ -34,13 +34,13 @@ h3{
 .customer_wrapper-drivers{
     /* width: 18rem; */
     background-color: #FFFFFF;
-  
+
 }
 .p-left-5{
     padding-left:5px;
 }
   h3 {
-   
+
 }
 
 
@@ -48,7 +48,7 @@ h3{
 .fs-40{
     font-size: 40px;
     color: #939292
-    
+
 }
 .fs-17{
     font-size: 17px;
@@ -68,7 +68,7 @@ h3{
 }
 .btnActive
 {
- background-color:#452950 
+ background-color:#452950
 }
 /*Padding*/
 .pd-lr{
@@ -96,7 +96,7 @@ h3{
     border: 1px solid white;
     list-style: none;
     border: 1px solid white;
-    
+
 }
 .list-back-ground-color-1{
     background-color: #EFEFEF
@@ -120,7 +120,7 @@ input[type="text"]
     width: 100%;
     background:none;
     /* line-height: 39px; */
-    
+
 }
 .list-group {
     margin-bottom: 0px;
@@ -130,7 +130,7 @@ input[type="text"]
 padding: 7px 12px;
 background-color: #fff;
  list-style: none;
-   
+
 }
 
 .border-bottom{
@@ -192,7 +192,7 @@ font-size: 16px;
 }
 
 .driver-details-card-body{
-    background-color: #FFFFFF; height: 265px
+    background-color: #FFFFFF; height: 289px
 }
 
 .box-icon{

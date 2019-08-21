@@ -38,16 +38,20 @@ export class LoginComponent implements OnInit {
     else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '1');
-    } else if ((register.value.user == "Telematics" || register.value.user == "telematics") && register.value.password == "Databot@12345") {
+      localStorage.setItem('username',register.value.user);
+    } else if ((register.value.user == "MelrosePark" || register.value.user == "melrosepark") && register.value.password == "data@melrose") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '2');
+      localStorage.setItem('username',register.value.user);
     } else if ((register.value.user == "Supplychain" || register.value.user == "supplychain") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '3');
+      localStorage.setItem('username',register.value.user);
     }
     else if ((register.value.user == "Politics" || register.value.user == "politics") && register.value.password == "Databot@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '4');
+      localStorage.setItem('username',register.value.user);
     }
 
     else {

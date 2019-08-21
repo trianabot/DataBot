@@ -9,7 +9,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="navheader"><a href="#" style="color:white"><span class="glyphicon glyphicon-user navheader"></span>
-              User Name</a></li>
+              {{username | uppercase}}</a></li>
           <li><button type="button" class="btn btn-primary btn-xs"
               style="margin-top: 16px;background-color: #273048;;border: 0px;" (click)="logOut()">Log
               Out</button></li>
@@ -17,11 +17,11 @@
       </div>
     </nav>
   </div>
-  
-  
+
+
   <div class="topnav">
-      <div class="row"> 
-          <div class="col-xs-12 col-sm-4 col-md-4 p-top"> 
+      <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-4 p-top">
               <i class="fa fa-bars pointer-class menu-css" aria-hidden="true"
               (click)="showSideMenu()"></i>
             <span (click)="showDashBoard()" class="pointer-class home-css"> Home </span>
@@ -29,7 +29,7 @@
           <div class="col-xs-12 col-sm-4 col-md-4">
               <h5 id="topHeading"> DATABOTICS IOT PLATFORM </h5>
           </div>
-          <div class="col-xs-12 col-sm-4 col-md-4 p-top-bottom"> 
+          <div class="col-xs-12 col-sm-4 col-md-4 p-top-bottom">
 <div style="float:right">
               <button (click)="previousUrl()" *ngIf="backUrl"> <i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 20px;"></i> </button>
               <input type="text" placeholder=" Search.." style="background-color:#4A587D">
@@ -37,11 +37,11 @@
           </div>
         </div>
 
-<!--     
+<!--
     <span style="font-size: 22px;color:white;padding-left: 150px;font-family: sans-serif;">{{title}}</span> -->
-    
-   
-    
+
+
+
     <!-- <a routerLink="" routerLinkActive="active">Back</a> -->
   </div>
 
@@ -50,7 +50,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 
-  <a [routerLink]="['/add-tenant']" routerLinkActive="active" 
+  <a [routerLink]="['/add-tenant']" routerLinkActive="active"
   >Add Client</a>
   <a [routerLink]="['/add-user']" routerLinkActive="active">Add User</a>
   <a [routerLink]="['/add-device']" routerLinkActive="active">Add Device</a>

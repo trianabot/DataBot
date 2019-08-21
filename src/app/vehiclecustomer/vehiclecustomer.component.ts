@@ -242,7 +242,8 @@ export class VehiclecustomerComponent implements OnInit, OnDestroy {
   fleetRatingChart(fivestarrating, dates, fourstarrating, threestarrating, twostartrating, onestartrating) {
     this.options = {
       chart: {
-        type: 'column'
+        type: 'column',
+        height: 350
       },
       title: {
         text: '',

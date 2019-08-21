@@ -32,7 +32,7 @@ import { HealthCareAnalyticsComponent } from './healthcare-usecase/health-care-a
 import { ExpenseAnalyticsComponent } from './finance-usecase/expense-analytics/expense-analytics.component';
 import { ProjectManagmentComponent } from './manufacturing-usecase/project-managment/project-managment.component';
 import { DataingestionComponent } from './dataingestion/dataingestion/dataingestion.component';
-import { BoothinchargeComponent } from './boothincharge-level/boothincharge-level.component'; 
+import { BoothinchargeComponent } from './boothincharge-level/boothincharge-level.component';
 import { ForecastTrendComponent } from './forecast-trend-analysis/forecast-trend-analysis.component';
 import { PolticalComponent } from './poltical-statics/poltical-statics.component';
 import { StateOverComponent } from './state-overview/state-overview.component';
@@ -43,7 +43,7 @@ import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/hu
 import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
 import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
 import { FleetmaticusescomponentComponent } from './fleetmaticusescomponent/fleetmaticusescomponent.component';
-
+import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -82,19 +82,20 @@ const routes: Routes = [
   {path: 'boothincharge', component:BoothinchargeComponent},
   {path: 'forecasttrend', component: ForecastTrendComponent},
   {path: 'political', component:PolticalComponent},
-  {path: 'stateover', component: StateOverComponent}, 
+  {path: 'stateover', component: StateOverComponent},
   {path: 'productionusecase', component: ProdutionusecaseComponent},
   {path: 'supplyusercase', component: SupplyusercomponentComponent},
   {path: 'telematicsusecase', component: TelematicsusercomponentComponent},
   {path: 'humancapital', component: HumancapitalusecomponentComponent},
   {path: 'reportusecase', component: ReportusecasecomponentComponent},
   {path: 'healthusecase', component: HealthusecasecomponentComponent},
-  {path: 'fleetmatic', component: FleetmaticusescomponentComponent}
-  // {path: '', component : HomeComponent, pathMatch : 'full'},  
+  {path: 'fleetmatic', component: FleetmaticusescomponentComponent},
+  {path: 'fleetmatics', component: FleetmaticsComponent}
+  // {path: '', component : HomeComponent, pathMatch : 'full'},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash : true,  onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes,{useHash : false,  onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

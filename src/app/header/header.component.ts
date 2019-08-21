@@ -13,8 +13,9 @@ export class HeaderComponent implements OnInit {
   previous: any;
   backUrl: Boolean = false;
   currentUrl: any;
+  username:any;
   constructor(private router: Router, private routerService: RouteService) {
-
+    this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userid');
     if (localStorage.getItem('title') == "" || localStorage.getItem('title') == null || localStorage.getItem('title') == undefined) {
       this.title = '';
@@ -65,15 +66,16 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userid');
     sessionStorage.removeItem('usecase');
     sessionStorage.removeItem('reportusecase');
+    localStorage.removeItem('username');
   }
 
-  showDashBoard() {   
+  showDashBoard() {
     this.router.navigate(["/industries" + "/home"]);
     localStorage.removeItem('title');
     sessionStorage.removeItem('usecase');
     sessionStorage.removeItem('reportusecase');
-    
-    
+
+
   }
 
   showSideMenu() {

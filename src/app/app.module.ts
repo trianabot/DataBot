@@ -77,6 +77,8 @@ import { VehiclebehaviorComponent } from './vehiclebehavior/vehiclebehavior.comp
 import { VehicleperformanceComponent } from './vehicleperformance/vehicleperformance.component';
 import { VehiclerouteComponent } from './vehicleroute/vehicleroute.component';
 import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.component';
+import { VehiclebehaviourtenantComponent } from './vehiclebehaviourtenant/vehiclebehaviourtenant.component';
+import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
 
 
 
@@ -131,7 +133,9 @@ import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.comp
     VehiclebehaviorComponent,
     VehicleperformanceComponent,
     VehiclerouteComponent,
-    VehiclecustomerComponent
+    VehiclecustomerComponent,
+    VehiclebehaviourtenantComponent,
+    FleetmaticsComponent
 
     ],
   imports: [
