@@ -276,9 +276,9 @@ getTotalDriveTime(trips) {
 loadmap(mapdata){
   //console.log(mapdata);
 var $this = this;
-let payload: {queryParams: {vehicle: string, drivername: string}};
+let payload: {queryParams: {vehicle: string, drivername: string, location: string}};
 this.map = new google.maps.Map(document.getElementById('map'), {
-zoom: 8,
+zoom: 11,
 center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
 mapTypeId: google.maps.MapTypeId.ROADMAP,
 mapTypeControl: false,
@@ -304,6 +304,35 @@ attachSecretMessage(marker,  mapdata[i]['latitude'], mapdata[i]['longitude'], ma
 
 function attachSecretMessage(marker, lat, long, label, devicenumber, drivername) {
 var geocoder = new google.maps.Geocoder();
+marker.addListener('mouseover', function () {
+  var latlong1 = new google.maps.LatLng(lat, long);
+  geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+    if (status == 'OK') {
+
+      var currentLocation = res[0].address_components[2].long_name;
+      // $this.city = currentLocation;
+      // $this.state = res[0].address_components[4].long_name;
+      // $this.country = res[0].address_components[5].long_name;
+
+      // $this.esttime = est;
+      infowindow = new google.maps.InfoWindow({
+        content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
+        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + label + '</p></b>'
+
+      });
+
+      $this.getDeviceEvents(devicenumber);
+      // alert(this.warehousename)
+      infowindow.open(this.map, marker);
+
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+    marker.addListener('mouseout', function() {
+      infowindow.close(marker.get('map'), marker);
+    });
+  });
+});
 marker.addListener('click', function () {
   var latlong1 = new google.maps.LatLng(lat, long);
   geocoder.geocode({ 'location': latlong1 }, function (res, status) {
@@ -316,8 +345,8 @@ marker.addListener('click', function () {
 
       // $this.esttime = est;
       infowindow = new google.maps.InfoWindow({
-        content: '<b><p style="color:blue;text-weight:bold">' + currentLocation + '</p></b>'
-        +'<b><p style="color:blue;text-weight:bold">' + label + '</p></b>'
+        content: '<b><p style="color:#0472b0;text-weight:bold">' + currentLocation + '</p></b>'
+        +'<b><p style="color:#0472b0;text-weight:bold">' + label + '</p></b>'
 
       });
 
@@ -325,7 +354,8 @@ marker.addListener('click', function () {
       payload = {
         queryParams: {
             vehicle: JSON.stringify(devicenumber),
-            drivername: JSON.stringify(drivername)
+            drivername: JSON.stringify(drivername),
+            location: JSON.stringify(currentLocation)
         }
     };
       $this.router.navigate(['/fleetmatics'], payload);

@@ -20,7 +20,6 @@ export class FleetmaticsComponent implements OnInit {
   Overview: boolean;
   options: any;
   harshevents: any;
-  hourschart: any;
   speedingchart: any;
   mileschart: any;
   mapdata: any;
@@ -40,6 +39,99 @@ export class FleetmaticsComponent implements OnInit {
   trips: any;
   drivetime: number;
   driver: any;
+  location: any;
+
+  private hourschart = new Chart({
+    
+    chart: {
+      backgroundColor: '#f9f9f8',
+      height: 200,
+      // width: 373,
+      type: 'bar',
+      style: {
+        color: 'white',
+      },
+    },
+    legend: {
+      itemStyle: {
+        color: '#fff'
+      },
+      align: 'center',
+      verticalAlign: 'top',
+      floating: false,
+      style: {
+        color: '#fff'
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    title: {
+      text: null,
+      style: {
+        color: '#fff'
+      }
+    },
+    xAxis: {
+      tickInterval: 1,
+      // type: 'datetime',
+      // categories: time,
+      labels: {
+        style: {
+          color: 'fff'
+        },
+        format: '{value}',
+      },
+    },
+    yAxis: {
+      gridLineColor: 'transparent',
+      labels: {
+        format: '{value}',
+        style: {
+          color: 'fff'
+        }
+      },
+      title: {
+        text: null,
+      },
+    },
+    series: [{
+      // name: "Speed",
+      // showInLegend: false,
+      // borderColor: null,
+      data: [20],
+      color: '#8ba9ff',
+      pointWidth: 15
+    },
+    {
+      // name: "Speed",
+      // showInLegend: false,
+      // borderColor: null,
+      data: [15],
+      color: '#4f76ad',
+      pointWidth: 15
+    },
+    {
+      // name: "Speed",
+      // showInLegend: false,
+      // borderColor: null,
+      data: [15],
+      color: '#4f76ad',
+      pointWidth: 15
+    },
+    {
+      // name: "Speed",
+      // showInLegend: false,
+      // borderColor: null,
+      data: [15],
+      color: '#4f76ad',
+      pointWidth: 15
+    }
+    ],
+    tooltip: {
+      valueSuffix: 'Hrs'
+    }
+  });
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -54,12 +146,14 @@ export class FleetmaticsComponent implements OnInit {
   ngOnInit() {
     const jsonString: string = this.route.snapshot.queryParamMap.get('vehicle');
     const drivername = this.route.snapshot.queryParamMap.get('drivername');
+    const location = this.route.snapshot.queryParamMap.get('location');
     this.selected = 1;
     if(jsonString) {
       this.imei = JSON.parse(jsonString);
       this.drivername = JSON.parse(drivername);
       this.driver = JSON.parse(drivername);
-      console.log(this.imei);
+      this.location = JSON.parse(location);
+      console.log(this.location);
       this.getDeviceEvents(this.imei);
       this.HarshEvents();
       this.HoursChart();
@@ -530,6 +624,7 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   vehicleDDChange(event) {
+    // this.hourschart.series[0].setData([100]);
      console.log(event.currentTarget.value);
      this.imei = event.currentTarget.value;
      this.loadData();
