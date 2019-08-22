@@ -1,111 +1,173 @@
 <app-header (sidenavChange)='sidenavChanged()'></app-header>
 
 <div class="container-fluid">
-  <!-- <div class="row m-0">
-    <div class="col-md-2">
-         <div class="row m-0">
-               <div class="col-md-12 padding0 t-a">
-                    <span> {{(drivetime) ? drivetime : '- -'}} </span><br>
-                    <span>Drive Time</span>
-               </div>
-               <div class="col-md-12 padding0">
-                    <img class="img" src="../../assets/distance.png">
-               </div>
-         </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> {{(distance) ? distance : '- -'}} </span><br>
-                         <span>Distance Travelled</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> {{(idlingtime) ? idlingtime : '- -'}} </span><br>
-                         <span>Idling</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Speeding</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Hard Braking</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-    <div class="col-md-2">
-            <div class="row m-0">
-                    <div class="col-md-12 padding0 t-a">
-                         <span> - - </span><br>
-                         <span>Acceleration</span>
-                    </div>
-                    <div class="col-md-12 padding0">
-                            <img class="img" src="../../assets/distance.png">
-                    </div>
-              </div>
-    </div>
-  </div> -->
-  <ul class="padding0" style="list-style: none">
+  <!-- <ul class="padding0" style="list-style: none">
       <li class="li-items">
-          <span class="f-s-30">4</span><br>
+          <span class="f-s-22">{{mapdata.length}}</span><br>
           <img class="p-4" src="../../assets/databot-page - icon1.png"><br>
           <span>Total Trucks</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">{{(drivetime) ? drivetime : '- -'}}</span><br>
+            <span class="f-s-22">{{(drivetime) ? drivetime : '- -'}}</span><br>
             <img class="p-2" src="../../assets/databot-page - icon2.png"><br>
             <span>Drive Time</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">{{(distance) ? distance : '- -'}}</span><br>
+            <span class="f-s-22">{{(distance) ? distance : '- -'}}</span><br>
             <img src="../../assets/databot-page - icon3.png"><br>
             <span>Distance Travelled</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">{{(idlingtime) ? idlingtime : '- -'}}</span><br>
+            <span class="f-s-22">{{(idlingtime) ? idlingtime : '- -'}}</span><br>
             <img class="p-10" src="../../assets/databot-page - icon4.png"><br>
             <span>Idling</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">200</span><br>
+            <span class="f-s-22">{{(highspeed) ? highspeed : '- -'}}</span><br>
             <img src="../../assets/databot-page - icon5.png"><br>
             <span>Speeding</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">60</span><br>
+            <span class="f-s-22"> {{(harshbraking) ? harshbraking : '- -'}} </span><br>
             <img src="../../assets/databot-page - icon6.png"><br>
             <span>Hard Braking</span>
       </li>
       <li class="li-items">
-            <span class="f-s-30">321</span><br>
+            <span class="f-s-22">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span><br>
             <img class="p-6" src="../../assets/databot-page - icon7.png"><br>
             <span>Acceleration</span>
       </li>
-  </ul>
+  </ul> -->
+  <div class="row m-0 m-t-10">
+      <div class="col-md-7 padding0 float-left">
+        <div class="col-md-3 d-3 padding0 float-left">
+            <div class="a-r-d">
+                <div class="row m-0">
+                    <div class="col-md-12 p-4 m-t">
+                            From: <input type="date" [(ngModel)]="fromdate" style="width: 140px;" placeholder="Select Date" required/>
+                    </div>
+                    <div class="col-md-12 p-4 m-t">
+                            to: <input type="date" [(ngModel)]="todate" style="width: 140px;margin-left: 20px;" placeholder="Select Date" required/>
+                    </div>
+                    <div class="col-md-12 p-4 m-t">
+                        <button class="btn" (click)="searchingBydate()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 d-3 padding0 float-left">
+            <div class="a-r-d">
+                <div class="row m-0">
+                <ul class="padding0" style="list-style: none">
+                        <li class="li-items">
+                            <span class="f-s-22">{{mapdata.length}}</span><br>
+                            <img class="p-4" src="../../assets/databot-page - icon1.png"><br>
+                            <span>Total Trucks</span>
+                        </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 d-3 padding0 float-left">
+            <div class="a-r-d">
+                <div class="row m-0">
+                <ul style="list-style: none">
+                        <li class="li-items">
+                                <span class="f-s-22">{{(drivetime) ? drivetime : '- -'}}</span><br>
+                                <img class="p-2" src="../../assets/databot-page - icon2.png"><br>
+                                <span>Drive Time</span>
+                        </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 d-3 padding0 float-left">
+            <div class="a-r-d">
+                <div class="row m-0">
+                <ul style="list-style: none">
+                        <li class="li-items">
+                                <span class="f-s-22">{{(distance) ? distance : '- -'}}</span><br>
+                                <img src="../../assets/databot-page - icon3.png"><br>
+                                <span>Distance Travelled</span>
+                        </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-5 padding0 float-left">
+           <div class="row m-0">
+                <div class="col-md-6 padding0">
+                    <div class="a-r-d">
+                        <div class="row m-0">
+                            <div class="col-md-4 padding0 float-left">
+                                    <img class="w-100" src="../../assets/databot-page - icon4.png">
+                                   
+                            </div>
+                            <div class="col-md-4 m-a padding0 float-left"> 
+                                    <span class="float-left">Idling</span>
+                            </div>
+                            <div class="col-md-4 m-a padding0 float-left">
+                                    <span class="f-s-22 float-left">{{(idlingtime) ? idlingtime : '- -'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 padding0">
+                    <div class="a-r-d">
+                        <div class="row m-0">
+                            
+                                <div class="col-md-4 padding0 float-left">
+                                        <img class="w-104" src="../../assets/databot-page - icon5.png">
+                                       
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left"> 
+                                        <span class=" float-left">Speeding</span>
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left">
+                                        <span class="f-s-22 float-left">{{(highspeed) ? highspeed : '- -'}}</span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           <div class="row m-0">
+                <div class="col-md-6 m-t-3 padding0">
+                    <div class="a-r-d">
+                         <div class="row m-0">
+                                <div class="col-md-4 padding0 float-left">
+                                        <img class="w-88" src="../../assets/databot-page - icon6.png">
+                                       
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left"> 
+                                        <span class="float-left">Harsh Braking</span>
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left">
+                                        <span class="f-s-22"> {{(harshbraking) ? harshbraking : '- -'}} </span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 m-t-3 padding0">
+                    <div class="a-r-d">
+                        <div class="row m-0">
+                                <div class="col-md-4 padding0 float-left">
+                                        <img class="w-95" src="../../assets/databot-page - icon7.png">
+                                       
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left"> 
+                                        <span class="float-left">Acceleration</span>
+                                </div>
+                                <div class="col-md-4 m-a padding0 float-left">
+                                        <span class="f-s-22">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+      </div>
+
+  </div>
   <div class="row m-0 m-t-10">
       <div class="col-md-12 padding0 m-4">
           <div id='map' class="col-md-12"></div>

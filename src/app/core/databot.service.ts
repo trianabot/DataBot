@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DatabotService {
   private apiendpoint = environment.apiEndPoint;
   private linxupEndpoint = environment.linxupEndPoint;
+  private linxupApiEndpoint = environment.linxupApiEndPoint;
 
   constructor(public http: HttpClient) { }
 
@@ -45,6 +46,18 @@ export class DatabotService {
 
   loadPoliticsTrendBooth(){
     return this.http.get('../../assets/data/booth_json_final.json');
+  }
+
+  private get_http_options() {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiIzMjgzNTUiLCJpc3MiOiJhZ2lsaXMiLCJwZXJzb25JZCI6Ijk1MDIyMSIsImV4cCI6MTcyMjk5NzgxMiwiaWF0IjoxNTY1MTQ1MDEyLCJ1c2VybmFtZSI6ImluZm9AZGF0YWFnaWxlLmNvbSJ9.CFiTePNkn_DBWWb1Q5wc5PKz7RhrJhLnlY6TDw4oc_k'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    return options;
   }
 
 
@@ -161,5 +174,9 @@ export class DatabotService {
       headers: httpHeaders
     };
     return this.http.post(this.linxupEndpoint + '/advancedTrips', JSON.stringify(body), options);
+  }
+
+  getVehicleAlerts(body) {
+    return this.http.post(this.linxupApiEndpoint + 'alerts', JSON.stringify(body), this.get_http_options());
   }
 }

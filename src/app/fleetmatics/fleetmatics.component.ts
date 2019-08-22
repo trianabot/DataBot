@@ -156,20 +156,20 @@ export class FleetmaticsComponent implements OnInit {
       console.log(this.location);
       this.getDeviceEvents(this.imei);
       this.HarshEvents();
-      this.HoursChart();
-      this.Speeding();
-      this.MilesChart();
-      this.loadmapdata();
-      // this.getIdlingAllDevices();
-      this.gettripevent();
-    }else {
-      this.HarshEvents();
-      this.HoursChart();
+      // this.HoursChart();
       this.Speeding();
       this.MilesChart();
       this.loadmapdata();
       this.getIdlingAllDevices();
       this.gettripevent();
+    }else {
+      // this.HarshEvents();
+      // this.HoursChart();
+      // this.Speeding();
+      // this.MilesChart();
+      // this.loadmapdata();
+      // this.getIdlingAllDevices();
+      // this.gettripevent();
 
     }
 
@@ -624,7 +624,10 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   vehicleDDChange(event) {
-    // this.hourschart.series[0].setData([100]);
+     let data = [50];
+      this.options.series[0].data = data;
+      this.hourschart = new Chart(this.options);
+    // this.hourschart.addPoint(100);
      console.log(event.currentTarget.value);
      this.imei = event.currentTarget.value;
      this.loadData();

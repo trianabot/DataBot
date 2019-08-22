@@ -17,7 +17,7 @@ declare const google: any;
   templateUrl: './fleetmaticusescomponent.component.html',
   styleUrls: ['./fleetmaticusescomponent.component.css']
 })
-export class FleetmaticusescomponentComponent implements OnInit {
+export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   selected: any;
   fleetOverview = true;
@@ -49,7 +49,16 @@ export class FleetmaticusescomponentComponent implements OnInit {
   drivetime: number;
 
   map: any;
-  distance: void;
+  distance: number;
+  harshbraking: number;
+  highspeed: number;
+  rapidacceleration: number;
+  fromdate: Date;
+  todate: Date
+  searchtodata: number;
+  searchfromdata: number;
+  initInterval: any;
+  searchInterval: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -64,48 +73,20 @@ export class FleetmaticusescomponentComponent implements OnInit {
   ngOnInit() {
     this.selected = 1;
     this.loadmapdata();
-    this.getIdlingAllDevices();
-    this.gettripevent();
+    this.initInterval = setInterval(() => {
+      this.searchtodata = Date.now();
+      this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
+      this.getIdlingAllDevices();
+      this.gettripevent();
+      this.getAlerts();
+     },5000);
 
   }
 
-  setfleetOverview(item: any) {
-    this.fleetOverview = true;
-    this.driverProfile = false;
-    this.trackOrder = false;
-    this.custFeed = false;
-    this.selected = item;
+  ngOnDestroy() {
+    clearInterval(this.searchInterval);
   }
 
-  setDriver(item: any) {
-    this.fleetOverview = false;
-    this.driverProfile = true;
-    this.trackOrder = false;
-    this.custFeed = false;
-    this.selected = item;
-  }
-
-  setvehicleMetric(item: any) {
-    this.fleetOverview = false;
-    this.driverProfile = false;
-    this.trackOrder = true;
-    this.custFeed = false;
-    this.selected = item;
-  }
-
-
-  setcustomerFeed(item: any) {
-    this.fleetOverview = false;
-    this.driverProfile = false;
-    this.trackOrder = false;
-    this.custFeed = true;
-    this.selected = item;
-  }
-
-
-  isActive(item: any) {
-    return this.selected === item;
-  }
   loadmapdata() {
     var body = {
       "username": "info@dataagile.com",
@@ -129,86 +110,14 @@ export class FleetmaticusescomponentComponent implements OnInit {
     let body = {
       "username":"info@dataagile.com",
       "password":"conquest",
-      "fromDate":yesterday, 
-      "toDate":today
+      "fromDate":this.searchfromdata, 
+      "toDate":this.searchtodata
     }
     this.databotService.getVehicleStops(body).subscribe(res => {
       var stops = res['data']['stops'];
       this.getIdlingEvents(stops);
     });
   }
-
-  vehicleDDChange(event) {
-     console.log(event.currentTarget.value);
-     this.imei = event.currentTarget.value;
-     this.getDeviceEvents(this.imei);
-  }
-
-  
-
-  getDeviceEvents(number){
-    // console.log(moment(1564337311686).format('MMM DD, YYYY') == moment(1564165457000).format('MMM DD, YYYY'));
-    var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
-    console.log(today, yesterday);
-    var yest = new Date(yesterday);
-    // console.log(yest+""+yesterday);​
-    let body = {
-      "username":"info@dataagile.com",
-      "password":"conquest",
-      "imei":number,
-      "fromDate": yesterday,
-      "toDate":today
-    }
-    this.databotService.getVehicleHistory(body).subscribe(result => {
-      console.log(result);
-      var positions  = result['data']['positions'];
-      var stops = result['data']['stops'];
-      this.drivername = result['data']['positions'][0]['personName'];
-      this.getBrakingIdlingEvents(positions);
-      this.getIdlingEvents(stops);
-      this.getTotalDriveTime(this.trips);
-    });
-  }
-
-
-  
-  getBrakingIdlingEvents(positions){
-    console.log(positions);
-    this.weekAcceleration = 0;
-    this.weekBraking = 0;
-    this.todayAcceleration = 0;
-    this.todayBraking = 0;
-    this.lastDayAcceleration = 0;
-    this.lastDayBraking = 0;
-    // tslint:disable-next-line: forin
-    for(var item in positions){
-       let today = moment(Date.now()).format('MMM DD, YYYY');
-       let todayfromdata = moment(positions[item]['date']).format('MMM DD, YYYY');
-       var dateString = moment().subtract(1, 'days').toString();
-       var dateObj = new Date(dateString);
-       var momentObj = moment(dateObj);
-       var momentString = momentObj.format('MMM DD, YYYY');
-      //  console.log(momentString);
-      //  if(positions[item]['behaviorCd'] == 'HAC'){
-      //    this.weekAcceleration = this.weekAcceleration + 1;
-      //  }else if(positions[item]['behaviorCd'] == 'HBR'){
-      //    this.weekBraking = this.weekBraking + 1;
-      //  }
-        if(positions[item]['behaviorCd'] == 'HAC' && (today == todayfromdata)){
-        this.todayAcceleration = this.todayAcceleration + 1;
-       }else if (positions[item]['behaviorCd'] == 'HBR' && (today == todayfromdata)){
-        this.todayBraking = this.todayBraking + 1;
-       }
-      // else if(positions[item]['behaviorCd'] == 'HAC' && (momentString == todayfromdata)){
-      //   this.lastDayAcceleration = this.lastDayAcceleration + 1;
-      //  }else if (positions[item]['behaviorCd'] == 'HBR' && (momentString == todayfromdata)){
-      //   this.lastDayBraking = this.lastDayBraking + 1;
-      //  }
-    }
-    // console.log(this.weekAcceleration+"this is"+this.weekBraking);
-}
-
 
 /**Get engine idling events */
 getIdlingEvents(stops) {
@@ -227,18 +136,8 @@ getIdlingEvents(stops) {
       var dateObj = new Date(dateString);
       var momentObj = moment(dateObj);
       var momentString = momentObj.format('MMM DD, YYYY');
-      console.log(today == todayfromdata);
-      // if(stops[item]['stopType'] == 'Idling'){
-      //   this.weekIdling = this.weekIdling + 1;
-      // }
-      // else if(stops[item]['stopType'] == 'Idling' && (today == todayfromdata) && (today == endfromdate)){
-      //  this.todayIdling = this.todayIdling + 1;
-      // }else if(stops[item]['stopType'] == 'Idling' && (momentString == todayfromdata) && (momentString == endfromdate)){
-      //   this.lastDayIdling = this.lastDayIdling + 1;
-      //  }
       if((stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
              this.stoptime = this.stoptime + stops[item]['duration'];
-             console.log(this.stoptime);
       }
       if((stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
         this.idlingtime = this.idlingtime + stops[item]['duration'];
@@ -249,26 +148,26 @@ getIdlingEvents(stops) {
 
 gettripevent() {
   var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+  var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
   let body = {
     "username":"info@dataagile.com",
     "password":"conquest",
-    "fromDate": yesterday,
-    "toDate":today
+    "fromDate": this.searchfromdata,
+    "toDate":this.searchtodata
   }
   this.databotService.getVehicleTrips(body).subscribe(result => {
-     console.log(result);
      this.trips = result['data']['trips'];
      this.getTotalDriveTime(this.trips);
   });
 }
 
 getTotalDriveTime(trips) {
-    this.drivetime = 0
+    this.drivetime = 0;
+    this.distance = 0;
     for(let item of trips) {
       this.drivetime = this.drivetime + item['durationMinutes'];
       this.distance = this.distance = item['distanceMiles'];
-      console.log(this.drivetime);
+      // console.log(this.drivetime);
     }
 }
 
@@ -321,7 +220,7 @@ marker.addListener('mouseover', function () {
 
       });
 
-      $this.getDeviceEvents(devicenumber);
+      // $this.getDeviceEvents(devicenumber);
       // alert(this.warehousename)
       infowindow.open(this.map, marker);
 
@@ -350,7 +249,7 @@ marker.addListener('click', function () {
 
       });
 
-      $this.getDeviceEvents(devicenumber);
+      // $this.getDeviceEvents(devicenumber);
       payload = {
         queryParams: {
             vehicle: JSON.stringify(devicenumber),
@@ -373,6 +272,56 @@ marker.addListener('click', function () {
 }
 
 
+}
+
+getParams() {
+  var today = this.searchtodata;
+  var yesterday = this.searchfromdata;
+  let body = {
+    "username":"info@dataagile.com",
+    "password":"conquest",
+    "fromDate": this.searchfromdata,
+    "toDate":this.searchtodata
+  };
+  return body;
+}
+
+getAlerts() {
+  this.harshbraking = 0;
+  this.highspeed = 0;
+  this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
+    for(let item of data['data']['alerts']) {
+      // console.log(item['alertCode']);
+      if(item['alertCode'] == 'HARSH_BRAKING') {
+         this.harshbraking = this.harshbraking + 1;
+         console.log(this.harshbraking);
+      }
+      if(item['alertCode'] == 'HIGH_SPEED') {
+        this.highspeed = this.highspeed + 1;
+        // console.log(this.harshbraking);
+     }
+     if(item['alertCode'] == 'RAPID_ACCELERATION') {
+      this.rapidacceleration = this.rapidacceleration + 1;
+      // console.log(this.rapidacceleration);
+   }
+    }
+  });
+}
+
+searching() {
+  this.searchtodata = new Date(this.todate).getTime()*1000;
+  this.searchfromdata = new Date(this.fromdate).getTime()*1000;
+}
+
+searchingBydate() {
+  clearInterval(this.initInterval);
+  this.searchtodata = new Date(this.todate).getTime();
+  this.searchfromdata = new Date(this.fromdate).getTime();
+  this.searchInterval = setInterval(() => {
+  this.getAlerts();
+  this.getIdlingAllDevices();
+  this.gettripevent();
+   },5000);
 }
 
 }

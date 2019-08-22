@@ -103,9 +103,9 @@ width:100%;
 .li-items {
 text-align: center;
 background: #d9dde6;
-width: 12%;
+width: 75%;
 float: left;
-margin-left: 18px;
+/* margin-left: 18px; */
 }
 .m-4 {
 margin-top: 4px;
@@ -122,6 +122,63 @@ padding: 2px;
 .p-6 {
 padding: 6px;
 }
-.f-s-30 {
-font-size: 30px;
+.f-s-22 {
+font-size: 22px;
+}
+
+.d-3 {
+  /* background: #d9dde6; */
+}
+.a-r-d {
+  background: #d9dde6;
+  width: 98%
+}
+.m-t {
+  margin-top: 21px
+}
+
+.w-85 {
+  width: 85px
+}
+.w-88 {
+  width: 88px
+}
+.w-104 {
+  width: 104px
+}
+.w-95 {
+  width: 95px
+}
+.w-100 {
+  width: 100px
+}
+.m-t-3 {
+  margin-top: 3px
+}
+.m-a {
+  margin-top: 25px;
+  text-align: center;
+}
+.btn {
+  margin-left: 70px;
+  background: #0472b0;
+  color: #f8fbff;
+}
+input[type="date"]::before {
+	color: #999999;
+	content: attr(placeholder);
+}
+input[type="date"] {
+  color: #ffffff;
+  content: attr(placeholder);
+}
+input[type="date"]:focus,
+input[type="date"]:valid {
+  color: #666666;
+  content: attr(placeholder);
+}
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  content: "" !important;
+  content: attr(placeholder);
 }
