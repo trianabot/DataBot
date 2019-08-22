@@ -1,347 +1,7 @@
 <app-header (sidenavChange)='sidenavChanged()'></app-header>
 
-<!-- <div class="container-fluid">
-    <div class="row" *ngIf="Overview">
-      <ul class="nav nav-tabs card-header-tabs nav_border_bottom">
-          <li class="nav-item">
-            <a class="nav-link" [ngClass]="{activeclass: isActive(1)}" (click)="setfleetOverview(1);" style="color: #788786;">Vehicle Behavior </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [ngClass]="{activeclass: isActive(2)}" (click)="setDriver(2);" style="color: #788786"> Vehicle Performance </a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" [ngClass]="{activeclass: isActive(3)}" (click)="setvehicleMetric(3);" style="color: #788786"> Route Optimization </a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" [ngClass]="{activeclass: isActive(4)}" (click)="setcustomerFeed(4);" style="color: #788786"> Driver Feedback  </a>
-          </li>
-      </ul>
-      <div>
-        <div>
-            <app-vehiclebehavior *ngIf="fleetOverview"> </app-vehiclebehavior>
-        </div>
-        <div>
-            <app-vehicleperformance *ngIf="driverProfile"></app-vehicleperformance>
-        </div>
-        <div>
-            <app-vehicleroute  *ngIf="trackOrder"></app-vehicleroute>
-        </div>
-        <div>
-            <app-vehiclecustomer  *ngIf="custFeed"></app-vehiclecustomer>
-        </div>
-
-      </div>
-    </div>
-    <div class="row" *ngIf="tenantOverview">
-        <ul class="nav nav-tabs card-header-tabs nav_border_bottom">
-            <li class="nav-item">
-              <a class="nav-link" [ngClass]="{activeclass: isActive(1)}" (click)="setfleetOverview(1);" style="color: #788786;">Vehicle Behavior </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [ngClass]="{activeclass: isActive(2)}" (click)="setDriver(2);" style="color: #788786"> Vehicle Performance </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{activeclass: isActive(3)}" (click)="setvehicleMetric(3);" style="color: #788786"> Route Optimization </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{activeclass: isActive(4)}" (click)="setcustomerFeed(4);" style="color: #788786"> Driver Feedback  </a>
-            </li>
-        </ul>
-        <div>
-          <div>
-              <app-vehiclebehaviourtenant *ngIf="fleetOverview"></app-vehiclebehaviourtenant>
-          </div>
-          <div>
-              <app-vehicleperformance *ngIf="driverProfile"></app-vehicleperformance>
-          </div>
-          <div>
-              <app-vehicleroute  *ngIf="trackOrder"></app-vehicleroute>
-          </div>
-          <div>
-              <app-vehiclecustomer  *ngIf="custFeed"></app-vehiclecustomer>
-          </div>
-  
-        </div>
-      </div>
-</div> -->
-<!-- <div class="container-fluid">
-  <div class="row m-0">
-      <div class="col-md-2 text-center padding0">
-          <span class="topsectiontext">Driver</span>
-          <select class="dropdownWidth" name="Fleet" (change)="vehicleDDChange($event)">
-              <option style="font: bold" selected disabled value="-1">Select Driver</option>
-              <option *ngFor="let option of mapdata" value="{{option.deviceNbr}}">{{option.personName}}</option>
-          </select>
-
-      </div>
-  </div>
-   <div class="row m-0 m-t-15">
-        <div class="col-md-2 float-left top-nav">
-             <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/1icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Decreased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">40%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-        <div class="col-md-2 float-left top-nav">
-            <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/2icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Decreased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">8%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-        <div class="col-md-2 float-left top-nav">
-            <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/3icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Increased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">600%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-        <div class="col-md-2 float-left top-nav">
-            <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/4icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Decreased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">30%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-        <div class="col-md-2 float-left top-nav">
-            <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/5icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Increased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">10%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-        <div class="col-md-2 float-left top-nav">
-            <div class="a-r">
-                <div class="row m-0">
-                     <div class="col-md-4 padding0">
-                          <img src="../../assets/6icon.png">
-                     </div>
-                     <div class="col-md-5 padding0">
-                          <div class="row m-0">
-                              <span>
-                                  Increased
-                              </span>
-                          </div>
-                          <div class="row m-0">
-                              <span class="f-s">0%</span>
-                          </div>
-                     </div>
-                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
-                     </div>
-                </div>
-             </div>
-        </div>
-   </div>
-   <div class="row r-2 m-0 m-t-15">
-       <div class="col-md-3 p-7">
-            <div class="row m-0">
-                 <span class="f-s">Driver Scorecard</span>
-            </div>
-            <div class="row m-0">
-                 <div class="col-md-2 padding0">
-                     <img src="../../assets/7icon.png">
-                 </div>
-                 <div class="col-md-10 padding0">
-                      <span>{{(drivername) ? drivername : '- -'}}</span><br>
-                 </div>
-            </div>
-       </div>
-       <div class="col-md-3 m-t-10">
-          <div class="a-r-2">
-              <div class="row m-0 p-5">
-                   <div class="col-md-4 padding0 m-30">
-                        <span class="text-color m-l-5 f-s">57%</span>
-                   </div>
-                   <div class="col-md-8 padding0">
-                        <div class="row m-0">
-                            <span>
-                                <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <div class="row m-0">
-                            <span class="text-color f-s-10">Increased by 1.9 points</span>
-                        </div>
-                   </div>
-              </div>
-           </div>
-       </div>
-       <div class="col-md-3 m-t-10">
-          <div class="a-r-3">
-              <div class="row m-0 t-a">
-                   <div class="col-md-12 padding0">
-                        <span class="text-color f-s">Rank</span>
-                   </div>
-              </div>
-              <div class="row m-0">
-                   <div class="col-md-5">
-                        <span>November</span><br>
-                        <span>27/40</span>
-                   </div>
-                   <div class="col-md-2">
-                      <i class="fa fa-arrow-right a-r-i" aria-hidden="true"></i>
-                   </div>
-                   <div class="col-md-5">
-                      <span>November</span><br>
-                      <span>27/40</span>
-                   </div>
-              </div>
-           </div>
-       </div>
-       <div class="col-md-3 b-c m-t-10">
-
-       </div>
-   </div>
-   <div class="row m-0 m-t-15">
-        <div class="col-md-3 padding0">
-            <div class="a-r-4 b-c-4 p-7">
-                 <div class="row m-0">
-                     <span>Harsh Events</span>
-                 </div>
-                 <div class="row m-0">
-                     <div [chart]="harshevents">
-
-                     </div>
-                 </div>
-                 <div class="row m-0 t-a">
-                    <div class="p-7">Acceleration Events: &nbsp; {{(todayAcceleration) ? todayAcceleration : '- -'}}</div>
-                    <div class="p-7">Braking Events: &nbsp; {{(todayBraking) ? todayBraking : '- -'}}</div>
-                    <div class="p-7">Cornering Events: &nbsp; 3</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 padding0">
-            <div class="a-r-4 b-c-4 p-7">
-                <div class="row m-0">
-                    <span>Hours Per Day</span>
-                </div>
-                <div class="row m-0">
-                    <div [chart]="hourschart">
-
-                    </div>
-                </div>
-                <div class="row m-0 t-a">
-                   <div class="p-7">Total driving time: &nbsp; {{(drivetime) ? drivetime : '- -'}} Min</div>
-                   <div class="p-7">Total idling time: &nbsp; {{(idlingtime) ? idlingtime : '- -'}} Hrs</div>
-                   <div class="p-7">Stopped Time: &nbsp; {{(stoptime) ? stoptime : '- -'}} Hrs</div>
-               </div>
-           </div>
-        </div>
-        <div class="col-md-3 padding0">
-            <div class="a-r-4 b-c-4 p-7">
-                <div class="row m-0">
-                    <span>Speeding</span>
-                </div>
-                <div class="row m-0">
-                    <div [chart]="speedingchart">
-
-                    </div>
-                </div>
-                <div class="row m-0 t-a">
-                   <div class="p-7">CAT1: &nbsp; 33</div>
-                   <div class="p-7">CAT2: &nbsp; 9</div>
-                   <div class="p-7">CAT3: &nbsp; 3</div>
-               </div>
-           </div>
-        </div>
-        <div class="col-md-3 padding0">
-            <div class="a-r-4 b-c-4 p-7">
-                <div class="row m-0">
-                    <span>Miles Per Day</span>
-                </div>
-                <div class="row m-0">
-                    <div [chart]="mileschart">
-
-                    </div>
-                </div>
-                <div class="row m-0 t-a">
-                   <div class="p-7">Days used: &nbsp; 33</div>
-                   <div class="p-7">Miles driven: &nbsp; 9</div>
-                   <div class="p-7">Total trips: &nbsp; 3</div>
-               </div>
-           </div>
-        </div>
-   </div>
-
-</div> -->
 <div class="container-fluid">
-  <div class="row m-0">
+  <!-- <div class="row m-0">
     <div class="col-md-2">
          <div class="row m-0">
                <div class="col-md-12 padding0 t-a">
@@ -408,9 +68,46 @@
                     </div>
               </div>
     </div>
-  </div>
+  </div> -->
+  <ul class="padding0" style="list-style: none">
+      <li class="li-items">
+          <span class="f-s-30">4</span><br>
+          <img class="p-4" src="../../assets/databot-page - icon1.png"><br>
+          <span>Total Trucks</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">{{(drivetime) ? drivetime : '- -'}}</span><br>
+            <img class="p-2" src="../../assets/databot-page - icon2.png"><br>
+            <span>Drive Time</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">{{(distance) ? distance : '- -'}}</span><br>
+            <img src="../../assets/databot-page - icon3.png"><br>
+            <span>Distance Travelled</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">{{(idlingtime) ? idlingtime : '- -'}}</span><br>
+            <img class="p-10" src="../../assets/databot-page - icon4.png"><br>
+            <span>Idling</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">200</span><br>
+            <img src="../../assets/databot-page - icon5.png"><br>
+            <span>Speeding</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">60</span><br>
+            <img src="../../assets/databot-page - icon6.png"><br>
+            <span>Hard Braking</span>
+      </li>
+      <li class="li-items">
+            <span class="f-s-30">321</span><br>
+            <img class="p-6" src="../../assets/databot-page - icon7.png"><br>
+            <span>Acceleration</span>
+      </li>
+  </ul>
   <div class="row m-0 m-t-10">
-      <div class="col-md-12 padding0">
+      <div class="col-md-12 padding0 m-4">
           <div id='map' class="col-md-12"></div>
       </div>
   </div>
