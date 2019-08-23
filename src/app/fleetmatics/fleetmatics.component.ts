@@ -40,98 +40,103 @@ export class FleetmaticsComponent implements OnInit {
   drivetime: number;
   driver: any;
   location: any;
-
-  private hourschart = new Chart({
+  hourschart: any;
+  // private hourschart = new Chart({
     
-    chart: {
-      backgroundColor: '#f9f9f8',
-      height: 200,
-      // width: 373,
-      type: 'bar',
-      style: {
-        color: 'white',
-      },
-    },
-    legend: {
-      itemStyle: {
-        color: '#fff'
-      },
-      align: 'center',
-      verticalAlign: 'top',
-      floating: false,
-      style: {
-        color: '#fff'
-      }
-    },
-    credits: {
-      enabled: false
-    },
-    title: {
-      text: null,
-      style: {
-        color: '#fff'
-      }
-    },
-    xAxis: {
-      tickInterval: 1,
-      // type: 'datetime',
-      // categories: time,
-      labels: {
-        style: {
-          color: 'fff'
-        },
-        format: '{value}',
-      },
-    },
-    yAxis: {
-      gridLineColor: 'transparent',
-      labels: {
-        format: '{value}',
-        style: {
-          color: 'fff'
-        }
-      },
-      title: {
-        text: null,
-      },
-    },
-    series: [{
-      // name: "Speed",
-      // showInLegend: false,
-      // borderColor: null,
-      data: [20],
-      color: '#8ba9ff',
-      pointWidth: 15
-    },
-    {
-      // name: "Speed",
-      // showInLegend: false,
-      // borderColor: null,
-      data: [15],
-      color: '#4f76ad',
-      pointWidth: 15
-    },
-    {
-      // name: "Speed",
-      // showInLegend: false,
-      // borderColor: null,
-      data: [15],
-      color: '#4f76ad',
-      pointWidth: 15
-    },
-    {
-      // name: "Speed",
-      // showInLegend: false,
-      // borderColor: null,
-      data: [15],
-      color: '#4f76ad',
-      pointWidth: 15
-    }
-    ],
-    tooltip: {
-      valueSuffix: 'Hrs'
-    }
-  });
+  //   chart: {
+  //     backgroundColor: '#f9f9f8',
+  //     height: 200,
+  //     // width: 373,
+  //     type: 'bar',
+  //     style: {
+  //       color: 'white',
+  //     },
+  //   },
+  //   legend: {
+  //     itemStyle: {
+  //       color: 'black'
+  //     },
+  //     align: 'center',
+  //     verticalAlign: 'top',
+  //     floating: false,
+  //     style: {
+  //       color: '#fff'
+  //     }
+  //   },
+  //   credits: {
+  //     enabled: false
+  //   },
+  //   title: {
+  //     text: null,
+  //     style: {
+  //       color: '#fff'
+  //     }
+  //   },
+  //   xAxis: {
+  //     tickInterval: 1,
+  //     // type: 'datetime',
+  //     // categories: time,
+  //     labels: {
+  //       style: {
+  //         color: 'fff'
+  //       },
+  //       format: '{value}',
+  //     },
+  //   },
+  //   yAxis: {
+  //     gridLineColor: 'transparent',
+  //     labels: {
+  //       format: '{value}',
+  //       style: {
+  //         color: 'fff'
+  //       }
+  //     },
+  //     title: {
+  //       text: null,
+  //     },
+  //   },
+  //   series: [
+  //   //   {
+  //   //   // name: "Speed",
+  //   //   // showInLegend: false,
+  //   //   // borderColor: null,
+  //   //   data: [20],
+  //   //   color: '#8ba9ff',
+  //   //   pointWidth: 15
+  //   // },
+  //   {
+  //     name: "Total Driving Time",
+  //     // showInLegend: false,
+  //     // borderColor: null,
+  //     data: [15],
+  //     color: '#4f76ad',
+  //     pointWidth: 15
+  //   },
+  //   {
+  //     name: "Idling Time",
+  //     // showInLegend: false,
+  //     // borderColor: null,
+  //     data: [15],
+  //     color: '#4f76ad',
+  //     pointWidth: 15
+  //   },
+  //   {
+  //     name: "Stopped Time",
+  //     // showInLegend: false,
+  //     // borderColor: null,
+  //     data: [15],
+  //     color: '#4f76ad',
+  //     pointWidth: 15
+  //   }
+  //   ],
+  //   tooltip: {
+  //     valueSuffix: 'Hrs'
+  //   }
+  // });
+  option: any;
+  miles: number;
+  totaltrips: any;
+  unauthorizedMiles: any;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -153,12 +158,11 @@ export class FleetmaticsComponent implements OnInit {
       this.drivername = JSON.parse(drivername);
       this.driver = JSON.parse(drivername);
       this.location = JSON.parse(location);
-      console.log(this.location);
       this.getDeviceEvents(this.imei);
-      this.HarshEvents();
-      // this.HoursChart();
+      this.HarshEvents('','');
+      this.HoursChart('','','');
       this.Speeding();
-      this.MilesChart();
+      this.MilesChart('','','');
       this.loadmapdata();
       this.getIdlingAllDevices();
       this.gettripevent();
@@ -213,13 +217,13 @@ export class FleetmaticsComponent implements OnInit {
     return this.selected === item;
   }
 
-  HarshEvents() {
+  HarshEvents(acc,braking) {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
         height: 200,
         // width: 373,
-        type: 'column',
+        type: 'pie',
         style: {
           color: 'white',
 
@@ -242,7 +246,7 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: '45',
+        text: null,
         align: 'center',
         verticalAlign: 'middle',
         y: 3,
@@ -293,22 +297,22 @@ export class FleetmaticsComponent implements OnInit {
       },
       series: [{
         type: 'pie',
-        name: 'Browser share',
+        showInLegend: false,
         innerSize: '90%',
         borderColor: null,
         data: [
-          ['Chrome', 58.9],
-          ['Firefox', 13.29]
+          ['Acceleration', acc],
+          ['Braking', braking]
         ]
       }],
       tooltip: {
-        valueSuffix: '°F'
+        // valueSuffix: '°F'
       }
     };
     this.harshevents = new Chart(this.options);
   }
 
-  HoursChart() {
+  HoursChart(drivetime,idletime,stoptime) {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
@@ -321,7 +325,7 @@ export class FleetmaticsComponent implements OnInit {
       },
       legend: {
         itemStyle: {
-          color: '#fff'
+          color: 'black'
         },
         align: 'center',
         verticalAlign: 'top',
@@ -363,34 +367,26 @@ export class FleetmaticsComponent implements OnInit {
         },
       },
       series: [{
-        // name: "Speed",
+        name: "Drive Time",
         showInLegend: false,
-        borderColor: null,
-        data: [20],
+        // borderColor: null,
+        data: [drivetime],
         color: '#8ba9ff',
         pointWidth: 15
       },
       {
-        // name: "Speed",
+        name: "Idle Time",
         showInLegend: false,
-        borderColor: null,
-        data: [15],
+        // borderColor: null,
+        data: [idletime],
         color: '#4f76ad',
         pointWidth: 15
       },
       {
-        // name: "Speed",
+        name: "Stop Time",
         showInLegend: false,
-        borderColor: null,
-        data: [15],
-        color: '#4f76ad',
-        pointWidth: 15
-      },
-      {
-        // name: "Speed",
-        showInLegend: false,
-        borderColor: null,
-        data: [15],
+        // borderColor: null,
+        data: [stoptime],
         color: '#4f76ad',
         pointWidth: 15
       }
@@ -432,7 +428,7 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        // text: '45',
+        text: null,
         align: 'center',
         verticalAlign: 'middle',
         // y: 3,
@@ -497,7 +493,7 @@ export class FleetmaticsComponent implements OnInit {
     this.speedingchart = new Chart(this.options);
   }
 
-  MilesChart() {
+  MilesChart(miles,totaltrips,unauthorizedMiles) {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
@@ -551,35 +547,28 @@ export class FleetmaticsComponent implements OnInit {
           text: null,
         },
       },
-      series: [{
-        // name: "Speed",
+      series: [
+      {
+        name: "Miles",
         showInLegend: false,
         borderColor: null,
-        data: [20],
+        data: [miles],
+        color: '#4f76ad',
+        pointWidth: 15
+      },
+      {
+        name: "Unauthorized Miles",
+        showInLegend: false,
+        borderColor: null,
+        data: [unauthorizedMiles],
         color: '#8ba9ff',
         pointWidth: 15
       },
       {
-        // name: "Speed",
+        name: "Total Trips",
         showInLegend: false,
         borderColor: null,
-        data: [15],
-        color: '#4f76ad',
-        pointWidth: 15
-      },
-      {
-        // name: "Speed",
-        showInLegend: false,
-        borderColor: null,
-        data: [15],
-        color: '#4f76ad',
-        pointWidth: 15
-      },
-      {
-        // name: "Speed",
-        showInLegend: false,
-        borderColor: null,
-        data: [15],
+        data: [totaltrips],
         color: '#4f76ad',
         pointWidth: 15
       }
@@ -600,7 +589,6 @@ export class FleetmaticsComponent implements OnInit {
       var data = res['data']['positions'];
       var mapdata = data;
       this.mapdata = data;
-      console.log(this.mapdata);
       // this.loadmap(mapdata);
     });
   }
@@ -624,35 +612,12 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   vehicleDDChange(event) {
-     let data = [50];
-      this.options.series[0].data = data;
-      this.hourschart = new Chart(this.options);
+    //  let data = [50];
+    //   this.options.series[0].data = data;
+    //   this.hourschart = new Chart(this.options);
     // this.hourschart.addPoint(100);
-     console.log(event.currentTarget.value);
      this.imei = event.currentTarget.value;
-     this.loadData();
-    //  this.getDeviceEvents(this.imei);
-    // var today = Date.now();
-    // var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
-    // console.log(today, yesterday);
-    // var yest = new Date(yesterday);
-    // // console.log(yest+""+yesterday);​
-    // let body = {
-    //   "username":"info@dataagile.com",
-    //   "password":"conquest",
-    //   "imei":this.imei,
-    //   "fromDate": yesterday,
-    //   "toDate":today
-    // }
-    // this.databotService.getVehicleHistory(body).subscribe(result => {
-    //   console.log(result);
-    //   var positions  = result['data']['positions'];
-    //   var stops = result['data']['stops'];
-    //   this.drivername = result['data']['positions'][0]['personName'];
-    //   this.getBrakingIdlingEvents(positions);
-    //   this.getIdlingEvents(stops);
-    //   this.getTotalDriveTime(this.trips);
-    // });
+     this.getDeviceEvents(this.imei);
   }
   
 loadData() {
@@ -668,10 +633,8 @@ loadData() {
     $this.todayBraking = 0;
     // console.log(moment(1564337311686).format('MMM DD, YYYY') == moment(1564165457000).format('MMM DD, YYYY'));
     var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
-    console.log(today, yesterday);
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
     var yest = new Date(yesterday);
-    // console.log(yest+""+yesterday);​
     let body = {
       "username":"info@dataagile.com",
       "password":"conquest",
@@ -680,11 +643,9 @@ loadData() {
       "toDate":today
     }
     this.databotService.getVehicleHistory(body).subscribe(result => {
-      console.log(result);
       var positions  = result['data']['positions'];
       var stops = result['data']['stops'];
       this.driver = result['data']['positions'][0]['personName'];
-      console.log(this.driver);
       this.gettripevent();
       this.getIdlingEvents(stops);
       for(let item of positions) {
@@ -696,30 +657,18 @@ loadData() {
         var momentString = momentObj.format('MMM DD, YYYY');
         if(item['behaviorCd'] == 'HAC' && (today == todayfromdata)) {
           $this.todayAcceleration = $this.todayAcceleration + 1;
-          console.log($this.todayAcceleration);
         }
         if(item['behaviorCd'] == 'HBR' && (today == todayfromdata)) {
           $this.todayBraking = $this.todayBraking + 1;
-          console.log($this.todayBraking);
         }
       }
-      // this.drivername = result['data']['positions'][0]['personName'];
-      // this.getBrakingIdlingEvents(positions);
-      // this.getIdlingEvents(stops);
-      // this.getTotalDriveTime(this.trips);
+      this.HarshEvents(this.todayAcceleration, this.todayBraking);
     });
   }
 
 
   
   getBrakingIdlingEvents(positions){
-    console.log(positions);
-    // this.weekAcceleration = 0;
-    // this.weekBraking = 0;
-    // this.todayAcceleration = 0;
-    // this.todayBraking = 0;
-    // this.lastDayAcceleration = 0;
-    // this.lastDayBraking = 0;
     // tslint:disable-next-line: forin
     for(var item in positions){
        let today = moment(Date.now()).format('MMM DD, YYYY');
@@ -728,30 +677,17 @@ loadData() {
        var dateObj = new Date(dateString);
        var momentObj = moment(dateObj);
        var momentString = momentObj.format('MMM DD, YYYY');
-      //  console.log(momentString);
-      //  if(positions[item]['behaviorCd'] == 'HAC'){
-      //    this.weekAcceleration = this.weekAcceleration + 1;
-      //  }else if(positions[item]['behaviorCd'] == 'HBR'){
-      //    this.weekBraking = this.weekBraking + 1;
-      //  }
         if(positions[item]['behaviorCd'] == 'HAC' && (today == todayfromdata)){
         this.todayAcceleration = this.todayAcceleration + 1;
        }else if (positions[item]['behaviorCd'] == 'HBR' && (today == todayfromdata)){
         this.todayBraking = this.todayBraking + 1;
        }
-      // else if(positions[item]['behaviorCd'] == 'HAC' && (momentString == todayfromdata)){
-      //   this.lastDayAcceleration = this.lastDayAcceleration + 1;
-      //  }else if (positions[item]['behaviorCd'] == 'HBR' && (momentString == todayfromdata)){
-      //   this.lastDayBraking = this.lastDayBraking + 1;
-      //  }
     }
-    // console.log(this.weekAcceleration+"this is"+this.weekBraking);
 }
 
 
 /**Get engine idling events */
 getIdlingEvents(stops) {
-    // console.log(stops);
     let $this = this;
     $this.todayIdling = 0;
     $this.lastDayIdling = 0;
@@ -767,22 +703,11 @@ getIdlingEvents(stops) {
       var dateObj = new Date(dateString);
       var momentObj = moment(dateObj);
       var momentString = momentObj.format('MMM DD, YYYY');
-      console.log(today == todayfromdata);
-      // if(stops[item]['stopType'] == 'Idling'){
-      //   this.weekIdling = this.weekIdling + 1;
-      // }
-      // else if(stops[item]['stopType'] == 'Idling' && (today == todayfromdata) && (today == endfromdate)){
-      //  this.todayIdling = this.todayIdling + 1;
-      // }else if(stops[item]['stopType'] == 'Idling' && (momentString == todayfromdata) && (momentString == endfromdate)){
-      //   this.lastDayIdling = this.lastDayIdling + 1;
-      //  }
       if(stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
              $this.stoptime = $this.stoptime + stops[item]['duration'];
-             console.log($this.stoptime);
       }
       if(stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
         $this.idlingtime = $this.idlingtime + stops[item]['duration'];
-        console.log($this.idlingtime);
       }
    }
 } 
@@ -797,21 +722,27 @@ gettripevent() {
     "toDate":today
   }
   this.databotService.getVehicleTrips(body).subscribe(result => {
-     console.log(result);
      this.trips = result['data']['trips'];
      this.getTotalDriveTime(this.trips);
   });
 }
 
 getTotalDriveTime(trips) {
-    this.drivetime = 0
+    this.drivetime = 0;
+    this.miles = 0;
+    this.totaltrips = 0;
+    this.unauthorizedMiles = 0
     for(let item of trips) {
-      // console.log(item);
       if(item['driverName'] == this.driver) {
+          this.miles = this.miles + item['authorizedMiles'];
+          this.unauthorizedMiles = this.unauthorizedMiles + item['unauthorizedMiles']
           this.drivetime = this.drivetime + item['durationMinutes'];
-          console.log(this.drivetime)
+          this.totaltrips = this.totaltrips + 1;
       }
     }
+   this.HoursChart(this.drivetime,this.idlingtime,this.stoptime);
+   this.MilesChart(this.miles,this.totaltrips,this.unauthorizedMiles);
+  //  this.updateHarshEventsChart();
 }
 
 }

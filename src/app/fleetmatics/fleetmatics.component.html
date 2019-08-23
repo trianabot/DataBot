@@ -285,7 +285,7 @@
                  <div class="row m-0 t-a">
                     <div class="p-7">Acceleration Events: &nbsp; {{(todayAcceleration) ? todayAcceleration : '- -'}}</div>
                     <div class="p-7">Braking Events: &nbsp; {{(todayBraking) ? todayBraking : '- -'}}</div>
-                    <div class="p-7">Cornering Events: &nbsp; 3</div>
+                    <div class="p-7">Speeding Events: &nbsp; 3</div>
                 </div>
             </div>
         </div>
@@ -334,9 +334,10 @@
                     </div>
                 </div>
                 <div class="row m-0 t-a">
-                   <div class="p-7">Days used: &nbsp; 33</div>
-                   <div class="p-7">Miles driven: &nbsp; 9</div>
-                   <div class="p-7">Total trips: &nbsp; 3</div>
+                   <!-- <div class="p-7">Days used: &nbsp; 33</div> -->
+                   <div class="p-7">Miles driven: &nbsp; {{this.miles}}</div>
+                   <div class="p-7">Unauthorized Miles driven: &nbsp; {{this.unauthorizedMiles}}</div>
+                   <div class="p-7">Total trips: &nbsp; {{this.totaltrips}}</div>
                </div>
            </div>
         </div>

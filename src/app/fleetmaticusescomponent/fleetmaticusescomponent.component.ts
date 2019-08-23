@@ -141,7 +141,7 @@ getIdlingEvents(stops) {
       }
       if((stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
         this.idlingtime = this.idlingtime + stops[item]['duration'];
-        console.log(this.idlingtime);
+        // console.log(this.idlingtime);
       }
    }
 } 
@@ -157,6 +157,7 @@ gettripevent() {
   }
   this.databotService.getVehicleTrips(body).subscribe(result => {
      this.trips = result['data']['trips'];
+     console.log(this.trips);
      this.getTotalDriveTime(this.trips);
   });
 }
