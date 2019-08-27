@@ -179,4 +179,8 @@ export class DatabotService {
   getVehicleAlerts(body) {
     return this.http.post(this.linxupApiEndpoint + 'alerts', JSON.stringify(body), this.get_http_options());
   }
+
+  getVehicleLocations(body) {
+    return this.http.post(this.linxupApiEndpoint + 'locations', JSON.stringify(body), this.get_http_options());
+  }
 }

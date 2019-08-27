@@ -993,6 +993,7 @@ var DatabotService = /** @class */ (function () {
         this.http = http;
         this.apiendpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiEndPoint;
         this.linxupEndpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].linxupEndPoint;
+        this.linxupApiEndpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].linxupApiEndPoint;
     }
     DatabotService.prototype.loadHrdashboard1 = function () {
         return this.http.get('../../assets/data/HR_Dashboard1.json');
@@ -1020,6 +1021,17 @@ var DatabotService = /** @class */ (function () {
     };
     DatabotService.prototype.loadPoliticsTrendBooth = function () {
         return this.http.get('../../assets/data/booth_json_final.json');
+    };
+    DatabotService.prototype.get_http_options = function () {
+        var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiIzMjgzNTUiLCJpc3MiOiJhZ2lsaXMiLCJwZXJzb25JZCI6Ijk1MDIyMSIsImV4cCI6MTcyMjk5NzgxMiwiaWF0IjoxNTY1MTQ1MDEyLCJ1c2VybmFtZSI6ImluZm9AZGF0YWFnaWxlLmNvbSJ9.CFiTePNkn_DBWWb1Q5wc5PKz7RhrJhLnlY6TDw4oc_k'
+        });
+        var options = {
+            headers: httpHeaders
+        };
+        return options;
     };
     DatabotService.prototype.clientRegistration = function (clientdata) {
         var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
@@ -1119,6 +1131,9 @@ var DatabotService = /** @class */ (function () {
             headers: httpHeaders
         };
         return this.http.post(this.linxupEndpoint + '/advancedTrips', JSON.stringify(body), options);
+    };
+    DatabotService.prototype.getVehicleAlerts = function (body) {
+        return this.http.post(this.linxupApiEndpoint + 'alerts', JSON.stringify(body), this.get_http_options());
     };
     DatabotService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -3044,21 +3059,21 @@ var FleetmaticsComponent = /** @class */ (function () {
             console.log(this.location);
             this.getDeviceEvents(this.imei);
             this.HarshEvents();
-            this.HoursChart();
-            this.Speeding();
-            this.MilesChart();
-            this.loadmapdata();
-            // this.getIdlingAllDevices();
-            this.gettripevent();
-        }
-        else {
-            this.HarshEvents();
-            this.HoursChart();
+            // this.HoursChart();
             this.Speeding();
             this.MilesChart();
             this.loadmapdata();
             this.getIdlingAllDevices();
             this.gettripevent();
+        }
+        else {
+            // this.HarshEvents();
+            // this.HoursChart();
+            // this.Speeding();
+            // this.MilesChart();
+            // this.loadmapdata();
+            // this.getIdlingAllDevices();
+            // this.gettripevent();
         }
     };
     FleetmaticsComponent.prototype.setfleetOverview = function (item) {
@@ -3489,7 +3504,10 @@ var FleetmaticsComponent = /** @class */ (function () {
         });
     };
     FleetmaticsComponent.prototype.vehicleDDChange = function (event) {
-        // this.hourschart.series[0].setData([100]);
+        var data = [50];
+        this.options.series[0].data = data;
+        this.hourschart = new angular_highcharts__WEBPACK_IMPORTED_MODULE_1__["Chart"](this.options);
+        // this.hourschart.addPoint(100);
         console.log(event.currentTarget.value);
         this.imei = event.currentTarget.value;
         this.loadData();
@@ -3691,7 +3709,7 @@ var FleetmaticsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".activeclass{\n  background-color: #f9f9f9!important;\n  border-bottom: 3px solid palevioletred;\n  cursor:pointer;\n\n}\n.nav-tabs>li>a:hover{\n  cursor:pointer;\n}\n.m-0 {\n  margin: 0px\n}\n.m-t-15 {\n  margin-top: 15px\n}\n.background {\n  /* background: '#66c8275';\n  height: '-webkit-fill-available' */\n}\n.top-nav {\n  /* background: #f2e5f1; width: 98% */\n}\n.padding0 {\n  padding: 0px;\n}\n.a-r {\n  background: #f2e5f1; width: 98%\n}\n.f-s {\n  font-size: 20px;\n}\n.f-s-10 {\n  font-size: 10px\n}\n.a-i {\n  margin-left: 15px !important;\n  font-size: 25px !important;\n  margin-top: 12px !important;\n  background: #f8fbff;\n  border-radius: 10px;\n\n}\n/*--------row 2-------*/\n.r-2 {\nborder: 1px black solid;\n/* padding: 40px; */\n}\n.m-t-10 {\n margin-top: 10px\n}\n.m-l-5 {\n margin-left: 30px;\n\n}\n.m-30 {\n margin-top: 30px\n}\n.a-r-2 {\n background: #013358;\n width: 98%\n}\n.text-color {\n color: #f8fbff\n}\n.a-r-3 {\nbackground: #03a9f5;\nwidth: 98%\n}\n.p-7 {\n padding: 7px\n}\n.p-5 {\n padding: 5px\n}\n.a-r-i {\n/* margin-left: 15px !important; */\nfont-size: 25px !important;\n/* margin-top: 12px !important; */\n}\n.t-a {\n text-align: center\n}\n.b-c {\n border: 1px black solid ;\n padding: 32px;\n}\n.a-r-4 {\n width: 98%\n}\n.b-c-4 {\nborder: 1px black solid ;\n}\n#map{\nheight:500px;\nwidth:100%;\n}\n.img {\n  margin-left: 50px\n}\n.li-items {\ntext-align: center;\nbackground: #d9dde6;\nwidth: 12%;\nfloat: left;\nmargin-left: 18px;\n}\n.m-4 {\nmargin-top: 4px;\n}\n.p-10 {\npadding: 10px\n}\n.p-4 {\npadding: 4px;\n}\n.p-2 {\npadding: 2px;\n}\n.p-6 {\npadding: 6px;\n}\n.f-s-30 {\nfont-size: 30px;\n}"
+module.exports = ".activeclass{\n  background-color: #f9f9f9!important;\n  border-bottom: 3px solid palevioletred;\n  cursor:pointer;\n\n}\n.nav-tabs>li>a:hover{\n  cursor:pointer;\n}\n.m-0 {\n  margin: 0px\n}\n.m-t-15 {\n  margin-top: 15px\n}\n.background {\n  /* background: '#66c8275';\n  height: '-webkit-fill-available' */\n}\n.top-nav {\n  /* background: #f2e5f1; width: 98% */\n}\n.padding0 {\n  padding: 0px;\n}\n.a-r {\n  background: #f2e5f1; width: 98%\n}\n.f-s {\n  font-size: 20px;\n}\n.f-s-10 {\n  font-size: 10px\n}\n.a-i {\n  margin-left: 15px !important;\n  font-size: 25px !important;\n  margin-top: 12px !important;\n  background: #f8fbff;\n  border-radius: 10px;\n\n}\n/*--------row 2-------*/\n.r-2 {\nborder: 1px black solid;\n/* padding: 40px; */\n}\n.m-t-10 {\n margin-top: 10px\n}\n.m-l-5 {\n margin-left: 30px;\n\n}\n.m-30 {\n margin-top: 30px\n}\n.a-r-2 {\n background: #013358;\n width: 98%\n}\n.text-color {\n color: #f8fbff\n}\n.a-r-3 {\nbackground: #03a9f5;\nwidth: 98%\n}\n.p-7 {\n padding: 7px\n}\n.p-5 {\n padding: 5px\n}\n.a-r-i {\n/* margin-left: 15px !important; */\nfont-size: 25px !important;\n/* margin-top: 12px !important; */\n}\n.t-a {\n text-align: center\n}\n.b-c {\n border: 1px black solid ;\n padding: 32px;\n}\n.a-r-4 {\n width: 98%\n}\n.b-c-4 {\nborder: 1px black solid ;\n}\n#map{\nheight:500px;\nwidth:100%;\n}\n.img {\n  margin-left: 50px\n}\n.li-items {\ntext-align: center;\nbackground: #d9dde6;\nwidth: 75%;\nfloat: left;\n/* margin-left: 18px; */\n}\n.m-4 {\nmargin-top: 4px;\n}\n.p-10 {\npadding: 10px\n}\n.p-4 {\npadding: 4px;\n}\n.p-2 {\npadding: 2px;\n}\n.p-6 {\npadding: 6px;\n}\n.f-s-22 {\nfont-size: 22px;\n}\n.d-3 {\n  /* background: #d9dde6; */\n}\n.a-r-d {\n  background: #d9dde6;\n  width: 98%\n}\n.m-t {\n  margin-top: 21px\n}\n.w-85 {\n  width: 85px\n}\n.w-88 {\n  width: 88px\n}\n.w-104 {\n  width: 104px\n}\n.w-95 {\n  width: 95px\n}\n.w-100 {\n  width: 100px\n}\n.m-t-3 {\n  margin-top: 3px\n}\n.m-a {\n  margin-top: 25px;\n  text-align: center;\n}\n.btn {\n  margin-left: 70px;\n  background: #0472b0;\n  color: #f8fbff;\n}\ninput[type=\"date\"]::before {\n\tcolor: #999999;\n\tcontent: attr(placeholder);\n}\ninput[type=\"date\"] {\n  color: #ffffff;\n  content: attr(placeholder);\n}\ninput[type=\"date\"]:focus,\ninput[type=\"date\"]:valid {\n  color: #666666;\n  content: attr(placeholder);\n}\ninput[type=\"date\"]:focus::before,\ninput[type=\"date\"]:valid::before {\n  content: \"\" !important;\n  content: attr(placeholder);\n}"
 
 /***/ }),
 
@@ -3702,7 +3720,7 @@ module.exports = ".activeclass{\n  background-color: #f9f9f9!important;\n  borde
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header (sidenavChange)='sidenavChanged()'></app-header>\n\n<div class=\"container-fluid\">\n  <!-- <div class=\"row m-0\">\n    <div class=\"col-md-2\">\n         <div class=\"row m-0\">\n               <div class=\"col-md-12 padding0 t-a\">\n                    <span> {{(drivetime) ? drivetime : '- -'}} </span><br>\n                    <span>Drive Time</span>\n               </div>\n               <div class=\"col-md-12 padding0\">\n                    <img class=\"img\" src=\"../../assets/distance.png\">\n               </div>\n         </div>\n    </div>\n    <div class=\"col-md-2\">\n            <div class=\"row m-0\">\n                    <div class=\"col-md-12 padding0 t-a\">\n                         <span> {{(distance) ? distance : '- -'}} </span><br>\n                         <span>Distance Travelled</span>\n                    </div>\n                    <div class=\"col-md-12 padding0\">\n                            <img class=\"img\" src=\"../../assets/distance.png\">\n                    </div>\n              </div>\n    </div>\n    <div class=\"col-md-2\">\n            <div class=\"row m-0\">\n                    <div class=\"col-md-12 padding0 t-a\">\n                         <span> {{(idlingtime) ? idlingtime : '- -'}} </span><br>\n                         <span>Idling</span>\n                    </div>\n                    <div class=\"col-md-12 padding0\">\n                            <img class=\"img\" src=\"../../assets/distance.png\">\n                    </div>\n              </div>\n    </div>\n    <div class=\"col-md-2\">\n            <div class=\"row m-0\">\n                    <div class=\"col-md-12 padding0 t-a\">\n                         <span> - - </span><br>\n                         <span>Speeding</span>\n                    </div>\n                    <div class=\"col-md-12 padding0\">\n                            <img class=\"img\" src=\"../../assets/distance.png\">\n                    </div>\n              </div>\n    </div>\n    <div class=\"col-md-2\">\n            <div class=\"row m-0\">\n                    <div class=\"col-md-12 padding0 t-a\">\n                         <span> - - </span><br>\n                         <span>Hard Braking</span>\n                    </div>\n                    <div class=\"col-md-12 padding0\">\n                            <img class=\"img\" src=\"../../assets/distance.png\">\n                    </div>\n              </div>\n    </div>\n    <div class=\"col-md-2\">\n            <div class=\"row m-0\">\n                    <div class=\"col-md-12 padding0 t-a\">\n                         <span> - - </span><br>\n                         <span>Acceleration</span>\n                    </div>\n                    <div class=\"col-md-12 padding0\">\n                            <img class=\"img\" src=\"../../assets/distance.png\">\n                    </div>\n              </div>\n    </div>\n  </div> -->\n  <ul class=\"padding0\" style=\"list-style: none\">\n      <li class=\"li-items\">\n          <span class=\"f-s-30\">4</span><br>\n          <img class=\"p-4\" src=\"../../assets/databot-page - icon1.png\"><br>\n          <span>Total Trucks</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">{{(drivetime) ? drivetime : '- -'}}</span><br>\n            <img class=\"p-2\" src=\"../../assets/databot-page - icon2.png\"><br>\n            <span>Drive Time</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">{{(distance) ? distance : '- -'}}</span><br>\n            <img src=\"../../assets/databot-page - icon3.png\"><br>\n            <span>Distance Travelled</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">{{(idlingtime) ? idlingtime : '- -'}}</span><br>\n            <img class=\"p-10\" src=\"../../assets/databot-page - icon4.png\"><br>\n            <span>Idling</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">200</span><br>\n            <img src=\"../../assets/databot-page - icon5.png\"><br>\n            <span>Speeding</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">60</span><br>\n            <img src=\"../../assets/databot-page - icon6.png\"><br>\n            <span>Hard Braking</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-30\">321</span><br>\n            <img class=\"p-6\" src=\"../../assets/databot-page - icon7.png\"><br>\n            <span>Acceleration</span>\n      </li>\n  </ul>\n  <div class=\"row m-0 m-t-10\">\n      <div class=\"col-md-12 padding0 m-4\">\n          <div id='map' class=\"col-md-12\"></div>\n      </div>\n  </div>\n</div>"
+module.exports = "<app-header (sidenavChange)='sidenavChanged()'></app-header>\n\n<div class=\"container-fluid\">\n  <!-- <ul class=\"padding0\" style=\"list-style: none\">\n      <li class=\"li-items\">\n          <span class=\"f-s-22\">{{mapdata.length}}</span><br>\n          <img class=\"p-4\" src=\"../../assets/databot-page - icon1.png\"><br>\n          <span>Total Trucks</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\">{{(drivetime) ? drivetime : '- -'}}</span><br>\n            <img class=\"p-2\" src=\"../../assets/databot-page - icon2.png\"><br>\n            <span>Drive Time</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\">{{(distance) ? distance : '- -'}}</span><br>\n            <img src=\"../../assets/databot-page - icon3.png\"><br>\n            <span>Distance Travelled</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\">{{(idlingtime) ? idlingtime : '- -'}}</span><br>\n            <img class=\"p-10\" src=\"../../assets/databot-page - icon4.png\"><br>\n            <span>Idling</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\">{{(highspeed) ? highspeed : '- -'}}</span><br>\n            <img src=\"../../assets/databot-page - icon5.png\"><br>\n            <span>Speeding</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\"> {{(harshbraking) ? harshbraking : '- -'}} </span><br>\n            <img src=\"../../assets/databot-page - icon6.png\"><br>\n            <span>Hard Braking</span>\n      </li>\n      <li class=\"li-items\">\n            <span class=\"f-s-22\">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span><br>\n            <img class=\"p-6\" src=\"../../assets/databot-page - icon7.png\"><br>\n            <span>Acceleration</span>\n      </li>\n  </ul> -->\n  <div class=\"row m-0 m-t-10\">\n      <div class=\"col-md-7 padding0 float-left\">\n        <div class=\"col-md-3 d-3 padding0 float-left\">\n            <div class=\"a-r-d\">\n                <div class=\"row m-0\">\n                    <div class=\"col-md-12 p-4 m-t\">\n                            From: <input type=\"date\" [(ngModel)]=\"fromdate\" style=\"width: 140px;\" placeholder=\"Select Date\" required/>\n                    </div>\n                    <div class=\"col-md-12 p-4 m-t\">\n                            to: <input type=\"date\" [(ngModel)]=\"todate\" style=\"width: 140px;margin-left: 20px;\" placeholder=\"Select Date\" required/>\n                    </div>\n                    <div class=\"col-md-12 p-4 m-t\">\n                        <button class=\"btn\" (click)=\"searchingBydate()\">Submit</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-md-3 d-3 padding0 float-left\">\n            <div class=\"a-r-d\">\n                <div class=\"row m-0\">\n                <ul class=\"padding0\" style=\"list-style: none\">\n                        <li class=\"li-items\">\n                            <span class=\"f-s-22\">{{mapdata.length}}</span><br>\n                            <img class=\"p-4\" src=\"../../assets/databot-page - icon1.png\"><br>\n                            <span>Total Trucks</span>\n                        </li>\n                </ul>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-md-3 d-3 padding0 float-left\">\n            <div class=\"a-r-d\">\n                <div class=\"row m-0\">\n                <ul style=\"list-style: none\">\n                        <li class=\"li-items\">\n                                <span class=\"f-s-22\">{{(drivetime) ? drivetime : '- -'}}</span><br>\n                                <img class=\"p-2\" src=\"../../assets/databot-page - icon2.png\"><br>\n                                <span>Drive Time</span>\n                        </li>\n                </ul>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-md-3 d-3 padding0 float-left\">\n            <div class=\"a-r-d\">\n                <div class=\"row m-0\">\n                <ul style=\"list-style: none\">\n                        <li class=\"li-items\">\n                                <span class=\"f-s-22\">{{(distance) ? distance : '- -'}}</span><br>\n                                <img src=\"../../assets/databot-page - icon3.png\"><br>\n                                <span>Distance Travelled</span>\n                        </li>\n                </ul>\n                </div>\n            </div>\n        </div>\n      </div>\n      <div class=\"col-md-5 padding0 float-left\">\n           <div class=\"row m-0\">\n                <div class=\"col-md-6 padding0\">\n                    <div class=\"a-r-d\">\n                        <div class=\"row m-0\">\n                            <div class=\"col-md-4 padding0 float-left\">\n                                    <img class=\"w-100\" src=\"../../assets/databot-page - icon4.png\">\n                                   \n                            </div>\n                            <div class=\"col-md-4 m-a padding0 float-left\"> \n                                    <span class=\"float-left\">Idling</span>\n                            </div>\n                            <div class=\"col-md-4 m-a padding0 float-left\">\n                                    <span class=\"f-s-22 float-left\">{{(idlingtime) ? idlingtime : '- -'}}</span>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-6 padding0\">\n                    <div class=\"a-r-d\">\n                        <div class=\"row m-0\">\n                            \n                                <div class=\"col-md-4 padding0 float-left\">\n                                        <img class=\"w-104\" src=\"../../assets/databot-page - icon5.png\">\n                                       \n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\"> \n                                        <span class=\" float-left\">Speeding</span>\n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\">\n                                        <span class=\"f-s-22 float-left\">{{(highspeed) ? highspeed : '- -'}}</span>\n                                </div>\n                        </div>\n                    </div>\n                </div>\n           </div>\n           <div class=\"row m-0\">\n                <div class=\"col-md-6 m-t-3 padding0\">\n                    <div class=\"a-r-d\">\n                         <div class=\"row m-0\">\n                                <div class=\"col-md-4 padding0 float-left\">\n                                        <img class=\"w-88\" src=\"../../assets/databot-page - icon6.png\">\n                                       \n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\"> \n                                        <span class=\"float-left\">Harsh Braking</span>\n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\">\n                                        <span class=\"f-s-22\"> {{(harshbraking) ? harshbraking : '- -'}} </span>\n                                </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-6 m-t-3 padding0\">\n                    <div class=\"a-r-d\">\n                        <div class=\"row m-0\">\n                                <div class=\"col-md-4 padding0 float-left\">\n                                        <img class=\"w-95\" src=\"../../assets/databot-page - icon7.png\">\n                                       \n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\"> \n                                        <span class=\"float-left\">Acceleration</span>\n                                </div>\n                                <div class=\"col-md-4 m-a padding0 float-left\">\n                                        <span class=\"f-s-22\">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span>\n                                </div>\n                        </div>\n                    </div>\n                </div>\n           </div>\n      </div>\n\n  </div>\n  <div class=\"row m-0 m-t-10\">\n      <div class=\"col-md-12 padding0 m-4\">\n          <div id='map' class=\"col-md-12\"></div>\n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -3749,41 +3767,19 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
         }
     }
     FleetmaticusescomponentComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.selected = 1;
         this.loadmapdata();
-        this.getIdlingAllDevices();
-        this.gettripevent();
+        this.initInterval = setInterval(function () {
+            _this.searchtodata = Date.now();
+            _this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
+            _this.getIdlingAllDevices();
+            _this.gettripevent();
+            _this.getAlerts();
+        }, 5000);
     };
-    FleetmaticusescomponentComponent.prototype.setfleetOverview = function (item) {
-        this.fleetOverview = true;
-        this.driverProfile = false;
-        this.trackOrder = false;
-        this.custFeed = false;
-        this.selected = item;
-    };
-    FleetmaticusescomponentComponent.prototype.setDriver = function (item) {
-        this.fleetOverview = false;
-        this.driverProfile = true;
-        this.trackOrder = false;
-        this.custFeed = false;
-        this.selected = item;
-    };
-    FleetmaticusescomponentComponent.prototype.setvehicleMetric = function (item) {
-        this.fleetOverview = false;
-        this.driverProfile = false;
-        this.trackOrder = true;
-        this.custFeed = false;
-        this.selected = item;
-    };
-    FleetmaticusescomponentComponent.prototype.setcustomerFeed = function (item) {
-        this.fleetOverview = false;
-        this.driverProfile = false;
-        this.trackOrder = false;
-        this.custFeed = true;
-        this.selected = item;
-    };
-    FleetmaticusescomponentComponent.prototype.isActive = function (item) {
-        return this.selected === item;
+    FleetmaticusescomponentComponent.prototype.ngOnDestroy = function () {
+        clearInterval(this.searchInterval);
     };
     FleetmaticusescomponentComponent.prototype.loadmapdata = function () {
         var _this = this;
@@ -3809,79 +3805,13 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
         var body = {
             "username": "info@dataagile.com",
             "password": "conquest",
-            "fromDate": yesterday,
-            "toDate": today
+            "fromDate": this.searchfromdata,
+            "toDate": this.searchtodata
         };
         this.databotService.getVehicleStops(body).subscribe(function (res) {
             var stops = res['data']['stops'];
             _this.getIdlingEvents(stops);
         });
-    };
-    FleetmaticusescomponentComponent.prototype.vehicleDDChange = function (event) {
-        console.log(event.currentTarget.value);
-        this.imei = event.currentTarget.value;
-        this.getDeviceEvents(this.imei);
-    };
-    FleetmaticusescomponentComponent.prototype.getDeviceEvents = function (number) {
-        var _this = this;
-        // console.log(moment(1564337311686).format('MMM DD, YYYY') == moment(1564165457000).format('MMM DD, YYYY'));
-        var today = Date.now();
-        var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2; // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
-        console.log(today, yesterday);
-        var yest = new Date(yesterday);
-        // console.log(yest+""+yesterday);​
-        var body = {
-            "username": "info@dataagile.com",
-            "password": "conquest",
-            "imei": number,
-            "fromDate": yesterday,
-            "toDate": today
-        };
-        this.databotService.getVehicleHistory(body).subscribe(function (result) {
-            console.log(result);
-            var positions = result['data']['positions'];
-            var stops = result['data']['stops'];
-            _this.drivername = result['data']['positions'][0]['personName'];
-            _this.getBrakingIdlingEvents(positions);
-            _this.getIdlingEvents(stops);
-            _this.getTotalDriveTime(_this.trips);
-        });
-    };
-    FleetmaticusescomponentComponent.prototype.getBrakingIdlingEvents = function (positions) {
-        console.log(positions);
-        this.weekAcceleration = 0;
-        this.weekBraking = 0;
-        this.todayAcceleration = 0;
-        this.todayBraking = 0;
-        this.lastDayAcceleration = 0;
-        this.lastDayBraking = 0;
-        // tslint:disable-next-line: forin
-        for (var item in positions) {
-            var today = moment__WEBPACK_IMPORTED_MODULE_3__(Date.now()).format('MMM DD, YYYY');
-            var todayfromdata = moment__WEBPACK_IMPORTED_MODULE_3__(positions[item]['date']).format('MMM DD, YYYY');
-            var dateString = moment__WEBPACK_IMPORTED_MODULE_3__().subtract(1, 'days').toString();
-            var dateObj = new Date(dateString);
-            var momentObj = moment__WEBPACK_IMPORTED_MODULE_3__(dateObj);
-            var momentString = momentObj.format('MMM DD, YYYY');
-            //  console.log(momentString);
-            //  if(positions[item]['behaviorCd'] == 'HAC'){
-            //    this.weekAcceleration = this.weekAcceleration + 1;
-            //  }else if(positions[item]['behaviorCd'] == 'HBR'){
-            //    this.weekBraking = this.weekBraking + 1;
-            //  }
-            if (positions[item]['behaviorCd'] == 'HAC' && (today == todayfromdata)) {
-                this.todayAcceleration = this.todayAcceleration + 1;
-            }
-            else if (positions[item]['behaviorCd'] == 'HBR' && (today == todayfromdata)) {
-                this.todayBraking = this.todayBraking + 1;
-            }
-            // else if(positions[item]['behaviorCd'] == 'HAC' && (momentString == todayfromdata)){
-            //   this.lastDayAcceleration = this.lastDayAcceleration + 1;
-            //  }else if (positions[item]['behaviorCd'] == 'HBR' && (momentString == todayfromdata)){
-            //   this.lastDayBraking = this.lastDayBraking + 1;
-            //  }
-        }
-        // console.log(this.weekAcceleration+"this is"+this.weekBraking);
     };
     /**Get engine idling events */
     FleetmaticusescomponentComponent.prototype.getIdlingEvents = function (stops) {
@@ -3900,18 +3830,8 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
             var dateObj = new Date(dateString);
             var momentObj = moment__WEBPACK_IMPORTED_MODULE_3__(dateObj);
             var momentString = momentObj.format('MMM DD, YYYY');
-            console.log(today == todayfromdata);
-            // if(stops[item]['stopType'] == 'Idling'){
-            //   this.weekIdling = this.weekIdling + 1;
-            // }
-            // else if(stops[item]['stopType'] == 'Idling' && (today == todayfromdata) && (today == endfromdate)){
-            //  this.todayIdling = this.todayIdling + 1;
-            // }else if(stops[item]['stopType'] == 'Idling' && (momentString == todayfromdata) && (momentString == endfromdate)){
-            //   this.lastDayIdling = this.lastDayIdling + 1;
-            //  }
             if ((stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
                 this.stoptime = this.stoptime + stops[item]['duration'];
-                console.log(this.stoptime);
             }
             if ((stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
                 this.idlingtime = this.idlingtime + stops[item]['duration'];
@@ -3926,22 +3846,22 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
         var body = {
             "username": "info@dataagile.com",
             "password": "conquest",
-            "fromDate": yesterday,
-            "toDate": today
+            "fromDate": this.searchfromdata,
+            "toDate": this.searchtodata
         };
         this.databotService.getVehicleTrips(body).subscribe(function (result) {
-            console.log(result);
             _this.trips = result['data']['trips'];
             _this.getTotalDriveTime(_this.trips);
         });
     };
     FleetmaticusescomponentComponent.prototype.getTotalDriveTime = function (trips) {
         this.drivetime = 0;
+        this.distance = 0;
         for (var _i = 0, trips_1 = trips; _i < trips_1.length; _i++) {
             var item = trips_1[_i];
             this.drivetime = this.drivetime + item['durationMinutes'];
             this.distance = this.distance = item['distanceMiles'];
-            console.log(this.drivetime);
+            // console.log(this.drivetime);
         }
     };
     FleetmaticusescomponentComponent.prototype.loadmap = function (mapdata) {
@@ -3985,7 +3905,7 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
                             content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
                                 + '<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + label + '</p></b>'
                         });
-                        $this.getDeviceEvents(devicenumber);
+                        // $this.getDeviceEvents(devicenumber);
                         // alert(this.warehousename)
                         infowindow.open(this.map, marker);
                     }
@@ -4010,7 +3930,7 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
                             content: '<b><p style="color:#0472b0;text-weight:bold">' + currentLocation + '</p></b>'
                                 + '<b><p style="color:#0472b0;text-weight:bold">' + label + '</p></b>'
                         });
-                        $this.getDeviceEvents(devicenumber);
+                        // $this.getDeviceEvents(devicenumber);
                         payload = {
                             queryParams: {
                                 vehicle: JSON.stringify(devicenumber),
@@ -4031,6 +3951,55 @@ var FleetmaticusescomponentComponent = /** @class */ (function () {
                 });
             });
         }
+    };
+    FleetmaticusescomponentComponent.prototype.getParams = function () {
+        var today = this.searchtodata;
+        var yesterday = this.searchfromdata;
+        var body = {
+            "username": "info@dataagile.com",
+            "password": "conquest",
+            "fromDate": this.searchfromdata,
+            "toDate": this.searchtodata
+        };
+        return body;
+    };
+    FleetmaticusescomponentComponent.prototype.getAlerts = function () {
+        var _this = this;
+        this.harshbraking = 0;
+        this.highspeed = 0;
+        this.databotService.getVehicleAlerts(this.getParams()).subscribe(function (data) {
+            for (var _i = 0, _a = data['data']['alerts']; _i < _a.length; _i++) {
+                var item = _a[_i];
+                // console.log(item['alertCode']);
+                if (item['alertCode'] == 'HARSH_BRAKING') {
+                    _this.harshbraking = _this.harshbraking + 1;
+                    console.log(_this.harshbraking);
+                }
+                if (item['alertCode'] == 'HIGH_SPEED') {
+                    _this.highspeed = _this.highspeed + 1;
+                    // console.log(this.harshbraking);
+                }
+                if (item['alertCode'] == 'RAPID_ACCELERATION') {
+                    _this.rapidacceleration = _this.rapidacceleration + 1;
+                    // console.log(this.rapidacceleration);
+                }
+            }
+        });
+    };
+    FleetmaticusescomponentComponent.prototype.searching = function () {
+        this.searchtodata = new Date(this.todate).getTime() * 1000;
+        this.searchfromdata = new Date(this.fromdate).getTime() * 1000;
+    };
+    FleetmaticusescomponentComponent.prototype.searchingBydate = function () {
+        var _this = this;
+        clearInterval(this.initInterval);
+        this.searchtodata = new Date(this.todate).getTime();
+        this.searchfromdata = new Date(this.fromdate).getTime();
+        this.searchInterval = setInterval(function () {
+            _this.getAlerts();
+            _this.getIdlingAllDevices();
+            _this.gettripevent();
+        }, 5000);
     };
     FleetmaticusescomponentComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -13682,7 +13651,8 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: false,
     apiEndPoint: "http://localhost:4000",
-    linxupEndPoint: "https://www.linxup.com/ibis/rest/linxupmobile"
+    linxupEndPoint: "https://www.linxup.com/ibis/rest/linxupmobile",
+    linxupApiEndPoint: 'https://www.linxup.com/ibis/rest/api/v2/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error

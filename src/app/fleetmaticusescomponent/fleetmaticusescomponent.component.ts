@@ -53,12 +53,13 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   harshbraking: number;
   highspeed: number;
   rapidacceleration: number;
-  fromdate: Date;
-  todate: Date
+  fromdate: any;
+  todate: any;
   searchtodata: number;
   searchfromdata: number;
   initInterval: any;
   searchInterval: any;
+  today: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -71,6 +72,15 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.today = Date.now();
+    var timestamp=new Date(this.today).getTime();
+    var todate=new Date(timestamp).getDate();
+    var tomonth=new Date(timestamp).getMonth()+1;
+    var toyear=new Date(timestamp).getFullYear();
+    var original_date=tomonth+'/'+todate+'/'+toyear;
+    console.log(original_date);
+    this.todate = original_date;
+
     this.selected = 1;
     this.loadmapdata();
     this.initInterval = setInterval(() => {
@@ -79,7 +89,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       this.getIdlingAllDevices();
       this.gettripevent();
       this.getAlerts();
-     },5000);
+      this.getvehicleLocations();
+     },10000);
 
   }
 
@@ -157,7 +168,6 @@ gettripevent() {
   }
   this.databotService.getVehicleTrips(body).subscribe(result => {
      this.trips = result['data']['trips'];
-     console.log(this.trips);
      this.getTotalDriveTime(this.trips);
   });
 }
@@ -176,7 +186,7 @@ getTotalDriveTime(trips) {
 loadmap(mapdata){
   //console.log(mapdata);
 var $this = this;
-let payload: {queryParams: {vehicle: string, drivername: string, location: string}};
+let payload: {queryParams: {vehicle: string, drivername: string, location: string, driverid: string}};
 this.map = new google.maps.Map(document.getElementById('map'), {
 zoom: 11,
 center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
@@ -199,10 +209,10 @@ marker = new google.maps.Marker({
   map: this.map,
   icon:image
 });
-attachSecretMessage(marker,  mapdata[i]['latitude'], mapdata[i]['longitude'], mapdata[i]['label'], mapdata[i]['deviceNbr'], mapdata[i]['personName']);
+attachSecretMessage(marker,  mapdata[i]['latitude'], mapdata[i]['longitude'], mapdata[i]['label'], mapdata[i]['deviceNbr'], mapdata[i]['personName'],mapdata[i]['fuelLevel'],mapdata[i]['battery'],mapdata[i]['speed'], mapdata[i]['driverId']);
 }
 
-function attachSecretMessage(marker, lat, long, label, devicenumber, drivername) {
+function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid) {
 var geocoder = new google.maps.Geocoder();
 marker.addListener('mouseover', function () {
   var latlong1 = new google.maps.LatLng(lat, long);
@@ -218,6 +228,9 @@ marker.addListener('mouseover', function () {
       infowindow = new google.maps.InfoWindow({
         content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
         +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + label + '</p></b>'
+        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
+        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
+        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
 
       });
 
@@ -255,7 +268,8 @@ marker.addListener('click', function () {
         queryParams: {
             vehicle: JSON.stringify(devicenumber),
             drivername: JSON.stringify(drivername),
-            location: JSON.stringify(currentLocation)
+            location: JSON.stringify(currentLocation),
+            driverid:JSON.stringify(driverid)
         }
     };
       $this.router.navigate(['/fleetmatics'], payload);
@@ -295,7 +309,7 @@ getAlerts() {
       // console.log(item['alertCode']);
       if(item['alertCode'] == 'HARSH_BRAKING') {
          this.harshbraking = this.harshbraking + 1;
-         console.log(this.harshbraking);
+        //  console.log(this.harshbraking);
       }
       if(item['alertCode'] == 'HIGH_SPEED') {
         this.highspeed = this.highspeed + 1;
@@ -325,4 +339,22 @@ searchingBydate() {
    },5000);
 }
 
+getuserParams() {
+    var today = Date.now();
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    let body = {
+      "username":"info@dataagile.com",
+      "password":"conquest",
+      "fromDate": this.searchfromdata,
+      "toDate":this.searchtodata
+    };
+    return body;
+  }
+  
+getvehicleLocations() {
+  this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
+      console.log(data);
+  });
+ }
 }
+

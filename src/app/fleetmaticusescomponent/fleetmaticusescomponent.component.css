@@ -134,7 +134,7 @@ font-size: 22px;
   width: 98%
 }
 .m-t {
-  margin-top: 21px
+  margin-top: 32px;
 }
 
 .w-85 {
@@ -164,7 +164,7 @@ font-size: 22px;
   background: #0472b0;
   color: #f8fbff;
 }
-input[type="date"]::before {
+/* input[type="date"]::before {
 	color: #999999;
 	content: attr(placeholder);
 }
@@ -181,4 +181,4 @@ input[type="date"]:focus::before,
 input[type="date"]:valid::before {
   content: "" !important;
   content: attr(placeholder);
-}
+} */
