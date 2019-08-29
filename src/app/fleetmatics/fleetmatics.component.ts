@@ -128,8 +128,8 @@ export class FleetmaticsComponent implements OnInit {
   startLong: any;
   endLat: any;
   endLong: any;
-  searchtodata: number;
-  searchfromdata: number;
+  searchtodate: any;
+  searchfromdate: any;
   hrsAcc: any = [];
   hoursAccChart: any;
   hrsBraking: any = [];
@@ -165,6 +165,8 @@ export class FleetmaticsComponent implements OnInit {
   tripChart: any;
   tripOptions: any;
   trip: any = [];
+  behaviourcard: number;
+  speedcard: number;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -174,8 +176,8 @@ export class FleetmaticsComponent implements OnInit {
       this.tenantOverview = false;
       this.Overview = true;
     }
-    this.searchtodata = Date.now();
-    this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    // this.searchtodate = Date.now();
+    // this.searchfromdate = Date.now() - 1000 * 60 * 60 * 24 * 2;
   }
 
   ngOnInit() {
@@ -183,6 +185,9 @@ export class FleetmaticsComponent implements OnInit {
     const drivername = this.route.snapshot.queryParamMap.get('drivername');
     const location = this.route.snapshot.queryParamMap.get('location');
     const driverid = this.route.snapshot.queryParamMap.get('driverid');
+    const searchfromdate = this.route.snapshot.queryParamMap.get('searchfromdate');
+    const searchtodate = this.route.snapshot.queryParamMap.get('searchtodate');
+    console.log(typeof(parseInt(searchfromdate)), searchtodate);
     this.selected = 1;
     if (jsonString) {
       this.imei = JSON.parse(jsonString);
@@ -190,17 +195,23 @@ export class FleetmaticsComponent implements OnInit {
       this.driver = JSON.parse(drivername);
       this.location = JSON.parse(location);
       this.driverid = JSON.parse(driverid);
+      this.searchfromdate = parseInt(searchfromdate);
+      this.searchtodate = parseInt(searchtodate);
+      console.log(this.searchfromdate, this.searchtodate);
       this.getvehicleAlerts();
+
       this.getDeviceEvents(this.imei);
       this.HarshEvents('', '','');
       this.HoursChart('', '', '');
       this.hrsSpeedChart('');
       this.MilesChart('', '', '');
+
       this.loadmap();
       this.loadmapdata();
       this.getIdlingAllDevices();
       this.gettripevent();
       this.loadData();
+      this.getRoute();
     } else {
       // this.HarshEvents();
       // this.HoursChart();
@@ -253,9 +264,6 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   HarshEvents(acc, braking, speed) {
-    console.log(acc);
-    console.log(braking);
-    console.log(speed);
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
@@ -740,7 +748,6 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   DriveChart(drivemins) {
-    console.log(drivemins);
     this.driveOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
@@ -1166,8 +1173,8 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   getParams() {
-    var today = this.searchtodata;
-    var yesterday = this.searchfromdata;
+    var today = this.searchtodate;
+    var yesterday = this.searchfromdate;
     let body = {
       "username":"info@dataagile.com",
       "password":"conquest",
@@ -1276,8 +1283,8 @@ export class FleetmaticsComponent implements OnInit {
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": yesterday,
-      "toDate": today
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     }
     this.databotService.getVehicleStops(body).subscribe(res => {
       var stops = res['data']['stops'];
@@ -1308,7 +1315,7 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   getDeviceEvents(number) {
-    console.log(new Date().getTime());
+    // console.log(new Date().getTime());
     this.hrs = [];
     this.hrsAcc = [];
     var $this = this;
@@ -1322,8 +1329,8 @@ export class FleetmaticsComponent implements OnInit {
       "username": "info@dataagile.com",
       "password": "conquest",
       "imei": this.imei,
-      "fromDate": yesterday,
-      "toDate": today
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     }
     this.databotService.getVehicleHistory(body).subscribe(result => {
       var positions = result['data']['positions'];
@@ -1373,10 +1380,47 @@ export class FleetmaticsComponent implements OnInit {
       // this.options.series[0].data = data;
       // this.hoursAccChart = new Chart(this.options);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
+      let score = (this.todayAcceleration+this.todayBraking+this.highSpeed);
+      this.behaviourCard(score);
+      this.speedCard(this.highSpeed);
     });
-    console.log(new Date().getTime());
   }
-f
+  behaviourCard(score) {
+      if(score == 0) {
+        this.behaviourcard = 100;
+      }
+      if(score >= 1 && score <= 5) {
+        console.log('5');
+        this.behaviourcard = 80;
+      } if(score >= 6 && score <= 10) {
+        console.log(score >= 6);
+        this.behaviourcard = 60;
+      } if(score >= 11 && score <= 15) {
+        console.log('15');
+        this.behaviourcard = 40;
+      } if(score >= 16 && score <= 20) {
+        console.log('20');
+        this.behaviourcard = 20;
+      }
+  }
+  speedCard(speed) {
+    if(speed == 0) {
+      this.speedcard = 100;
+    }
+    if(speed >= 1 && speed <= 5) {
+      console.log('5');
+      this.speedcard = 80;
+    } if(speed >= 6 && speed <= 10) {
+      console.log(speed >= 6);
+      this.speedcard = 60;
+    } if(speed >= 11 && speed <= 15) {
+      console.log('15');
+      this.speedcard = 40;
+    } if(speed >= 16 && speed <= 20) {
+      console.log('20');
+      this.speedcard = 20;
+    }
+}
   /**Get engine idling events */
   getIdlingEvents(stops) {
     let $this = this;
@@ -1425,8 +1469,8 @@ f
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": yesterday,
-      "toDate": today
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     }
     this.databotService.getVehicleTrips(body).subscribe(result => {
       this.trips = result['data']['trips'];
@@ -1487,6 +1531,12 @@ f
     this.HoursChart(this.drivetime, this.idlingtime, this.stoptime);
     this.MilesChart(this.miles, this.totaltrips, this.unauthorizedMiles);
     //  this.updateHarshEventsChart();
+  }
+
+  getRoute() {
+    this.databotService.getVehicleRouteLocations(this.getParams(), this.imei).subscribe(data => {
+        console.log(data);
+    });
   }
 
   loadRoute() {

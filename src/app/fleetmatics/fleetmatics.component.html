@@ -90,7 +90,7 @@
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">40%</span>
+                            <span class="f-s">{{(behaviourcard) ? behaviourcard : '- -'}}%</span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
@@ -112,7 +112,7 @@
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">8%</span>
+                            <span class="f-s">{{(speedcard) ? speedcard : '- -'}}%</span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
@@ -221,7 +221,6 @@
                 </div>
                 <div class="col-md-10 padding0">
                     <span>{{(driver) ? driver : '- -'}}</span><br>
-                    <!-- <span>Engineer LCVs</span> -->
                 </div>
             </div>
         </div>

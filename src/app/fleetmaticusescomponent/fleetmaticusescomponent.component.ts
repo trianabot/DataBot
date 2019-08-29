@@ -31,7 +31,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   hourschart: any;
   speedingchart: any;
   mileschart: any;
-  mapdata: any;
+  mapdata: any = [];
   weekAcceleration: number;
   weekBraking: number;
   todayAcceleration: number;
@@ -55,14 +55,24 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   rapidacceleration: number = 0;
   fromdate: any;
   todate: any;
-  searchtodata: number;
-  searchfromdata: number;
+  searchtodate: number;
+  searchfromdate: number;
   initInterval: any;
   searchInterval: any;
   today: any;
+  inittodate: any;
+  initfromdate: any;
+  marker: any = new Array();
 
   constructor(public databotService: DatabotService, private router: Router) {
+    let searchtodate = Date.now();
+    let todateStamp = new Date(searchtodate).getTime();
+    this.searchtodate = todateStamp;
+    this.searchfromdate = Date.now() - 1000 * 60 * 60 * 24 * 1;
+    console.log(this.searchfromdate, this.searchtodate);
     this.fetchAllData();
+    this.loadmapdata();
+    this.loadmap(this.searchfromdate, this.searchtodate);
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
       this.tenantOverview = true;
       this.Overview = false;
@@ -83,7 +93,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.todate = original_date;
 
     this.selected = 1;
-    this.loadmapdata();
     
     this.initInterval = setInterval(() => {
       this.fetchAllData();
@@ -91,29 +100,18 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   }
   fetchAllData() {
-    this.searchtodata = Date.now();
-    this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    this.inittodate = Date.now();
+    this.initfromdate = Date.now() - 1000 * 60 * 60 * 24 * 1;
     this.getIdlingAllDevices();
     this.gettripevent();
     this.getAlerts();
+    this.loadmap(this.searchfromdate, this.searchtodate);
     //this.getvehicleLocations();
   }
   ngOnDestroy() {
     clearInterval(this.searchInterval);
   }
 
-  loadmapdata() {
-    var body = {
-      "username": "info@dataagile.com",
-      "password": "conquest"
-    }
-    this.databotService.getCurrentPostition(body).subscribe(res => {
-      var data = res['data']['positions'];
-      var mapdata = data;
-      this.mapdata = data;
-      this.loadmap(mapdata);
-    });
-  }
 
   getIdlingAllDevices() {
     // console.log(moment().subtract(1, 'days').toString()+ "hello ");
@@ -124,8 +122,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": this.searchfromdata,
-      "toDate": this.searchtodata
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     }
     this.databotService.getVehicleStops(body).subscribe(res => {
       var stops = res['data']['stops'];
@@ -162,12 +160,12 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   gettripevent() {
     var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 1;
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": this.searchfromdata,
-      "toDate": this.searchtodata
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     }
     this.databotService.getVehicleTrips(body).subscribe(result => {
       this.trips = result['data']['trips'];
@@ -185,18 +183,52 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     }
   }
 
+  // initmap() {
+  //   this.map = new google.maps.Map(document.getElementById('map'), {
+  //     zoom: 11,
+  //     center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
+  //     mapTypeId: google.maps.MapTypeId.ROADMAP,
+  //     mapTypeControl: false,
+  //     streetViewControl: false
+  //   });
+  // }
 
-  loadmap(mapdata) {
-    //console.log(mapdata);
-    var $this = this;
-    let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string } };
+  loadmapdata() {
+    var body = {
+      "username": "info@dataagile.com",
+      "password": "conquest"
+    }
+    this.databotService.getCurrentPostition(body).subscribe(res => {
+      var data = res['data']['positions'];
+      var mapdata = data;
+      this.mapdata = data;
+      this.getpositions();
+      this.loadmap('','');
+    });
+  }
+
+  getpositions() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
-      center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
+      center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false
     });
+  }
+
+  loadmap(searchfromdate, searchtodate) {
+    this.marker = new Array();
+    var body = {
+      "username": "info@dataagile.com",
+      "password": "conquest"
+    }
+    this.databotService.getCurrentPostition(body).subscribe(res => {
+      var data = res['data']['positions'];
+      var mapdata = data;
+      this.mapdata = data;
+    var $this = this;
+    let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
 
     var infowindow = new google.maps.InfoWindow();
     var marker;
@@ -205,17 +237,25 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       url: '../../assets/images/warehouse.png',
       scaledSize: new google.maps.Size(50, 50),
     };
-
-    for (i = 0; i < mapdata.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(mapdata[i]['latitude'], mapdata[i]['longitude']),
+    // this.map.center = new google.maps.LatLng(mapdata[4]['latitude'], mapdata[4]['longitude']);
+    // this.marker = [];
+    // this.marker = [];
+    var latlong = [];
+    // tslint:disable-next-line: forin
+    for (let item in this.mapdata) {
+      var lat = this.mapdata[item]['latitude'];
+      var long = this.mapdata[item]['longitude'];
+      latlong = new google.maps.LatLng(lat, long);
+      this.marker = new google.maps.Marker({
+        position: latlong,
         map: this.map,
         icon: image
       });
-      attachSecretMessage(marker, mapdata[i]['latitude'], mapdata[i]['longitude'], mapdata[i]['label'], mapdata[i]['deviceNbr'], mapdata[i]['personName'], mapdata[i]['fuelLevel'], mapdata[i]['battery'], mapdata[i]['speed'], mapdata[i]['driverId']);
+      
+      // this.marker.setMap(null);
+      attachSecretMessage(this.marker, this.mapdata[item]['latitude'], this.mapdata[item]['longitude'], this.mapdata[item]['label'], this.mapdata[item]['deviceNbr'], this.mapdata[item]['personName'], this.mapdata[item]['fuelLevel'], this.mapdata[item]['battery'], this.mapdata[item]['speed'], this.mapdata[item]['driverId'], searchfromdate, searchtodate);
     }
-
-    function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid) {
+    function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid, searchfromdate, searchtodate) {
       var geocoder = new google.maps.Geocoder();
       marker.addListener('mouseover', function () {
         var latlong1 = new google.maps.LatLng(lat, long);
@@ -244,10 +284,13 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
-          marker.addListener('mouseout', function () {
-            infowindow.close(marker.get('map'), marker);
-          });
         });
+      });
+      // marker.addListener('mouseout', function () {
+      //   infowindow.close(marker.get('map'), marker);
+      // });
+      marker.addListener('mouseout', function () {
+        infowindow.close(marker.get('map'), marker);
       });
       marker.addListener('click', function () {
         var latlong1 = new google.maps.LatLng(lat, long);
@@ -272,34 +315,35 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
                 vehicle: JSON.stringify(devicenumber),
                 drivername: JSON.stringify(drivername),
                 location: JSON.stringify(currentLocation),
-                driverid: JSON.stringify(driverid)
+                driverid: JSON.stringify(driverid),
+                searchfromdate: searchfromdate,
+                searchtodate: searchtodate
               }
             };
+            console.log(payload);
             $this.router.navigate(['/fleetmatics'], payload);
             // alert(this.warehousename)
-            infowindow.open(this.map, marker);
+            // infowindow.open(this.map, marker);
 
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
-          marker.addListener('mouseout', function () {
-            infowindow.close(marker.get('map'), marker);
-          });
         });
       });
     }
 
+  });
 
   }
 
   getParams() {
-    var today = this.searchtodata;
-    var yesterday = this.searchfromdata;
+    var today = this.searchtodate;
+    var yesterday = this.searchfromdate;
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": this.searchfromdata,
-      "toDate": this.searchtodata
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     };
     return body;
   }
@@ -307,6 +351,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   getAlerts() {
     let harshbraking = 0;
     let highspeed = 0;
+    let acceleration = 0;
     this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
       for (let item of data['data']['alerts']) {
         // console.log(item['alertCode']);
@@ -319,28 +364,32 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           // console.log(this.harshbraking);
         }
         if (item['alertCode'] == 'RAPID_ACCELERATION') {
-          this.rapidacceleration = this.rapidacceleration + 1;
+          acceleration = acceleration + 1;
           // console.log(this.rapidacceleration);
         }
       }
       this.harshbraking = harshbraking;
       this.highspeed = highspeed;
+      this.rapidacceleration = acceleration;
     });
   }
 
   searching() {
-    this.searchtodata = new Date(this.todate).getTime() * 1000;
-    this.searchfromdata = new Date(this.fromdate).getTime() * 1000;
+    this.searchtodate = new Date(this.todate).getTime() * 1000;
+    this.searchfromdate = new Date(this.fromdate).getTime() * 1000;
   }
 
   searchingBydate() {
     clearInterval(this.initInterval);
-    this.searchtodata = new Date(this.todate).getTime();
-    this.searchfromdata = new Date(this.fromdate).getTime();
+    this.searchtodate = new Date(this.todate).getTime();
+    this.searchfromdate = new Date(this.fromdate).getTime();
+    console.log(this.searchfromdate, this.searchtodate);
     this.searchInterval = setInterval(() => {
+      console.log(this.searchfromdate, this.searchtodate);
       this.getAlerts();
       this.getIdlingAllDevices();
       this.gettripevent();
+      this.loadmap(this.searchfromdate, this.searchtodate);
     }, 10000);
   }
 
@@ -350,8 +399,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",
-      "fromDate": this.searchfromdata,
-      "toDate": this.searchtodata
+      "fromDate": this.searchfromdate,
+      "toDate": this.searchtodate
     };
     return body;
   }
