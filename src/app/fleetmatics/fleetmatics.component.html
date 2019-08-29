@@ -304,26 +304,8 @@
                 </div>
                 <div class="row m-0 t-a">
                     <div class="p-7">Total driving time: &nbsp; {{(drivetime) ? drivetime : '- -'}} Min</div>
-                    <div class="p-7">Total idling time: &nbsp; {{(idlingtime) ? idlingtime : '- -'}} Hrs</div>
-                    <div class="p-7">Stopped Time: &nbsp; {{(stoptime) ? stoptime : '- -'}} Hrs</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 padding0">
-            <div class="a-r-4 b-c-4 p-7">
-                <div class="row m-0">
-                    <div class="col-md-6 float-left"><span>Speeding</span></div>
-                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal2"></i></span></div>
-                </div>
-                <div class="row m-0">
-                    <div [chart]="speedingchart">
-
-                    </div>
-                </div>
-                <div class="row m-0 t-a">
-                    <div class="p-7">CAT1: &nbsp; 33</div>
-                    <div class="p-7">CAT2: &nbsp; 9</div>
-                    <div class="p-7">CAT3: &nbsp; 3</div>
+                    <div class="p-7">Total idling time: &nbsp; {{(idlingtime) ? idlingtime : '- -'}} Mins</div>
+                    <div class="p-7">Stopped Time: &nbsp; {{(stoptime) ? stoptime : '- -'}} Mins</div>
                 </div>
             </div>
         </div>
@@ -331,7 +313,7 @@
             <div class="a-r-4 b-c-4 p-7">
                 <div class="row m-0">
                     <div class="col-md-6 float-left"><span>Miles Per Day</span></div>
-                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal3"></i></span></div>
+                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal2"></i></span></div>
                 </div>
                 <div class="row m-0">
                     <div [chart]="mileschart">
@@ -346,12 +328,11 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row r-2 m-0 m-t-15">
-        <div class="col-md-12 padding0">
-            <div id="map">
-
+        <div class="col-md-3 padding0">
+            <div class="a-r-4 b-c-4 p-7">
+                    <div id="map">
+        
+                    </div>
             </div>
         </div>
     </div>
@@ -363,7 +344,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Harsh Events Insights</h4>
                 </div>
                 <div class="modal-body">
                     <!-- <pre *ngFor="let item of hrsAcc">
@@ -401,10 +382,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Driving Hour Insights</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div [chart]="driveChart">
+        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div [chart]="idleChart">
+        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div [chart]="stopChart">
+        
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -420,10 +417,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Miles Insights</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div [chart]="mileChart">
+        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div [chart]="unauthorizedMileChart">
+        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div [chart]="tripChart">
+        
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

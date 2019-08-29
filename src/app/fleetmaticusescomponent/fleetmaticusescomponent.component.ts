@@ -50,9 +50,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   map: any;
   distance: number;
-  harshbraking: number;
-  highspeed: number;
-  rapidacceleration: number;
+  harshbraking: number = 0;
+  highspeed: number = 0;
+  rapidacceleration: number = 0;
   fromdate: any;
   todate: any;
   searchtodata: number;
@@ -62,6 +62,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   today: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
+    this.fetchAllData();
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
       this.tenantOverview = true;
       this.Overview = false;
@@ -73,27 +74,30 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.today = Date.now();
-    var timestamp=new Date(this.today).getTime();
-    var todate=new Date(timestamp).getDate();
-    var tomonth=new Date(timestamp).getMonth()+1;
-    var toyear=new Date(timestamp).getFullYear();
-    var original_date=tomonth+'/'+todate+'/'+toyear;
+    var timestamp = new Date(this.today).getTime();
+    var todate = new Date(timestamp).getDate();
+    var tomonth = new Date(timestamp).getMonth() + 1;
+    var toyear = new Date(timestamp).getFullYear();
+    var original_date = tomonth + '/' + todate + '/' + toyear;
     console.log(original_date);
     this.todate = original_date;
 
     this.selected = 1;
     this.loadmapdata();
+    
     this.initInterval = setInterval(() => {
-      this.searchtodata = Date.now();
-      this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
-      this.getIdlingAllDevices();
-      this.gettripevent();
-      this.getAlerts();
-      this.getvehicleLocations();
-     },10000);
+      this.fetchAllData();
+    }, 10000);
 
   }
-
+  fetchAllData() {
+    this.searchtodata = Date.now();
+    this.searchfromdata = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    this.getIdlingAllDevices();
+    this.gettripevent();
+    this.getAlerts();
+    //this.getvehicleLocations();
+  }
   ngOnDestroy() {
     clearInterval(this.searchInterval);
   }
@@ -107,22 +111,21 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['positions'];
       var mapdata = data;
       this.mapdata = data;
-      console.log(this.mapdata);
       this.loadmap(mapdata);
     });
   }
 
-  getIdlingAllDevices(){
+  getIdlingAllDevices() {
     // console.log(moment().subtract(1, 'days').toString()+ "hello ");
     var today = Date.now();
     var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 6;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
     var yest = new Date(yesterday);
     // console.log(yest+""+yesterday);​
     let body = {
-      "username":"info@dataagile.com",
-      "password":"conquest",
-      "fromDate":this.searchfromdata, 
-      "toDate":this.searchtodata
+      "username": "info@dataagile.com",
+      "password": "conquest",
+      "fromDate": this.searchfromdata,
+      "toDate": this.searchtodata
     }
     this.databotService.getVehicleStops(body).subscribe(res => {
       var stops = res['data']['stops'];
@@ -130,8 +133,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     });
   }
 
-/**Get engine idling events */
-getIdlingEvents(stops) {
+  /**Get engine idling events */
+  getIdlingEvents(stops) {
     // console.log(stops);
     this.todayIdling = 0;
     this.lastDayIdling = 0;
@@ -139,7 +142,7 @@ getIdlingEvents(stops) {
     this.stoptime = 0
     this.idlingtime = 0;
     // tslint:disable-next-line: forin
-    for(var item in stops){
+    for (var item in stops) {
       let today = moment(Date.now()).format('MMM DD, YYYY');
       let todayfromdata = moment(stops[item]['beginDate']).format('MMM DD, YYYY');
       let endfromdate = moment(stops[item]['endDate']).format('MMM DD, YYYY');
@@ -147,214 +150,216 @@ getIdlingEvents(stops) {
       var dateObj = new Date(dateString);
       var momentObj = moment(dateObj);
       var momentString = momentObj.format('MMM DD, YYYY');
-      if((stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
-             this.stoptime = this.stoptime + stops[item]['duration'];
+      if ((stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
+        this.stoptime = this.stoptime + stops[item]['duration'];
       }
-      if((stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
+      if ((stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
         this.idlingtime = this.idlingtime + stops[item]['duration'];
         // console.log(this.idlingtime);
       }
-   }
-} 
-
-gettripevent() {
-  var today = Date.now();
-  var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
-  let body = {
-    "username":"info@dataagile.com",
-    "password":"conquest",
-    "fromDate": this.searchfromdata,
-    "toDate":this.searchtodata
+    }
   }
-  this.databotService.getVehicleTrips(body).subscribe(result => {
-     this.trips = result['data']['trips'];
-     this.getTotalDriveTime(this.trips);
-  });
-}
 
-getTotalDriveTime(trips) {
+  gettripevent() {
+    var today = Date.now();
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    let body = {
+      "username": "info@dataagile.com",
+      "password": "conquest",
+      "fromDate": this.searchfromdata,
+      "toDate": this.searchtodata
+    }
+    this.databotService.getVehicleTrips(body).subscribe(result => {
+      this.trips = result['data']['trips'];
+      this.getTotalDriveTime(this.trips);
+    });
+  }
+
+  getTotalDriveTime(trips) {
     this.drivetime = 0;
     this.distance = 0;
-    for(let item of trips) {
+    for (let item of trips) {
       this.drivetime = this.drivetime + item['durationMinutes'];
       this.distance = this.distance = item['distanceMiles'];
       // console.log(this.drivetime);
     }
-}
+  }
 
 
-loadmap(mapdata){
-  //console.log(mapdata);
-var $this = this;
-let payload: {queryParams: {vehicle: string, drivername: string, location: string, driverid: string}};
-this.map = new google.maps.Map(document.getElementById('map'), {
-zoom: 11,
-center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
-mapTypeId: google.maps.MapTypeId.ROADMAP,
-mapTypeControl: false,
-streetViewControl: false
-});
-
-var infowindow = new google.maps.InfoWindow();
-var marker;
-var i;
-var image = {
-url: '../../assets/images/warehouse.png',
-scaledSize: new google.maps.Size(50, 50),
-};
-
-for (i = 0; i < mapdata.length; i++) {
-marker = new google.maps.Marker({
-  position: new google.maps.LatLng(mapdata[i]['latitude'], mapdata[i]['longitude']),
-  map: this.map,
-  icon:image
-});
-attachSecretMessage(marker,  mapdata[i]['latitude'], mapdata[i]['longitude'], mapdata[i]['label'], mapdata[i]['deviceNbr'], mapdata[i]['personName'],mapdata[i]['fuelLevel'],mapdata[i]['battery'],mapdata[i]['speed'], mapdata[i]['driverId']);
-}
-
-function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid) {
-var geocoder = new google.maps.Geocoder();
-marker.addListener('mouseover', function () {
-  var latlong1 = new google.maps.LatLng(lat, long);
-  geocoder.geocode({ 'location': latlong1 }, function (res, status) {
-    if (status == 'OK') {
-
-      var currentLocation = res[0].address_components[2].long_name;
-      // $this.city = currentLocation;
-      // $this.state = res[0].address_components[4].long_name;
-      // $this.country = res[0].address_components[5].long_name;
-
-      // $this.esttime = est;
-      infowindow = new google.maps.InfoWindow({
-        content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
-        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + label + '</p></b>'
-        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
-        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
-        +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
-
-      });
-
-      // $this.getDeviceEvents(devicenumber);
-      // alert(this.warehousename)
-      infowindow.open(this.map, marker);
-
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-    marker.addListener('mouseout', function() {
-      infowindow.close(marker.get('map'), marker);
+  loadmap(mapdata) {
+    //console.log(mapdata);
+    var $this = this;
+    let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string } };
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: new google.maps.LatLng(mapdata[0]['latitude'], mapdata[0]['longitude']),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: false
     });
-  });
-});
-marker.addListener('click', function () {
-  var latlong1 = new google.maps.LatLng(lat, long);
-  geocoder.geocode({ 'location': latlong1 }, function (res, status) {
-    if (status == 'OK') {
 
-      var currentLocation = res[0].address_components[2].long_name;
-      // $this.city = currentLocation;
-      // $this.state = res[0].address_components[4].long_name;
-      // $this.country = res[0].address_components[5].long_name;
-
-      // $this.esttime = est;
-      infowindow = new google.maps.InfoWindow({
-        content: '<b><p style="color:#0472b0;text-weight:bold">' + currentLocation + '</p></b>'
-        +'<b><p style="color:#0472b0;text-weight:bold">' + label + '</p></b>'
-
-      });
-
-      // $this.getDeviceEvents(devicenumber);
-      payload = {
-        queryParams: {
-            vehicle: JSON.stringify(devicenumber),
-            drivername: JSON.stringify(drivername),
-            location: JSON.stringify(currentLocation),
-            driverid:JSON.stringify(driverid)
-        }
+    var infowindow = new google.maps.InfoWindow();
+    var marker;
+    var i;
+    var image = {
+      url: '../../assets/images/warehouse.png',
+      scaledSize: new google.maps.Size(50, 50),
     };
-      $this.router.navigate(['/fleetmatics'], payload);
-      // alert(this.warehousename)
-      infowindow.open(this.map, marker);
 
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+    for (i = 0; i < mapdata.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(mapdata[i]['latitude'], mapdata[i]['longitude']),
+        map: this.map,
+        icon: image
+      });
+      attachSecretMessage(marker, mapdata[i]['latitude'], mapdata[i]['longitude'], mapdata[i]['label'], mapdata[i]['deviceNbr'], mapdata[i]['personName'], mapdata[i]['fuelLevel'], mapdata[i]['battery'], mapdata[i]['speed'], mapdata[i]['driverId']);
     }
-    marker.addListener('mouseout', function() {
-      infowindow.close(marker.get('map'), marker);
-    });
-  });
-});
-}
 
+    function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid) {
+      var geocoder = new google.maps.Geocoder();
+      marker.addListener('mouseover', function () {
+        var latlong1 = new google.maps.LatLng(lat, long);
+        geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+          if (status == 'OK') {
 
-}
+            var currentLocation = res[0].address_components[2].long_name;
+            // $this.city = currentLocation;
+            // $this.state = res[0].address_components[4].long_name;
+            // $this.country = res[0].address_components[5].long_name;
 
-getParams() {
-  var today = this.searchtodata;
-  var yesterday = this.searchfromdata;
-  let body = {
-    "username":"info@dataagile.com",
-    "password":"conquest",
-    "fromDate": this.searchfromdata,
-    "toDate":this.searchtodata
-  };
-  return body;
-}
+            // $this.esttime = est;
+            infowindow = new google.maps.InfoWindow({
+              content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
+                + '<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + label + '</p></b>'
+                + '<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
+                + '<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
+                + '<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
 
-getAlerts() {
-  this.harshbraking = 0;
-  this.highspeed = 0;
-  this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
-    for(let item of data['data']['alerts']) {
-      // console.log(item['alertCode']);
-      if(item['alertCode'] == 'HARSH_BRAKING') {
-         this.harshbraking = this.harshbraking + 1;
-        //  console.log(this.harshbraking);
-      }
-      if(item['alertCode'] == 'HIGH_SPEED') {
-        this.highspeed = this.highspeed + 1;
-        // console.log(this.harshbraking);
-     }
-     if(item['alertCode'] == 'RAPID_ACCELERATION') {
-      this.rapidacceleration = this.rapidacceleration + 1;
-      // console.log(this.rapidacceleration);
-   }
+            });
+
+            // $this.getDeviceEvents(devicenumber);
+            // alert(this.warehousename)
+            infowindow.open(this.map, marker);
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+          marker.addListener('mouseout', function () {
+            infowindow.close(marker.get('map'), marker);
+          });
+        });
+      });
+      marker.addListener('click', function () {
+        var latlong1 = new google.maps.LatLng(lat, long);
+        geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+          if (status == 'OK') {
+
+            var currentLocation = res[0].address_components[2].long_name;
+            // $this.city = currentLocation;
+            // $this.state = res[0].address_components[4].long_name;
+            // $this.country = res[0].address_components[5].long_name;
+
+            // $this.esttime = est;
+            infowindow = new google.maps.InfoWindow({
+              content: '<b><p style="color:#0472b0;text-weight:bold">' + currentLocation + '</p></b>'
+                + '<b><p style="color:#0472b0;text-weight:bold">' + label + '</p></b>'
+
+            });
+
+            // $this.getDeviceEvents(devicenumber);
+            payload = {
+              queryParams: {
+                vehicle: JSON.stringify(devicenumber),
+                drivername: JSON.stringify(drivername),
+                location: JSON.stringify(currentLocation),
+                driverid: JSON.stringify(driverid)
+              }
+            };
+            $this.router.navigate(['/fleetmatics'], payload);
+            // alert(this.warehousename)
+            infowindow.open(this.map, marker);
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+          marker.addListener('mouseout', function () {
+            infowindow.close(marker.get('map'), marker);
+          });
+        });
+      });
     }
-  });
-}
 
-searching() {
-  this.searchtodata = new Date(this.todate).getTime()*1000;
-  this.searchfromdata = new Date(this.fromdate).getTime()*1000;
-}
 
-searchingBydate() {
-  clearInterval(this.initInterval);
-  this.searchtodata = new Date(this.todate).getTime();
-  this.searchfromdata = new Date(this.fromdate).getTime();
-  this.searchInterval = setInterval(() => {
-  this.getAlerts();
-  this.getIdlingAllDevices();
-  this.gettripevent();
-   },5000);
-}
+  }
 
-getuserParams() {
-    var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+  getParams() {
+    var today = this.searchtodata;
+    var yesterday = this.searchfromdata;
     let body = {
-      "username":"info@dataagile.com",
-      "password":"conquest",
+      "username": "info@dataagile.com",
+      "password": "conquest",
       "fromDate": this.searchfromdata,
-      "toDate":this.searchtodata
+      "toDate": this.searchtodata
     };
     return body;
   }
-  
-getvehicleLocations() {
-  this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
+
+  getAlerts() {
+    let harshbraking = 0;
+    let highspeed = 0;
+    this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
+      for (let item of data['data']['alerts']) {
+        // console.log(item['alertCode']);
+        if (item['alertCode'] == 'HARSH_BRAKING') {
+          harshbraking = harshbraking + 1;
+          //  console.log(this.harshbraking);
+        }
+        if (item['alertCode'] == 'HIGH_SPEED') {
+          highspeed = highspeed + 1;
+          // console.log(this.harshbraking);
+        }
+        if (item['alertCode'] == 'RAPID_ACCELERATION') {
+          this.rapidacceleration = this.rapidacceleration + 1;
+          // console.log(this.rapidacceleration);
+        }
+      }
+      this.harshbraking = harshbraking;
+      this.highspeed = highspeed;
+    });
+  }
+
+  searching() {
+    this.searchtodata = new Date(this.todate).getTime() * 1000;
+    this.searchfromdata = new Date(this.fromdate).getTime() * 1000;
+  }
+
+  searchingBydate() {
+    clearInterval(this.initInterval);
+    this.searchtodata = new Date(this.todate).getTime();
+    this.searchfromdata = new Date(this.fromdate).getTime();
+    this.searchInterval = setInterval(() => {
+      this.getAlerts();
+      this.getIdlingAllDevices();
+      this.gettripevent();
+    }, 10000);
+  }
+
+  getuserParams() {
+    var today = Date.now();
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    let body = {
+      "username": "info@dataagile.com",
+      "password": "conquest",
+      "fromDate": this.searchfromdata,
+      "toDate": this.searchtodata
+    };
+    return body;
+  }
+
+  /*getvehicleLocations() {
+    this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
       console.log(data);
-  });
- }
+    });
+  }*/
 }
 

@@ -21,7 +21,6 @@ export class FleetmaticsComponent implements OnInit {
   Overview: boolean;
   options: any;
   harshevents: any;
-  speedingchart: any;
   mileschart: any;
   mapdata: any;
   weekAcceleration: number;
@@ -143,6 +142,30 @@ export class FleetmaticsComponent implements OnInit {
   speedOptions: any;
   hrsSpeed: any = [];
 
+  driveChart: any;
+  driveOptions: any;
+  drivemins: any = [];
+
+  idleChart: any;
+  idleOptions: any;
+  idlemins: any = [];
+
+  stopChart: any;
+  stopOptions: any;
+  stopmins: any = [];
+
+  mileChart: any;
+  mileOptions: any;
+  mile: any = [];
+
+  unauthorizedMileChart: any;
+  unauthorizedMileOptions: any;
+  unauthorizedMile: any = [];
+
+  tripChart: any;
+  tripOptions: any;
+  trip: any = [];
+
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
       this.tenantOverview = true;
@@ -172,7 +195,6 @@ export class FleetmaticsComponent implements OnInit {
       this.HarshEvents('', '','');
       this.HoursChart('', '', '');
       this.hrsSpeedChart('');
-      this.Speeding();
       this.MilesChart('', '', '');
       this.loadmap();
       this.loadmapdata();
@@ -415,101 +437,6 @@ export class FleetmaticsComponent implements OnInit {
     this.hourschart = new Chart(this.options);
   }
 
-
-  Speeding() {
-    this.options = {
-      chart: {
-        backgroundColor: '#f9f9f8',
-        height: 200,
-        // width: 373,
-        type: 'pie',
-        style: {
-          color: 'white',
-
-        },
-      },
-      legend: {
-        itemStyle: {
-          color: '#fff'
-        },
-        align: 'center',
-
-        verticalAlign: 'top',
-        floating: false,
-        style: {
-          color: '#fff'
-        }
-      },
-
-      credits: {
-        enabled: false
-      },
-      title: {
-        text: null,
-        align: 'center',
-        verticalAlign: 'middle',
-        // y: 3,
-        style: {
-          color: '#a4a0a0',
-          // fontSize: '12px',
-        }
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: false
-          }
-        }
-      },
-      xAxis: {
-        tickInterval: 1,
-        // type: 'datetime',
-        // categories: time,
-        labels: {
-          style: {
-            color: 'fff'
-          },
-          format: '{value}',
-        },
-      },
-      yAxis: {
-        gridLineColor: 'transparent',
-        labels: {
-          format: '{value}',
-          style: {
-            color: 'fff'
-          }
-        },
-
-        title: {
-          text: null,
-        },
-      },
-      series: [{
-        name: 'Speeding',
-        colorByPoint: true,
-        data: [{
-          name: 'CAT1',
-          y: 61.41,
-          sliced: true,
-          selected: true
-        }, {
-          name: 'CAT2',
-          y: 11.84
-        }, {
-          name: 'CAT3',
-          y: 10.85
-        }]
-      }],
-      tooltip: {
-        valueSuffix: '°F'
-      }
-    };
-    this.speedingchart = new Chart(this.options);
-  }
-
   MilesChart(miles, totaltrips, unauthorizedMiles) {
     this.options = {
       chart: {
@@ -624,9 +551,9 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: null,
+        text: "Acceleration",
         style: {
-          color: '#fff'
+          color: 'black'
         }
       },
       xAxis: {
@@ -695,9 +622,9 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: null,
+        text: "Braking",
         style: {
-          color: '#fff'
+          color: 'black'
         }
       },
       xAxis: {
@@ -767,9 +694,9 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: null,
+        text: "Speed",
         style: {
-          color: '#fff'
+          color: 'black'
         }
       },
       xAxis: {
@@ -810,6 +737,432 @@ export class FleetmaticsComponent implements OnInit {
       }
     };
     this.hoursSpeedChart = new Chart(this.speedOptions);
+  }
+
+  DriveChart(drivemins) {
+    console.log(drivemins);
+    this.driveOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Drive Time',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Drive Time",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Mins'
+      }
+    };
+    this.driveChart = new Chart(this.driveOptions);
+  }
+
+  IdleChart() {
+    this.idleOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Idle Time',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Idle Time",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Mins'
+      }
+    };
+    this.idleChart = new Chart(this.idleOptions);
+  }
+  StopChart() {
+    this.stopOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Stop Time',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Stop Time",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Mins'
+      }
+    };
+    this.stopChart = new Chart(this.stopOptions);
+  }
+
+  MileChart() {
+    this.mileOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Miles',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Miles",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Miles'
+      }
+    };
+    this.mileChart = new Chart(this.mileOptions);
+  }
+
+  UnauthorizedMileChart() {
+    this.unauthorizedMileOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Unauthorized Miles',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Unauthorized Miles",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Miles'
+      }
+    };
+    this.unauthorizedMileChart = new Chart(this.unauthorizedMileOptions);
+  }
+
+  TripChart() {
+    this.tripOptions = {
+      chart: {
+        backgroundColor: '#f9f9f8',
+        height: 200,
+        // width: 373,
+        type: 'line',
+        style: {
+          color: 'white',
+        },
+      },
+      legend: {
+        itemStyle: {
+          color: 'black'
+        },
+        align: 'center',
+        verticalAlign: 'top',
+        floating: false,
+        style: {
+          color: '#fff'
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Trips',
+        style: {
+          color: 'black'
+        }
+      },
+      xAxis: {
+        tickInterval: 1,
+        // type: 'datetime',
+        // categories: time,
+        labels: {
+          enabled: true,
+          style: {
+            color: 'black'
+          },
+        },
+      },
+      yAxis: {
+        gridLineColor: 'transparent',
+        labels: {
+          format: '{value}',
+          style: {
+            color: 'fff'
+          }
+        },
+        title: {
+          text: null,
+        },
+      },
+      series: [
+      {
+        name: "Trips",
+        showInLegend: false,
+        // borderColor: null,
+        data: [10, 20 , 5],
+        color: '#8ba9f8',
+        pointWidth: 15
+      }
+      ],
+      tooltip: {
+        valueSuffix: 'Miles'
+      }
+    };
+    this.tripChart = new Chart(this.tripOptions);
   }
 
   getParams() {
@@ -955,6 +1308,7 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   getDeviceEvents(number) {
+    console.log(new Date().getTime());
     this.hrs = [];
     this.hrsAcc = [];
     var $this = this;
@@ -973,7 +1327,6 @@ export class FleetmaticsComponent implements OnInit {
     }
     this.databotService.getVehicleHistory(body).subscribe(result => {
       var positions = result['data']['positions'];
-      console.log(positions);
       var stops = result['data']['stops'];
       this.driver = result['data']['positions'][0]['personName'];
       this.gettripevent();
@@ -1006,12 +1359,14 @@ export class FleetmaticsComponent implements OnInit {
 
         }
       }
-      console.log(this.hrsAcc);
       let accelerationData = this.hrsAcc;
       let brakingData = this.hrsBraking;
       let hrs = this.hrs;
-      this.accOptions.xAxis.categories = hrs;
-      this.accOptions.series[0].data = accelerationData;
+      if (this.accOptions) {
+        this.accOptions.xAxis.categories = hrs;
+        this.accOptions.series[0].data = accelerationData;
+      }
+      this.brakingOptions.xAxis.categories = hrs;
       this.brakingOptions.series[0].data = brakingData;
       this.hoursAccChart = new Chart(this.accOptions);
       this.hoursBrakingChart = new Chart(this.brakingOptions);
@@ -1019,8 +1374,9 @@ export class FleetmaticsComponent implements OnInit {
       // this.hoursAccChart = new Chart(this.options);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
     });
+    console.log(new Date().getTime());
   }
-
+f
   /**Get engine idling events */
   getIdlingEvents(stops) {
     let $this = this;
@@ -1029,6 +1385,8 @@ export class FleetmaticsComponent implements OnInit {
     $this.weekIdling = 0;
     $this.stoptime = 0
     $this.idlingtime = 0;
+    this.stopmins = [];
+    this.idlemins = [];
     // tslint:disable-next-line: forin
     for (var item in stops) {
       let today = moment(Date.now()).format('MMM DD, YYYY');
@@ -1040,10 +1398,24 @@ export class FleetmaticsComponent implements OnInit {
       var momentString = momentObj.format('MMM DD, YYYY');
       if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
         $this.stoptime = $this.stoptime + stops[item]['duration'];
+        this.stopmins.push(stops[item]['duration']);
+        this.StopChart();
       }
       if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
         $this.idlingtime = $this.idlingtime + stops[item]['duration'];
+        this.idlemins.push(stops[item]['duration']);
+        this.IdleChart();
       }
+    }
+    let idlemins = this.idlemins;
+    let stopmins = this.stopmins;
+    if(this.idleOptions) {
+      this.idleOptions.series[0].data = idlemins;
+      this.idleChart = new Chart(this.idleOptions);
+    }
+    if(this.stopOptions) {
+      this.stopOptions.series[0].data = stopmins;
+      this.stopChart = new Chart(this.stopOptions);
     }
   }
 
@@ -1066,18 +1438,51 @@ export class FleetmaticsComponent implements OnInit {
     this.drivetime = 0;
     this.miles = 0;
     this.totaltrips = 0;
-    this.unauthorizedMiles = 0
+    this.unauthorizedMiles = 0;
+    this.drivemins = [];
+    this.mile = [];
+    this.unauthorizedMile = [];
+    this.trip = [];
     for (let item of trips) {
       if (item['driverName'] == this.driver) {
+        this.DriveChart('');
+        this.MileChart();
+        this.UnauthorizedMileChart();
+        this.TripChart();
         this.miles = this.miles + item['authorizedMiles'];
-        this.unauthorizedMiles = this.unauthorizedMiles + item['unauthorizedMiles']
+        this.unauthorizedMiles = this.unauthorizedMiles + item['unauthorizedMiles'];
         this.drivetime = this.drivetime + item['durationMinutes'];
         this.totaltrips = this.totaltrips + 1;
         this.startLat = item['startLatitude'];
         this.startLong = item['startLongitude'];
         this.endLat = item['endLatitude'];
         this.endLong = item['endLongitude'];
+        this.drivemins.push(item['durationMinutes']);
+        this.mile.push(item['authorizedMiles']);
+        this.unauthorizedMile.push(item['unauthorizedMiles']);
+        this.trip.push(this.totaltrips);
       }
+    }
+    // this.driveOptions.xAxis.categories = drivetime;
+    let drivemins = this.drivemins;
+    let mile = this.mile;
+    let unauthorizedMile = this.unauthorizedMile;
+    let trip = this.trip;
+    if(this.driveOptions) {
+      this.driveOptions.series[0].data = drivemins;
+      this.driveChart = new Chart(this.driveOptions);
+    }
+    if(this.mileOptions) {
+      this.mileOptions.series[0].data = mile;
+      this.mileChart = new Chart(this.mileOptions);
+    }
+    if(this.unauthorizedMileOptions) {
+      this.unauthorizedMileOptions.series[0].data = unauthorizedMile;
+      this.unauthorizedMileChart = new Chart(this.unauthorizedMileOptions);
+    }
+    if(this.tripOptions) {
+      this.tripOptions.series[0].data = trip;
+      this.tripChart = new Chart(this.tripOptions);
     }
     this.HoursChart(this.drivetime, this.idlingtime, this.stoptime);
     this.MilesChart(this.miles, this.totaltrips, this.unauthorizedMiles);

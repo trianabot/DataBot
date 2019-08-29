@@ -54,6 +54,28 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('username',register.value.user);
     }
 
+
+    else if ((register.value.user == "SriP" || register.value.user == "srip") && register.value.password == "DataAgile@2019") {
+      this.router.navigate(['/industries']);
+      localStorage.setItem('userid', '5');
+      localStorage.setItem('username',register.value.user);
+    }
+    else if ((register.value.user == "OToni" || register.value.user == "otoni") && register.value.password == "DataAgile@2019") {
+      this.router.navigate(['/industries']);
+      localStorage.setItem('userid', '6');
+      localStorage.setItem('username',register.value.user);
+    }
+    else if ((register.value.user == "Pfrank" || register.value.user == "pfrank") && register.value.password == "DataAgile@2019") {
+      this.router.navigate(['/industries']);
+      localStorage.setItem('userid', '7');
+      localStorage.setItem('username',register.value.user);
+    }
+    else if ((register.value.user == "Melroseparkuser" || register.value.user == "melroseparkuser") && register.value.password == "DataAgile@2019") {
+      this.router.navigate(['/industries']);
+      localStorage.setItem('userid', '8');
+      localStorage.setItem('username',register.value.user);
+    }
+
     else {
       this.modelText = "Wrong Credentials";
       $('#myModal').modal('show');
