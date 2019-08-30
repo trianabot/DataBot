@@ -86,7 +86,7 @@
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Decreased
+                                Behavior
                             </span>
                         </div>
                         <div class="row m-0">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-down a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -103,12 +103,12 @@
             <div class="a-r">
                 <div class="row m-0">
                     <div class="col-md-4 padding0">
-                        <img src="../../assets/2icon.png">
+                        <img class="img-w" src="../../assets/icon-5.jpg">
                     </div>
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Decreased
+                                Speeding
                             </span>
                         </div>
                         <div class="row m-0">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-down a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -125,20 +125,20 @@
             <div class="a-r">
                 <div class="row m-0">
                     <div class="col-md-4 padding0">
-                        <img src="../../assets/3icon.png">
+                        <img class="img-w" src="../../assets/icon-7.jpg">
                     </div>
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Increased
+                                Acceleration
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">600%</span>
+                            <span class="f-s">{{(accelerationScore) ? accelerationScore : '- -'}}%</span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-up a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -147,20 +147,20 @@
             <div class="a-r">
                 <div class="row m-0">
                     <div class="col-md-4 padding0">
-                        <img src="../../assets/4icon.png">
+                        <img class="img-w" src="../../assets/icon-6.jpg">
                     </div>
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Decreased
+                                Braking
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">30%</span>
+                            <span class="f-s">{{(brakingScore) ? brakingScore : '- -'}}%</span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-down a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-down a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -169,20 +169,20 @@
             <div class="a-r">
                 <div class="row m-0">
                     <div class="col-md-4 padding0">
-                        <img src="../../assets/5icon.png">
+                        <img src="../../assets/icon-8.png">
                     </div>
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Increased
+                                Idle Time
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">10%</span>
+                            <span class="f-s"> {{(idleTime) ? idleTime : '- -'}}% </span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-up a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -191,20 +191,20 @@
             <div class="a-r">
                 <div class="row m-0">
                     <div class="col-md-4 padding0">
-                        <img src="../../assets/6icon.png">
+                        <img src="../../assets/icon-9.jpg">
                     </div>
                     <div class="col-md-5 padding0">
                         <div class="row m-0">
                             <span>
-                                Increased
+                                Stop Time
                             </span>
                         </div>
                         <div class="row m-0">
-                            <span class="f-s">0%</span>
+                            <span class="f-s"> {{(stopTime) ? stopTime : '- -'}}% </span>
                         </div>
                     </div>
                     <div class="col-md-3 padding0">
-                        <i class="fa fa-arrow-up a-i" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-arrow-up a-i" aria-hidden="true"></i> -->
                     </div>
                 </div>
             </div>
@@ -252,15 +252,15 @@
                 </div>
                 <div class="row m-0">
                     <div class="col-md-5">
-                        <span>November</span><br>
-                        <span>27/40</span>
+                        <span>July</span><br>
+                        <span>3/6</span>
                     </div>
                     <div class="col-md-2">
                         <i class="fa fa-arrow-right a-r-i" aria-hidden="true"></i>
                     </div>
                     <div class="col-md-5">
-                        <span>November</span><br>
-                        <span>27/40</span>
+                        <span>August</span><br>
+                        <span>2/6</span>
                     </div>
                 </div>
             </div>
@@ -274,56 +274,55 @@
         <div class="col-md-3 padding0">
             <div class="a-r-4 b-c-4 p-7">
                 <div class="row m-0">
-                    <div class="col-md-6 float-left"><span>Harsh Events</span></div>
-                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></span></div>
+                    <div class="col-md-6 float-left"><span class="chart-txt">Harsh Events</span></div>
+                    <div class="col-md-6 float-left" style="cursor: pointer"><span class="f-r"><i class="fa fa-line-chart" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></span></div>
                 </div>
                 <div class="row m-0">
                     <div [chart]="harshevents">
 
                     </div>
                 </div>
-                <div class="row m-0 t-a">
-                    <div class="p-7">Acceleration Events: &nbsp; {{(todayAcceleration) ? todayAcceleration : '- -'}}
-                    </div>
-                    <div class="p-7">Braking Events: &nbsp; {{(todayBraking) ? todayBraking : '- -'}}</div>
-                    <div class="p-7">Speeding Events: &nbsp; {{(highSpeed) ? highSpeed : '- -'}}</div>
+                <div class="row m-0 t-a b-g">
+                    <div class="t-c p-7">Acceleration Events: &nbsp; {{(todayAcceleration) ? todayAcceleration : '- -'}}</div>
+                    <div class="t-c p-7">Braking Events: &nbsp; {{(todayBraking) ? todayBraking : '- -'}}</div>
+                    <div class="t-c p-7">Speeding Events: &nbsp; {{(highSpeed) ? highSpeed : '- -'}}</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3 padding0">
             <div class="a-r-4 b-c-4 p-7">
                 <div class="row m-0">
-                    <div class="col-md-6 float-left"><span>Hours Per Day</span></div>
-                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal1"></i></span></div>
+                    <div class="col-md-6 float-left"><span class="chart-txt">Hours Per Day</span></div>
+                    <div class="col-md-6 float-left" style="cursor: pointer"><span class="f-r"><i class="fa fa-line-chart" aria-hidden="true" data-toggle="modal" data-target="#myModal1"></i></span></div>
                 </div>
                 <div class="row m-0">
                     <div [chart]="hourschart">
 
                     </div>
                 </div>
-                <div class="row m-0 t-a">
-                    <div class="p-7">Total driving time: &nbsp; {{(drivetime) ? drivetime : '- -'}} Min</div>
-                    <div class="p-7">Total idling time: &nbsp; {{(idlingtime) ? idlingtime : '- -'}} Mins</div>
-                    <div class="p-7">Stopped Time: &nbsp; {{(stoptime) ? stoptime : '- -'}} Mins</div>
+                <div class="row m-0 t-a b-g">
+                    <div class="t-c p-7">Total driving time: &nbsp; {{(drivetime) ? drivetime : '- -'}} Min</div>
+                    <div class="t-c p-7">Total idling time: &nbsp; {{(idlingtime) ? idlingtime : '- -'}} Mins</div>
+                    <div class="t-c p-7">Stopped Time: &nbsp; {{(stoptime) ? stoptime : '- -'}} Mins</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3 padding0">
             <div class="a-r-4 b-c-4 p-7">
                 <div class="row m-0">
-                    <div class="col-md-6 float-left"><span>Miles Per Day</span></div>
-                    <div class="col-md-6 float-left" style="cursor: pointer"><span><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#myModal2"></i></span></div>
+                    <div class="col-md-6 float-left"><span class="chart-txt">Miles Per Day</span></div>
+                    <div class="col-md-6 float-left" style="cursor: pointer"><span class="f-r"><i class="fa fa-line-chart" aria-hidden="true" data-toggle="modal" data-target="#myModal2"></i></span></div>
                 </div>
                 <div class="row m-0">
                     <div [chart]="mileschart">
 
                     </div>
                 </div>
-                <div class="row m-0 t-a">
+                <div class="row m-0 t-a b-g">
                     <!-- <div class="p-7">Days used: &nbsp; 33</div> -->
-                    <div class="p-7">Miles driven: &nbsp; {{this.miles}}</div>
-                    <div class="p-7">Unauthorized Miles driven: &nbsp; {{this.unauthorizedMiles}}</div>
-                    <div class="p-7">Total trips: &nbsp; {{this.totaltrips}}</div>
+                    <div class="t-c p-7">Miles driven: &nbsp; {{this.miles}}</div>
+                    <div class="t-c p-7">Unauthorized Miles driven: &nbsp; {{this.unauthorizedMiles}}</div>
+                    <div class="t-c p-7">Total trips: &nbsp; {{this.totaltrips}}</div>
                 </div>
             </div>
         </div>

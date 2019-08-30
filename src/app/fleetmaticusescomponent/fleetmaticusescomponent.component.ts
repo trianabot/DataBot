@@ -62,7 +62,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   today: any;
   inittodate: any;
   initfromdate: any;
-  marker: any = new Array();
+  marker: any = [];
+  drivetimeDaysFormat: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -92,8 +93,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     console.log(original_date);
     this.todate = original_date;
 
+
     this.selected = 1;
-    
+
     this.initInterval = setInterval(() => {
       this.fetchAllData();
     }, 10000);
@@ -174,13 +176,15 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
 
   getTotalDriveTime(trips) {
-    this.drivetime = 0;
+    let drivetime = 0;
     this.distance = 0;
     for (let item of trips) {
-      this.drivetime = this.drivetime + item['durationMinutes'];
-      this.distance = this.distance = item['distanceMiles'];
+      drivetime = drivetime + item['durationMinutes'];
+      this.distance = this.distance + item['distanceMiles'];
       // console.log(this.drivetime);
     }
+    this.drivetime = drivetime;
+    this.convertoDays(this.drivetime);
   }
 
   // initmap() {
@@ -203,14 +207,14 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var mapdata = data;
       this.mapdata = data;
       this.getpositions();
-      this.loadmap('','');
+      this.loadmap('', '');
     });
   }
 
   getpositions() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
-      center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
+      center: new google.maps.LatLng(0, 0),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false
@@ -227,6 +231,13 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['positions'];
       var mapdata = data;
       this.mapdata = data;
+      this.map.setCenter(new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']));
+      this.updateMarkers(searchfromdate, searchtodate);
+    });
+
+  }
+
+  updateMarkers(searchfromdate, searchtodate) {
     var $this = this;
     let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
 
@@ -240,20 +251,23 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     // this.map.center = new google.maps.LatLng(mapdata[4]['latitude'], mapdata[4]['longitude']);
     // this.marker = [];
     // this.marker = [];
+    if (marker && marker.setMap) {
+      marker.setMap(null);
+    }
     var latlong = [];
     // tslint:disable-next-line: forin
     for (let item in this.mapdata) {
       var lat = this.mapdata[item]['latitude'];
       var long = this.mapdata[item]['longitude'];
       latlong = new google.maps.LatLng(lat, long);
-      this.marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: latlong,
         map: this.map,
         icon: image
       });
-      
+      this.marker.push(marker);
       // this.marker.setMap(null);
-      attachSecretMessage(this.marker, this.mapdata[item]['latitude'], this.mapdata[item]['longitude'], this.mapdata[item]['label'], this.mapdata[item]['deviceNbr'], this.mapdata[item]['personName'], this.mapdata[item]['fuelLevel'], this.mapdata[item]['battery'], this.mapdata[item]['speed'], this.mapdata[item]['driverId'], searchfromdate, searchtodate);
+      attachSecretMessage(marker, this.mapdata[item]['latitude'], this.mapdata[item]['longitude'], this.mapdata[item]['label'], this.mapdata[item]['deviceNbr'], this.mapdata[item]['personName'], this.mapdata[item]['fuelLevel'], this.mapdata[item]['battery'], this.mapdata[item]['speed'], this.mapdata[item]['driverId'], searchfromdate, searchtodate);
     }
     function attachSecretMessage(marker, lat, long, label, devicenumber, drivername, fuel, battery, speed, driverid, searchfromdate, searchtodate) {
       var geocoder = new google.maps.Geocoder();
@@ -331,9 +345,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         });
       });
     }
-
-  });
-
   }
 
   getParams() {
@@ -393,9 +404,28 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     }, 10000);
   }
 
+  convertoDays(input) {
+
+    // set minutes to seconds
+    var seconds = input * 60
+
+    // calculate (and subtract) whole days
+    var days = Math.floor(seconds / 86400);
+    seconds -= days * 86400;
+
+    // calculate (and subtract) whole hours
+    var hours = Math.floor(seconds / 3600) % 24;
+    seconds -= hours * 3600;
+
+    // calculate (and subtract) whole minutes
+    var minutes = Math.floor(seconds / 60) % 60;
+
+    this.drivetimeDaysFormat =  days + 'd ' + hours + 'h ' + minutes + 'm ';
+    console.log('str:', this.drivetimeDaysFormat);
+  }
   getuserParams() {
     var today = Date.now();
-    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
+    var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 1;
     let body = {
       "username": "info@dataagile.com",
       "password": "conquest",

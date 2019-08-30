@@ -164,6 +164,9 @@ font-size: 22px;
   background: #0472b0;
   color: #f8fbff;
 }
+.img-w {
+  width: 107px;
+}
 /* input[type="date"]::before {
 	color: #999999;
 	content: attr(placeholder);

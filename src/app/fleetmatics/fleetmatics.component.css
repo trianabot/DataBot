@@ -25,7 +25,7 @@
     padding: 0px;
   }
   .a-r {
-    background: #f2e5f1; width: 98%
+    background: #e6eef2; width: 98%
   }
   .f-s {
     font-size: 20px;
@@ -79,7 +79,7 @@
   /* margin-top: 12px !important; */
  }
  .t-a {
-   text-align: center
+   text-align: center;
  }
  .b-c {
    border: 1px black solid ;
@@ -102,4 +102,20 @@
 .score {
   font-size: 30px;
   margin-top: -8px;
+}
+.chart-txt {
+  font-weight: bold;
+  color: #013358;
+}
+.f-r {
+  float: right !important
+}
+.t-c {
+  color: #013358;
+}
+.b-g {
+  background: #e6eef2;
+}
+.img-w {
+  width: 49px
 }

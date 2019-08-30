@@ -167,6 +167,13 @@ export class FleetmaticsComponent implements OnInit {
   trip: any = [];
   behaviourcard: number;
   speedcard: number;
+  accelerationScore: number;
+  brakingScore: number;
+  idleTime: number;
+  stopTime: number;
+  drivehrs: any = [];
+  alertHrs: any = [];
+  stopidletime: any = [];
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -1264,11 +1271,15 @@ export class FleetmaticsComponent implements OnInit {
              this.hrsSpeedChart(this.hrsSpeed);
              this.highSpeed = this.highSpeed + 1;
              let highspeed = 1;
+             let alertHrs = moment(item['alertDateTime']).format('H:mm:ss');
+             this.alertHrs.push(alertHrs)
              this.hrsSpeed.push(highspeed);
         }
       }
       let speed = this.hrsSpeed;
+      let alerthrs = this.alertHrs;
       this.HarshEvents('','',this.highSpeed);
+      this.speedOptions.xAxis.categories = alerthrs;
       this.speedOptions.series[0].data = speed;
       this.hoursSpeedChart = new Chart(this.speedOptions);
     });
@@ -1342,7 +1353,7 @@ export class FleetmaticsComponent implements OnInit {
       // this.getvehicleAlerts();
       for (let item of positions) {
         let today = moment(Date.now()).format('MMM DD, YYYY');
-        let todayfromdata = moment([item]['date']).format('MMM DD, YYYY');
+        let todayfromdata = moment(item['date']).format('MMM DD, YYYY');
         var dateString = moment().subtract(1, 'days').toString();
         var dateObj = new Date(dateString);
         var momentObj = moment(dateObj);
@@ -1350,7 +1361,7 @@ export class FleetmaticsComponent implements OnInit {
         if (item['behaviorCd'] == 'HAC' && (today == todayfromdata)) {
           this.hrsAccChart(this.hrsAcc);
           let acceleration = 1;
-          let hoursAccTrack = moment([item]['date']).format('H:mm:ss');
+          let hoursAccTrack = moment(item['date']).format('H:mm:ss');
           $this.todayAcceleration = $this.todayAcceleration + 1;
           this.hrsAcc.push(acceleration);
           this.hrs.push(hoursAccTrack);
@@ -1360,12 +1371,14 @@ export class FleetmaticsComponent implements OnInit {
           let braking = 1;
           $this.todayBraking = $this.todayBraking + 1;
           this.hrsBraking.push(braking);
-          let hoursAccTrack = moment([item]['date']).format('H:mm:ss');
+          let hoursAccTrack = moment(item['date']).format('H:mm:ss');
           this.hrs.push(hoursAccTrack);
           this.hrsBrakingChart(this.hrsBraking);
 
         }
       }
+      this.Acceleration(this.todayAcceleration);
+      this.Braking(this.todayBraking);
       let accelerationData = this.hrsAcc;
       let brakingData = this.hrsBraking;
       let hrs = this.hrs;
@@ -1421,6 +1434,78 @@ export class FleetmaticsComponent implements OnInit {
       this.speedcard = 20;
     }
 }
+Acceleration(acc) {
+  if(acc == 0) {
+    this.accelerationScore = 100;
+  }
+  if(acc >= 1 && acc <= 5) {
+    console.log('5');
+    this.accelerationScore = 80;
+  } if(acc >= 6 && acc <= 10) {
+    console.log(acc >= 6);
+    this.accelerationScore = 60;
+  } if(acc >= 11 && acc <= 15) {
+    console.log('15');
+    this.accelerationScore = 40;
+  } if(acc >= 16 && acc <= 20) {
+    console.log('20');
+    this.accelerationScore = 20;
+  }
+}
+Braking(acc) {
+  if(acc == 0) {
+    this.brakingScore = 100;
+  }
+  if(acc >= 1 && acc <= 5) {
+    console.log('5');
+    this.brakingScore = 80;
+  } if(acc >= 6 && acc <= 10) {
+    console.log(acc >= 6);
+    this.brakingScore = 60;
+  } if(acc >= 11 && acc <= 15) {
+    console.log('15');
+    this.brakingScore = 40;
+  } if(acc >= 16 && acc <= 20) {
+    console.log('20');
+    this.brakingScore = 20;
+  }
+}
+Idle(acc) {
+  if(acc == 0) {
+    this.idleTime = 100;
+  }
+  if(acc >= 1 && acc <= 5) {
+    console.log('5');
+    this.idleTime = 80;
+  } if(acc >= 6 && acc <= 10) {
+    console.log(acc >= 6);
+    this.idleTime = 60;
+  } if(acc >= 11 && acc <= 15) {
+    console.log('15');
+    this.idleTime = 40;
+  } if(acc >= 16 && acc <= 20) {
+    console.log('20');
+    this.idleTime = 20;
+  }
+}
+Stop(acc) {
+  if(acc == 0) {
+    this.stopTime = 100;
+  }
+  if(acc >= 1 && acc <= 5) {
+    console.log('5');
+    this.stopTime = 80;
+  } if(acc >= 6 && acc <= 10) {
+    console.log(acc >= 6);
+    this.stopTime = 60;
+  } if(acc >= 11 && acc <= 15) {
+    console.log('15');
+    this.stopTime = 40;
+  } if(acc >= 16 && acc <= 20) {
+    console.log('20');
+    this.stopTime = 20;
+  }
+}
   /**Get engine idling events */
   getIdlingEvents(stops) {
     let $this = this;
@@ -1442,6 +1527,8 @@ export class FleetmaticsComponent implements OnInit {
       var momentString = momentObj.format('MMM DD, YYYY');
       if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Engine Off') && (today == todayfromdata)) {
         $this.stoptime = $this.stoptime + stops[item]['duration'];
+        let stoptime = moment(stops[item]['beginDate']).format('hh:mm:ss');
+        this.stopidletime.push(stoptime);
         this.stopmins.push(stops[item]['duration']);
         this.StopChart();
       }
@@ -1451,13 +1538,18 @@ export class FleetmaticsComponent implements OnInit {
         this.IdleChart();
       }
     }
+    let stopintime = this.stopidletime;
+    this.Idle(this.idlingtime);
+    this.Stop(this.stoptime);
     let idlemins = this.idlemins;
     let stopmins = this.stopmins;
     if(this.idleOptions) {
+      this.idleOptions.xAxis.categories = stopintime;
       this.idleOptions.series[0].data = idlemins;
       this.idleChart = new Chart(this.idleOptions);
     }
     if(this.stopOptions) {
+      this.stopOptions.xAxis.categories = stopintime;
       this.stopOptions.series[0].data = stopmins;
       this.stopChart = new Chart(this.stopOptions);
     }
@@ -1501,6 +1593,8 @@ export class FleetmaticsComponent implements OnInit {
         this.startLong = item['startLongitude'];
         this.endLat = item['endLatitude'];
         this.endLong = item['endLongitude'];
+        let hoursTrack = moment(item['startDateTime']).format('hh:mm:ss');
+        this.drivehrs.push(hoursTrack);
         this.drivemins.push(item['durationMinutes']);
         this.mile.push(item['authorizedMiles']);
         this.unauthorizedMile.push(item['unauthorizedMiles']);
@@ -1512,19 +1606,25 @@ export class FleetmaticsComponent implements OnInit {
     let mile = this.mile;
     let unauthorizedMile = this.unauthorizedMile;
     let trip = this.trip;
+    let drivehrs = this.drivehrs;
+    console.log(this.drivehrs);
     if(this.driveOptions) {
+      this.driveOptions.xAxis.categories = drivehrs;
       this.driveOptions.series[0].data = drivemins;
       this.driveChart = new Chart(this.driveOptions);
     }
     if(this.mileOptions) {
+      this.mileOptions.xAxis.categories = drivehrs;
       this.mileOptions.series[0].data = mile;
       this.mileChart = new Chart(this.mileOptions);
     }
     if(this.unauthorizedMileOptions) {
+      this.unauthorizedMileOptions.xAxis.categories = drivehrs;
       this.unauthorizedMileOptions.series[0].data = unauthorizedMile;
       this.unauthorizedMileChart = new Chart(this.unauthorizedMileOptions);
     }
     if(this.tripOptions) {
+      this.tripOptions.xAxis.categories = drivehrs;
       this.tripOptions.series[0].data = trip;
       this.tripChart = new Chart(this.tripOptions);
     }
