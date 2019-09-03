@@ -62,7 +62,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   today: any;
   inittodate: any;
   initfromdate: any;
-  marker: any = [];
+  marker: any ;
   drivetimeDaysFormat: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
@@ -70,10 +70,11 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     let todateStamp = new Date(searchtodate).getTime();
     this.searchtodate = todateStamp;
     this.searchfromdate = Date.now() - 1000 * 60 * 60 * 24 * 1;
-    console.log(this.searchfromdate, this.searchtodate);
+    // console.log(this.searchfromdate, this.searchtodate);
     this.fetchAllData();
-    this.loadmapdata();
-    this.loadmap(this.searchfromdate, this.searchtodate);
+    // this.Map();
+    // this.loadmapdata();
+    // this.loadmap(this.searchfromdate, this.searchtodate);
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
       this.tenantOverview = true;
       this.Overview = false;
@@ -90,15 +91,16 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     var tomonth = new Date(timestamp).getMonth() + 1;
     var toyear = new Date(timestamp).getFullYear();
     var original_date = tomonth + '/' + todate + '/' + toyear;
-    console.log(original_date);
+    // console.log(original_date);
     this.todate = original_date;
+    this.fromdate = original_date;
 
 
     this.selected = 1;
 
     this.initInterval = setInterval(() => {
       this.fetchAllData();
-    }, 10000);
+    }, 50000);
 
   }
   fetchAllData() {
@@ -107,13 +109,117 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.getIdlingAllDevices();
     this.gettripevent();
     this.getAlerts();
-    this.loadmap(this.searchfromdate, this.searchtodate);
+    this.loadVehicles(this.searchfromdate, this.searchtodate);
+    // this.loadmap(this.searchfromdate, this.searchtodate);
     //this.getvehicleLocations();
   }
   ngOnDestroy() {
     clearInterval(this.searchInterval);
   }
+  
+  loadVehicles(fromDate, toDate) {
+    var body = {
+      "username": "info@dataagile.com",
+      "password": "conquest"
+    }
+    this.databotService.getCurrentPostition(body).subscribe(res => {
+      var data = res['data']['positions'];
+      var mapdata = data;
+      this.mapdata = data;
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: new google.maps.LatLng(0, 0),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false
+      });
+      for(let item of this.mapdata) {
+        this.showLocations(item, fromDate, toDate);
+      }
+    });
+  }
 
+  showLocations(item, fromDate, toDate) {
+    console.log(item);
+    var marker;
+    var geocoder = new google.maps.Geocoder();
+    var $this = this;
+    let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
+    var infowindow = new google.maps.InfoWindow();
+    var bounds = new google.maps.LatLngBounds();
+    this.map.setCenter(new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']));
+    var image = {
+      url: '../../assets/images/warehouse.png',
+      scaledSize: new google.maps.Size(50, 50),
+    };
+    if (marker && marker.setMap) {
+        marker.setMap(null);
+      }
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(item['latitude'], item['longitude']),
+      map: this.map,
+      icon: image
+    });
+    var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
+    // attachSecretMessage(marker, item['latitude'], item['longitude'], item['label'], item['deviceNbr'], item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['driverId'], this.searchfromdate, this.searchtodate)
+    marker.addListener('mouseover', function () {
+      geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+        if (status == 'OK') {
+
+          var currentLocation = res[0].address_components[2].long_name;
+          // $this.city = currentLocation;
+          // $this.state = res[0].address_components[4].long_name;
+          // $this.country = res[0].address_components[5].long_name;
+
+          // $this.esttime = est;
+          infowindow = new google.maps.InfoWindow({
+            content: '<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
+              + '<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + item['label'] + '</p></b>'
+              + '<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + item['fuelLevel'] + '</p></b>'
+              + '<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + item['battery'] + '</p></b>'
+              + '<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + item['speed'] + '</p></b>'
+
+          });
+
+          // $this.getDeviceEvents(devicenumber);
+          // alert(this.warehousename)
+          infowindow.open(this.map, marker);
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    });
+    marker.addListener('mouseout', function () {
+      infowindow.close(marker.get('map'), marker);
+    });
+    marker.addListener('click', function () {
+      // var latlong1 = new google.maps.LatLng(lat, long);
+      geocoder.geocode({ 'location': latlong1 }, function (res, status) {
+        if (status == 'OK') {
+
+          var currentLocation = res[0].address_components[2].long_name;
+          payload = {
+            queryParams: {
+              vehicle: JSON.stringify(item['deviceNbr']),
+              drivername: JSON.stringify(item['personName']),
+              location: JSON.stringify(currentLocation),
+              driverid: JSON.stringify(item['driverId']),
+              searchfromdate: fromDate,
+              searchtodate: toDate
+            }
+          };
+          console.log(payload);
+          $this.router.navigate(['/fleetmatics'], payload);
+          // alert(this.warehousename)
+          // infowindow.open(this.map, marker);
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    });
+  }
 
   getIdlingAllDevices() {
     // console.log(moment().subtract(1, 'days').toString()+ "hello ");
@@ -251,17 +357,32 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     // this.map.center = new google.maps.LatLng(mapdata[4]['latitude'], mapdata[4]['longitude']);
     // this.marker = [];
     // this.marker = [];
+    // if (marker && marker.setMap) {
+    //   marker.setMap(null);
+    // }
+    var latlong = [];
     if (marker && marker.setMap) {
       marker.setMap(null);
     }
-    var latlong = [];
     // tslint:disable-next-line: forin
     for (let item in this.mapdata) {
       var lat = this.mapdata[item]['latitude'];
       var long = this.mapdata[item]['longitude'];
       latlong = new google.maps.LatLng(lat, long);
+      // if (marker && marker.setMap) {
+      //   console.log(marker.setMap);
+      //   marker.setMap(null);
+      // }
+      // else {
+      //   marker = new google.maps.Marker({
+      //     position: new google.maps.LatLng(this.mapdata[item]['latitude'], this.mapdata[item]['longitude']),
+      //     map: this.map,
+      //     icon: image
+      //   });
+      // }
+      // marker.setMap(null);
       marker = new google.maps.Marker({
-        position: latlong,
+        position: new google.maps.LatLng(this.mapdata[item]['latitude'], this.mapdata[item]['longitude']),
         map: this.map,
         icon: image
       });
@@ -334,7 +455,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
                 searchtodate: searchtodate
               }
             };
-            console.log(payload);
+            // console.log(payload);
             $this.router.navigate(['/fleetmatics'], payload);
             // alert(this.warehousename)
             // infowindow.open(this.map, marker);
@@ -394,9 +515,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     clearInterval(this.initInterval);
     this.searchtodate = new Date(this.todate).getTime();
     this.searchfromdate = new Date(this.fromdate).getTime();
-    console.log(this.searchfromdate, this.searchtodate);
+    // console.log(this.searchfromdate, this.searchtodate);
     this.searchInterval = setInterval(() => {
-      console.log(this.searchfromdate, this.searchtodate);
+      // console.log(this.searchfromdate, this.searchtodate);
       this.getAlerts();
       this.getIdlingAllDevices();
       this.gettripevent();
@@ -421,7 +542,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     var minutes = Math.floor(seconds / 60) % 60;
 
     this.drivetimeDaysFormat =  days + 'd ' + hours + 'h ' + minutes + 'm ';
-    console.log('str:', this.drivetimeDaysFormat);
+    // console.log('str:', this.drivetimeDaysFormat);
   }
   getuserParams() {
     var today = Date.now();

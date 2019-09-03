@@ -174,6 +174,8 @@ export class FleetmaticsComponent implements OnInit {
   drivehrs: any = [];
   alertHrs: any = [];
   stopidletime: any = [];
+  startmarker: any;
+  infowindow: any;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -1226,6 +1228,15 @@ export class FleetmaticsComponent implements OnInit {
             mapTypeControl: false,
             streetViewControl: false
           });
+          var image = {
+            url: '../../assets/images/warehouse.png',
+            scaledSize: new google.maps.Size(50, 50),
+          };
+          this.startmarker = new google.maps.Marker({
+            position: new google.maps.LatLng(item.latitude, item.longitude),
+            map: this.map,
+            icon:image
+          });
         }
       }
     });
@@ -1239,24 +1250,28 @@ export class FleetmaticsComponent implements OnInit {
       url: '../../assets/images/warehouse.png',
       scaledSize: new google.maps.Size(50, 50),
     };
-    var infowindow = new google.maps.InfoWindow();
-    startmarker = new google.maps.Marker({
+    this.infowindow = new google.maps.InfoWindow();
+    if (this.startmarker && this.startmarker.setMap) {
+      this.startmarker.setMap(null);
+    }
+    this.startmarker = new google.maps.Marker({
       position: new google.maps.LatLng(vehicle.latitude, vehicle.longitude),
       map: this.map,
       icon:image
     });
-    this.map.panTo(startmarker.getPosition());
-    startmarker.addListener('mouseover', function () {
-      infowindow = new google.maps.InfoWindow({
+    this.map.panTo(this.startmarker.getPosition());
+    this.startmarker.addListener('mouseover', function () {
+      console.log('mouseover');
+      this.infowindow = new google.maps.InfoWindow({
           content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + vehicle.personName + '</p></b>'
           +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + vehicle.fuelLevel + '</p></b>'
           +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + vehicle.battery + '</p></b>'
           +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + vehicle.speed + '</p></b>'
       });
-      infowindow.open(this.map, startmarker);
+      this.infowindow.open(this.map, this.startmarker);
     });
-    startmarker.addListener('mouseout', function() {
-      infowindow.close(startmarker.get('map'), startmarker);
+    this.startmarker.addListener('mouseout', function() {
+      this.infowindow.close(this.startmarker.get('map'), this.startmarker);
     });
   }
 
@@ -1329,6 +1344,7 @@ export class FleetmaticsComponent implements OnInit {
     // console.log(new Date().getTime());
     this.hrs = [];
     this.hrsAcc = [];
+    this.hrsBraking = [];
     var $this = this;
     $this.todayAcceleration = 0;
     $this.todayBraking = 0;
