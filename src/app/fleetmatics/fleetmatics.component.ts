@@ -175,6 +175,7 @@ export class FleetmaticsComponent implements OnInit {
   alertHrs: any = [];
   stopidletime: any = [];
   startmarker: any;
+  initInterval: any;
   infowindow: any;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
@@ -196,7 +197,6 @@ export class FleetmaticsComponent implements OnInit {
     const driverid = this.route.snapshot.queryParamMap.get('driverid');
     const searchfromdate = this.route.snapshot.queryParamMap.get('searchfromdate');
     const searchtodate = this.route.snapshot.queryParamMap.get('searchtodate');
-    console.log(typeof(parseInt(searchfromdate)), searchtodate);
     this.selected = 1;
     if (jsonString) {
       this.imei = JSON.parse(jsonString);
@@ -206,7 +206,6 @@ export class FleetmaticsComponent implements OnInit {
       this.driverid = JSON.parse(driverid);
       this.searchfromdate = parseInt(searchfromdate);
       this.searchtodate = parseInt(searchtodate);
-      console.log(this.searchfromdate, this.searchtodate);
       this.getvehicleAlerts();
 
       this.getDeviceEvents(this.imei);
@@ -215,12 +214,16 @@ export class FleetmaticsComponent implements OnInit {
       this.hrsSpeedChart('');
       this.MilesChart('', '', '');
 
-      this.loadmap();
-      this.loadmapdata();
+      // this.loadmap();
+      // this.loadmapdata();
       this.getIdlingAllDevices();
       this.gettripevent();
       this.loadData();
       this.getRoute();
+      this.loadVehicle();
+      // this.initInterval = setInterval(() => {
+      //   this.loadVehicle();
+      // }, 30000);
     } else {
       // this.HarshEvents();
       // this.HoursChart();
@@ -1193,25 +1196,7 @@ export class FleetmaticsComponent implements OnInit {
     return body;
   }
 
-  loadmapdata() {
-    this.getUpdateVehicleInterval = setInterval(() => {
-      var body = {
-        "username": "info@dataagile.com",
-        "password": "conquest"
-      }
-      this.databotService.getVehicleLocations(this.getParams()).subscribe(res => {
-        var data = res['data']['locations'];
-        for(let item of data) {
-          if(item['personName'] == this.driver) {
-            this.showVehicle(item);
-          }
-        }
-      });
-    },5000);
-    
-  }
-  
-  loadmap() {
+  loadVehicle() {
     var body = {
       "username": "info@dataagile.com",
       "password": "conquest"
@@ -1220,7 +1205,6 @@ export class FleetmaticsComponent implements OnInit {
       var data = res['data']['locations'];
       for(let item of data) {
         if(item['personName'] == this.driver) {
-          // this.showVehicle(item);
           this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
             center: new google.maps.LatLng(item.latitude, item.longitude),
@@ -1232,46 +1216,47 @@ export class FleetmaticsComponent implements OnInit {
             url: '../../assets/images/warehouse.png',
             scaledSize: new google.maps.Size(50, 50),
           };
-          this.startmarker = new google.maps.Marker({
+          var startmarker = new google.maps.Marker({
             position: new google.maps.LatLng(item.latitude, item.longitude),
             map: this.map,
             icon:image
           });
         }
       }
+      this.UpdateMarker(this.map, startmarker);
+      this.initInterval = setInterval(() => {
+        this.UpdateMarker(this.map, startmarker);
+      }, 10000);
     });
   }
 
-  showVehicle(vehicle) {
-    var startmarker;
-    var endmarker;
-    var i;
-    var image = {
-      url: '../../assets/images/warehouse.png',
-      scaledSize: new google.maps.Size(50, 50),
-    };
-    this.infowindow = new google.maps.InfoWindow();
-    if (this.startmarker && this.startmarker.setMap) {
-      this.startmarker.setMap(null);
+  UpdateMarker(map, startmarker) {
+    var body = {
+      "username": "info@dataagile.com",
+      "password": "conquest"
     }
-    this.startmarker = new google.maps.Marker({
-      position: new google.maps.LatLng(vehicle.latitude, vehicle.longitude),
-      map: this.map,
-      icon:image
-    });
-    this.map.panTo(this.startmarker.getPosition());
-    this.startmarker.addListener('mouseover', function () {
-      console.log('mouseover');
-      this.infowindow = new google.maps.InfoWindow({
-          content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + vehicle.personName + '</p></b>'
-          +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + vehicle.fuelLevel + '</p></b>'
-          +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + vehicle.battery + '</p></b>'
-          +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + vehicle.speed + '</p></b>'
-      });
-      this.infowindow.open(this.map, this.startmarker);
-    });
-    this.startmarker.addListener('mouseout', function() {
-      this.infowindow.close(this.startmarker.get('map'), this.startmarker);
+    this.databotService.getVehicleLocations(this.getParams()).subscribe(res => {
+      var data = res['data']['locations'];
+      for(let item of data) {
+        if(item['personName'] == this.driver) {
+          var infowindow = new google.maps.InfoWindow();
+          // this.showVehicle(item,map);
+          map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
+          startmarker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
+          startmarker.addListener('mouseover', function () {
+            infowindow = new google.maps.InfoWindow({
+                content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + item['personName'] + '</p></b>'
+                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + item['fuelLevel'] + '</p></b>'
+                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + item['battery'] + '</p></b>'
+                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + item['speed'] + '</p></b>'
+            });
+            infowindow.open(map, startmarker);
+          });
+          startmarker.addListener('mouseout', function() {
+            infowindow.close(map, startmarker);
+          });
+        }
+      }
     });
   }
 
@@ -1279,10 +1264,8 @@ export class FleetmaticsComponent implements OnInit {
     this.highSpeed = 0;
     this.hrsSpeed = [];
     this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
-      console.log(data);
       for(let item of data['data']['alerts']) {
         if(item['alertCode'] == 'HIGH_SPEED') {
-             console.log(item);
              this.hrsSpeedChart(this.hrsSpeed);
              this.highSpeed = this.highSpeed + 1;
              let highspeed = 1;
@@ -1301,7 +1284,6 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   getIdlingAllDevices() {
-    // console.log(moment().subtract(1, 'days').toString()+ "hello ");
     var today = Date.now();
     var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 6;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
     var yest = new Date(yesterday);
@@ -1341,14 +1323,12 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   getDeviceEvents(number) {
-    // console.log(new Date().getTime());
     this.hrs = [];
     this.hrsAcc = [];
     this.hrsBraking = [];
     var $this = this;
     $this.todayAcceleration = 0;
     $this.todayBraking = 0;
-    // console.log(moment(1564337311686).format('MMM DD, YYYY') == moment(1564165457000).format('MMM DD, YYYY'));
     var today = Date.now();
     var yesterday = Date.now() - 1000 * 60 * 60 * 24 * 2;
     var yest = new Date(yesterday);
@@ -1365,7 +1345,8 @@ export class FleetmaticsComponent implements OnInit {
       this.driver = result['data']['positions'][0]['personName'];
       this.gettripevent();
       this.getIdlingEvents(stops);
-      this.loadmapdata();
+      // this.loadmapdata();
+      this.loadVehicle();
       // this.getvehicleAlerts();
       for (let item of positions) {
         let today = moment(Date.now()).format('MMM DD, YYYY');
@@ -1419,16 +1400,12 @@ export class FleetmaticsComponent implements OnInit {
         this.behaviourcard = 100;
       }
       if(score >= 1 && score <= 5) {
-        console.log('5');
         this.behaviourcard = 80;
       } if(score >= 6 && score <= 10) {
-        console.log(score >= 6);
         this.behaviourcard = 60;
       } if(score >= 11 && score <= 15) {
-        console.log('15');
         this.behaviourcard = 40;
       } if(score >= 16 && score <= 20) {
-        console.log('20');
         this.behaviourcard = 20;
       }
   }
@@ -1437,16 +1414,12 @@ export class FleetmaticsComponent implements OnInit {
       this.speedcard = 100;
     }
     if(speed >= 1 && speed <= 5) {
-      console.log('5');
       this.speedcard = 80;
     } if(speed >= 6 && speed <= 10) {
-      console.log(speed >= 6);
       this.speedcard = 60;
     } if(speed >= 11 && speed <= 15) {
-      console.log('15');
       this.speedcard = 40;
     } if(speed >= 16 && speed <= 20) {
-      console.log('20');
       this.speedcard = 20;
     }
 }
@@ -1455,16 +1428,12 @@ Acceleration(acc) {
     this.accelerationScore = 100;
   }
   if(acc >= 1 && acc <= 5) {
-    console.log('5');
     this.accelerationScore = 80;
   } if(acc >= 6 && acc <= 10) {
-    console.log(acc >= 6);
     this.accelerationScore = 60;
   } if(acc >= 11 && acc <= 15) {
-    console.log('15');
     this.accelerationScore = 40;
   } if(acc >= 16 && acc <= 20) {
-    console.log('20');
     this.accelerationScore = 20;
   }
 }
@@ -1473,16 +1442,12 @@ Braking(acc) {
     this.brakingScore = 100;
   }
   if(acc >= 1 && acc <= 5) {
-    console.log('5');
     this.brakingScore = 80;
   } if(acc >= 6 && acc <= 10) {
-    console.log(acc >= 6);
     this.brakingScore = 60;
   } if(acc >= 11 && acc <= 15) {
-    console.log('15');
     this.brakingScore = 40;
   } if(acc >= 16 && acc <= 20) {
-    console.log('20');
     this.brakingScore = 20;
   }
 }
@@ -1491,16 +1456,12 @@ Idle(acc) {
     this.idleTime = 100;
   }
   if(acc >= 1 && acc <= 5) {
-    console.log('5');
     this.idleTime = 80;
   } if(acc >= 6 && acc <= 10) {
-    console.log(acc >= 6);
     this.idleTime = 60;
   } if(acc >= 11 && acc <= 15) {
-    console.log('15');
     this.idleTime = 40;
   } if(acc >= 16 && acc <= 20) {
-    console.log('20');
     this.idleTime = 20;
   }
 }
@@ -1509,16 +1470,12 @@ Stop(acc) {
     this.stopTime = 100;
   }
   if(acc >= 1 && acc <= 5) {
-    console.log('5');
     this.stopTime = 80;
   } if(acc >= 6 && acc <= 10) {
-    console.log(acc >= 6);
     this.stopTime = 60;
   } if(acc >= 11 && acc <= 15) {
-    console.log('15');
     this.stopTime = 40;
   } if(acc >= 16 && acc <= 20) {
-    console.log('20');
     this.stopTime = 20;
   }
 }
@@ -1623,7 +1580,6 @@ Stop(acc) {
     let unauthorizedMile = this.unauthorizedMile;
     let trip = this.trip;
     let drivehrs = this.drivehrs;
-    console.log(this.drivehrs);
     if(this.driveOptions) {
       this.driveOptions.xAxis.categories = drivehrs;
       this.driveOptions.series[0].data = drivemins;
@@ -1651,7 +1607,7 @@ Stop(acc) {
 
   getRoute() {
     this.databotService.getVehicleRouteLocations(this.getParams(), this.imei).subscribe(data => {
-        console.log(data);
+        // console.log(data);
     });
   }
 
