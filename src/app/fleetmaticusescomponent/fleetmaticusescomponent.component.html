@@ -185,12 +185,22 @@
             <div class="col-md-6 padding0 float-left" style="background: radial-gradient(black, transparent);">
               <div class="col-md-3 d-3 padding0 float-left " style="text-align: left;">
                   <div class="a-r-d1">
-                      <div class="row m-0 cor" style="padding: 30px; padding-left: 0px;">
+                      <div class="row m-0 cor">
                           <div class="col-md-12">
-                                From: <input type="text" [(ngModel)]="fromdate" style="width: 125px;color: black" (keyup.enter)="searchingBydate()" placeholder="MM/DD/YYYY">
+                              <div class="row m-0 p-7">
+                                <span>From:</span>
+                              </div>
+                              <div class="row m-0 p-7">
+                                    <input type="text" class="inp" [(ngModel)]="fromdate" style="color: black" (keyup.enter)="searchingBydate()" placeholder="MM/DD/YYYY">
+                              </div>
                           </div><br>
                           <div class="col-md-12 m-t-10">
-                                to: <input type="text" id="today" [(ngModel)]="todate" style="width: 125px; color: black" placeholder="MM/DD/YYYY" value="todate">
+                                <div class="row m-0 p-7">
+                                        <span>To:</span>
+                                </div>
+                                <div class="row m-0 p-7">
+                                    <input type="text" class="inp" id="today" [(ngModel)]="todate" style="color: black" placeholder="MM/DD/YYYY" value="todate">
+                                </div>
                           </div>
                           <div class="col-md-12 p-4 m-t-0">
                               <!-- <button class="btn" (click)="searchingBydate()">Submit</button> -->
@@ -226,7 +236,7 @@
                                       <img class="p-2" class="w-10" src="../../assets/icon-002.png"><br> 
                                       <span>DRIVE TIME</span><br>
                                       <span class="f-s-10">(0d 0h 0m)</span><br>
-                                      <button class="p-30 m-t-10"><span class="f-s-22">{{(drivetimeDaysFormat) ? drivetimeDaysFormat : '- -'}}</span></button><br>
+                                      <button class="p-t m-t-10"><span class="f-s-22">{{(drivetimeDaysFormat) ? drivetimeDaysFormat : '- -'}}</span></button><br>
                                      
                               </li>
                       </ul>

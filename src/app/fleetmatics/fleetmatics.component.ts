@@ -279,7 +279,7 @@ export class FleetmaticsComponent implements OnInit {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 265,
+        height: 200,
         // width: 373,
         type: 'pie',
         style: {
@@ -292,8 +292,8 @@ export class FleetmaticsComponent implements OnInit {
           color: 'black'
         },
         align: 'center',
-        layout: 'vertical',
-        verticalAlign: 'bottom',
+        // layout: 'vertical',
+        verticalAlign: 'top',
         floating: false,
         style: {
           color: 'black'
@@ -317,7 +317,7 @@ export class FleetmaticsComponent implements OnInit {
         pie: {
           dataLabels: {
             enabled: false,
-            distance: -50,
+            distance: -70,
             style: {
               fontWeight: 'bold',
               color: 'white'
@@ -352,15 +352,15 @@ export class FleetmaticsComponent implements OnInit {
       },
       series: [{
         type: 'pie',
-        showInLegend: true,
-        innerSize: '60%',
+        showInLegend: false,
+        innerSize: '80%',
         borderColor: null,
         data: [
           ['Acceleration', acc],
           ['Braking', braking],
           ['Speed', speed]
         ],
-        colors: ['red', 'green', 'blue']
+        // colors: ['red', 'green', 'blue']
       }],
       tooltip: {
         // valueSuffix: '°F'
@@ -373,7 +373,7 @@ export class FleetmaticsComponent implements OnInit {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 162,
+        height: 200,
         // width: 373,
         type: 'bar',
         style: {
@@ -554,7 +554,7 @@ export class FleetmaticsComponent implements OnInit {
     this.accOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 280,
+        height: 200,
         // width: 373,
         type: 'line',
         style: {
@@ -625,7 +625,7 @@ export class FleetmaticsComponent implements OnInit {
     this.brakingOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 280,
+        height: 200,
         // width: 373,
         type: 'line',
         style: {
@@ -697,7 +697,7 @@ export class FleetmaticsComponent implements OnInit {
     this.speedOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 280,
+        height: 200,
         // width: 373,
         type: 'line',
         style: {

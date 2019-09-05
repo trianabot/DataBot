@@ -1,4 +1,4 @@
-/* .activeclass{
+.activeclass{
     background-color: #f9f9f9!important;
     border-bottom: 3px solid palevioletred;
     cursor:pointer;
@@ -111,8 +111,11 @@
 }
 .img-w {
   width: 49px
-} */
-#map {
+}
+
+/* new screen css */
+
+/* #map {
   height:272px;
   width:100%;
 }
@@ -202,7 +205,6 @@
 }
 
 .p-img {
-  /* width: 48%; */
   border-radius: 65px;
   padding-bottom: 11px;
 }
@@ -217,4 +219,4 @@
 .tb-tc {
   font-weight: bold;
   text-align: center;
-}
+} */
