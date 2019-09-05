@@ -161,11 +161,21 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
           var currentLocation = res[0].address_components[2].long_name;
          infowindow = new google.maps.InfoWindow({
-              content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
-              +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + person + '</p></b>'
-              +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
-              +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
-              +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          content:'<b style="display:inline-block"><p style="color:white;padding:5px;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style="display:inline-block; font-family: sans-serif; width:191px;"><p style="color:white;padding:5px; background:black;text-weight:bold">' + 'Driver Name:' + person + '</p></b><br>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style=""><p style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg">Fuel:' + fuel + '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style="display:inline-block;" ><p style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i>Battery:' + battery +'V'+ '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed:' + speed +'mph'+ '</p></b>'
+              // content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
+              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + person + '</p></b>'
+              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
+              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
+              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
           });
           // console.log(infowindow);
           infowindow.open(map, marker);

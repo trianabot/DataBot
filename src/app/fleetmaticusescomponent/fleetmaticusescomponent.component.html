@@ -38,7 +38,7 @@
             <span>Acceleration</span>
       </li>
   </ul> -->
-  <div class="row m-0 m-t-10">
+  <!-- <div class="row m-0 m-t-10">
       <div class="col-md-7 padding0 float-left">
         <div class="col-md-3 d-3 padding0 float-left">
             <div class="a-r-d">
@@ -50,8 +50,7 @@
                             to: <input type="text" id="today" [(ngModel)]="todate" style="width: 140px;margin-left: 20px;" placeholder="MM/DD/YYYY" value="todate">
                     </div>
                     <div class="col-md-12 p-4 m-t">
-                        <!-- <button class="btn" (click)="searchingBydate()">Submit</button> -->
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -178,4 +177,180 @@
           <div id='map' class="col-md-12"></div>
       </div>
   </div>
-</div>
+</div> -->
+
+<div class="row wi">
+
+        <div class="row m-0 m-t-10 db-fmicons">
+            <div class="col-md-6 padding0 float-left" style="background: radial-gradient(black, transparent);">
+              <div class="col-md-3 d-3 padding0 float-left " style="text-align: left;">
+                  <div class="a-r-d1">
+                      <div class="row m-0 cor" style="padding: 30px; padding-left: 0px;">
+                          <div class="col-md-12">
+                                From: <input type="text" [(ngModel)]="fromdate" style="width: 125px;color: black" (keyup.enter)="searchingBydate()" placeholder="MM/DD/YYYY">
+                          </div><br>
+                          <div class="col-md-12 m-t-10">
+                                to: <input type="text" id="today" [(ngModel)]="todate" style="width: 125px; color: black" placeholder="MM/DD/YYYY" value="todate">
+                          </div>
+                          <div class="col-md-12 p-4 m-t-0">
+                              <!-- <button class="btn" (click)="searchingBydate()">Submit</button> -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+         
+          
+              <div class="col-md-3 d-3 padding0 float-left">
+                  <div class="a-r-d2">
+                      <div class="row m-0 cor">
+                      <ul class="padding0" style="list-style: none">
+                              <li class="li-items cor">
+                                  <img class="p-4"  class="w-10" src="../../assets/icon-001.png"><br>
+                                  <span>TOTAL TRUCKS</span><br>
+                                  <span></span><br>
+                                  <button class="p-31 m-t-10"><span class="f-s-22">{{mapdata?.length}}</span></button><br>
+                                 
+                                 
+                              </li>
+                      </ul>
+                      </div>
+                  </div>
+              </div>
+          
+         
+              <div class="col-md-3 d-3 padding0 float-left">
+                  <div class="a-r-d2">
+                      <div class="row m-0 cor">
+                      <ul style="list-style: none; padding: 0px;">
+                              <li class="li-items cor">
+                                      <img class="p-2" class="w-10" src="../../assets/icon-002.png"><br> 
+                                      <span>DRIVE TIME</span><br>
+                                      <span class="f-s-10">(0d 0h 0m)</span><br>
+                                      <button class="p-30 m-t-10"><span class="f-s-22">{{(drivetimeDaysFormat) ? drivetimeDaysFormat : '- -'}}</span></button><br>
+                                     
+                              </li>
+                      </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3 d-3 padding0 float-left">
+                  <div class="a-r-d2">
+                      <div class="row m-0 cor">
+                      <ul style="list-style: none; padding: 0px;">
+                              <li class="li-items cor">
+                                      <img class="w-10" src="../../assets/icon-003.png"> <br>
+                                     <span>DISTANCE TRAVELLED</span><br>
+                                     <span class="f-s-10">(Miles)</span><br>
+                                     <button class="p-30 m-t-10"><span class="f-s-22">{{(distance) ? distance : '- -'}}</span></button>
+                                      
+                              </li>
+                      </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 padding0 float-left" >
+                 <div class="row m-0 cor" style="background: radial-gradient(black, transparent); width: 97%;" >
+                      <div class="col-md-3 padding0">
+                          <div class="a-r-d3 cor">
+                              <div class="row m-0">
+                                  <div class="col-md-12 padding0 float-left">
+                                          <ul class="padding0" style="list-style: none">
+                                                  <li class="li-items ">
+                                                       <img class="w-10" src="../../assets/icon-004.png"><br>
+                                                       <span class="float-left">IDLING</span><br>
+                                                       <span class="f-s-10">(Incidents)</span><br>
+                                                        <button class="p-31 m-t-10"><span class="f-s-22 float-left">{{(idlingtime) ? idlingtime : '- -'}}</span></button>
+                                                   </li>
+                                         </ul>
+                                  </div>
+                                  <!-- <div class="col-md-4 m-a padding0 float-left"> 
+                                         
+                                  </div> -->
+                                  <!-- <div class="col-md-4 m-a padding0 float-left">
+                                         
+                                      </div> -->
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-3 padding0">
+                          <div class="a-r-d6">
+                              <div class="row m-0 cor ">
+                                  
+                                      <div class="col-md-12 a-r-d padding0 float-left">
+                                              <ul class="padding0" style="list-style: none">
+                                                      <li class="li-items ">
+                                                          <img class="w-10" src="../../assets/icon-005.png"><br>
+                                                          <span class=" float-left">SPEEDING</span><br>
+                                                          <span class="f-s-10">(Incidents)</span><br>
+                                                          <button class="p-30 m-t-10"><span class="f-s-22 float-left">{{(highspeed) ? highspeed : '- -'}}</span></button>
+                                                      </li>
+                                              </ul>    
+                                      </div>
+                                      <!-- <div class="col-md-4 m-a padding0 float-left"> 
+                                              
+                                      </div> -->
+                                      <!-- <div class="col-md-4 m-a padding0 float-left">
+                                              
+                                          </div> -->
+                              </div>
+                          </div>
+                      </div>
+                
+                 
+                      <div class="col-md-3 m-t-2 padding0">
+                          <div class="a-r-d3 cor">
+                               <div class="row m-0 ">
+                                      <div class="col-md-12 padding0 float-left">
+                                              <ul class="padding0" style="list-style: none">
+                                                      <li class="li-items ">
+                                                          <img class="w-10" src="../../assets/icon-006.png"><br>          
+                                                          <span class="float-left">HARSH BRAKING</span><br>
+                                                          <span class="f-s-10">(Incidents)</span><br>
+                                                          <button class="p-30 m-t-10"><span class="f-s-22"> {{(harshbraking) ? harshbraking : '- -'}} </span></button>
+                                                      </li>
+                                                  </ul>
+                                      </div>
+                                      <!-- <div class="col-md-4 m-a padding0 float-left"> 
+                                              
+                                      </div> -->
+                                      <!-- <div class="col-md-4 m-a padding0 float-left">
+                                             
+                                          </div> -->
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-3 m-t-2 padding0">
+                          <div class="a-r-d3">
+                              <div class="row m-0 cor ">
+                                      <div class="col-md-12 padding0 float-left">
+                                              <ul class="padding0" style="list-style: none">
+                                                      <li class="li-items">
+                                                          <img class="w-10" src="../../assets/icon-007.png"><br>
+                                                          <span class="float-left">ACCELERATION</span><br>
+                                                          <span class="f-s-10">(Incidents)</span><br>
+                                                          <button class="p-31 m-t-10"><span class="f-s-22">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span></button>
+                                                      </li>
+                                              </ul>
+                                      </div>
+                                      <!-- <div class="col-md-4 m-a padding0 float-left"> 
+                                              
+                                      </div> -->
+                                      <!-- <div class="col-md-4 m-a padding0 float-left">
+                                             
+                                          </div> -->
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                 
+            </div>
+      
+        </div>
+      </div>
+        <div class="row m-0 m-t-10">
+            <div class="col-md-12 padding0 m-4">
+                <div id='map' class="col-md-12"></div>
+            </div>
+        </div>
+      </div>

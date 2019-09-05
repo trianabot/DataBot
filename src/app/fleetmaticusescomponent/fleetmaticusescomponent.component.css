@@ -1,4 +1,4 @@
-.activeclass{
+/* .activeclass{
   background-color: #f9f9f9!important;
   border-bottom: 3px solid palevioletred;
   cursor:pointer;
@@ -15,11 +15,8 @@
   margin-top: 15px
 }
 .background {
-  /* background: '#66c8275';
-  height: '-webkit-fill-available' */
 }
 .top-nav {
-  /* background: #f2e5f1; width: 98% */
 }
 .padding0 {
   padding: 0px;
@@ -41,10 +38,8 @@
   border-radius: 10px;
 
 }
-/*--------row 2-------*/
 .r-2 {
 border: 1px black solid;
-/* padding: 40px; */
 }
 .m-t-10 {
  margin-top: 10px
@@ -74,9 +69,7 @@ width: 98%
  padding: 5px
 }
 .a-r-i {
-/* margin-left: 15px !important; */
 font-size: 25px !important;
-/* margin-top: 12px !important; */
 }
 .t-a {
  text-align: center
@@ -105,7 +98,6 @@ text-align: center;
 background: #d9dde6;
 width: 79%;
 float: left;
-/* margin-left: 18px; */
 }
 .m-4 {
 margin-top: 4px;
@@ -127,7 +119,6 @@ font-size: 22px;
 }
 
 .d-3 {
-  /* background: #d9dde6; */
 }
 .a-r-d {
   background: #d9dde6;
@@ -166,7 +157,260 @@ font-size: 22px;
 }
 .img-w {
   width: 107px;
+} */
+
+.activeclass{
+  background-color: #f9f9f9!important;
+  border-bottom: 3px solid palevioletred;
+  cursor:pointer;
+
 }
+.nav-tabs>li>a:hover{
+  cursor:pointer;
+}
+
+.m-0 {
+  margin: 0px
+  
+}
+.cor{
+  background-color: #0B3453;
+  color: white;
+}
+/* .cor-1{
+  background-color: #0B3453;
+  color: white;
+  margin-left: -19px;
+}
+.cor-2{
+  background-color: #0B3453;
+  color: white;
+  margin-left: -28px;
+} */
+.m-t-15 {
+  margin-top: 15px
+}
+.background {
+  /* background: '#66c8275';
+  height: '-webkit-fill-available' */
+}
+.top-nav {
+  /* background: #f2e5f1; width: 98% */
+}
+.padding0 {
+  padding: 0px;
+  text-align:center;
+}
+.a-r {
+  background: #f2e5f1; width: 98%
+}
+.f-s {
+  font-size: 20px;
+}
+.f-s-10 {
+  font-size: 10px
+}
+.a-i {
+  margin-left: 15px !important;
+  font-size: 25px !important;
+  margin-top: 12px !important;
+  background: #133646;
+  border-radius: 10px;
+
+}
+/*--------row 2-------*/
+.r-2 {
+border: 1px black solid;
+/* padding: 40px; */
+}
+.m-t-10 {
+ margin-top: 10px
+}
+.m-l-5 {
+ margin-left: 30px;
+
+}
+.m-30 {
+ margin-top: 30px
+}
+.a-r-2 {
+ background: #013358;
+ width: 98%
+}
+.text-color {
+ color: #f8fbff
+}
+.a-r-3 {
+background: #03a9f5;
+width: 57%
+}
+.p-7 {
+ padding: 7px
+}
+.p-5 {
+ padding: 5px
+}
+.a-r-i {
+/* margin-left: 15px !important; */
+font-size: 25px !important;
+/* margin-top: 12px !important; */
+}
+.t-a {
+ text-align: center
+}
+.b-c {
+ border: 1px black solid ;
+ padding: 32px;
+}
+.a-r-4 {
+ width: 81%
+}
+.b-c-4 {
+border: 1px black solid ;
+}
+#map{
+height:500px;
+width:100%;
+}
+
+.img {
+  margin-left: 50px
+}
+
+.li-items {
+text-align: center;
+background: #0B3453;
+width: 97%;
+padding: 20px 0px;
+float: left;
+/* margin-left: 18px; */
+}
+.m-4 {
+margin-top: 4px;
+}
+.p-10 {
+padding: 10px
+}
+.p-4 {
+padding: 4px;
+}
+.p-2 {
+padding: 2px;
+}
+.p-6 {
+padding: 6px;
+}
+.f-s-22 {
+font-size: 17px;
+}
+.p-30{
+  padding-left: 35px;
+  padding-right: 35px;
+  height: 22px;
+  background-color:#789097;
+  border-radius: 4px;
+  border: none;
+
+}
+.p-31{
+  padding-left: 35px;
+  padding-right: 35px;
+  height: 22px;
+  background-color:#D58D3C;
+  border-radius: 4px;
+  border: none;
+
+}
+.d-3 {
+  /* background: #d9dde6; */
+}
+.a-r-d {
+background: #0B3453;
+  width: 99%
+}
+.a-r-d1{
+  margin-left: 21px;
+  width: 91%;
+}
+.a-r-d2{
+  
+  width: 95%;
+  margin-left: 15px;
+}
+.a-r-d3{
+  
+  width: 95%;
+  margin-left: 12px;
+}
+
+.a-r-d5{
+  background: #0B3453;
+  width: 94%;
+  padding: 20px 0px;
+}
+.a-r-d6{
+  background:bl#133646;
+  width: 95%;
+  margin-left: 12px;
+}
+
+.m-t {
+  margin-top: 22px;
+  padding: 15px;
+
+}
+.db-fmicons{
+  font-size: 11px;
+  background: #133646;
+}
+
+
+.w-85 {
+  width: 85px
+}
+.w-88 {
+  width: 88px
+}
+.w-104 {
+  width: 104px
+}
+.w-95 {
+  width: 95px
+}
+.w-100 {
+  width: 80px
+}
+.m-t-3 {
+  margin-top: 3px
+}
+.m-t-2 {
+  margin-top: 2px
+}
+.m-a {
+  /* margin-top: 25px; */
+  text-align: center;
+}
+
+.btn {
+  margin-left: 70px;
+  background: #0472b0;
+  color: #f8fbff;
+}
+.w-100{
+  width: 100%;
+}
+.m-t-0{
+  margin-top: 0px;
+}
+.m-t-1{
+  margin-top: 0px;
+  height: 40px;
+}
+.w-10{
+  width: 35px;
+  margin-bottom: 10px;
+}
+
 /* input[type="date"]::before {
 	color: #999999;
 	content: attr(placeholder);
@@ -185,3 +429,10 @@ input[type="date"]:valid::before {
   content: "" !important;
   content: attr(placeholder);
 } */
+.wi{
+  width: 102%;
+}
+
+@media screen and (max-width:1366px){
+  
+}

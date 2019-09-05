@@ -279,7 +279,7 @@ export class FleetmaticsComponent implements OnInit {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 200,
+        height: 265,
         // width: 373,
         type: 'pie',
         style: {
@@ -289,14 +289,14 @@ export class FleetmaticsComponent implements OnInit {
       },
       legend: {
         itemStyle: {
-          color: '#fff'
+          color: 'black'
         },
         align: 'center',
-
-        verticalAlign: 'top',
+        layout: 'vertical',
+        verticalAlign: 'bottom',
         floating: false,
         style: {
-          color: '#fff'
+          color: 'black'
         }
       },
 
@@ -337,32 +337,30 @@ export class FleetmaticsComponent implements OnInit {
           style: {
             color: 'fff'
           },
-          format: '{value}',
         },
       },
       yAxis: {
-        gridLineColor: 'transparent',
         labels: {
-          format: '{value}',
           style: {
             color: 'fff'
           }
         },
 
         title: {
-          text: null,
+          // text: null,
         },
       },
       series: [{
         type: 'pie',
-        showInLegend: false,
-        innerSize: '90%',
+        showInLegend: true,
+        innerSize: '60%',
         borderColor: null,
         data: [
           ['Acceleration', acc],
           ['Braking', braking],
           ['Speed', speed]
-        ]
+        ],
+        colors: ['red', 'green', 'blue']
       }],
       tooltip: {
         // valueSuffix: '°F'
@@ -375,7 +373,7 @@ export class FleetmaticsComponent implements OnInit {
     this.options = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 200,
+        height: 162,
         // width: 373,
         type: 'bar',
         style: {
@@ -451,7 +449,7 @@ export class FleetmaticsComponent implements OnInit {
       }
       ],
       tooltip: {
-        valueSuffix: 'Hrs'
+        valueSuffix: 'Mins'
       }
     };
     this.hourschart = new Chart(this.options);
@@ -518,7 +516,10 @@ export class FleetmaticsComponent implements OnInit {
           borderColor: null,
           data: [miles],
           color: '#4f76ad',
-          pointWidth: 15
+          pointWidth: 15,
+          tooltip: {
+           valueSuffix: 'Miles'
+      }
         },
         {
           name: "Unauthorized Miles",
@@ -526,7 +527,10 @@ export class FleetmaticsComponent implements OnInit {
           borderColor: null,
           data: [unauthorizedMiles],
           color: '#8ba9ff',
-          pointWidth: 15
+          pointWidth: 15,
+          tooltip: {
+            valueSuffix: 'Miles'
+          }
         },
         {
           name: "Total Trips",
@@ -534,12 +538,13 @@ export class FleetmaticsComponent implements OnInit {
           borderColor: null,
           data: [totaltrips],
           color: '#4f76ad',
-          pointWidth: 15
+          pointWidth: 15,
+          tooltip: {
+            valueSuffix: ''
+          }
         }
       ],
-      tooltip: {
-        valueSuffix: 'Hrs'
-      }
+      
     };
     this.mileschart = new Chart(this.options);
   }
@@ -549,7 +554,7 @@ export class FleetmaticsComponent implements OnInit {
     this.accOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 200,
+        height: 280,
         // width: 373,
         type: 'line',
         style: {
@@ -596,7 +601,7 @@ export class FleetmaticsComponent implements OnInit {
           }
         },
         title: {
-          text: null,
+          // text: null,
         },
       },
       series: [{
@@ -620,7 +625,7 @@ export class FleetmaticsComponent implements OnInit {
     this.brakingOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 200,
+        height: 280,
         // width: 373,
         type: 'line',
         style: {
@@ -692,7 +697,7 @@ export class FleetmaticsComponent implements OnInit {
     this.speedOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 200,
+        height: 280,
         // width: 373,
         type: 'line',
         style: {
@@ -747,7 +752,7 @@ export class FleetmaticsComponent implements OnInit {
         name: "Speeding",
         showInLegend: false,
         // borderColor: null,
-        data: [],
+        data: [0, 0, 0],
         color: '#8ba9f8',
         pointWidth: 15
       }
@@ -1245,10 +1250,15 @@ export class FleetmaticsComponent implements OnInit {
           startmarker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
           startmarker.addListener('mouseover', function () {
             infowindow = new google.maps.InfoWindow({
-                content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + item['personName'] + '</p></b>'
-                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + item['fuelLevel'] + '</p></b>'
-                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + item['battery'] + '</p></b>'
-                +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + item['speed'] + '</p></b>'
+                // content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + item['personName'] + '</p></b>'
+                // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + item['fuelLevel'] + '</p></b>'
+                // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + item['battery'] + '</p></b>'
+                // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + item['speed'] + '</p></b>'
+
+                content:'<b ><p style="color:white; background:black;text-weight:bold; padding:5px;">' + 'Driver Name:' + item['personName'] + '</p></b>'
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; ">' + ' <img src="../assets/fuel.jpg"> Fuel:' + item['fuelLevel'] + '</p></b>'
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery:' + item['battery'] + '</p></b>'
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <img src="../assets/speed.jpg">Speed:' + item['speed'] + '</p></b>'
             });
             infowindow.open(map, startmarker);
           });
@@ -1355,16 +1365,17 @@ export class FleetmaticsComponent implements OnInit {
         var dateObj = new Date(dateString);
         var momentObj = moment(dateObj);
         var momentString = momentObj.format('MMM DD, YYYY');
-        if (item['behaviorCd'] == 'HAC' && (today == todayfromdata)) {
-          this.hrsAccChart(this.hrsAcc);
+        if (item['behaviorCd'] == 'HAC') {
+          console.log('inside HAC');
           let acceleration = 1;
           let hoursAccTrack = moment(item['date']).format('H:mm:ss');
           $this.todayAcceleration = $this.todayAcceleration + 1;
           this.hrsAcc.push(acceleration);
           this.hrs.push(hoursAccTrack);
-
+          this.hrsAccChart(this.hrsAcc);
         }
-        if (item['behaviorCd'] == 'HBR' && (today == todayfromdata)) {
+        if (item['behaviorCd'] == 'HBR') {
+          console.log('inside HBR');
           let braking = 1;
           $this.todayBraking = $this.todayBraking + 1;
           this.hrsBraking.push(braking);
@@ -1381,12 +1392,16 @@ export class FleetmaticsComponent implements OnInit {
       let hrs = this.hrs;
       if (this.accOptions) {
         this.accOptions.xAxis.categories = hrs;
+        this.accOptions.title.text = 'Acceleration';
         this.accOptions.series[0].data = accelerationData;
+        this.hoursAccChart = new Chart(this.accOptions);
       }
-      this.brakingOptions.xAxis.categories = hrs;
-      this.brakingOptions.series[0].data = brakingData;
-      this.hoursAccChart = new Chart(this.accOptions);
-      this.hoursBrakingChart = new Chart(this.brakingOptions);
+      if (this.brakingOptions) {
+        this.brakingOptions.xAxis.categories = hrs;
+        this.brakingOptions.series[0].data = brakingData;
+        this.hoursBrakingChart = new Chart(this.brakingOptions);
+      }
+      
       // this.options.series[0].data = data;
       // this.hoursAccChart = new Chart(this.options);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
@@ -1505,7 +1520,7 @@ Stop(acc) {
         this.stopmins.push(stops[item]['duration']);
         this.StopChart();
       }
-      if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Idling') && (today == todayfromdata)) {
+      if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Idling')) {
         $this.idlingtime = $this.idlingtime + stops[item]['duration'];
         this.idlemins.push(stops[item]['duration']);
         this.IdleChart();
