@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   }
   redirectRegister() {
-    this.router.navigate(['./sign-up'])
+    this.router.navigate(['./sign-up']);
   }
 
 

@@ -79,7 +79,7 @@ import { VehiclerouteComponent } from './vehicleroute/vehicleroute.component';
 import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.component';
 import { VehiclebehaviourtenantComponent } from './vehiclebehaviourtenant/vehiclebehaviourtenant.component';
 import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
-
+import { DataTableModule } from 'angular7-data-table';
 
 
 @NgModule({
@@ -150,7 +150,8 @@ import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
       innerStrokeColor: '#C7E596',
       animationDuration: 300,
       maxPercent: 960
-    })
+    }),
+    DataTableModule
   ],
   providers: [RouteService,DatabotService,{provide: HIGHCHARTS_MODULES,
     useFactory: () => [ drilldown, treemap,more , Heatmap, solidGauge,highstock]}],

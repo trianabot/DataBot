@@ -1,4 +1,4 @@
-.activeclass{
+/* .activeclass{
     background-color: #f9f9f9!important;
     border-bottom: 3px solid palevioletred;
     cursor:pointer;
@@ -111,11 +111,11 @@
 }
 .img-w {
   width: 49px
-}
+} */
 
 /* new screen css */
 
-/* #map {
+#map {
   height:272px;
   width:100%;
 }
@@ -206,7 +206,10 @@
 
 .p-img {
   border-radius: 65px;
-  padding-bottom: 11px;
+  padding-bottom: 1px;
+}
+.p-17 {
+  padding: 17px;
 }
 
 .hr {
@@ -219,4 +222,61 @@
 .tb-tc {
   font-weight: bold;
   text-align: center;
-} */
+}
+
+.f-r {
+  color: black;
+  float: right !important
+}
+
+.modal-dialog {
+  width: 100%;
+  margin: 30px auto;
+}
+
+.m-d {
+  width: 50% !important;
+  margin: 30px auto;
+}
+
+.tb-br {
+  border: 1px black solid;
+}
+.m-l-60 {
+  margin-left: 60px;
+}
+.pd-bg {
+  padding: 7px;
+  background: #113E53;
+  font-size: 13px;
+}
+.topsectiontext {
+  font-size: 13px;
+  color: #f8fbff;
+}
+.dropdownWidth{
+  margin-left: 10px;
+}
+.f-s-10 {
+  font-size: 10px;
+}
+.gray-bg {
+  background: #eaeaea;
+}
+.spn-fs {
+    color: green;
+    font-weight: bolder;
+    font-size: 21px;
+}
+.btn-success {
+  color: #fff;
+  background-color: #113e53 !important;
+  border-color: #113e53 !important;
+}
+.m-l-10 {
+  margin-left: 10px;
+}
+.modal-header {
+  background: #444444;
+  color: #ffffff
+}

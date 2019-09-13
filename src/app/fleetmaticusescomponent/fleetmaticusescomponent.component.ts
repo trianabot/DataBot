@@ -65,6 +65,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   initfromdate: any;
   marker: any ;
   drivetimeDaysFormat: any;
+  username: any;
+  totalTrucks: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -74,16 +76,17 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.loadVehicles(this.searchfromdate, this.searchtodate);
     // console.log(this.searchfromdate, this.searchtodate);
     this.fetchAllData();
+    this.username = localStorage.getItem('username');
     // this.Map();
     // this.loadmapdata();
     // this.loadmap(this.searchfromdate, this.searchtodate);
-    if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
-      this.tenantOverview = true;
-      this.Overview = false;
-    } else {
-      this.tenantOverview = false;
-      this.Overview = true;
-    }
+    // if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
+    //   this.tenantOverview = true;
+    //   this.Overview = false;
+    // } else {
+    //   this.tenantOverview = false;
+    //   this.Overview = true;
+    // }
   }
 
   ngOnInit() {
@@ -117,6 +120,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     clearInterval(this.searchInterval);
+    clearInterval(this.initInterval);
   }
   
   loadVehicles(fromDate, toDate) {
@@ -129,6 +133,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var mapdata = data;
       this.mapdata = data;
       var $this = this;
+      this.totalTrucks = 0;
       var infowindow = new google.maps.InfoWindow();
       var geocoder = new google.maps.Geocoder();
       let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
@@ -145,21 +150,38 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           url: '../../assets/images/warehouse.png',
           scaledSize: new google.maps.Size(50, 50),
         };
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(item['latitude'], item['longitude']),
-          map: map,
-          icon: image
-        });
-        var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-        attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId']);
-        // this.showLocations(item, map, fromDate, toDate);
-      }
+        if(this.username == 'melrosepark') {
+          if(item['lastName'] == 'PW') {
+            // console.log(item['lastName']);
+            this.totalTrucks = this.totalTrucks + 1;
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(item['latitude'], item['longitude']),
+              map: map,
+              icon: image
+            });
+            var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
+            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId']);  
+          }
+        }else{
+          this.totalTrucks = this.totalTrucks + 1;
+          console.log('inside else');
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(item['latitude'], item['longitude']),
+            map: map,
+            icon: image
+          });
+          var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
+          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId']);
+          // this.showLocations(item, map, fromDate, toDate);
+        }
+        }
       function attachMessage(map, marker, latlong, person, fuel, battery, speed, devicenumber, driverid) {
         marker.addListener('mouseover', function () {
           geocoder.geocode({ 'location': latlong }, function (res, status) {
         if (status == 'OK') {
-
+          console.log(res[0]);
           var currentLocation = res[0].address_components[2].long_name;
+          // var currentLocation = res[0].formatted_address;
          infowindow = new google.maps.InfoWindow({
           // tslint:disable-next-line: max-line-length
           content:'<b style="display:inline-block"><p style="color:white;padding:5px;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</p></b>'
@@ -190,7 +212,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           // var latlong1 = new google.maps.LatLng(lat, long);
           geocoder.geocode({ 'location': latlong }, function (res, status) {
             if (status == 'OK') {
-              var currentLocation = res[0].address_components[2].long_name;
+              // var currentLocation = res[0].address_components[0].long_name + ',' + res[0].address_components[1].short_name + ',' + res[0].address_components[6].long_name;
+              var currentLocation = res[0].formatted_address;
               payload = {
                 queryParams: {
                   vehicle: JSON.stringify(devicenumber),
@@ -273,13 +296,20 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var dateObj = new Date(dateString);
       var momentObj = moment(dateObj);
       var momentString = momentObj.format('MMM DD, YYYY');
-      if (stops[item]['stopType'] == 'Engine Off') {
-        this.stoptime = this.stoptime + stops[item]['duration'];
+      // if (stops[item]['stopType'] == 'Engine Off') {
+      //   this.stoptime = this.stoptime + stops[item]['duration'];
+      // }
+      if(this.username == 'melrosepark') {
+        if(stops[item]['lastName'] == 'PW') {
+          if (stops[item]['stopType'] == 'Idling') {
+            this.idlingtime = this.idlingtime + 1;
+            // console.log(this.idlingtime);
+          }
+        }
+      }else {
+        this.idlingtime = this.idlingtime + 1;
       }
-      if (stops[item]['stopType'] == 'Idling') {
-        this.idlingtime = this.idlingtime + stops[item]['duration'];
-        // console.log(this.idlingtime);
-      }
+      
     }
   }
 
@@ -302,8 +332,17 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     let drivetime = 0;
     this.distance = 0;
     for (let item of trips) {
-      drivetime = drivetime + item['durationMinutes'];
-      this.distance = this.distance + item['distanceMiles'];
+      if(this.username == 'melrosepark') {
+         if(item['driverName'] == 'MP3 PW' || item['driverName'] == 'MP4 PW' || item['driverName'] == 'MP5 PW' || item['driverName'] == 'MP6 PW' ||item['driverName'] == 'MP7 PW') {
+          drivetime = drivetime + item['durationMinutes'];
+          this.distance = this.distance + item['distanceMiles'];
+          // console.log('drive time inside');
+         }
+      }else {
+        // console.log('drive time else');
+        drivetime = drivetime + item['durationMinutes'];
+        this.distance = this.distance + item['distanceMiles'];
+      }
       // console.log(this.drivetime);
     }
     this.drivetime = drivetime;
@@ -329,18 +368,40 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
       for (let item of data['data']['alerts']) {
         // console.log(item['alertCode']);
-        if (item['alertCode'] == 'HARSH_BRAKING') {
-          harshbraking = harshbraking + 1;
-          //  console.log(this.harshbraking);
+        if(this.username == 'melrosepark') {
+           if(item['lastName'] == 'PW') {
+              // console.log('inside pw');
+              if (item['alertCode'] == 'HARSH_BRAKING') {
+              harshbraking = harshbraking + 1;
+              //  console.log(this.harshbraking);
+              }
+              if (item['alertCode'] == 'HIGH_SPEED') {
+                highspeed = highspeed + 1;
+                // console.log(this.harshbraking);
+              }
+              if (item['alertCode'] == 'RAPID_ACCELERATION') {
+                acceleration = acceleration + 1;
+                // console.log(this.rapidacceleration);
+              }
+
+           }
+        }else {
+          // console.log('inside else');
+          if (item['alertCode'] == 'HARSH_BRAKING') {
+            harshbraking = harshbraking + 1;
+            //  console.log(this.harshbraking);
+            }
+            if (item['alertCode'] == 'HIGH_SPEED') {
+              highspeed = highspeed + 1;
+              // console.log(this.harshbraking);
+            }
+            if (item['alertCode'] == 'RAPID_ACCELERATION') {
+              acceleration = acceleration + 1;
+              // console.log(this.rapidacceleration);
+            }
         }
-        if (item['alertCode'] == 'HIGH_SPEED') {
-          highspeed = highspeed + 1;
-          // console.log(this.harshbraking);
-        }
-        if (item['alertCode'] == 'RAPID_ACCELERATION') {
-          acceleration = acceleration + 1;
-          // console.log(this.rapidacceleration);
-        }
+        
+        
       }
       this.harshbraking = harshbraking;
       this.highspeed = highspeed;
