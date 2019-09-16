@@ -146,12 +146,22 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       });
       for(let item of this.mapdata) {
         var marker;
-        var image = {
-          url: '../../assets/images/warehouse.png',
-          scaledSize: new google.maps.Size(50, 50),
-        };
+        var icon;
+        var size;
+        
         if(this.username == 'melrosepark') {
           if(item['lastName'] == 'PW') {
+            if(item['speed'] == '0') {
+              icon = '../../assets/stop-icon.png';
+              size = new google.maps.Size(15, 15);
+            }else{
+              icon = '../../assets/direction-icon.png';
+              size = new google.maps.Size(15, 15);
+            }
+            var image = {
+              url: icon,
+              scaledSize: size,
+            };
             // console.log(item['lastName']);
             this.totalTrucks = this.totalTrucks + 1;
             marker = new google.maps.Marker({
@@ -160,28 +170,49 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
               icon: image
             });
             var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId']);  
+            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId'], item['odo']);  
           }
         }else{
+          if(item['speed'] == '0') {
+            icon = '../../assets/stop-icon.png';
+            size = new google.maps.Size(15, 15);
+          }else{
+            icon = '../../assets/direction-icon.png';
+            size = new google.maps.Size(15, 15);
+          }
+          var image = {
+            url: icon,
+            scaledSize: size,
+          };
           this.totalTrucks = this.totalTrucks + 1;
-          console.log('inside else');
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(item['latitude'], item['longitude']),
             map: map,
             icon: image
           });
           var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId']);
+          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId'], item['odo']);
           // this.showLocations(item, map, fromDate, toDate);
         }
         }
-      function attachMessage(map, marker, latlong, person, fuel, battery, speed, devicenumber, driverid) {
+      function attachMessage(map, marker, latlong, person, fuel, battery, speed, devicenumber, driverid, odo) {
         marker.addListener('mouseover', function () {
           geocoder.geocode({ 'location': latlong }, function (res, status) {
         if (status == 'OK') {
-          console.log(res[0]);
+          var runningStatus;
+          var deviceStatus;
           var currentLocation = res[0].address_components[2].long_name;
-          // var currentLocation = res[0].formatted_address;
+          if(speed == '0') {
+            runningStatus = 'Stopped';
+          }else{
+            runningStatus = 'Running';
+          }
+          if(!battery) {
+            deviceStatus = 'Disconnected';
+          }else{
+            deviceStatus = 'Running';
+          }
+          
          infowindow = new google.maps.InfoWindow({
           // tslint:disable-next-line: max-line-length
           content:'<b style="display:inline-block"><p style="color:white;padding:5px;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</p></b>'
@@ -192,12 +223,13 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           // tslint:disable-next-line: max-line-length
           +'<b style="display:inline-block;" ><p style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i>Battery:' + battery +'V'+ '</p></b>'
           // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed:' + speed +'mph'+ '</p></b>'
-              // content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Current Location:' + currentLocation + '</p></b>'
-              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + person + '</p></b>'
-              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Fuel:' + fuel + '</p></b>'
-              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + battery + '</p></b>'
-              // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + speed + '</p></b>'
+          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed:' + speed +'mph'+ '</p></b>' + '<br>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style=""><p style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg">Odo:' + odo + '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style="display:inline-block;" ><p style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i>Running:' + runningStatus + '</p></b>'
+          // tslint:disable-next-line: max-line-length
+          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Device:' + deviceStatus + '</p></b>'
           });
           // console.log(infowindow);
           infowindow.open(map, marker);
@@ -254,7 +286,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       for (let item of data) {
         var infowindow = new google.maps.InfoWindow();
         // this.showVehicle(item,map);
-        // map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
+        map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
         marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
         // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
       }
@@ -418,13 +450,13 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     clearInterval(this.initInterval);
     this.searchtodate = new Date(this.todate).getTime();
     this.searchfromdate = new Date(this.fromdate).getTime();
+    this.loadVehicles(this.searchfromdate, this.searchtodate);
     // console.log(this.searchfromdate, this.searchtodate);
     this.searchInterval = setInterval(() => {
       // console.log(this.searchfromdate, this.searchtodate);
       this.getAlerts();
       this.getIdlingAllDevices();
       this.gettripevent();
-      this.loadVehicles(this.searchfromdate, this.searchtodate);
       // this.loadmap(this.searchfromdate, this.searchtodate);
     }, 10000);
   }

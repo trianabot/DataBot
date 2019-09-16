@@ -269,12 +269,13 @@
     font-size: 21px;
 }
 .btn-success {
+  width: 100%;
   color: #fff;
   background-color: #113e53 !important;
   border-color: #113e53 !important;
 }
-.m-l-10 {
-  margin-left: 10px;
+.m-l-1 {
+  margin-left: 1px;
 }
 .modal-header {
   background: #444444;

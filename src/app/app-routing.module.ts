@@ -44,6 +44,7 @@ import { ReportusecasecomponentComponent } from './reportusecasecomponent/report
 import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
 import { FleetmaticusescomponentComponent } from './fleetmaticusescomponent/fleetmaticusescomponent.component';
 import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
+import { VendormanagerComponent } from './vendormanager/vendormanager.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -90,7 +91,8 @@ const routes: Routes = [
   {path: 'reportusecase', component: ReportusecasecomponentComponent},
   {path: 'healthusecase', component: HealthusecasecomponentComponent},
   {path: 'fleetmatic', component: FleetmaticusescomponentComponent},
-  {path: 'fleetmatics', component: FleetmaticsComponent}
+  {path: 'fleetmatics', component: FleetmaticsComponent},
+  {path: 'vendor-manager', component: VendormanagerComponent}
   // {path: '', component : HomeComponent, pathMatch : 'full'},
 ];
 

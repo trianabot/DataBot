@@ -69,6 +69,9 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     else if (useCaseType == 5) {
       this.router.navigate(['/healthusecase']);
     }
+    else if (useCaseType == 10) {
+      this.router.navigate(['/vendor-manager']);
+    }
 
 
 

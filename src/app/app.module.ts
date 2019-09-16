@@ -80,6 +80,7 @@ import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.comp
 import { VehiclebehaviourtenantComponent } from './vehiclebehaviourtenant/vehiclebehaviourtenant.component';
 import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
 import { DataTableModule } from 'angular7-data-table';
+import { VendormanagerComponent } from './vendormanager/vendormanager.component';
 
 
 @NgModule({
@@ -135,7 +136,8 @@ import { DataTableModule } from 'angular7-data-table';
     VehiclerouteComponent,
     VehiclecustomerComponent,
     VehiclebehaviourtenantComponent,
-    FleetmaticsComponent
+    FleetmaticsComponent,
+    VendormanagerComponent
 
     ],
   imports: [

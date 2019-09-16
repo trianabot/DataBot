@@ -1351,6 +1351,8 @@ export class FleetmaticsComponent implements OnInit {
     this.databotService.getVehicleLocations(this.getParams()).subscribe(res => {
       var data = res['data']['locations'];
       for(let item of data) {
+        var icon;
+        var size;
         if(item['personName'] == this.driver) {
           this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
@@ -1359,10 +1361,21 @@ export class FleetmaticsComponent implements OnInit {
             mapTypeControl: false,
             streetViewControl: false
           });
+          if(item['speed'] == '0') {
+            icon = '../../assets/stop-icon.png';
+            size = new google.maps.Size(15, 15);
+          }else{
+            icon = '../../assets/direction-icon.png';
+            size = new google.maps.Size(15, 15);
+          }
           var image = {
-            url: '../../assets/images/warehouse.png',
-            scaledSize: new google.maps.Size(50, 50),
+            url: icon,
+            scaledSize: size,
           };
+          // var image = {
+          //   url: '../../assets/images/warehouse.png',
+          //   scaledSize: new google.maps.Size(50, 50),
+          // };
           var startmarker = new google.maps.Marker({
             position: new google.maps.LatLng(item.latitude, item.longitude),
             map: this.map,
