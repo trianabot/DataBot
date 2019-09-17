@@ -414,6 +414,9 @@ background: #0B3453;
   margin-top: 0px;
   height: 40px;
 }
+.m-1 {
+  margin-top: 1px;
+}
 .w-10{
   width: 35px;
   margin-bottom: 10px;
@@ -446,4 +449,19 @@ input[type="date"]:valid::before {
 
 @media screen and (max-width:1366px){
   
+}
+
+.pd-bg {
+  padding: 7px;
+  background: #113E53;
+  font-size: 13px;
+}
+.topsectiontext {
+  font-size: 13px;
+  color: #f8fbff;
+  float: left
+}
+.dropdownWidth{
+  margin-left: 10px;
+  float: left;
 }

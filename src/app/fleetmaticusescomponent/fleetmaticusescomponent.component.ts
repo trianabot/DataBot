@@ -210,26 +210,24 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           if(!battery) {
             deviceStatus = 'Disconnected';
           }else{
-            deviceStatus = 'Running';
+            deviceStatus = 'Connected';
           }
-          
+
          infowindow = new google.maps.InfoWindow({
           // tslint:disable-next-line: max-line-length
-          content:'<b style="display:inline-block"><p style="color:white;padding:5px;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</p></b>'
+          content:'<div class="row" style="margin:0px"><div div class="row" style="margin:0px;background:black;width:360px"><div class="col-md-7" style="padding:0px"><span style="color:white;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</span></div>'
           // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block; font-family: sans-serif; width:191px;"><p style="color:white;padding:5px; background:black;text-weight:bold">' + 'Driver Name:' + person + '</p></b><br>'
+          +'<div class="col-md-5" style="padding:0px;"><span style="color:white; background:black;text-weight:bold;font-family: sans-serif;">' + 'Driver Name:' + person + '</span></div></div><br>'
           // tslint:disable-next-line: max-line-length
-          +'<b style=""><p style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg">Fuel:' + fuel + '</p></b>'
+          +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg" style="width: 22px;">&nbsp;&nbsp;Fuel&nbsp;:&nbsp;' + fuel + '</span></b></div>'
           // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block;" ><p style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i>Battery:' + battery +'V'+ '</p></b>'
+          +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block;" ><span style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery&nbsp;:&nbsp;' + battery +'V'+ '</span></b></div>'
           // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed:' + speed +'mph'+ '</p></b>' + '<br>'
+          +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed&nbsp;:&nbsp;' + speed +'mph'+ '</span></b>' + '</div></div>'
           // tslint:disable-next-line: max-line-length
-          +'<b style=""><p style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg">Odo:' + odo + '</p></b>'
+          +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + odo + '</span></b></div>'
           // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block;" ><p style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i>Running:' + runningStatus + '</p></b>'
-          // tslint:disable-next-line: max-line-length
-          +'<b style="display:inline-block; float:right;font-family: sans-serif;"><p style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Device:' + deviceStatus + '</p></b>'
+          +'<div class="col-md-8" style="padding:0px;margin-left: -50px;"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</span></b></div></div></div>'
           });
           // console.log(infowindow);
           infowindow.open(map, marker);
@@ -286,7 +284,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       for (let item of data) {
         var infowindow = new google.maps.InfoWindow();
         // this.showVehicle(item,map);
-        map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
+        // map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
         marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
         // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
       }
@@ -492,6 +490,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     return body;
   }
 
+  vehicleDDChange(event) {
+    console.log(event.currentTarget.value)
+  }
   /*getvehicleLocations() {
     this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
       console.log(data);

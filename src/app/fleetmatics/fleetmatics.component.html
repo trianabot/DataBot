@@ -491,7 +491,7 @@
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
                                 <div class="txt">
-                                    {{(idlingtime) ? idlingtime : '- -'}}
+                                    {{(idlingtimeDaysFormat) ? idlingtimeDaysFormat : '- -'}}
                                 </div>
                             </div>
                         </div>
@@ -507,7 +507,7 @@
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
                                 <div class="txt">
-                                    {{(stoptime) ? stoptime : '- -'}}
+                                    {{(stoptimeDaysFormat) ? stoptimeDaysFormat : '- -'}}
                                 </div>
                             </div>
                         </div>
@@ -687,14 +687,14 @@
             <div class="row m-0 m-t-10 t-c">
                 <div class="col-md-3 padding0">
                     <div class="a-r-2">
-                        <div class="row m-0" data-toggle="modal" data-target="#myModal3">
+                        <div class="row m-0 pointer" data-toggle="modal" data-target="#myModal3">
                             <img src="../../assets/nw-icon-7.png">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 padding0">
                     <div class="a-r-2">
-                        <div class="row m-0" data-toggle="modal" data-target="#myModal4">
+                        <div class="row m-0 pointer" data-toggle="modal" data-target="#myModal4">
                             <img src="../../assets/nw-icon-5.png">
                         </div>
                     </div>
@@ -702,14 +702,14 @@
                 </div>
                 <div class="col-md-3 padding0">
                     <div class="a-r-2">
-                        <div class="row m-0" data-toggle="modal" data-target="#myModal5">
+                        <div class="row m-0 pointer" data-toggle="modal" data-target="#myModal5">
                             <img src="../../assets/nw-icon-6.png">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 padding0">
                     <div class="a-r-2">
-                        <div class="row m-0" data-toggle="modal" data-target="#myModal6">
+                        <div class="row m-0 pointer" data-toggle="modal" data-target="#myModal6">
                             <img src="../../assets/nw-icon-3.png">
                         </div>
                     </div>
@@ -875,7 +875,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Stop Info</h4>
+                    <h4 class="modal-title">Stops Info</h4>
                 </div>
                 <div class="modal-body">
                     <data-table id="persons-grid" headerTitle="" [items]="stopitems" [itemCount]="stopitemCount"

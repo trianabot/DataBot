@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { Chart } from 'angular-highcharts';
-import * as Highcharts from 'highcharts';
+import { Chart } from 'angular-highcharts';
+// import * as Highcharts from 'highcharts';
 declare const google: any;
 import { from } from 'rxjs';
 @Component({
@@ -26,13 +26,14 @@ import { from } from 'rxjs';
 // }
 export class VendormanagerComponent implements OnInit {
 
-  barChartOptions: any;
 
 
   // my: [];
   // pie: [];
   // userList: User[];
   // Chart: [];
+  barChart: any;
+  barChartOptions: any;
   constructor() {
     // this.userList = [
     //   { ContractNumber: 0, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 126.07, ContractRate: 105.36, Competetor: "INC", CompetetorRate: 73.52, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
@@ -47,7 +48,7 @@ export class VendormanagerComponent implements OnInit {
 
   ngOnInit() {
     this.loadMap();
-    // this.loadBarChart();
+    this.loadBarChart();
     // this.loadPieChart();
     // this.loadPieChart1();
 
@@ -58,34 +59,36 @@ export class VendormanagerComponent implements OnInit {
       zoom: 8
     });
   }
-  // loadBarChart() {
-  //   var my = Highcharts.chart('barChart', {
-  //     chart: {
-  //       type: 'bar'
-  //     },
-  //     xAxis: {
-  //       categories: ['Microsoft', 'Amazon', 'Accenture','Tcs','IBM','Delloite']
-  //     },
-  //     yAxis: {
-  //       min:1,
-  //       max:10,
-  //     },
-  //     series: [{
-  //       name: 'Contract Rate',
-  //       data: [1, 5, 4,3,2,6],
-  //       type: undefined
-  //     }, {
-  //       name: 'ASG Rate',
-  //       data: [5, 7, 3,8,7,2],
-  //       type: undefined
-  //     }, {
-  //       name: 'Competitor Rate',
-  //       data: [2, 5, 7,5,6,4],
-  //       type: undefined
-  //     }
-  //     ]
-  //   });
-  // }
+  loadBarChart() {
+    // var my = Highcharts.chart('barChart', {
+      this.barChartOptions = {
+      chart: {
+        type: 'bar'
+      },
+      xAxis: {
+        categories: ['Microsoft', 'Amazon', 'Accenture','Tcs','IBM','Delloite']
+      },
+      yAxis: {
+        min:1,
+        max:10,
+      },
+      series: [{
+        name: 'Contract Rate',
+        data: [1, 5, 4, 3, 2, 6],
+        type: undefined
+      }, {
+        name: 'ASG Rate',
+        data: [5, 7, 3, 8, 7, 2],
+        type: undefined
+      }, {
+        name: 'Competitor Rate',
+        data: [2, 5, 7, 5, 6, 4],
+        type: undefined
+      }
+      ]
+    },
+    this.barChart = new Chart(this.barChartOptions);
+  }
   // loadPieChart() {
   //   //  var pie = Highcharts.chart('pieChart', {
   //   //     chart: {

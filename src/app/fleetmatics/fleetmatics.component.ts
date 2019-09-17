@@ -214,6 +214,8 @@ export class FleetmaticsComponent implements OnInit {
   tripitems: any = [];
   param: any = {offset: 0, limit: 25};
   username: any;
+  idlingtimeDaysFormat: any;
+  stoptimeDaysFormat: any;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -536,6 +538,14 @@ export class FleetmaticsComponent implements OnInit {
           color: 'black'
         }
       },
+      plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                inside: false
+            }
+        }
+    },
       xAxis: {
         tickInterval: 1,
         // type: 'datetime',
@@ -624,6 +634,14 @@ export class FleetmaticsComponent implements OnInit {
           color: 'black'
         }
       },
+      plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                inside: false
+            }
+        }
+    },
       xAxis: {
         tickInterval: 1,
         // type: 'datetime',
@@ -1408,7 +1426,21 @@ export class FleetmaticsComponent implements OnInit {
     this.databotService.getVehicleLocations(this.getParams()).subscribe(res => {
       var data = res['data']['locations'];
       for(let item of data) {
+        var icon;
+        var size;
+        var deviceStatus;
         if(item['personName'] == this.driver) {
+          if(item['speed'] == '0') {
+            icon = '../../assets/stop-icon.png';
+            size = new google.maps.Size(15, 15);
+          }else{
+            icon = '../../assets/direction-icon.png';
+            size = new google.maps.Size(15, 15);
+          }
+          var image = {
+            url: icon,
+            scaledSize: size,
+          };
           var infowindow = new google.maps.InfoWindow();
           var geocoder = new google.maps.Geocoder();
           var latlong = new google.maps.LatLng(item['latitude'], item['longitude']);
@@ -1419,9 +1451,15 @@ export class FleetmaticsComponent implements OnInit {
               $this.location = currentLocation;
             }
           });
+          if(!item['battery']) {
+            deviceStatus = 'Disconnected';
+          }else{
+            deviceStatus = 'Connected';
+          }
           // this.showVehicle(item,map);
           map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
           startmarker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
+          startmarker.setIcon(image);
           startmarker.addListener('mouseover', function () {
             infowindow = new google.maps.InfoWindow({
                 // content:'<b><p style="color:#0472b0;text-weight:bold">' + 'Driver Name:' + item['personName'] + '</p></b>'
@@ -1429,16 +1467,24 @@ export class FleetmaticsComponent implements OnInit {
                 // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Battery:' + item['battery'] + '</p></b>'
                 // +'<b><p style="color:#0472b0;text-weight:bold">' + 'Speed:' + item['speed'] + '</p></b>'
 
-                content:'<b ><p style="color:white; background:black;text-weight:bold; padding:5px;">' + 'Driver Name:' + item['personName'] + '</p></b>'
-                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; ">' + ' <img src="../assets/fuel.jpg"> Fuel:' + item['fuelLevel'] + '</p></b>'
-                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery:' + item['battery'] + '</p></b>'
-                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <img src="../assets/speed.jpg">Speed:' + item['speed'] + '</p></b>'
+                // tslint:disable-next-line: max-line-length
+                content:'<b ><p style="color:white; background:black;text-weight:bold; padding:5px;">' + 'Driver Name&nbsp;:&nbsp;' + item['personName'] + '</p></b>'
+                // tslint:disable-next-line: max-line-length
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; ">' + ' <img src="../assets/fuel.jpg" style="width: 22px;"> Fuel&nbsp;&nbsp:&nbsp;' + item['fuelLevel'] + '</p></b>'
+                // tslint:disable-next-line: max-line-length
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery&nbsp;:&nbsp;' + item['battery'] + '</p></b>'
+                // tslint:disable-next-line: max-line-length
+                +'<b style="display:inline-block;"><p style="color:black;text-weight:bold; margin-left:30px;">' + ' <img src="../assets/speed.jpg">Speed&nbsp;:&nbsp;' + item['speed'] + '</p></b><br>'
+                // tslint:disable-next-line: max-line-length
+                +'<b style=""><p style="color:black;float:left;margin-left: 6px;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + item['virtualOdo'] + '</p></b>'
+                // tslint:disable-next-line: max-line-length
+                +'<b style="display:inline-block; float:right;font-family: sans-serif;margin-right: 19px;"><p style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</p></b>'
             });
             infowindow.open(map, startmarker);
           });
-          startmarker.addListener('mouseout', function() {
-            infowindow.close(map, startmarker);
-          });
+          // startmarker.addListener('mouseout', function() {
+          //   infowindow.close(map, startmarker);
+          // });
         }
       }
     });
@@ -1755,8 +1801,10 @@ Stop(acc) {
       }
     }
     let stopintime = this.stopidletime;
-    this.stoptime = this.convertoDays(this.stoptime);
-    this.idlingtime = this.convertoDays(this.idlingtime);
+    console.log(this.stoptime, this.idlingtime);
+    this.stoptimeDaysFormat = this.convertoDays(this.stoptime);
+    this.idlingtimeDaysFormat = this.convertoDays(this.idlingtime);
+    this.HoursChart(this.drivetime, this.idlingtime, this.stoptime);
     this.Idle(this.idlingtime);
     this.Stop(this.stoptime);
     let idlemins = this.idlemins;
@@ -1789,6 +1837,7 @@ Stop(acc) {
   }
 
   getTotalDriveTime(trips) {
+    var $this = this;
     this.drivetime = 0;
     this.miles = 0;
     this.totaltrips = 0;
@@ -1810,7 +1859,7 @@ Stop(acc) {
         // this.TripChart();
         this.miles = this.miles + item['authorizedMiles'];
         this.unauthorizedMiles = this.unauthorizedMiles + item['unauthorizedMiles'];
-        this.drivetime = this.drivetime + item['durationMinutes'];
+        $this.drivetime = $this.drivetime + item['durationMinutes'];
         this.totaltrips = this.totaltrips + 1;
         this.startLat = item['startLatitude'];
         this.startLong = item['startLongitude'];
@@ -1940,10 +1989,10 @@ Stop(acc) {
             // marker.setPosition(result.routes[0].overview_path[i]);
           }
         } else if (status === google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
-          delayFactor++;
-          setTimeout(function () {
-            m_get_directions_route(request, latlong);
-          }, delayFactor * 1000);
+          // delayFactor++;
+          // setTimeout(function () {
+          //   m_get_directions_route(request, latlong);
+          // }, delayFactor * 1000);
         } else {
           //console.log("Route: " + status);
         }

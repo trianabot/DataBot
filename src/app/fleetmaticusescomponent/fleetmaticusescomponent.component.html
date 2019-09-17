@@ -178,10 +178,21 @@
       </div>
   </div>
 </div> -->
+<!-- <div class="row wi m-1">
+    <div class="col-md-12 padding0 pd-bg">
+        <span class="topsectiontext">Driver</span>
+        <select class="dropdownWidth" name="Fleet" [(ngModel)]="drivername" (change)="vehicleDDChange($event)">
+            <option style="font: bold" selected disabled value="-1">Select Driver</option>
+            <option> {{drivername}} </option>
+            <option *ngFor="let option of mapdata" value="{{option.deviceNbr}}">{{option.personName}}</option>
+        </select>
+
+    </div>
+</div> -->
 
     <div class="row wi">
 
-        <div class="row m-0 m-t-10 db-fmicons">
+        <div class="row m-0 m-1 db-fmicons">
             <div class="col-md-6 padding0 float-left" style="background: radial-gradient(black, transparent);">
                 <div class="col-md-3 d-3 padding0 float-left " style="text-align: left;">
                     <div class="a-r-d1">

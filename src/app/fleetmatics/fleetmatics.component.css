@@ -281,3 +281,9 @@
   background: #444444;
   color: #ffffff
 }
+.pointer {
+  cursor: pointer;
+}
+.float-left {
+  float: left;
+}
