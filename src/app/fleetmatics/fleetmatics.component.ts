@@ -250,7 +250,7 @@ export class FleetmaticsComponent implements OnInit {
       this.getvehicleAlerts();
 
       this.getDeviceEvents(this.imei);
-      this.HarshEvents('', '','');
+      // this.HarshEvents('', '','');
       this.HoursChart('', '', '');
       this.hrsSpeedChart('');
       this.MilesChart('', '', '');
@@ -261,6 +261,7 @@ export class FleetmaticsComponent implements OnInit {
       this.gettripevent();
       // this.getRoute();
       this.loadVehicle();
+      this.getRoute();
       // this.initInterval = setInterval(() => {
       //   this.loadVehicle();
       // }, 30000);
@@ -316,6 +317,14 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   HarshEvents(acc, braking, speed) {
+    console.log(acc, braking, speed);
+    var Events = acc + braking + speed;
+    var totalevents;
+    if(Events == 0) {
+       totalevents = '0';
+    }else{
+      totalevents = Events;
+    }
     this.harshEventsOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
@@ -345,7 +354,7 @@ export class FleetmaticsComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: 'Harsh Events',
+        text: '<p style=" font-size: 20px">' + totalevents + '</p><br>' + '<p>Events</p>',
         align: 'center',
         verticalAlign: 'middle',
         y: 3,
@@ -415,7 +424,7 @@ export class FleetmaticsComponent implements OnInit {
     this.scoreChartOptions = {
       chart: {
         backgroundColor: '#f9f9f8',
-        height: 280,
+        height: 250,
         // width: 373,
         type: 'pie',
         style: {
@@ -463,6 +472,13 @@ export class FleetmaticsComponent implements OnInit {
           endAngle: 180,
           center: ['50%', '50%'],
           size: '100%'
+        },
+        series: {
+          states: {
+              hover: {
+                  enabled: false
+              }
+          }
         }
       },
       xAxis: {
@@ -563,7 +579,7 @@ export class FleetmaticsComponent implements OnInit {
         labels: {
           format: '{value}',
           style: {
-            color: 'fff'
+            color: 'gray'
           }
         },
         title: {
@@ -659,7 +675,7 @@ export class FleetmaticsComponent implements OnInit {
         labels: {
           format: '{value}',
           style: {
-            color: 'fff'
+            color: 'gray'
           }
         },
         title: {
@@ -1457,7 +1473,7 @@ export class FleetmaticsComponent implements OnInit {
             deviceStatus = 'Connected';
           }
           // this.showVehicle(item,map);
-          map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
+          // map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
           startmarker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
           startmarker.setIcon(image);
           startmarker.addListener('mouseover', function () {
@@ -1598,6 +1614,7 @@ export class FleetmaticsComponent implements OnInit {
       this.getIdlingEvents(stops);
       // this.loadmapdata();
       this.loadVehicle();
+      this.getRoute();
       // this.getvehicleAlerts();
       for (let item of positions) {
         let today = moment(Date.now()).format('MMM DD, YYYY');
@@ -1645,8 +1662,8 @@ export class FleetmaticsComponent implements OnInit {
       
       // this.options.series[0].data = data;
       // this.hoursAccChart = new Chart(this.options);
-      this.harshEventsOptions.title.text = 'Harsh Events';
-      this.harshevents = new Chart(this.harshEventsOptions);
+      // this.harshEventsOptions.title.text = 'Harsh Events';
+      // this.harshevents = new Chart(this.harshEventsOptions);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
       let score = (this.todayAcceleration+this.todayBraking+this.highSpeed);
       this.behaviourCard(score);
@@ -1921,25 +1938,32 @@ Stop(acc) {
   getRoute() {
     this.databotService.getVehicleRouteLocations(this.getParams(), this.imei).subscribe(data => {
         this.locations = data['data']['locations'];
-        this.loadRoute(this.locations);
+        // this.loadRoute(this.locations);
         // this.loadRoute();
     });
   }
 
-  loadRoute(locations) {
+  getRouteMap() {
+    this.loadRoute();
+  }
+
+  loadRoute() {
     var lat_lng = new Array();
     var $this = this;
-    for(let item of locations) {
+    for(let item of this.locations) {
       var lat = item['latitude'];
       var long = item['longitude'];
       var myLatlng = new google.maps.LatLng(lat, long);
+      
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
+        zoom: 10,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         streetViewControl: false
       });
+      // bounds.extend(myLatlng);
+      // bounds.extend(marker.position);
     lat_lng.push(myLatlng);
     var infowindow = new google.maps.InfoWindow();
     var startmarker;
@@ -1960,6 +1984,7 @@ Stop(acc) {
     //   icon:image
     // });
     }
+    // map.fitBounds(bounds);
     var service = new google.maps.DirectionsService();
     var delayFactor = 0;
 
@@ -1967,7 +1992,7 @@ Stop(acc) {
       service.route(request, function (result, status) {
         if (status === google.maps.DirectionsStatus.OK) {
           //Process you route here
-
+          var bounds = new google.maps.LatLngBounds();
           var lineSymbol = {
             path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
           };
@@ -1984,16 +2009,23 @@ Stop(acc) {
           var path = new google.maps.MVCArray();
           var poly = new google.maps.Polyline(polylineoptns);
           poly.setPath(path);
+          // bounds.extend(path);
           for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
             path.push(result.routes[0].overview_path[i]);
+            bounds = result.routes[0].bounds;
             // marker.setPosition(result.routes[0].overview_path[i]);
           }
-        } else if (status === google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
-          // delayFactor++;
-          // setTimeout(function () {
-          //   m_get_directions_route(request, latlong);
-          // }, delayFactor * 1000);
-        } else {
+          map.fitBounds(bounds);
+          var zoom = map.getZoom();
+          map.setZoom(zoom > 10 ? 13 : zoom);
+        }
+        // else if (status === google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
+        //   // delayFactor++;
+        //   // setTimeout(function () {
+        //   //   m_get_directions_route(request, latlong);
+        //   // }, delayFactor * 1000);
+        // } 
+        else {
           //console.log("Route: " + status);
         }
       });

@@ -1,4 +1,4 @@
-
+<app-header (sidenavChange)='sidenavChanged()'></app-header>
 <div class="row">
     <div class="col-md-5">
     <div class="col-md-4">
@@ -117,7 +117,7 @@
                     <span>Average rate By Vendor</span>
                 </div>
                 <div class="card-body" style="height: 400px; padding: 0px;">
-                    <div [chart]="barChart"></div>
+                    <div [chart] = "vendorBarChart"></div>
                 </div>
     
             </div>
@@ -128,7 +128,7 @@
                         <span>Contract Value By ASG</span>
                     </div>
                     <div class="card-body" style="height: 400px; padding: 0px;">
-                            <div id="pieChart"></div>
+                            <div [chart] = "asgChart"></div>
                         <!-- <img src="H:\new webpage\img-12.png"> -->
                     </div>
         
@@ -188,7 +188,7 @@
                             </div>
                             <div class="card-body" style="height: 300px; padding: 0px;">
                                 <!-- <img src="H:\new webpage\pie.png"> -->
-                                <div id="pieChart1"></div>
+                                <div [chart] = "competetorChart"></div>
                             </div>
                 
                         </div>

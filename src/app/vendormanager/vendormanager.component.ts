@@ -30,25 +30,34 @@ export class VendormanagerComponent implements OnInit {
 
   // my: [];
   // pie: [];
-  // userList: User[];
+  userList: any = [];
   // Chart: [];
-  barChart: any;
-  barChartOptions: any;
-  constructor() {
-    // this.userList = [
-    //   { ContractNumber: 0, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 126.07, ContractRate: 105.36, Competetor: "INC", CompetetorRate: 73.52, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
-    //   { ContractNumber: 0, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 163.13, ContractRate: 52.86, Competetor: "ACCENTURE", CompetetorRate: 112.72, CompetetorDetails: -1, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
-    //   { ContractNumber: 0, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 172.51, ContractRate: 86.96, Competetor: "PERFICIENT", CompetetorRate: 210.12, CompetetorDetails: -1, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
-    //   { ContractNumber: 110668, Vendor: "Microsoft", ASGRole: "Arichitect", ASGrate: 116.02, ContractRate: 170.09, Competetor: "PINFOVERITY", CompetetorRate: 176.98, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
-    //   { ContractNumber: 29009100, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 170.15, ContractRate: 127.06, Competetor: "BELCAN ENGINEERING COLLEGE", CompetetorRate: 80.23, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
-    //   { ContractNumber: 29009100, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 157.03, ContractRate: 155.54, Competetor: "BELCAN ENGINEERING COLLEGE", CompetetorRate: 113.46, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+  vendorBarChart: any;
+  vendorBarChartOptions: any;
 
-    // ]
+  asgChart: any;
+  asgChartOptions: any;
+
+  competetorChart: any;
+  competetorChartOptions: any;
+
+  constructor() {
+    this.userList = [
+      { ContractNumber: 0, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 126.07, ContractRate: 105.36, Competetor: "INC", CompetetorRate: 73.52, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+      { ContractNumber: 0, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 163.13, ContractRate: 52.86, Competetor: "ACCENTURE", CompetetorRate: 112.72, CompetetorDetails: -1, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+      { ContractNumber: 0, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 172.51, ContractRate: 86.96, Competetor: "PERFICIENT", CompetetorRate: 210.12, CompetetorDetails: -1, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+      { ContractNumber: 110668, Vendor: "Microsoft", ASGRole: "Arichitect", ASGrate: 116.02, ContractRate: 170.09, Competetor: "PINFOVERITY", CompetetorRate: 176.98, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+      { ContractNumber: 29009100, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 170.15, ContractRate: 127.06, Competetor: "BELCAN ENGINEERING COLLEGE", CompetetorRate: 80.23, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+      { ContractNumber: 29009100, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 157.03, ContractRate: 155.54, Competetor: "BELCAN ENGINEERING COLLEGE", CompetetorRate: 113.46, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
+
+    ]
   }
 
   ngOnInit() {
     this.loadMap();
-    this.loadBarChart();
+    this.VendorBarChart();
+    this.ASGChart();
+    this.CompetetorChart();
     // this.loadPieChart();
     // this.loadPieChart1();
 
@@ -59,9 +68,9 @@ export class VendormanagerComponent implements OnInit {
       zoom: 8
     });
   }
-  loadBarChart() {
+  VendorBarChart() {
     // var my = Highcharts.chart('barChart', {
-      this.barChartOptions = {
+      this.vendorBarChartOptions = {
       chart: {
         type: 'bar'
       },
@@ -87,9 +96,9 @@ export class VendormanagerComponent implements OnInit {
       }
       ]
     },
-    this.barChart = new Chart(this.barChartOptions);
+    this.vendorBarChart = new Chart(this.vendorBarChartOptions);
   }
-  // loadPieChart() {
+  ASGChart() {
   //   //  var pie = Highcharts.chart('pieChart', {
   //   //     chart: {
   //   //       type: 'pie',
@@ -120,68 +129,69 @@ export class VendormanagerComponent implements OnInit {
   //   //       type: undefined
   //   //     }]
   //   //   });
-  //   var pie = Highcharts.chart('pieChart', {
-  //     chart: {
-  //       plotBackgroundColor: null,
-  //       plotBorderWidth: null,
-  //       plotShadow: false,
-  //       type: 'pie'
-  //     },
-  //     tooltip: {
-  //       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  //     },
-  //     plotOptions: {
-  //       pie: {
-  //         allowPointSelect: true,
-  //         cursor: 'pointer',
-  //         dataLabels: {
-  //           enabled: false
-  //         },
-  //         showInLegend: true
-  //       }
-  //     },
-  //     series: [{
-  //       name: 'Brands',
-  //       colorByPoint: true,
-  //       data: [{
-  //         name: 'Arichitect',
-  //         y: 8,
-  //       }, {
-  //         name: 'Database Analyst',
-  //         y: 3,
-  //       }, {
-  //         name: 'Bussiness Analyst',
-  //         y: 1,
-  //       }, {
-  //         name: 'IT Analyst',
-  //         y: 6,
-  //       }, {
-  //         name: 'Tech-Lead',
-  //         y: 8,
-  //       },
-  //       {
-  //         name: 'Testing Analyst',
-  //         y: 4,
-  //       },
-  //       {
-  //         name: 'Software Engineer',
-  //         y: 4,
-  //       },
-  //       {
-  //         name: 'Support Analyst',
-  //         y: 1,
-  //       },
-  //       {
-  //         name: 'Network Engineer',
-  //         y: 1,
-  //       },
-  //       ],
-  //       type: undefined
-  //     }]
-  //   });
-  // }
+  this.asgChartOptions = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+          name: 'Arichitect',
+          y: 8,
+        }, {
+          name: 'Database Analyst',
+          y: 3,
+        }, {
+          name: 'Bussiness Analyst',
+          y: 1,
+        }, {
+          name: 'IT Analyst',
+          y: 6,
+        }, {
+          name: 'Tech-Lead',
+          y: 8,
+        },
+        {
+          name: 'Testing Analyst',
+          y: 4,
+        },
+        {
+          name: 'Software Engineer',
+          y: 4,
+        },
+        {
+          name: 'Support Analyst',
+          y: 1,
+        },
+        {
+          name: 'Network Engineer',
+          y: 1,
+        },
+        ],
+        type: undefined
+      }]
+    },
+    this.asgChart = new Chart(this.asgChartOptions);
+  }
 
-  // loadPieChart1() {
+  CompetetorChart() {
   //   //   var pie = Highcharts.chart('pieChart1',{
   //   //      chart: {
   //   //        type: 'pie',
@@ -214,63 +224,64 @@ export class VendormanagerComponent implements OnInit {
   //   //    });
   //   //  }
   //   // Build the chart
-  //   var pie = Highcharts.chart('pieChart1', {
-  //     chart: {
-  //       plotBackgroundColor: null,
-  //       plotBorderWidth: null,
-  //       plotShadow: false,
-  //       type: 'pie'
-  //     },
-  //     tooltip: {
-  //       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  //     },
-  //     plotOptions: {
-  //       pie: {
-  //         allowPointSelect: true,
-  //         cursor: 'pointer',
-  //         dataLabels: {
-  //           enabled: false
-  //         },
-  //         showInLegend: true
-  //       }
-  //     },
-  //     series: [{
-  //       name: 'Brands',
-  //       colorByPoint: true,
-  //       data: [{
-  //         name: 'BECAN ENGINEER',
-  //         y: 8,
-  //       }, {
-  //         name: 'ACCENTURE LLP',
-  //         y: 3,
-  //       }, {
-  //         name: 'INFOSYS',
-  //         y: 1,
-  //       }, {
-  //         name: 'LLC',
-  //         y: 6,
-  //       }, {
-  //         name: 'INFOVERTY',
-  //         y: 8,
-  //       }, {
-  //         name: 'PERFICIENT',
-  //         y: 4,
-  //       },
-  //       {
-  //         name: 'CUNVERGUYS',
-  //         y: 1,
-  //       },
-  //       {
-  //         name: 'TECHSYSTEMS',
-  //         y: 1,
-  //       },
-  //       {
-  //         name: 'DSM-H LLC',
-  //         y: 1,
-  //       },
-  //       ],
-  //       type: undefined
-  //     }]
-  //   });
-  // }
+   this.competetorChartOptions = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+          name: 'BECAN ENGINEER',
+          y: 8,
+        }, {
+          name: 'ACCENTURE LLP',
+          y: 3,
+        }, {
+          name: 'INFOSYS',
+          y: 1,
+        }, {
+          name: 'LLC',
+          y: 6,
+        }, {
+          name: 'INFOVERTY',
+          y: 8,
+        }, {
+          name: 'PERFICIENT',
+          y: 4,
+        },
+        {
+          name: 'CUNVERGUYS',
+          y: 1,
+        },
+        {
+          name: 'TECHSYSTEMS',
+          y: 1,
+        },
+        {
+          name: 'DSM-H LLC',
+          y: 1,
+        },
+        ],
+        type: undefined
+      }]
+    }
+    this.competetorChart = new Chart(this.competetorChartOptions);
+  }
 }
