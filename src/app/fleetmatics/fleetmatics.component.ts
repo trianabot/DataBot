@@ -213,6 +213,8 @@ export class FleetmaticsComponent implements OnInit {
   tripitemCount = 0;
   tripitems: any = [];
   param: any = {offset: 0, limit: 25};
+  pagelimits = [10, 20, 30];
+
   username: any;
   idlingtimeDaysFormat: any;
   stoptimeDaysFormat: any;
@@ -317,7 +319,6 @@ export class FleetmaticsComponent implements OnInit {
   }
 
   HarshEvents(acc, braking, speed) {
-    console.log(acc, braking, speed);
     var Events = acc + braking + speed;
     var totalevents;
     if(Events == 0) {
@@ -1513,7 +1514,8 @@ export class FleetmaticsComponent implements OnInit {
       for(let item of data['data']['alerts']) {
         if(item['deviceNumber'] == this.imei) {
              this.VIN = item['vin'];
-             this.alertArray.push({'Device Serial Number': item['deviceSerialNumber'], 'Device Type': item['deviceTypeDescription'], 'Alert': item['alertShortDesc'], 'Alert Description': item['alertDesc']});
+             let alerttime = moment(item['alertDateTime']).format('YYYY-MM-DD  hh:mm:ss A');
+             this.alertArray.push({'Device Serial Number': item['deviceSerialNumber'], 'Device Type': item['deviceTypeDescription'], 'Alert': item['alertShortDesc'], 'Alert Description': item['alertDesc'], 'Alert Time': alerttime});
              this.columns = Object.keys(this.alertArray[0]);
              // this.columns.splice(0, 1);
              this.alertitemResource = new DataTableResource(this.alertArray);
@@ -1571,13 +1573,13 @@ export class FleetmaticsComponent implements OnInit {
     var body = { "username": "info@dataagile.com",
       "password": "conquest"
     }
-    this.databotService.getCurrentPostition(body).subscribe(data =>{
-      var mapdata = data['data']['positions'];
+    this.databotService.getVehicleLocations(this.getParams()).subscribe(data =>{
+      var mapdata = data['data']['locations'];
+      console.log(mapdata);
       let vehicles = [];
       for (let item of mapdata) {
         if(this.username == 'melrosepark') {
-           if(item['lastName'] == 'PW') {
-              // console.log('inside pw');
+           if(item['fleetId'] == 129900) {
               vehicles.push(item);
               this.mapdata = vehicles;
            }
@@ -1666,6 +1668,7 @@ export class FleetmaticsComponent implements OnInit {
       // this.harshevents = new Chart(this.harshEventsOptions);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
       let score = (this.todayAcceleration+this.todayBraking+this.highSpeed);
+      console.log(score);
       this.behaviourCard(score);
       this.speedCard(this.highSpeed);
     });
@@ -1687,6 +1690,8 @@ export class FleetmaticsComponent implements OnInit {
       } if(score >= 16 && score <= 20) {
         this.behaviourcard = 20;
         this.ScoreChart(20, 80);
+      }else{
+        this.ScoreChart(10, 90);
       }
   }
   speedCard(speed) {
@@ -1818,10 +1823,11 @@ Stop(acc) {
       }
     }
     let stopintime = this.stopidletime;
-    console.log(this.stoptime, this.idlingtime);
     this.stoptimeDaysFormat = this.convertoDays(this.stoptime);
     this.idlingtimeDaysFormat = this.convertoDays(this.idlingtime);
+    console.log(this.stoptimeDaysFormat);
     this.HoursChart(this.drivetime, this.idlingtime, this.stoptime);
+    console.log(this.drivetime);
     this.Idle(this.idlingtime);
     this.Stop(this.stoptime);
     let idlemins = this.idlemins;
@@ -1899,6 +1905,8 @@ Stop(acc) {
         this.tripreloadItems(this.param);
       }
     }
+    console.log(this.mile);
+    console.log(this.totaltrips);
     this.drivetimeDaysFormat = this.convertoDays(this.drivetime);
     // this.driveOptions.xAxis.categories = drivetime;
     let drivemins = this.drivemins;

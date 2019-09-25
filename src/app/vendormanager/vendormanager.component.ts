@@ -3,6 +3,7 @@ import { Chart } from 'angular-highcharts';
 // import * as Highcharts from 'highcharts';
 declare const google: any;
 import { from } from 'rxjs';
+import { DataTableResource } from 'angular7-data-table';
 @Component({
   selector: 'app-vendormanager',
   templateUrl: './vendormanager.component.html',
@@ -41,6 +42,13 @@ export class VendormanagerComponent implements OnInit {
   competetorChart: any;
   competetorChartOptions: any;
 
+  itemCount = 0;
+  items: any = [];
+  itemResource: any = new DataTableResource([]);
+  param: any = {offset: 0, limit: 10};
+  Columns: string [];
+  pagelimits = [10, 12, 15, 20];
+
   constructor() {
     this.userList = [
       { ContractNumber: 0, Vendor: "Accenture", ASGRole: "Arichitect", ASGrate: 126.07, ContractRate: 105.36, Competetor: "INC", CompetetorRate: 73.52, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
@@ -51,6 +59,10 @@ export class VendormanagerComponent implements OnInit {
       { ContractNumber: 29009100, Vendor: "IBM", ASGRole: "Arichitect", ASGrate: 157.03, ContractRate: 155.54, Competetor: "BELCAN ENGINEERING COLLEGE", CompetetorRate: 113.46, CompetetorDetails: 0, example: "yes", example1: "yes", example2: "yes", example3: "yes", example4: "yes" },
 
     ]
+    this.Columns = Object.keys(this.userList[0]);
+    this.itemResource = new DataTableResource(this.userList);
+    this.itemResource.count().then((count: any) => this.itemCount = count);
+    this.reloadItems(this.param);
   }
 
   ngOnInit() {
@@ -62,6 +74,10 @@ export class VendormanagerComponent implements OnInit {
     // this.loadPieChart1();
 
   }
+
+  reloadItems(params: any) {
+    this.itemResource.query(params).then((items: any) => this.items = items);
+  }
   loadMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 },
@@ -72,14 +88,24 @@ export class VendormanagerComponent implements OnInit {
     // var my = Highcharts.chart('barChart', {
       this.vendorBarChartOptions = {
       chart: {
-        type: 'bar'
+        type: 'bar',
+        // width: 440
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: null
       },
       xAxis: {
-        categories: ['Microsoft', 'Amazon', 'Accenture','Tcs','IBM','Delloite']
+        categories: ['Microsoft', 'Amazon', 'Accenture', 'Tcs', 'IBM', 'Delloite']
       },
       yAxis: {
-        min:1,
-        max:10,
+        min: 1,
+        max: 10,
+        title: {
+          text: null,
+        },
       },
       series: [{
         name: 'Contract Rate',
@@ -139,6 +165,9 @@ export class VendormanagerComponent implements OnInit {
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
+      title: {
+        text: null
+      },
       plotOptions: {
         pie: {
           allowPointSelect: true,
@@ -149,17 +178,20 @@ export class VendormanagerComponent implements OnInit {
           showInLegend: true
         }
       },
+      credits: {
+        enabled: false
+      },
       series: [{
         name: 'Brands',
         colorByPoint: true,
         data: [{
-          name: 'Arichitect',
+          name: 'Architect',
           y: 8,
         }, {
           name: 'Database Analyst',
           y: 3,
         }, {
-          name: 'Bussiness Analyst',
+          name: 'Business Analyst',
           y: 1,
         }, {
           name: 'IT Analyst',
@@ -234,6 +266,12 @@ export class VendormanagerComponent implements OnInit {
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: null
+      },
       plotOptions: {
         pie: {
           allowPointSelect: true,
@@ -281,7 +319,7 @@ export class VendormanagerComponent implements OnInit {
         ],
         type: undefined
       }]
-    }
+    },
     this.competetorChart = new Chart(this.competetorChartOptions);
   }
 }

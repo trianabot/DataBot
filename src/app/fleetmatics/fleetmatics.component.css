@@ -291,3 +291,28 @@
 .float-left {
   float: left;
 }
+/* 
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  float: left !important;
+}
+.pagination-box {
+  outline: 0!important;
+  float: left !important;
+  width: 100% !important
+}
+.pagination-pages {
+  margin: 2px !important;
+  float: left !important;
+}
+.pagination-pages[_ngcontent-c7] > *[_ngcontent-c7] {
+  margin: 2px !important;
+  float: inherit !important;
+}
+.pagination-pages {
+  float: right!important;
+  width: 100% !important;
+  margin-top: -50px !important;
+  } */

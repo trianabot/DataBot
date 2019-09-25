@@ -128,8 +128,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       "username": "info@dataagile.com",
       "password": "conquest"
     }
-    this.databotService.getCurrentPostition(body).subscribe(res => {
-      var data = res['data']['positions'];
+    this.databotService.getVehicleLocations(body).subscribe(res => {
+      var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
       var $this = this;
@@ -138,7 +138,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var geocoder = new google.maps.Geocoder();
       let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 11,
+        zoom: 12,
         center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -150,7 +150,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         var size;
         
         if(this.username == 'melrosepark') {
-          if(item['lastName'] == 'PW') {
+          if(item['fleetId'] == 129900) {
             if(item['speed'] == '0') {
               icon = '../../assets/stop-icon.png';
               size = new google.maps.Size(15, 15);
@@ -162,7 +162,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
               url: icon,
               scaledSize: size,
             };
-            // console.log(item['lastName']);
             this.totalTrucks = this.totalTrucks + 1;
             marker = new google.maps.Marker({
               position: new google.maps.LatLng(item['latitude'], item['longitude']),
@@ -170,7 +169,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
               icon: image
             });
             var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId'], item['odo']);  
+            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['odo']);  
           }
         }else{
           if(item['speed'] == '0') {
@@ -191,7 +190,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
             icon: image
           });
           var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['deviceNbr'], item['driverId'], item['odo']);
+          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['odo']);
           // this.showLocations(item, map, fromDate, toDate);
         }
         }
@@ -277,14 +276,14 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       "username": "info@dataagile.com",
       "password": "conquest"
     }
-    this.databotService.getCurrentPostition(body).subscribe(res => {
-      var data = res['data']['positions'];
+    this.databotService.getVehicleLocations(body).subscribe(res => {
+      var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
       for (let item of data) {
         var infowindow = new google.maps.InfoWindow();
         // this.showVehicle(item,map);
-        // map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
+        //  map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
         marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
         // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
       }

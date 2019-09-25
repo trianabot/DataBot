@@ -457,7 +457,7 @@
             <select class="dropdownWidth" name="Fleet" [(ngModel)]="drivername" (change)="vehicleDDChange($event)">
                 <option style="font: bold" selected disabled value="-1">Select Driver</option>
                 <option> {{drivername}} </option>
-                <option *ngFor="let option of mapdata" value="{{option.deviceNbr}}">{{option.personName}}</option>
+                <option *ngFor="let option of mapdata" value="{{option.imei}}">{{option.personName}}</option>
             </select>
 
         </div>
@@ -879,7 +879,7 @@
                 </div>
                 <div class="modal-body">
                     <data-table id="persons-grid" headerTitle="" [items]="stopitems" [itemCount]="stopitemCount"
-                        (reload)="stopreloadItems($event)" [limit]="10" (rowClick)="rowClick($event)"
+                        (reload)="stopreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of stopColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -904,7 +904,7 @@
                 </div>
                 <div class="modal-body">
                     <data-table id="persons-grid" headerTitle="" [items]="idleitems" [itemCount]="idleitemCount"
-                        (reload)="idlereloadItems($event)" [limit]="10" (rowClick)="rowClick($event)"
+                        (reload)="idlereloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of idleColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -929,7 +929,7 @@
                 </div>
                 <div class="modal-body">
                     <data-table id="persons-grid" headerTitle="" [items]="tripitems" [itemCount]="tripitemCount"
-                        (reload)="tripreloadItems($event)" [limit]="10" (rowClick)="rowClick($event)"
+                        (reload)="tripreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of tripColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -972,7 +972,7 @@
                         </tbody>
                     </table> -->
                     <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount"
-                        (reload)="reloadItems($event)" [limit]="10" (rowClick)="rowClick($event)"
+                        (reload)="reloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of columns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
