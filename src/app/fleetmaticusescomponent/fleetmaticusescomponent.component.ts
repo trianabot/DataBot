@@ -67,6 +67,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   drivetimeDaysFormat: any;
   username: any;
   totalTrucks: any;
+  vehicleTrackerInfo: any = [];
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -137,7 +138,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var infowindow = new google.maps.InfoWindow();
       var geocoder = new google.maps.Geocoder();
       let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
-      var map = new google.maps.Map(document.getElementById('map'), {
+      this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -152,45 +153,47 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         if(this.username == 'melrosepark') {
           if(item['fleetId'] == 129900) {
             if(item['speed'] == '0') {
-              icon = '../../assets/stop-icon.png';
+              icon = '../../assets/truck-stop.png';
               size = new google.maps.Size(15, 15);
             }else{
-              icon = '../../assets/direction-icon.png';
+              icon = '../../assets/truck-dir.png';
               size = new google.maps.Size(15, 15);
             }
             var image = {
               url: icon,
               scaledSize: size,
+              rotation: [90]
             };
             this.totalTrucks = this.totalTrucks + 1;
-            marker = new google.maps.Marker({
+            this.marker = new google.maps.Marker({
               position: new google.maps.LatLng(item['latitude'], item['longitude']),
-              map: map,
+              map: this.map,
               icon: image
             });
             var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-            attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['odo']);  
+            attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);  
           }
         }else{
           if(item['speed'] == '0') {
-            icon = '../../assets/stop-icon.png';
+            icon = '../../assets/truck-stop.png';
             size = new google.maps.Size(15, 15);
           }else{
-            icon = '../../assets/direction-icon.png';
+            icon = '../../assets/truck-dir.png';
             size = new google.maps.Size(15, 15);
           }
           var image = {
             url: icon,
             scaledSize: size,
+            rotation: [90]
           };
           this.totalTrucks = this.totalTrucks + 1;
-          marker = new google.maps.Marker({
+          this.marker = new google.maps.Marker({
             position: new google.maps.LatLng(item['latitude'], item['longitude']),
-            map: map,
+            map: this.map,
             icon: image
           });
           var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-          attachMessage(map, marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['odo']);
+          attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);
           // this.showLocations(item, map, fromDate, toDate);
         }
         }
@@ -237,6 +240,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         marker.addListener('mouseout', function() {
           infowindow.close(map, marker);
         });
+        marker.addListener(map, "click", function(event) {
+          infowindow.close(map, marker);
+        });
         marker.addListener('click', function () {
           // var latlong1 = new google.maps.LatLng(lat, long);
           geocoder.geocode({ 'location': latlong }, function (res, status) {
@@ -259,14 +265,14 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
               // infowindow.open(this.map, marker);
     
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              // alert('Geocode was not successful for the following reason: ' + status);
             }
           });
         });
       }
-      this.UpdateMarker(map, marker, infowindow);
+      this.UpdateMarker(this.map, this.marker, infowindow);
       this.initInterval = setInterval(() => {
-        this.UpdateMarker(map, marker, infowindow);
+        this.UpdateMarker(this.map, this.marker, infowindow);
       }, 5000);
     });
   }
@@ -280,14 +286,47 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
+      this.vehicleTracker();
       for (let item of data) {
+        var icon;
+        var size;
         var infowindow = new google.maps.InfoWindow();
         // this.showVehicle(item,map);
         //  map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
         marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
+        if(item['speed'] == '0') {
+          console.log('inside speed 0');
+          icon = '../../assets/truck-stop.png';
+          size = new google.maps.Size(15, 15);
+        }else{
+          icon = '../../assets/truck-dir.png';
+          size = new google.maps.Size(15, 15);
+        }
+        var image = {
+          url: icon,
+          scaledSize: size,
+        };
+        console.log(image);
+        this.marker.setIcon(image);
         // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
       }
     });
+  }
+
+  vehicleTracker() {
+    this.vehicleTrackerInfo = [];
+    for(let item of this.mapdata) {
+      var icon;
+      var status;
+      if(item['speed'] == '0') {
+        status = 'Stopped';
+        icon = '../../assets/truck-stop.png';
+      }else{
+        status = 'Running';
+        icon = '../../assets/truck-dir.png';
+      }
+        this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+    }
   }
 
   getIdlingAllDevices() {

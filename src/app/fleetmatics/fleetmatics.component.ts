@@ -218,6 +218,7 @@ export class FleetmaticsComponent implements OnInit {
   username: any;
   idlingtimeDaysFormat: any;
   stoptimeDaysFormat: any;
+  alerts: any;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -1397,10 +1398,10 @@ export class FleetmaticsComponent implements OnInit {
             streetViewControl: false
           });
           if(item['speed'] == '0') {
-            icon = '../../assets/stop-icon.png';
+            icon = '../../assets/truck-stop.png';
             size = new google.maps.Size(15, 15);
           }else{
-            icon = '../../assets/direction-icon.png';
+            icon = '../../assets/truck-dir.png';
             size = new google.maps.Size(15, 15);
           }
           var image = {
@@ -1416,15 +1417,6 @@ export class FleetmaticsComponent implements OnInit {
             map: this.map,
             icon:image
           });
-          // var geocoder = new google.maps.Geocoder();
-          // var latlong = new google.maps.LatLng(item['latitude'], item['longitude']);
-          // geocoder.geocode({ 'location': latlong }, function (res, status) {
-          //   if (status == 'OK') {
-          //     var currentLocation = res[0].address_components[2].long_name;
-          //     // console.log(currentLocation);
-          //     // this.location = currentLocation;
-          //   }
-          // });
         }
       }
       this.UpdateMarker(this.map, startmarker);
@@ -1448,10 +1440,10 @@ export class FleetmaticsComponent implements OnInit {
         var deviceStatus;
         if(item['personName'] == this.driver) {
           if(item['speed'] == '0') {
-            icon = '../../assets/stop-icon.png';
+            icon = '../../assets/truck-stop.png';
             size = new google.maps.Size(15, 15);
           }else{
-            icon = '../../assets/direction-icon.png';
+            icon = '../../assets/truck-dir.png';
             size = new google.maps.Size(15, 15);
           }
           var image = {
@@ -1499,9 +1491,12 @@ export class FleetmaticsComponent implements OnInit {
             });
             infowindow.open(map, startmarker);
           });
-          // startmarker.addListener('mouseout', function() {
-          //   infowindow.close(map, startmarker);
-          // });
+          startmarker.addListener('mouseout', function() {
+            infowindow.close(map, startmarker);
+          });
+          google.maps.event.addListener(map, "click", function(event) {
+            infowindow.close(map, startmarker);
+        });
         }
       }
     });
@@ -1510,9 +1505,11 @@ export class FleetmaticsComponent implements OnInit {
   getvehicleAlerts() {
     this.highSpeed = 0;
     this.hrsSpeed = [];
+    this.alerts = 0;
     this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
       for(let item of data['data']['alerts']) {
         if(item['deviceNumber'] == this.imei) {
+             this.alerts = this.alerts + 1;
              this.VIN = item['vin'];
              let alerttime = moment(item['alertDateTime']).format('YYYY-MM-DD  hh:mm:ss A');
              this.alertArray.push({'Device Serial Number': item['deviceSerialNumber'], 'Device Type': item['deviceTypeDescription'], 'Alert': item['alertShortDesc'], 'Alert Description': item['alertDesc'], 'Alert Time': alerttime});
@@ -1668,7 +1665,7 @@ export class FleetmaticsComponent implements OnInit {
       // this.harshevents = new Chart(this.harshEventsOptions);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
       let score = (this.todayAcceleration+this.todayBraking+this.highSpeed);
-      console.log(score);
+      // console.log(score);
       this.behaviourCard(score);
       this.speedCard(this.highSpeed);
     });
@@ -1825,9 +1822,7 @@ Stop(acc) {
     let stopintime = this.stopidletime;
     this.stoptimeDaysFormat = this.convertoDays(this.stoptime);
     this.idlingtimeDaysFormat = this.convertoDays(this.idlingtime);
-    console.log(this.stoptimeDaysFormat);
     this.HoursChart(this.drivetime, this.idlingtime, this.stoptime);
-    console.log(this.drivetime);
     this.Idle(this.idlingtime);
     this.Stop(this.stoptime);
     let idlemins = this.idlemins;
@@ -1905,8 +1900,6 @@ Stop(acc) {
         this.tripreloadItems(this.param);
       }
     }
-    console.log(this.mile);
-    console.log(this.totaltrips);
     this.drivetimeDaysFormat = this.convertoDays(this.drivetime);
     // this.driveOptions.xAxis.categories = drivetime;
     let drivemins = this.drivemins;
