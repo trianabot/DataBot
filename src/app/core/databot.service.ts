@@ -186,4 +186,7 @@ export class DatabotService {
   getVehicleRouteLocations(body, imei) {
     return this.http.post(this.linxupApiEndpoint + 'locations' + '/' + imei, JSON.stringify(body), this.get_http_options());
   }
+  getLocationInfo() {
+    return this.http.get('http://192.168.5.191:5000/filter/128193');
+  }
 }

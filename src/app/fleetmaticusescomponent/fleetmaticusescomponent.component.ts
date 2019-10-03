@@ -11,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
 import * as moment from 'moment';
 declare const google: any;
+import * as Stomp from 'stompjs';
+import * as SockJs from 'sockjs-client';
 
 @Component({
   selector: 'app-fleetmaticusescomponent',
@@ -68,6 +70,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   username: any;
   totalTrucks: any;
   vehicleTrackerInfo: any = [];
+  stompClient: any;
+  WEBSOCKET_URL: any = 'http://192.168.99.1:6060/linxuplocation/';
+  gmarkers: any = [];
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -100,15 +105,36 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     // console.log(original_date);
     this.todate = original_date;
     this.fromdate = original_date;
-
-
+    this.initializeWebSocketConnection();
+    this.getvehicleinfo();
     this.selected = 1;
 
     this.initInterval = setInterval(() => {
       this.fetchAllData();
     }, 5000);
+    // setInterval(() => {
+    //     this.updatemarkersdata();
+    //   }, 5000);
 
   }
+  getvehicleinfo() {
+    this.databotService.getLocationInfo().subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  initializeWebSocketConnection() {
+    let ws = new SockJs('http://192.168.29.253:6060/linxuplocation');
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, (frame: any) => {
+      that.stompClient.subscribe('/location/databot', (scoredata) => {
+        const scoreJson = JSON.parse(scoredata.body);
+        console.log(scoreJson);
+      });
+    });
+  }
+
   fetchAllData() {
     this.inittodate = Date.now();
     this.initfromdate = Date.now() - 1000 * 60 * 60 * 24 * 1;
@@ -133,6 +159,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
+      // this.loadmap();
+
       var $this = this;
       this.totalTrucks = 0;
       var infowindow = new google.maps.InfoWindow();
@@ -271,10 +299,76 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         });
       }
       this.UpdateMarker(this.map, this.marker, infowindow);
-      this.initInterval = setInterval(() => {
+      setInterval(() => {
         this.UpdateMarker(this.map, this.marker, infowindow);
       }, 5000);
     });
+  }
+
+  loadmap() {
+    var mapOptions = {
+      center: new google.maps.LatLng(35.66, -80.50),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  this.map = new google.maps.Map(document.getElementById("map"),
+  mapOptions);
+
+  // add the markers to the map if they have been loaded already.
+  if (this.gmarkers.length > 0) {
+      for (var i = 0; i < this.gmarkers.length; i++) {
+          this.gmarkers[i].setMap(this.map);
+      }
+  }
+  }
+
+  updatemarkersdata() {
+    var body = {
+      "username": "info@dataagile.com",
+      "password": "conquest"
+    }
+    this.databotService.getVehicleLocations(body).subscribe(res => {
+      var data = res['data']['locations'];
+      var mapdata = data;
+      this.mapdata = data;
+      this.updatemarkers();
+    });
+  }
+
+  updatemarkers() {
+    var bounds = new google.maps.LatLngBounds();
+
+    // delete all existing markers first
+    for (var i = 0; i < this.gmarkers.length; i++) {
+        this.gmarkers[i].setMap(null);
+    }
+    this.gmarkers = [];
+
+    // add new markers from the JSON data
+    for (var i = 0;  i < this.mapdata.length; i++) {
+       var latLng = new google.maps.LatLng(this.mapdata[i].latitude, this.mapdata[i].longitude);
+        bounds.extend(latLng);
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: this.map,
+            // title: data[i].title
+        });
+        var infoWindow = new google.maps.InfoWindow();
+        // google.maps.event.addListener(marker, "click", function (e) {
+        //     infoWindow.setContent(data.description+"<br>"+marker.getPosition().toUrlValue(6));
+        //     infoWindow.open(map, marker);
+        // });
+        // (function (marker, data) {
+        //     google.maps.event.addListener(marker, "click", function (e) {
+        //         infoWindow.setContent(data.description+"<br>"+marker.getPosition().toUrlValue(6));
+        //         infoWindow.open(map, marker);
+        //     });
+        // })(marker, data[i]);
+        this.gmarkers.push(marker);
+    }
+
+    // zoom the map to show all the markers, may not be desirable.
+    this.map.fitBounds(bounds);
   }
 
   UpdateMarker(map, marker, infowindow) {
@@ -295,7 +389,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         //  map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
         marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
         if(item['speed'] == '0') {
-          console.log('inside speed 0');
           icon = '../../assets/truck-stop.png';
           size = new google.maps.Size(15, 15);
         }else{
@@ -306,7 +399,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           url: icon,
           scaledSize: size,
         };
-        console.log(image);
         this.marker.setIcon(image);
         // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
       }
@@ -318,14 +410,37 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     for(let item of this.mapdata) {
       var icon;
       var status;
-      if(item['speed'] == '0') {
-        status = 'Stopped';
-        icon = '../../assets/truck-stop.png';
-      }else{
-        status = 'Running';
-        icon = '../../assets/truck-dir.png';
+      if(this.username == 'melrosepark') {
+        if(item['fleetId'] == 129900) {
+          if(item['speed'] == '0') {
+            status = 'Stopped';
+            icon = '../../assets/truck-stop.png';
+          }else{
+            status = 'Running';
+            icon = '../../assets/truck-dir.png';
+          }
+            this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+       
+        }
+      }else {
+        if(item['speed'] == '0') {
+          status = 'Stopped';
+          icon = '../../assets/truck-stop.png';
+        }else{
+          status = 'Running';
+          icon = '../../assets/truck-dir.png';
+        }
+          this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+     
       }
-        this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+      // if(item['speed'] == '0') {
+      //   status = 'Stopped';
+      //   icon = '../../assets/truck-stop.png';
+      // }else{
+      //   status = 'Running';
+      //   icon = '../../assets/truck-dir.png';
+      // }
+      //   this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
     }
   }
 
@@ -529,7 +644,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
 
   vehicleDDChange(event) {
-    console.log(event.currentTarget.value)
+    // console.log(event.currentTarget.value)
   }
   /*getvehicleLocations() {
     this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
