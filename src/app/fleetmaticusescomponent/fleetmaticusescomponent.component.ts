@@ -12,7 +12,7 @@ import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
 import * as moment from 'moment';
 declare const google: any;
 import * as Stomp from 'stompjs';
-import * as SockJs from 'sockjs-client';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-fleetmaticusescomponent',
@@ -73,6 +73,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   stompClient: any;
   WEBSOCKET_URL: any = 'http://192.168.99.1:6060/linxuplocation/';
   gmarkers: any = [];
+  vehicleinfo: any = [];
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -108,15 +109,34 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.initializeWebSocketConnection();
     this.getvehicleinfo();
     this.selected = 1;
-
+    this.livePushData();
     this.initInterval = setInterval(() => {
       this.fetchAllData();
     }, 5000);
-    // setInterval(() => {
-    //     this.updatemarkersdata();
-    //   }, 5000);
+    this.updatemarkersdata(this.searchfromdate, this.searchtodate);
+    setInterval(() => {
+        this.updatemarkersdata(this.searchfromdate, this.searchtodate);
+      }, 10000);
 
   }
+
+  livePushData() {
+    const socket = new SockJS('http://192.168.5.103:6060/linxuplocation');
+    this.stompClient = Stomp.over(socket);
+ 
+    const _this = this;
+    this.stompClient.connect({}, function (frame) {
+      // _this.setConnected(true);
+      console.log('Connected: ' + frame);
+ 
+      _this.stompClient.subscribe('/location/databot', function (data) {
+        console.log(data.body);
+      });
+    });
+
+  }
+
+
   getvehicleinfo() {
     this.databotService.getLocationInfo().subscribe(data => {
       console.log(data);
@@ -124,7 +144,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
 
   initializeWebSocketConnection() {
-    let ws = new SockJs('http://192.168.29.253:6060/linxuplocation');
+    let ws = new SockJS('http://192.168.5.103:6060/linxuplocation');
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, (frame: any) => {
@@ -159,156 +179,156 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
-      // this.loadmap();
+      this.loadmap();
 
-      var $this = this;
-      this.totalTrucks = 0;
-      var infowindow = new google.maps.InfoWindow();
-      var geocoder = new google.maps.Geocoder();
-      let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
-      this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        streetViewControl: false
-      });
-      for(let item of this.mapdata) {
-        var marker;
-        var icon;
-        var size;
+      // var $this = this;
+      // this.totalTrucks = 0;
+      // var infowindow = new google.maps.InfoWindow();
+      // var geocoder = new google.maps.Geocoder();
+      // let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
+      // this.map = new google.maps.Map(document.getElementById('map'), {
+      //   zoom: 12,
+      //   center: new google.maps.LatLng(this.mapdata[4]['latitude'], this.mapdata[4]['longitude']),
+      //   mapTypeId: google.maps.MapTypeId.ROADMAP,
+      //   mapTypeControl: false,
+      //   streetViewControl: false
+      // });
+      // for(let item of this.mapdata) {
+      //   var marker;
+      //   var icon;
+      //   var size;
         
-        if(this.username == 'melrosepark') {
-          if(item['fleetId'] == 129900) {
-            if(item['speed'] == '0') {
-              icon = '../../assets/truck-stop.png';
-              size = new google.maps.Size(15, 15);
-            }else{
-              icon = '../../assets/truck-dir.png';
-              size = new google.maps.Size(15, 15);
-            }
-            var image = {
-              url: icon,
-              scaledSize: size,
-              rotation: [90]
-            };
-            this.totalTrucks = this.totalTrucks + 1;
-            this.marker = new google.maps.Marker({
-              position: new google.maps.LatLng(item['latitude'], item['longitude']),
-              map: this.map,
-              icon: image
-            });
-            var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-            attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);  
-          }
-        }else{
-          if(item['speed'] == '0') {
-            icon = '../../assets/truck-stop.png';
-            size = new google.maps.Size(15, 15);
-          }else{
-            icon = '../../assets/truck-dir.png';
-            size = new google.maps.Size(15, 15);
-          }
-          var image = {
-            url: icon,
-            scaledSize: size,
-            rotation: [90]
-          };
-          this.totalTrucks = this.totalTrucks + 1;
-          this.marker = new google.maps.Marker({
-            position: new google.maps.LatLng(item['latitude'], item['longitude']),
-            map: this.map,
-            icon: image
-          });
-          var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
-          attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);
-          // this.showLocations(item, map, fromDate, toDate);
-        }
-        }
-      function attachMessage(map, marker, latlong, person, fuel, battery, speed, devicenumber, driverid, odo) {
-        marker.addListener('mouseover', function () {
-          geocoder.geocode({ 'location': latlong }, function (res, status) {
-        if (status == 'OK') {
-          var runningStatus;
-          var deviceStatus;
-          var currentLocation = res[0].address_components[2].long_name;
-          if(speed == '0') {
-            runningStatus = 'Stopped';
-          }else{
-            runningStatus = 'Running';
-          }
-          if(!battery) {
-            deviceStatus = 'Disconnected';
-          }else{
-            deviceStatus = 'Connected';
-          }
+      //   if(this.username == 'melrosepark') {
+      //     if(item['fleetId'] == 129900) {
+      //       if(item['speed'] == '0') {
+      //         icon = '../../assets/truck-stop.png';
+      //         size = new google.maps.Size(15, 15);
+      //       }else{
+      //         icon = '../../assets/truck-dir.png';
+      //         size = new google.maps.Size(15, 15);
+      //       }
+      //       var image = {
+      //         url: icon,
+      //         scaledSize: size,
+      //         rotation: [90]
+      //       };
+      //       this.totalTrucks = this.totalTrucks + 1;
+      //       this.marker = new google.maps.Marker({
+      //         position: new google.maps.LatLng(item['latitude'], item['longitude']),
+      //         map: this.map,
+      //         icon: image
+      //       });
+      //       var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
+      //       attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);  
+      //     }
+      //   }else{
+      //     if(item['speed'] == '0') {
+      //       icon = '../../assets/truck-stop.png';
+      //       size = new google.maps.Size(15, 15);
+      //     }else{
+      //       icon = '../../assets/truck-dir.png';
+      //       size = new google.maps.Size(15, 15);
+      //     }
+      //     var image = {
+      //       url: icon,
+      //       scaledSize: size,
+      //       rotation: [90]
+      //     };
+      //     this.totalTrucks = this.totalTrucks + 1;
+      //     this.marker = new google.maps.Marker({
+      //       position: new google.maps.LatLng(item['latitude'], item['longitude']),
+      //       map: this.map,
+      //       icon: image
+      //     });
+      //     var latlong1 = new google.maps.LatLng(item['latitude'], item['longitude']);
+      //     attachMessage(this.map, this.marker, latlong1, item['personName'], item['fuelLevel'], item['battery'], item['speed'], item['imei'], item['driverId'], item['virtualOdo']);
+      //     // this.showLocations(item, map, fromDate, toDate);
+      //   }
+      //   }
+      // function attachMessage(map, marker, latlong, person, fuel, battery, speed, devicenumber, driverid, odo) {
+      //   marker.addListener('mouseover', function () {
+      //     geocoder.geocode({ 'location': latlong }, function (res, status) {
+      //   if (status == 'OK') {
+      //     var runningStatus;
+      //     var deviceStatus;
+      //     var currentLocation = res[0].address_components[2].long_name;
+      //     if(speed == '0') {
+      //       runningStatus = 'Stopped';
+      //     }else{
+      //       runningStatus = 'Running';
+      //     }
+      //     if(!battery) {
+      //       deviceStatus = 'Disconnected';
+      //     }else{
+      //       deviceStatus = 'Connected';
+      //     }
 
-         infowindow = new google.maps.InfoWindow({
-          // tslint:disable-next-line: max-line-length
-          content:'<div class="row" style="margin:0px"><div div class="row" style="margin:0px;background:black;width:360px"><div class="col-md-7" style="padding:0px"><span style="color:white;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</span></div>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="col-md-5" style="padding:0px;"><span style="color:white; background:black;text-weight:bold;font-family: sans-serif;">' + 'Driver Name:' + person + '</span></div></div><br>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg" style="width: 22px;">&nbsp;&nbsp;Fuel&nbsp;:&nbsp;' + fuel + '</span></b></div>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block;" ><span style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery&nbsp;:&nbsp;' + battery +'V'+ '</span></b></div>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed&nbsp;:&nbsp;' + speed +'mph'+ '</span></b>' + '</div></div>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + odo + '</span></b></div>'
-          // tslint:disable-next-line: max-line-length
-          +'<div class="col-md-8" style="padding:0px;margin-left: -50px;"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</span></b></div></div></div>'
-          });
-          // console.log(infowindow);
-          infowindow.open(map, marker);
-         }
-          });
+      //    infowindow = new google.maps.InfoWindow({
+      //     // tslint:disable-next-line: max-line-length
+      //     content:'<div class="row" style="margin:0px"><div div class="row" style="margin:0px;background:black;width:360px"><div class="col-md-7" style="padding:0px"><span style="color:white;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentLocation + '</span></div>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="col-md-5" style="padding:0px;"><span style="color:white; background:black;text-weight:bold;font-family: sans-serif;">' + 'Driver Name:' + person + '</span></div></div><br>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg" style="width: 22px;">&nbsp;&nbsp;Fuel&nbsp;:&nbsp;' + fuel + '</span></b></div>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block;" ><span style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery&nbsp;:&nbsp;' + battery +'V'+ '</span></b></div>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed&nbsp;:&nbsp;' + speed +'mph'+ '</span></b>' + '</div></div>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + odo + '</span></b></div>'
+      //     // tslint:disable-next-line: max-line-length
+      //     +'<div class="col-md-8" style="padding:0px;margin-left: -50px;"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</span></b></div></div></div>'
+      //     });
+      //     // console.log(infowindow);
+      //     infowindow.open(map, marker);
+      //    }
+      //     });
 
-        });
-        marker.addListener('mouseout', function() {
-          infowindow.close(map, marker);
-        });
-        marker.addListener(map, "click", function(event) {
-          infowindow.close(map, marker);
-        });
-        marker.addListener('click', function () {
-          // var latlong1 = new google.maps.LatLng(lat, long);
-          geocoder.geocode({ 'location': latlong }, function (res, status) {
-            if (status == 'OK') {
-              // var currentLocation = res[0].address_components[0].long_name + ',' + res[0].address_components[1].short_name + ',' + res[0].address_components[6].long_name;
-              var currentLocation = res[0].formatted_address;
-              payload = {
-                queryParams: {
-                  vehicle: JSON.stringify(devicenumber),
-                  drivername: JSON.stringify(person),
-                  location: JSON.stringify(currentLocation),
-                  driverid: JSON.stringify(driverid),
-                  searchfromdate: fromDate,
-                  searchtodate: toDate
-                }
-              };
-              // console.log(payload);
-              $this.router.navigate(['/fleetmatics'], payload);
-              // alert(this.warehousename)
-              // infowindow.open(this.map, marker);
+      //   });
+      //   marker.addListener('mouseout', function() {
+      //     infowindow.close(map, marker);
+      //   });
+      //   marker.addListener(map, "click", function(event) {
+      //     infowindow.close(map, marker);
+      //   });
+      //   marker.addListener('click', function () {
+      //     // var latlong1 = new google.maps.LatLng(lat, long);
+      //     geocoder.geocode({ 'location': latlong }, function (res, status) {
+      //       if (status == 'OK') {
+      //         // var currentLocation = res[0].address_components[0].long_name + ',' + res[0].address_components[1].short_name + ',' + res[0].address_components[6].long_name;
+      //         var currentLocation = res[0].formatted_address;
+      //         payload = {
+      //           queryParams: {
+      //             vehicle: JSON.stringify(devicenumber),
+      //             drivername: JSON.stringify(person),
+      //             location: JSON.stringify(currentLocation),
+      //             driverid: JSON.stringify(driverid),
+      //             searchfromdate: fromDate,
+      //             searchtodate: toDate
+      //           }
+      //         };
+      //         // console.log(payload);
+      //         $this.router.navigate(['/fleetmatics'], payload);
+      //         // alert(this.warehousename)
+      //         // infowindow.open(this.map, marker);
     
-            } else {
-              // alert('Geocode was not successful for the following reason: ' + status);
-            }
-          });
-        });
-      }
-      this.UpdateMarker(this.map, this.marker, infowindow);
-      setInterval(() => {
-        this.UpdateMarker(this.map, this.marker, infowindow);
-      }, 5000);
+      //       } else {
+      //         // alert('Geocode was not successful for the following reason: ' + status);
+      //       }
+      //     });
+      //   });
+      // }
+      // this.UpdateMarker(this.map, this.marker, infowindow);
+      // setInterval(() => {
+      //   this.UpdateMarker(this.map, this.marker, infowindow);
+      // }, 5000);
     });
   }
 
   loadmap() {
     var mapOptions = {
-      center: new google.maps.LatLng(35.66, -80.50),
-      zoom: 8,
+      center: new google.maps.LatLng(this.mapdata[5].latitude, this.mapdata[5].longitude),
+      zoom: 12,
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   this.map = new google.maps.Map(document.getElementById("map"),
@@ -322,7 +342,8 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
   }
 
-  updatemarkersdata() {
+  updatemarkersdata(fromdate, todate) {
+    this.vehicleinfo = [];
     var body = {
       "username": "info@dataagile.com",
       "password": "conquest"
@@ -331,13 +352,38 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
-      this.updatemarkers();
+      console.log(this.mapdata);
+      console.log(this.username);
+      if(this.username == 'melrosepark') {
+            console.log(this.username, 'inside melrose');
+            // if(item['fleetId'] == 129900) {}
+            for(let item of this.mapdata) {
+                 if(item['fleetId'] == 129900) {
+                   this.vehicleinfo.push(item);
+                 }else {
+
+                 }
+            }
+            console.log(this.vehicleinfo);
+      }else {
+        console.log('inside else');
+        for (let item of this.mapdata) {
+          this.vehicleinfo.push(item);
+        }
+      }
+      this.vehicleTracker();
+      this.updatemarkers(fromdate, todate);
     });
   }
 
-  updatemarkers() {
+  updatemarkers(fromdate, todate) {
     var bounds = new google.maps.LatLngBounds();
-
+    var geocoder = new google.maps.Geocoder();
+    var icon;
+    var size;
+    var currentLocation;
+    var $this = this;
+    let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
     // delete all existing markers first
     for (var i = 0; i < this.gmarkers.length; i++) {
         this.gmarkers[i].setMap(null);
@@ -345,30 +391,117 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.gmarkers = [];
 
     // add new markers from the JSON data
-    for (var i = 0;  i < this.mapdata.length; i++) {
-       var latLng = new google.maps.LatLng(this.mapdata[i].latitude, this.mapdata[i].longitude);
+    for (var i = 0;  i < this.vehicleinfo.length; i++) {
+       var latLng = new google.maps.LatLng(this.vehicleinfo[i].latitude, this.vehicleinfo[i].longitude);
         bounds.extend(latLng);
+        if(this.vehicleinfo[i]['speed'] == '0') {
+                  icon = '../../assets/truck-stop.png';
+                  size = new google.maps.Size(15, 15);
+                }else{
+                   if(this.vehicleinfo[i].heading == 'N') {
+                    icon = '../../assets/up.png';
+                    size = new google.maps.Size(15, 15);
+                   }else if(this.vehicleinfo[i].heading == 'S') {
+                    icon = '../../assets/down.png';
+                    size = new google.maps.Size(15, 15);
+                   }else if(this.vehicleinfo[i].heading == 'E') {
+                    icon = '../../assets/right.png';
+                    size = new google.maps.Size(15, 15);
+                   }else if(this.vehicleinfo[i].heading == 'W') {
+                    icon = '../../assets/left.png';
+                    size = new google.maps.Size(15, 15);
+                  }
+                }
+                var image = {
+                  url: icon,
+                  scaledSize: size,
+                  rotation: [90]
+                };
         var marker = new google.maps.Marker({
             position: latLng,
             map: this.map,
+            icon: image
             // title: data[i].title
         });
         var infoWindow = new google.maps.InfoWindow();
-        // google.maps.event.addListener(marker, "click", function (e) {
-        //     infoWindow.setContent(data.description+"<br>"+marker.getPosition().toUrlValue(6));
-        //     infoWindow.open(map, marker);
-        // });
-        // (function (marker, data) {
-        //     google.maps.event.addListener(marker, "click", function (e) {
-        //         infoWindow.setContent(data.description+"<br>"+marker.getPosition().toUrlValue(6));
-        //         infoWindow.open(map, marker);
-        //     });
-        // })(marker, data[i]);
+        (function (marker, data) {
+          var runningStatus;
+          var deviceStatus;
+          // var currentLocation = res[0].address_components[2].long_name;
+          if(data.speed == '0') {
+            runningStatus = 'Stopped';
+          }else{
+            runningStatus = 'Running';
+          }
+          if(!data.battery) {
+            deviceStatus = 'Disconnected';
+          }else{
+            deviceStatus = 'Connected';
+          }
+            google.maps.event.addListener(marker, "mouseover", function (e) {
+              var latlong = new google.maps.LatLng(data.latitude, data.longitude);
+              var currentlocation;
+              geocoder.geocode({ 'location': latlong }, function (res, status) {
+                  if (status == 'OK') {
+                    currentlocation = res[0].address_components[2].long_name;
+                  }
+              
+               infoWindow.setContent('<div class="row" style="margin:0px"><div div class="row" style="margin:0px;background:black;width:360px"><div class="col-md-7" style="padding:0px"><span style="color:white;font-family: sans-serif; background:black;text-weight:bold;">' + '<i class="fa fa-map-marker" aria-hidden="true"></i> Current Location:' + currentlocation + '</span></div>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="col-md-5" style="padding:0px;"><span style="color:white; background:black;text-weight:bold;font-family: sans-serif;">' + 'Driver Name:' + data['personName'] + '</span></div></div><br>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/fuel.jpg" style="width: 22px;">&nbsp;&nbsp;Fuel&nbsp;:&nbsp;' + data['fuelLevel'] + '</span></b></div>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block;" ><span style="color:black;text-weight:bold;font-family: sans-serif;">' + '<i class="fa fa-battery-quarter" aria-hidden="true"></i> Battery&nbsp;:&nbsp;' + data['battery'] +'V'+ '</span></b></div>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed&nbsp;:&nbsp;' + data['speed'] +'mph'+ '</span></b>' + '</div></div>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + data['virtualOdo'] + '</span></b></div>'
+                // tslint:disable-next-line: max-line-length
+                +'<div class="col-md-8" style="padding:0px;margin-left: -50px;"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</span></b></div></div></div>');
+            infoWindow.open(this.map, marker);
+            });
+          });
+
+          google.maps.event.addListener(marker, "mouseout", function () {
+            infoWindow.close(this.map, marker);
+          });
+
+            google.maps.event.addListener(marker, "click", function () {
+              var latlng = new google.maps.LatLng(data.latitude, data.longitude);
+              var currentlocation;
+              geocoder.geocode({ 'location': latlng }, function (res, status) {
+                if (status == 'OK') {
+                  // var currentLocation = res[0].address_components[0].long_name + ',' + res[0].address_components[1].short_name + ',' + res[0].address_components[6].long_name;
+                  currentlocation = res[0].formatted_address;
+                  payload = {
+                    queryParams: {
+                      vehicle: JSON.stringify(data.imei),
+                      drivername: JSON.stringify(data.personName),
+                      location: JSON.stringify(currentlocation),
+                      driverid: JSON.stringify(data.driverId),
+                      searchfromdate: fromdate,
+                      searchtodate: todate
+                    }
+                  };
+                  console.log(payload);
+                  $this.router.navigate(['/fleetmatics'], payload);
+                  // alert(this.warehousename)
+                  // infowindow.open(this.map, marker);
+        
+                } else {
+                  // alert('Geocode was not successful for the following reason: ' + status);
+                }
+              });
+            });
+        })(marker, this.vehicleinfo[i]);
+
+        
         this.gmarkers.push(marker);
     }
 
     // zoom the map to show all the markers, may not be desirable.
-    this.map.fitBounds(bounds);
+    // this.map.fitBounds(bounds);
   }
 
   UpdateMarker(map, marker, infowindow) {
