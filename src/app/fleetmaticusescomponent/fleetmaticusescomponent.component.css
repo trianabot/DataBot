@@ -201,6 +201,9 @@ font-size: 22px;
   padding: 0px;
   text-align:center;
 }
+.txt-l {
+  text-align: left;
+}
 .a-r {
   background: #f2e5f1; width: 98%
 }
@@ -487,4 +490,38 @@ input[type="date"]:valid::before {
 }
 .b-gray {
   background: gray;
+}
+.f-r {
+  float: left
+}
+
+.modal-dialog {
+  width: 100%;
+  margin: 30px auto;
+}
+.btn {
+  background: #444444;
+  color: #ffffff;
+}
+.modal-map {
+  width: 50%;
+  position: absolute;
+  height: 300px;
+  background: gray;
+  top: 20%;
+  left: 25%;
+  color: white;
+  z-index: 9999999999999999999999;
+}
+
+#smallmap {
+  height:300px;
+  width:100%;  
+}
+.txt-r {
+  text-align: right;
+}
+
+.cursor {
+  cursor: pointer;
 }

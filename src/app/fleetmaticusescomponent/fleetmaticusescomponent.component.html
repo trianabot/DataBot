@@ -225,9 +225,9 @@
 
                 <div class="col-md-3 d-3 padding0 float-left">
                     <div class="a-r-d2">
-                        <div class="row m-0 cor">
+                        <div class="row m-0 cor cursor">
                             <ul class="padding0" style="list-style: none">
-                                <li class="li-items cor">
+                                <li class="li-items cor" data-toggle="modal" data-target="#myModal1">
                                     <img class="p-4" class="w-10" src="../../assets/icon-001.png"><br>
                                     <span>TOTAL TRUCKS</span><br>
                                     <span></span><br>
@@ -244,14 +244,17 @@
 
                 <div class="col-md-3 d-3 padding0 float-left">
                     <div class="a-r-d2">
-                        <div class="row m-0 cor">
+                        <div class="row m-0 cor cursor">
                             <ul style="list-style: none; padding: 0px;">
-                                <li class="li-items cor">
+                                <li class="li-items cor" data-toggle="modal" data-target="#myModal1">
                                     <img class="p-2" class="w-10" src="../../assets/icon-002.png"><br>
-                                    <span>DRIVE TIME</span><br>
-                                    <span class="f-s-10">(0d 0h 0m)</span><br>
-                                    <button class="p-t m-t-10"><span
-                                            class="f-s-22">{{(drivetimeDaysFormat) ? drivetimeDaysFormat : '- -'}}</span></button><br>
+                                    <!-- <span>DRIVE TIME</span><br> -->
+                                    <span>Total Drivers</span><br>
+                                    <!-- <span class="f-s-10">(0d 0h 0m)</span><br> -->
+                                    <span></span><br>
+                                    <button class="p-31 m-t-10">
+                                            <!--<span class="f-s-22">{{(drivetimeDaysFormat) ? drivetimeDaysFormat : '- -'}}</span></button><br> -->
+                                            <span class="f-s-22">{{(totalTrucks) ? totalTrucks : '- -'}}</span></button><br>
 
                                 </li>
                             </ul>
@@ -260,14 +263,14 @@
                 </div>
                 <div class="col-md-3 d-3 padding0 float-left">
                     <div class="a-r-d2">
-                        <div class="row m-0 cor">
+                        <div class="row m-0 cor cursor">
                             <ul style="list-style: none; padding: 0px;">
-                                <li class="li-items cor">
+                                <li class="li-items cor" data-toggle="modal" data-target="#myModal2">
                                     <img class="w-10" src="../../assets/icon-003.png"> <br>
                                     <span>DISTANCE TRAVELLED</span><br>
                                     <span class="f-s-10">(Miles)</span><br>
                                     <button class="p-30 m-t-10"><span
-                                            class="f-s-22">{{(distance) ? distance : '- -'}}</span></button>
+                                            class="f-s-22">{{(flaskinfo?.distanceMiles!=null) ? flaskinfo?.distanceMiles : '- -'}}</span></button>
 
                                 </li>
                             </ul>
@@ -279,15 +282,15 @@
                 <div class="row m-0 cor" style="background: radial-gradient(black, transparent); width: 97%;">
                     <div class="col-md-3 padding0">
                         <div class="a-r-d3 cor">
-                            <div class="row m-0">
+                            <div class="row m-0 cursor">
                                 <div class="col-md-12 padding0 float-left">
                                     <ul class="padding0" style="list-style: none">
-                                        <li class="li-items ">
+                                        <li class="li-items " data-toggle="modal" data-target="#myModal3">
                                             <img class="w-10" src="../../assets/icon-004.png"><br>
                                             <span class="float-left">IDLING</span><br>
                                             <span class="f-s-10">(Incidents)</span><br>
                                             <button class="p-31 m-t-10"><span
-                                                    class="f-s-22 float-left">{{(idlingtime) ? idlingtime : '- -'}}</span></button>
+                                                    class="f-s-22 float-left">{{(flaskinfo?.Idling!=null) ? flaskinfo?.Idling : '- -'}}</span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -302,16 +305,16 @@
                     </div>
                     <div class="col-md-3 padding0">
                         <div class="a-r-d6">
-                            <div class="row m-0 cor ">
+                            <div class="row m-0 cor cursor">
 
                                 <div class="col-md-12 a-r-d padding0 float-left">
                                     <ul class="padding0" style="list-style: none">
-                                        <li class="li-items ">
+                                        <li class="li-items " data-toggle="modal" data-target="#myModal4">
                                             <img class="w-10" src="../../assets/icon-005.png"><br>
                                             <span class=" float-left">SPEEDING</span><br>
                                             <span class="f-s-10">(Incidents)</span><br>
                                             <button class="p-30 m-t-10"><span
-                                                    class="f-s-22 float-left">{{(highspeed) ? highspeed : '- -'}}</span></button>
+                                                    class="f-s-22 float-left">{{(flaskinfo?.HIGH_SPEED!=null) ? flaskinfo?.HIGH_SPEED : '- -'}}</span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -328,15 +331,15 @@
 
                     <div class="col-md-3 m-t-2 padding0">
                         <div class="a-r-d3 cor">
-                            <div class="row m-0 ">
+                            <div class="row m-0 cursor">
                                 <div class="col-md-12 padding0 float-left">
                                     <ul class="padding0" style="list-style: none">
-                                        <li class="li-items ">
+                                        <li class="li-items " data-toggle="modal" data-target="#myModal5">
                                             <img class="w-10" src="../../assets/icon-006.png"><br>
                                             <span class="float-left">HARSH BRAKING</span><br>
                                             <span class="f-s-10">(Incidents)</span><br>
                                             <button class="p-30 m-t-10"><span class="f-s-22">
-                                                    {{(harshbraking) ? harshbraking : '- -'}} </span></button>
+                                                    {{(flaskinfo?.HARSH_BRAKING!=null) ? flaskinfo?.HARSH_BRAKING : '- -'}} </span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -351,15 +354,15 @@
                     </div>
                     <div class="col-md-3 m-t-2 padding0">
                         <div class="a-r-d3">
-                            <div class="row m-0 cor ">
+                            <div class="row m-0 cor cursor">
                                 <div class="col-md-12 padding0 float-left">
                                     <ul class="padding0" style="list-style: none">
-                                        <li class="li-items">
+                                        <li class="li-items" data-toggle="modal" data-target="#myModal6">
                                             <img class="w-10" src="../../assets/icon-007.png"><br>
                                             <span class="float-left">ACCELERATION</span><br>
                                             <span class="f-s-10">(Incidents)</span><br>
                                             <button class="p-31 m-t-10"><span
-                                                    class="f-s-22">{{(rapidacceleration) ? rapidacceleration : '- -'}}</span></button>
+                                                    class="f-s-22">{{(flaskinfo?.RAPID_ACCELERATION!=null) ? flaskinfo?.RAPID_ACCELERATION : '- -'}}</span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -378,10 +381,16 @@
 
         </div>
     </div>
-    <div class="row m-0 m-t-10">
-        <div class="col-md-12 padding0">
-            <span class="btn btn-success pointer" data-toggle="modal"
-            data-target="#myModal">Tracker</span>
+    <div class="row m-t-10 cor">
+        <div class="col-md-12 padding0 cor">
+            <div class="col-md-6 padding0 txt-l">
+                    <span class="">Live Tracker</span>
+            </div>
+            <div class="col-md-6 padding0">
+                    <span class="btn btn-success pointer" data-toggle="modal"
+            data-target="#myModal">Status</span>
+            </div>
+            
         </div>
         <div class="col-md-12 padding0 m-4">
             <div id='map' class="col-md-12"></div>
@@ -432,5 +441,179 @@
                 </div>
     
             </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Trucks Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" headerTitle="" [items]="items" [itemCount]="itemCount"
+                        (reload)="reloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column *ngFor="let col of columns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Travelled Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" class="cursor" headerTitle="" [items]="DTitems" [itemCount]="DTitemCount"
+                        (reload)="DTreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column class="cursor" *ngFor="let col of DTcolumns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Idle Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" headerTitle="" [items]="Idleitems" [itemCount]="IdleitemCount"
+                        (reload)="IdlereloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column *ngFor="let col of Idlecolumns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Speed Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" headerTitle="" [items]="speeditems" [itemCount]="speeditemCount"
+                        (reload)="speedreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column *ngFor="let col of speedcolumns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal5" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Harsh Braking Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" headerTitle="" [items]="HBitems" [itemCount]="HBitemCount"
+                        (reload)="HBreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column *ngFor="let col of HBcolumns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal6" role="dialog">
+            <div class="modal-dialog">
+    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Harsh Braking Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <data-table id="persons-grid" headerTitle="" [items]="ACCitems" [itemCount]="ACCitemCount"
+                        (reload)="ACCreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                        (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+                        <data-table-column *ngFor="let col of ACCcolumns; let i = index" [visible]="(i<8)?true:false"
+                            [property]='col' [header]='col' [sortable]="true" [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <!---show small map-->
+        <div class="modal-map" *ngIf="showmap">
+             <div class="row">
+                  <div class="col-md-6">
+                       <span></span>
+                  </div>
+                  <div class="col-md-6 txt-r">
+                    <div (click)="close()"><i class="fa fa-times cursor" aria-hidden="true"></i></div>
+                  </div>
+             </div>
+             <div class="row">
+                 <div class="col-md-12">
+                        <div id="smallmap">
+
+                        </div>
+                 </div>
+             </div>
         </div>
 </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 
 @Injectable({
@@ -189,4 +190,62 @@ export class DatabotService {
   getLocationInfo() {
     return this.http.get('http://192.168.5.191:5000/filter/128193');
   }
+  sendEmail(body) {
+    return this.http.post('http://localhost:7000/sendmail/sendInfo', body);
+  }
+  alertEmail(body) {
+    return this.http.post('http://localhost:7000/sendmail/alert', {firstname:body});
+  }
+  getMelroseInfo() {
+    return this.http.get('http://13.71.1.239:5000/default/cal/129900');
+  }
+
+  getAllInfo() {
+    return this.http.get('http://13.71.1.239:5000/default/cal/1');
+  }
+
+  getMelroseInfobyDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/selected_range/cal/129900/' + fromdate + '/' + todate);
+  }
+
+  getAllInfobyDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/selected_range/cal/1/' + fromdate + '/' + todate);
+  }
+
+  getidleArraymelinfo() {
+    return this.http.get('http://13.71.1.239:5000/alt_stp/Melrose%20Park/stops');
+  }
+
+  getidleArraymelinfoByDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/alt_stp_range/Melrose%20Park/stops/' + fromdate + '/' + todate);
+  }
+
+  getidleArrayinfo() {
+    return this.http.get('http://13.71.1.239:5000/alt_stp/default/stops');
+  }
+
+  getidleArrayinfoByDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/alt_stp_range/default/stops/' + fromdate + '/' + todate);
+  }
+
+  getalertArrayMelinfo() {
+    return this.http.get('http://13.71.1.239:5000/alt_stp/Melrose%20Park/alerts');
+  }
+
+  getalertArrayMelinfoByDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/alt_stp_range/Melrose%20Park/alerts/' + fromdate + '/' + todate);
+  }
+
+  getalertArrayinfo() {
+    return this.http.get('http://13.71.1.239:5000/alt_stp/default/alerts');
+  }
+
+  getalertArrayinfoByDates(fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/alt_stp_range/default/alerts/' + fromdate + '/' + todate);
+  }
+
+  getEachDriverInfo(driver, fromdate, todate) {
+    return this.http.get('http://13.71.1.239:5000/screen2/' + driver + '/' + fromdate + '/' + todate );
+  }
+
 }

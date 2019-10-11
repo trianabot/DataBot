@@ -291,6 +291,10 @@
 .float-left {
   float: left;
 }
+.btn {
+  background: #444444;
+  color: #ffffff;
+}
 /* 
 .input-group {
   position: relative;

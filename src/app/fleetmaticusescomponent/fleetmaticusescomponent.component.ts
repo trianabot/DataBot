@@ -13,6 +13,8 @@ import * as moment from 'moment';
 declare const google: any;
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+var schedule = require('node-schedule');
+import { DataTableResource } from 'angular7-data-table';
 
 @Component({
   selector: 'app-fleetmaticusescomponent',
@@ -74,6 +76,58 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   WEBSOCKET_URL: any = 'http://192.168.99.1:6060/linxuplocation/';
   gmarkers: any = [];
   vehicleinfo: any = [];
+  totalalertTypes: any = [];
+  alertTypes: any;
+  signalmodemalert: any = 0;
+  checkValue: number = 0;
+  totalDrivers: any = [];
+  trucksInfo: any = [];
+  DTArray: any = [];
+  idleArray: any = [];
+
+  columns: string [];
+  itemResource: any = new DataTableResource([]);
+  itemCount = 0;
+  items: any = [];
+  param: any = {offset: 0, limit: 25};
+
+  DTcolumns: string [];
+  DTitemResource: any = new DataTableResource([]);
+  DTitemCount = 0;
+  DTitems: any = [];
+  DTparam: any = {offset: 0, limit: 25};
+  pagelimits = [10, 20, 30];
+
+  Idlecolumns: string [];
+  IdleitemResource: any = new DataTableResource([]);
+  IdleitemCount = 0;
+  Idleitems: any = [];
+  Idleparam: any = {offset: 0, limit: 25};
+
+  speedArray: any = [];
+  speedcolumns: string [];
+  speeditemResource: any = new DataTableResource([]);
+  speeditemCount = 0;
+  speeditems: any = [];
+  speedparam: any = {offset: 0, limit: 25};
+
+  HBArray: any = [];
+  HBcolumns: string [];
+  HBitemResource: any = new DataTableResource([]);
+  HBitemCount = 0;
+  HBitems: any = [];
+  HBparam: any = {offset: 0, limit: 25};
+
+  ACCArray: any = [];
+  ACCcolumns: string [];
+  ACCitemResource: any = new DataTableResource([]);
+  ACCitemCount = 0;
+  ACCitems: any = [];
+  ACCparam: any = {offset: 0, limit: 25};
+
+  flaskinfo: any;
+  showmap: boolean;
+  locationData_: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -81,78 +135,93 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.searchtodate = todateStamp;
     this.searchfromdate = Date.now() - 1000 * 60 * 60 * 24 * 1;
     this.loadVehicles(this.searchfromdate, this.searchtodate);
-    // console.log(this.searchfromdate, this.searchtodate);
-    this.fetchAllData();
+    // this.fetchAllData();
     this.username = localStorage.getItem('username');
-    // this.Map();
-    // this.loadmapdata();
-    // this.loadmap(this.searchfromdate, this.searchtodate);
-    // if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
-    //   this.tenantOverview = true;
-    //   this.Overview = false;
-    // } else {
-    //   this.tenantOverview = false;
-    //   this.Overview = true;
-    // }
+    if(this.username == 'melrosepark') {
+       this.databotService.getMelroseInfo().subscribe(data => {
+        //  console.log(data);
+         this.flaskinfo = data;
+       });
+       this.getidleArrayMelInfo();
+       this.getAlertMelInfo();
+    } else {
+      this.getidleArrayInfo();
+      this.getAlertInfo();
+      this.databotService.getAllInfo().subscribe(data => {
+        // console.log(data);
+        this.flaskinfo = data;
+      });
+      
+    }
+    this.showmap = false;
   }
 
   ngOnInit() {
     this.today = Date.now();
     var timestamp = new Date(this.today).getTime();
     var todate = new Date(timestamp).getDate();
+    var fromdate = todate - 1;
     var tomonth = new Date(timestamp).getMonth() + 1;
     var toyear = new Date(timestamp).getFullYear();
     var original_date = tomonth + '/' + todate + '/' + toyear;
-    // console.log(original_date);
+    var previousdate = tomonth + '/' + fromdate + '/' + toyear;
     this.todate = original_date;
-    this.fromdate = original_date;
-    this.initializeWebSocketConnection();
-    this.getvehicleinfo();
+    this.fromdate = previousdate;
     this.selected = 1;
-    this.livePushData();
-    this.initInterval = setInterval(() => {
-      this.fetchAllData();
-    }, 5000);
+    // this.initializeWebSocketConnection();
+    // this.getvehicleinfo();
+    // this.livePushData();
+    // this.getTotalAlerts();
+    // this.gettripevent();
+    // this.getIdlingAllDevices();
+    // this.initInterval = setInterval(() => {
+    //   this.fetchAllData();
+    // }, 5000);
     this.updatemarkersdata(this.searchfromdate, this.searchtodate);
     setInterval(() => {
         this.updatemarkersdata(this.searchfromdate, this.searchtodate);
       }, 10000);
+    this.getIdleInfoData();
+    this.getMilesInfo();
+      // setInterval(() => {
+      //   this.checkSignalModemAlert();
+      // }, 10000);
 
   }
 
   livePushData() {
-    const socket = new SockJS('http://192.168.5.103:6060/linxuplocation');
-    this.stompClient = Stomp.over(socket);
+    // const socket = new SockJS('http://192.168.5.103:6060/linxuplocation');
+    // this.stompClient = Stomp.over(socket);
  
-    const _this = this;
-    this.stompClient.connect({}, function (frame) {
-      // _this.setConnected(true);
-      console.log('Connected: ' + frame);
+    // const _this = this;
+    // this.stompClient.connect({}, function (frame) {
+    //   // _this.setConnected(true);
+    //   // console.log('Connected: ' + frame);
  
-      _this.stompClient.subscribe('/location/databot', function (data) {
-        console.log(data.body);
-      });
-    });
+    //   _this.stompClient.subscribe('/location/databot', function (data) {
+    //     // console.log(data.body);
+    //   });
+    // });
 
   }
 
 
   getvehicleinfo() {
     this.databotService.getLocationInfo().subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
   initializeWebSocketConnection() {
-    let ws = new SockJS('http://192.168.5.103:6060/linxuplocation');
-    this.stompClient = Stomp.over(ws);
-    let that = this;
-    this.stompClient.connect({}, (frame: any) => {
-      that.stompClient.subscribe('/location/databot', (scoredata) => {
-        const scoreJson = JSON.parse(scoredata.body);
-        console.log(scoreJson);
-      });
-    });
+    // let ws = new SockJS('http://192.168.5.103:6060/linxuplocation');
+    // this.stompClient = Stomp.over(ws);
+    // let that = this;
+    // this.stompClient.connect({}, (frame: any) => {
+    //   that.stompClient.subscribe('/location/databot', (scoredata) => {
+    //     const scoreJson = JSON.parse(scoredata.body);
+    //     console.log(scoreJson);
+    //   });
+    // });
   }
 
   fetchAllData() {
@@ -352,22 +421,20 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       var data = res['data']['locations'];
       var mapdata = data;
       this.mapdata = data;
-      console.log(this.mapdata);
-      console.log(this.username);
+      this.totalTrucks = 0;
       if(this.username == 'melrosepark') {
-            console.log(this.username, 'inside melrose');
             // if(item['fleetId'] == 129900) {}
             for(let item of this.mapdata) {
+              this.totalTrucks = this.totalTrucks + 1;
                  if(item['fleetId'] == 129900) {
                    this.vehicleinfo.push(item);
                  }else {
 
                  }
             }
-            console.log(this.vehicleinfo);
       }else {
-        console.log('inside else');
         for (let item of this.mapdata) {
+          this.totalTrucks = this.totalTrucks + 1;
           this.vehicleinfo.push(item);
         }
       }
@@ -404,10 +471,10 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
                    }else if(this.vehicleinfo[i].heading == 'S') {
                     icon = '../../assets/down.png';
                     size = new google.maps.Size(15, 15);
-                   }else if(this.vehicleinfo[i].heading == 'E') {
+                   }else if(this.vehicleinfo[i].heading == 'E' || this.vehicleinfo[i].heading == 'NE' || this.vehicleinfo[i].heading == 'SE') {
                     icon = '../../assets/right.png';
                     size = new google.maps.Size(15, 15);
-                   }else if(this.vehicleinfo[i].heading == 'W') {
+                   }else if(this.vehicleinfo[i].heading == 'W' || this.vehicleinfo[i].heading == 'NW' || this.vehicleinfo[i].heading == 'SW') {
                     icon = '../../assets/left.png';
                     size = new google.maps.Size(15, 15);
                   }
@@ -500,46 +567,12 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.gmarkers.push(marker);
     }
 
-    // zoom the map to show all the markers, may not be desirable.
-    // this.map.fitBounds(bounds);
   }
 
-  UpdateMarker(map, marker, infowindow) {
-    var body = {
-      "username": "info@dataagile.com",
-      "password": "conquest"
-    }
-    this.databotService.getVehicleLocations(body).subscribe(res => {
-      var data = res['data']['locations'];
-      var mapdata = data;
-      this.mapdata = data;
-      this.vehicleTracker();
-      for (let item of data) {
-        var icon;
-        var size;
-        var infowindow = new google.maps.InfoWindow();
-        // this.showVehicle(item,map);
-        //  map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
-        marker.setPosition(new google.maps.LatLng(item.latitude, item.longitude));
-        if(item['speed'] == '0') {
-          icon = '../../assets/truck-stop.png';
-          size = new google.maps.Size(15, 15);
-        }else{
-          icon = '../../assets/truck-dir.png';
-          size = new google.maps.Size(15, 15);
-        }
-        var image = {
-          url: icon,
-          scaledSize: size,
-        };
-        this.marker.setIcon(image);
-        // attachMessage(marker, item['personName'], item['fuelLevel'], item['battery'], item['speed'] )
-      }
-    });
-  }
 
   vehicleTracker() {
     this.vehicleTrackerInfo = [];
+    this.trucksInfo = [];
     for(let item of this.mapdata) {
       var icon;
       var status;
@@ -553,7 +586,11 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
             icon = '../../assets/truck-dir.png';
           }
             this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
-       
+            // this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
+            // console.log(this.trucksInfo);
+            this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
+           
+            
         }
       }else {
         if(item['speed'] == '0') {
@@ -564,17 +601,19 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           icon = '../../assets/truck-dir.png';
         }
           this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+          this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
+        }
+     }
+     this.columns = Object.keys(this.trucksInfo[0]);
+ // this.columns.splice(0, 1);
+ this.itemResource = new DataTableResource(this.trucksInfo);
+ this.itemResource.count().then((count: any) => this.itemCount = count);
+ this.reloadItems(this.param);
      
-      }
-      // if(item['speed'] == '0') {
-      //   status = 'Stopped';
-      //   icon = '../../assets/truck-stop.png';
-      // }else{
-      //   status = 'Running';
-      //   icon = '../../assets/truck-dir.png';
-      // }
-      //   this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
-    }
+  }
+
+  reloadItems(params: any) {
+    this.itemResource.query(params).then((items: any) => this.items = items);
   }
 
   getIdlingAllDevices() {
@@ -591,7 +630,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     }
     this.databotService.getVehicleStops(body).subscribe(res => {
       var stops = res['data']['stops'];
-      this.getIdlingEvents(stops);
+      // this.getIdlingEvents(stops);
     });
   }
 
@@ -603,6 +642,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.weekIdling = 0;
     this.stoptime = 0
     this.idlingtime = 0;
+    this.idleArray = [];
     // tslint:disable-next-line: forin
     for (var item in stops) {
       let today = moment(Date.now()).format('MMM DD, YYYY');
@@ -616,17 +656,46 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       //   this.stoptime = this.stoptime + stops[item]['duration'];
       // }
       if(this.username == 'melrosepark') {
+        // console.log('inside mel');
         if(stops[item]['lastName'] == 'PW') {
+          // console.log('inside pw');
           if (stops[item]['stopType'] == 'Idling') {
             this.idlingtime = this.idlingtime + 1;
-            // console.log(this.idlingtime);
+            // let duration = stops[item]['duration'];
+            // let tripId = stops[item]['id'];
+            // let tripStart = moment(stops[item]['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
+            // let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
+            // let location = stops[item]['street'] + stops[item]['city'] + stops[item]['countryCode'];
+            // let stoptype = stops[item]['stopType'];
+            // this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+            // console.log(this.idleArray);
           }
         }
       }else {
         this.idlingtime = this.idlingtime + 1;
+        // if (stops[item]['stopType'] == 'Idling') {
+        //   let duration = stops[item]['duration'];
+        //   let tripId = stops[item]['id'];
+        //   let tripStart = moment(stops[item]['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
+        //   let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
+        //   let location = stops[item]['street'] + stops[item]['city'] + stops[item]['countryCode'];
+        //   let stoptype = stops[item]['stopType'];
+        //   this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+        // // }
+        
       }
+          // // console.log(this.idleArray);
+          // this.Idlecolumns = Object.keys(this.idleArray[0]);
+          // // this.columns.splice(0, 1);
+          // this.IdleitemResource = new DataTableResource(this.idleArray);
+          // this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+          // this.IdlereloadItems(this.Idleparam);
       
     }
+  }
+
+  IdlereloadItems(params: any) {
+    this.IdleitemResource.query(params).then((items: any) => this.Idleitems = items);
   }
 
   gettripevent() {
@@ -640,6 +709,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     }
     this.databotService.getVehicleTrips(body).subscribe(result => {
       this.trips = result['data']['trips'];
+      // console.log(this.trips);
       this.getTotalDriveTime(this.trips);
     });
   }
@@ -647,22 +717,39 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   getTotalDriveTime(trips) {
     let drivetime = 0;
     this.distance = 0;
+    this.DTArray = [];
     for (let item of trips) {
+      // console.log(item);
       if(this.username == 'melrosepark') {
-         if(item['driverName'] == 'MP3 PW' || item['driverName'] == 'MP4 PW' || item['driverName'] == 'MP5 PW' || item['driverName'] == 'MP6 PW' ||item['driverName'] == 'MP7 PW') {
+        // console.log(item);
+         if(item['driverName'] == 'MP1 PW' || item['driverName'] == 'MP2 PW' ||item['driverName'] == 'MP3 PW' || item['driverName'] == 'MP4 PW' || item['driverName'] == 'MP5 PW' || item['driverName'] == 'MP6 PW' ||item['driverName'] == 'MP7 PW'||item['driverName'] == 'MP8 PW'||item['driverName'] == 'MP9 PW'||item['driverName'] == 'MP10 PW') {
           drivetime = drivetime + item['durationMinutes'];
           this.distance = this.distance + item['distanceMiles'];
+          let startTime =  moment(item['startDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+          let endTime = moment(item['endDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+          this.DTArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
           // console.log('drive time inside');
          }
       }else {
         // console.log('drive time else');
+        // console.log(item);
         drivetime = drivetime + item['durationMinutes'];
         this.distance = this.distance + item['distanceMiles'];
+        let startTime =  moment(item['startDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+        let endTime = moment(item['endDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+        this.DTArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
       }
-      // console.log(this.drivetime);
     }
+    // console.log(this.DTArray);
+    this.DTcolumns = Object.keys(this.DTArray[0]);
+    this.DTitemResource = new DataTableResource(this.DTArray);
+    this.DTitemResource.count().then((count: any) => this.DTitemCount = count);
+    this.DTreloadItems(this.DTparam);
     this.drivetime = drivetime;
     this.convertoDays(this.drivetime);
+  }
+  DTreloadItems(params: any) {
+    this.DTitemResource.query(params).then((items: any) => this.DTitems = items);
   }
 
   getParams() {
@@ -725,24 +812,35 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     });
   }
 
-  searching() {
-    this.searchtodate = new Date(this.todate).getTime() * 1000;
-    this.searchfromdate = new Date(this.fromdate).getTime() * 1000;
-  }
-
   searchingBydate() {
     clearInterval(this.initInterval);
-    this.searchtodate = new Date(this.todate).getTime();
+    this.searchtodate  = new Date(this.todate).getTime();
     this.searchfromdate = new Date(this.fromdate).getTime();
     this.loadVehicles(this.searchfromdate, this.searchtodate);
-    // console.log(this.searchfromdate, this.searchtodate);
-    this.searchInterval = setInterval(() => {
-      // console.log(this.searchfromdate, this.searchtodate);
-      this.getAlerts();
-      this.getIdlingAllDevices();
-      this.gettripevent();
-      // this.loadmap(this.searchfromdate, this.searchtodate);
-    }, 10000);
+    this.gettripevent();
+    this.getIdlingAllDevices();
+    if(this.username == 'melrosepark') {
+      this.getidleArrayMelInfoByDates(this.searchfromdate, this.searchtodate);
+       this.getAlertMelInfoByDates(this.searchfromdate, this.searchtodate);
+      this.databotService.getMelroseInfobyDates(this.searchfromdate, this.searchtodate).subscribe(data => {
+        console.log(data);
+        this.flaskinfo = data;
+      });
+   } else {
+    this.getidleArrayInfoByDates(this.searchfromdate, this.searchtodate);
+    this.getAlertInfoByDates(this.searchfromdate, this.searchtodate);
+     this.databotService.getAllInfobyDates(this.searchfromdate, this.searchtodate).subscribe(data => {
+       console.log(data);
+       this.flaskinfo = data;
+     });
+   }
+    // this.searchInterval = setInterval(() => {
+    //   // console.log(this.searchfromdate, this.searchtodate);
+    //   this.getAlerts();
+    //   this.getIdlingAllDevices();
+    //   this.gettripevent();
+    //   // this.loadmap(this.searchfromdate, this.searchtodate);
+    // }, 10000);
   }
 
   convertoDays(input) {
@@ -779,10 +877,481 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   vehicleDDChange(event) {
     // console.log(event.currentTarget.value)
   }
-  /*getvehicleLocations() {
-    this.databotService.getVehicleLocations(this.getuserParams()).subscribe(data => {
-      console.log(data);
+
+  getTotalAlerts() {
+    this.totalalertTypes = [];
+    this.totalDrivers = [];
+    this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
+      // console.log(data);
+      var alerts = data['data']['alerts'];
+      this.alertTypes = data['data']['alerts'];
+      this.totalalertTypes = alerts.reduce(function(a, d) {
+        if (a.indexOf(d.alertCode) === -1) {
+            a.push(d.alertCode);
+        }
+        return a;
+    }, []);
+    for(let item of this.alertTypes) {
+      this.totalDrivers.push({'driver':item['firstName'], alerttype: item['alertCode']});
+    }
+    // console.log(this.totalDrivers);
+    // this.filterAlert();
+    // this.filterAlertByFleet();
+    this.filterAlertByDriver();
     });
-  }*/
+  }
+
+  filterAlert() {
+     var filteredAlerts = [];
+     var alerts = [];
+     var alert = 0;
+     for(let item of this.totalalertTypes) {
+       alert = 0;
+       for(let items of this.alertTypes) {
+         if(item == items['alertCode']) {
+             alert = alert + 1;
+         }
+       }
+       filteredAlerts.push({alerttype: item, alertvalue: alert});
+     }
+    // console.log(filteredAlerts);
+    // alerts.push({'Idle End': filteredAlerts[0].item, 'Idle Start': filteredAlerts[1].item, 'RAPID_ACCELERATION': filteredAlerts[2].item,'NO_SIGNAL_MODEM': filteredAlerts[3].item,'FIRST_IGNITION_OF_DAY': filteredAlerts[4].item,'HARSH_BRAKING': filteredAlerts[5].item, 'HIGH_SPEED': filteredAlerts[6].item});
+    // console.log(alerts);
+    this.databotService.sendEmail(filteredAlerts).subscribe(data => {
+        // console.log(data);
+    });
+  }
+
+  filterAlertByFleet() {
+    var filteredAlertsByFleet = [];
+    var DA = [];
+    var MP = [];
+    var total = [];
+    var alerts = [];
+    var DAalert = 0;
+    var MPalert = 0;
+    var totalalert = 0;
+    var TTalert = 0;
+    for(let item of this.totalalertTypes) {
+      TTalert = 0;
+      DAalert = 0;
+      MPalert = 0;
+      totalalert = 0;
+      for(let items of this.alertTypes) {
+        if (item == items['alertCode']) {
+          TTalert = TTalert + 1;
+          if(items['fleetName'] == 'Data Agile') {
+              DAalert = DAalert + 1;
+          }else if(items['fleetName'] == 'Melrose Park') {
+              MPalert = MPalert + 1;
+          }else if(items['fleetName'] == 'GTito-Fleet') {
+              totalalert = totalalert + 1;
+          }
+        }
+        
+      }
+      filteredAlertsByFleet.push({alerttype: item, totalCount: TTalert, DA: DAalert, MP: MPalert, GT: totalalert});
+      // DA.push({alerttype: item, alertvalue: DAalert});
+      // MP.push({alerttype: item, alertvalue: MPalert});
+      // total.push({alerttype: item, alertvalue: totalalert});
+    }
+  //  console.log(filteredAlertsByFleet);
+   // alerts.push({'Idle End': filteredAlerts[0].item, 'Idle Start': filteredAlerts[1].item, 'RAPID_ACCELERATION': filteredAlerts[2].item,'NO_SIGNAL_MODEM': filteredAlerts[3].item,'FIRST_IGNITION_OF_DAY': filteredAlerts[4].item,'HARSH_BRAKING': filteredAlerts[5].item, 'HIGH_SPEED': filteredAlerts[6].item});
+   // console.log(alerts);
+   this.databotService.sendEmail(filteredAlertsByFleet).subscribe(data => {
+       console.log(data);
+   });
+  }
+
+  filterAlertByDriver() {
+    var filterBydriver = [];
+    var counts = {};
+    for(let item of this.totalalertTypes) {
+        counts = {};
+        this.totalDrivers.forEach(element => {
+          // counts[element.driver] = (item || 0) + 1
+          counts[element.driver] = (counts[element.driver] || 0) + 1,
+          counts['alerttype'] = item;
+          if(element['alerttype']==item) {
+            counts[element.driver] = (counts[element.driver] || 0) + 1,
+            counts['alerttype'] = item;
+          }
+        });
+      // filterBydriver.push({alerttype: item, D1: D1alert, D2: D2alert, D3: D3alert, D4: D4alert, frank: frankalert, MP1: mp1alert, MP2: mp2alert, MP3: mp3alert, MP4: mp4alert, MP5: mp5alert, MP6: mp6alert, MP7: mp7alert, MP8: mp8alert, MP9: mp9alert, REP: repalert, Toni: tonialert});
+      // console.log(counts);
+    }
+  }
+
+  checkSignalModemAlert() {
+    this.databotService.getVehicleAlerts(this.getParams()).subscribe(data => {
+      // console.log(data);
+      var alert = 'NO_SIGNAL_MODEM';
+      var alerts = data['data']['alerts'];
+      var firstname;
+      let count = 0;
+      for(let item of alerts) {
+        if(alert == item['alertCode']) {
+           firstname = item['firstName'];
+           count = count + 1;
+        }
+      }
+      this.signalmodemalert = count;
+
+      if(this.signalmodemalert > this.checkValue) {
+        this.checkValue = this.signalmodemalert;
+      //   this.databotService.alertEmail(firstname).subscribe(data => {
+      //     console.log(data);
+      // });
+      }else {
+        this.checkValue = this.checkValue;
+      }
+      // console.log(this.checkValue);
+
+    });
+  }
+
+  getIdleInfoData() {
+    this.databotService.getVehicleStops(this.getParams()).subscribe(res => {
+      var stops = res['data']['stops'];
+      // console.log(stops);
+      this.getIdleEventData(stops);
+    });
+  }
+
+  getIdleEventData(stops) {
+    // this.idleArray = [];
+    if(this.username == 'melrosepark') {
+          for(let item of stops) {
+                if(item['lastName']=='PW') {
+                     if(item['stopType']=='Idling') {
+                       let duration = item['duration'];
+                       let tripId = item['id'];
+                       let tripStart = moment(item['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
+                       let tripEnd = moment(item['endDate']).format('YYYY-MM-DD hh:mm:ss A');
+                       let location = item['street'] + item['city'] + item['countryCode'];
+                       let stoptype = item['stopType'];
+                      //  this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+                      //  console.log(this.idleArray);
+                     }
+                }
+          }
+    }else {
+
+      for(let item of stops) {
+             if(item['stopType']=='Idling') {
+               let duration = item['duration'];
+               let tripId = item['id'];
+               let tripStart = moment(item['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
+               let tripEnd = moment(item['endDate']).format('YYYY-MM-DD hh:mm:ss A');
+               let location = item['street'] + item['city'] + item['countryCode'];
+               let stoptype = item['stopType'];
+              //  this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+              //  console.log(this.idleArray);
+             }
+      }
+    }
+          this.Idlecolumns = Object.keys(this.idleArray[0]);
+          // this.columns.splice(0, 1);
+          this.IdleitemResource = new DataTableResource(this.idleArray);
+          this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+          this.IdlereloadItems(this.Idleparam);
+  }
+
+  getMilesInfo() {
+    this.databotService.getVehicleTrips(this.getParams()).subscribe(result => {
+      this.trips = result['data']['trips'];
+      // console.log(this.trips);
+      this.getMilesEventData(this.trips);
+    });
+  }
+
+  getMilesEventData(trips) {
+    this.DTArray = [];
+    var count = 0;
+    if(this.username == 'melrosepark') {
+      for(let item of trips) {
+        if(item['driverName'] == 'MP1 PW' || item['driverName'] == 'MP2 PW' ||item['driverName'] == 'MP3 PW' || item['driverName'] == 'MP4 PW' || item['driverName'] == 'MP5 PW' || item['driverName'] == 'MP6 PW' ||item['driverName'] == 'MP7 PW'||item['driverName'] == 'MP8 PW'||item['driverName'] == 'MP9 PW'||item['driverName'] == 'MP10 PW') {
+          count = count + item['authorizedMiles'];
+          let startTime =  moment(item['startDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+          let endTime = moment(item['endDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+          this.DTArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
+        }
+      }
+    }else {
+      for(let item of trips) {
+        count = count + item['authorizedMiles'];
+        let startTime =  moment(item['startDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+        let endTime = moment(item['endDateTime']).format('YYYY-MM-DD hh:mm:ss A');
+        this.DTArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
+      }
+    }
+    console.log(count);
+    this.DTcolumns = Object.keys(this.DTArray[0]);
+    this.DTitemResource = new DataTableResource(this.DTArray);
+    this.DTitemResource.count().then((count: any) => this.DTitemCount = count);
+    this.DTreloadItems(this.DTparam);
+  }
+
+  rowClick(event) {
+    this.showmap = true;
+    var mapOptions;
+    var map;
+     var startloc = event.row.item['Start Address'];
+     var endloc = event.row.item['End Address'];
+     var startlatitude;
+     var startlongitude;
+     var endlatitude;
+     var endlongitude;
+     var geocoder = new google.maps.Geocoder();
+     var startinfoWindow = new google.maps.InfoWindow();
+     var endinfoWindow = new google.maps.InfoWindow();
+     var bounds = new google.maps.LatLngBounds();
+     geocoder.geocode({ 'address': startloc }, function (res, status) {
+      if (status == 'OK') {
+        startlatitude =  res[0].geometry.location.lat();
+        startlongitude = res[0].geometry.location.lng();
+        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+        mapOptions = {
+          center: new google.maps.LatLng(startlatitude, startlongitude),
+          zoom: 9,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("smallmap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(startlatitude, startlongitude),
+        map: map,
+        // title: data[i].title
+      });
+      // bounds.extend(latLng);
+      var contentString = '<div id="content">'+
+        '<div id="siteNotice" style="color:black">'+ 'Start Point'
+        '</div>'+
+        '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
+        '</div>';
+      startinfoWindow = new google.maps.InfoWindow({
+         content: contentString
+      });
+      startinfoWindow.open(map, startmarker);
+      }
+    });
+    geocoder.geocode({ 'address': endloc }, function (res, status) {
+      if (status == 'OK') {
+        endlatitude =  res[0].geometry.location.lat();
+        endlongitude = res[0].geometry.location.lng();
+        // var latlong1 = new google.maps.LatLng(endlatitude, endlongitude);
+        var endmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(endlatitude, endlongitude),
+        map: map,
+        // title: data[i].title
+      });
+      // bounds.extend(latlong1);
+      var contentString1 = '<div id="content">'+
+        '<div id="siteNotice" style="color:black">'+ 'End Point'
+        '</div>'+
+        '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
+        '</div>';
+      startinfoWindow = new google.maps.InfoWindow({
+         content: contentString1
+      });
+      startinfoWindow.open(map, endmarker);
+      }
+
+    });
+  }
+
+  close() {
+    this.showmap = false;
+  }
+
+  getidleArrayMelInfo() {
+     this.idleArray = [];
+     this.databotService.getidleArraymelinfo().subscribe(data => {
+       this.idleArray = data;
+      //  console.log(this.idleArray);
+       this.Idlecolumns = Object.keys(this.idleArray[0]);
+       // this.columns.splice(0, 1);
+       this.IdleitemResource = new DataTableResource(this.idleArray);
+       this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+       this.IdlereloadItems(this.Idleparam);
+     });
+  }
+
+  getidleArrayInfo() {
+    this.idleArray = [];
+    this.databotService.getidleArrayinfo().subscribe(data => {
+      console.log(data);
+      this.idleArray = data;
+      this.Idlecolumns = Object.keys(this.idleArray[0]);
+      // this.columns.splice(0, 1);
+      this.IdleitemResource = new DataTableResource(this.idleArray);
+      this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+      this.IdlereloadItems(this.Idleparam);
+    });
+  }
+
+  getAlertMelInfo() {
+    this.speedArray = [];
+    this.HBArray = [];
+    this.ACCArray = [];
+    this.databotService.getalertArrayMelinfo().subscribe(data => {
+        console.log(data);
+        this.speedArray = data['HIGH_SPEED'];
+        this.HBArray = data['HARSH_BRAKING'];
+        this.ACCArray = data['RAPID_ACCELERATION'];
+        this.speedcolumns = Object.keys(this.speedArray[0]);
+        // this.columns.splice(0, 1);
+        this.speeditemResource = new DataTableResource(this.speedArray);
+        this.speeditemResource.count().then((count: any) => this.speeditemCount = count);
+        this.speedreloadItems(this.speedparam);
+
+        this.HBcolumns = Object.keys(this.HBArray[0]);
+        this.HBitemResource = new DataTableResource(this.HBArray);
+        this.HBitemResource.count().then((count: any) => this.HBitemCount = count);
+        this.HBreloadItems(this.HBparam);
+
+        this.ACCcolumns = Object.keys(this.ACCArray[0]);
+        this.ACCitemResource = new DataTableResource(this.ACCArray);
+        this.ACCitemResource.count().then((count: any) => this.ACCitemCount = count);
+        this.ACCreloadItems(this.ACCparam);
+    });
+  }
+
+  getAlertInfo() {
+    this.speedArray = [];
+    this.HBArray = [];
+    this.ACCArray = [];
+    this.databotService.getalertArrayinfo().subscribe(data => {
+        console.log(data);
+        this.speedArray = data['HIGH_SPEED'];
+        this.HBArray = data['HARSH_BRAKING'];
+        this.ACCArray = data['RAPID_ACCELERATION'];
+        this.speedcolumns = Object.keys(this.speedArray[0]);
+        // this.columns.splice(0, 1);
+        this.speeditemResource = new DataTableResource(this.speedArray);
+        this.speeditemResource.count().then((count: any) => this.speeditemCount = count);
+        this.speedreloadItems(this.speedparam);
+
+        this.HBcolumns = Object.keys(this.HBArray[0]);
+        this.HBitemResource = new DataTableResource(this.HBArray);
+        this.HBitemResource.count().then((count: any) => this.HBitemCount = count);
+        this.HBreloadItems(this.HBparam);
+
+        this.ACCcolumns = Object.keys(this.ACCArray[0]);
+        this.ACCitemResource = new DataTableResource(this.ACCArray);
+        this.ACCitemResource.count().then((count: any) => this.ACCitemCount = count);
+        this.ACCreloadItems(this.ACCparam);
+    });
+  }
+
+  speedreloadItems(params: any) {
+    this.speeditemResource.query(params).then((items: any) => this.speeditems = items);
+  }
+  HBreloadItems(params: any) {
+    this.HBitemResource.query(params).then((items: any) => this.HBitems = items);
+  }
+  ACCreloadItems(params: any) {
+    this.ACCitemResource.query(params).then((items: any) => this.ACCitems = items);
+  }
+
+  getidleArrayMelInfoByDates(fromdate, todate) {
+    this.idleArray = [];
+    this.databotService.getidleArraymelinfoByDates(fromdate, todate).subscribe(data => {
+      this.idleArray = data;
+     //  console.log(this.idleArray);
+      this.Idlecolumns = Object.keys(this.idleArray[0]);
+      // this.columns.splice(0, 1);
+      this.IdleitemResource = new DataTableResource(this.idleArray);
+      this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+      this.IdlereloadItems(this.Idleparam);
+    });
+  }
+  getAlertMelInfoByDates(fromdate, todate) {
+    this.speedArray = [];
+    this.HBArray = [];
+    this.ACCArray = [];
+    this.databotService.getalertArrayMelinfoByDates(fromdate, todate).subscribe(data => {
+        console.log(data);
+        this.speedArray = data['HIGH_SPEED'];
+        this.HBArray = data['HARSH_BRAKING'];
+        this.ACCArray = data['RAPID_ACCELERATION'];
+        this.speedcolumns = Object.keys(this.speedArray[0]);
+        // this.columns.splice(0, 1);
+        this.speeditemResource = new DataTableResource(this.speedArray);
+        this.speeditemResource.count().then((count: any) => this.speeditemCount = count);
+        this.speedreloadItems(this.speedparam);
+
+        this.HBcolumns = Object.keys(this.HBArray[0]);
+        this.HBitemResource = new DataTableResource(this.HBArray);
+        this.HBitemResource.count().then((count: any) => this.HBitemCount = count);
+        this.HBreloadItems(this.HBparam);
+
+        this.ACCcolumns = Object.keys(this.ACCArray[0]);
+        this.ACCitemResource = new DataTableResource(this.ACCArray);
+        this.ACCitemResource.count().then((count: any) => this.ACCitemCount = count);
+        this.ACCreloadItems(this.ACCparam);
+    });
+  }
+
+  getidleArrayInfoByDates(searchfromdate, searchtodate) {
+    this.idleArray = [];
+    this.databotService.getidleArrayinfoByDates(searchfromdate, searchtodate).subscribe(data => {
+      this.idleArray = data;
+     //  console.log(this.idleArray);
+      this.Idlecolumns = Object.keys(this.idleArray[0]);
+      // this.columns.splice(0, 1);
+      this.IdleitemResource = new DataTableResource(this.idleArray);
+      this.IdleitemResource.count().then((count: any) => this.IdleitemCount = count);
+      this.IdlereloadItems(this.Idleparam);
+    });
+  }
+  getAlertInfoByDates(searchfromdate, searchtodate) {
+    this.speedArray = [];
+    this.HBArray = [];
+    this.ACCArray = [];
+    this.databotService.getalertArrayinfoByDates(searchfromdate, searchtodate).subscribe(data => {
+        console.log(data);
+        this.speedArray = data['HIGH_SPEED'];
+        this.HBArray = data['HARSH_BRAKING'];
+        this.ACCArray = data['RAPID_ACCELERATION'];
+        this.speedcolumns = Object.keys(this.speedArray[0]);
+        // this.columns.splice(0, 1);
+        this.speeditemResource = new DataTableResource(this.speedArray);
+        this.speeditemResource.count().then((count: any) => this.speeditemCount = count);
+        this.speedreloadItems(this.speedparam);
+
+        this.HBcolumns = Object.keys(this.HBArray[0]);
+        this.HBitemResource = new DataTableResource(this.HBArray);
+        this.HBitemResource.count().then((count: any) => this.HBitemCount = count);
+        this.HBreloadItems(this.HBparam);
+
+        this.ACCcolumns = Object.keys(this.ACCArray[0]);
+        this.ACCitemResource = new DataTableResource(this.ACCArray);
+        this.ACCitemResource.count().then((count: any) => this.ACCitemCount = count);
+        this.ACCreloadItems(this.ACCparam);
+    });
+  }
+
+  // connect() {
+  //   const socket = new SockJS('http://ec2-54-172-122-115.compute-1.amazonaws.com:6060/linxuplocation');
+  //   this.stompClient = Stomp.over(socket);
+ 
+  //   const _this = this;
+  //   this.stompClient.connect({}, function (frame) {
+  //     // _this.setConnected(true);
+  //     // console.log('Connected: ' + frame);
+ 
+  //     _this.stompClient.subscribe('/location/databot', function (data) {
+  //       let locationData= JSON.parse(data.body);
+  //        _this.locationData_= locationData;
+  //     });
+
+  //     //location maps
+  //     _this.stompClient.subscribe('/trackingdata/vehicle', data=>{
+  //       console.log(data.body);
+  //     });
+  //   });
+  // }
+
 }
 

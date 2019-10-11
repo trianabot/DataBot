@@ -1608,7 +1608,7 @@ export class FleetmaticsComponent implements OnInit {
     this.databotService.getVehicleHistory(body).subscribe(result => {
       var positions = result['data']['positions'];
       var stops = result['data']['stops'];
-      this.driver = result['data']['positions'][0]['personName'];
+      // this.driver = result['data']['positions'][0]['personName'];
       // this.gettripevent();
       this.getIdlingEvents(stops);
       // this.loadmapdata();
@@ -1804,12 +1804,13 @@ Stop(acc) {
       if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Idling')) {
         $this.idlingtime = $this.idlingtime + stops[item]['duration'];
         this.idlemins.push(stops[item]['duration']);
+        let duration = stops[item]['duration'];
         let tripId = stops[item]['id'];
         let tripStart = moment(stops[item]['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
         let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
         let location = stops[item]['street'] + stops[item]['city'] + stops[item]['countryCode'];
         let stoptype = stops[item]['stopType'];
-        this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd, 'Location': location, 'Stop Type': stoptype});
+        this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
         this.IdleChart();
 
         this.idleColumns = Object.keys(this.idleArray[0]);
@@ -1850,6 +1851,7 @@ Stop(acc) {
     }
     this.databotService.getVehicleTrips(body).subscribe(result => {
       this.trips = result['data']['trips'];
+      console.log(this.trips);
       this.getTotalDriveTime(this.trips);
     });
   }
@@ -1939,6 +1941,8 @@ Stop(acc) {
   getRoute() {
     this.databotService.getVehicleRouteLocations(this.getParams(), this.imei).subscribe(data => {
         this.locations = data['data']['locations'];
+        this.driver = this.locations[0]['personName'];
+        console.log(this.driver);
         // this.loadRoute(this.locations);
         // this.loadRoute();
     });
@@ -1961,7 +1965,8 @@ Stop(acc) {
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
-        streetViewControl: false
+        streetViewControl: false,
+        fullscreenControl: true
       });
       // bounds.extend(myLatlng);
       // bounds.extend(marker.position);
@@ -2001,9 +2006,9 @@ Stop(acc) {
             strokeOpacity: 0.8,
             strokeWeight: 3,
             strokeColor: 'green',
-            icons: [{
-               icon: lineSymbol
-            }],
+            // icons: [{
+            //    icon: lineSymbol
+            // }],
             map: map,
           };
 
