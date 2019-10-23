@@ -129,6 +129,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   showmap: boolean;
   locationData_: any;
 
+  onTripTrucksArray: any = [];
+  onTripTrucks: any;
+
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
     let todateStamp = new Date(searchtodate).getTime();
@@ -397,7 +400,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   loadmap() {
     var mapOptions = {
       center: new google.maps.LatLng(this.mapdata[5].latitude, this.mapdata[5].longitude),
-      zoom: 12,
+      zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   this.map = new google.maps.Map(document.getElementById("map"),
@@ -425,21 +428,23 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
       if(this.username == 'melrosepark') {
             // if(item['fleetId'] == 129900) {}
             for(let item of this.mapdata) {
-              this.totalTrucks = this.totalTrucks + 1;
                  if(item['fleetId'] == 129900) {
+                   this.totalTrucks = this.totalTrucks + 1;
                    this.vehicleinfo.push(item);
                  }else {
 
                  }
             }
+            this.updatemarkers(fromdate, todate);
       }else {
         for (let item of this.mapdata) {
           this.totalTrucks = this.totalTrucks + 1;
           this.vehicleinfo.push(item);
         }
+        this.updatemarkers(fromdate, todate);
       }
       this.vehicleTracker();
-      this.updatemarkers(fromdate, todate);
+      this.onTripTrucksInfo(fromdate, todate);
     });
   }
 
@@ -585,7 +590,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
             status = 'Running';
             icon = '../../assets/truck-dir.png';
           }
-            this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+            this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon, 'IMEI': item['imei'], 'lat': item['latitude'], 'long': item['longitude'], 'DriverId': item['driverId'], 'fromdate': this.searchfromdate, 'todate': this.searchtodate});
             // this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
             // console.log(this.trucksInfo);
             this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
@@ -600,7 +605,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           status = 'Running';
           icon = '../../assets/truck-dir.png';
         }
-          this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon});
+          this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon, 'IMEI': item['imei'], 'lat': item['latitude'], 'long': item['longitude'], 'DriverId': item['driverId'], 'fromdate': this.searchfromdate, 'todate': this.searchtodate});
           this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
         }
      }
@@ -615,6 +620,86 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   reloadItems(params: any) {
     this.itemResource.query(params).then((items: any) => this.items = items);
   }
+
+  onTripTrucksInfo(fromdate, todate) {
+    this.onTripTrucksArray = [];
+    this.DTArray = [];
+    var icon;
+    var size;
+    this.onTripTrucks = 0;
+    for(let item of this.mapdata) {
+     if(this.username == 'melrosepark') {
+       if(item['fleetId'] == 129900) {
+         if(item['speed'] > '0') {
+           this.onTripTrucks = this.onTripTrucks + 1;
+           if(item.heading == 'N') {
+             icon = '../../assets/up.png';
+             size = new google.maps.Size(15, 15);
+            }else if(item.heading == 'S') {
+             icon = '../../assets/down.png';
+             size = new google.maps.Size(15, 15);
+            }else if(item.heading == 'E' || item.heading == 'NE' || item.heading == 'SE') {
+             icon = '../../assets/right.png';
+             size = new google.maps.Size(15, 15);
+            }else if(item.heading == 'W' || item.heading == 'NW' || item.heading == 'SW') {
+             icon = '../../assets/left.png';
+             size = new google.maps.Size(15, 15);
+           }
+            this.onTripTrucksArray.push({'VIN': item['vin'], 'Driver': item['personName'],'icon': icon, 'DriverId': item['driverId'], 'lat': item['latitude'], 'long': item['longitude'],'speed': item['speed']+ 'MPHs'});
+         }
+       }
+     }else {
+       if (item['speed'] > '0') {
+         this.onTripTrucks = this.onTripTrucks + 1;
+         if(item.heading == 'N') {
+           icon = '../../assets/up.png';
+           size = new google.maps.Size(15, 15);
+          }else if(item.heading == 'S') {
+           icon = '../../assets/down.png';
+           size = new google.maps.Size(15, 15);
+          }else if(item.heading == 'E' || item.heading == 'NE' || item.heading == 'SE') {
+           icon = '../../assets/right.png';
+           size = new google.maps.Size(15, 15);
+          }else if(item.heading == 'W' || item.heading == 'NW' || item.heading == 'SW') {
+           icon = '../../assets/left.png';
+           size = new google.maps.Size(15, 15);
+         }
+         this.onTripTrucksArray.push({'VIN': item['vin'], 'Driver': item['personName'],'icon': icon, 'DriverId': item['driverId'], 'lat': item['latitude'], 'long': item['longitude'], 'speed': item['speed'] + 'MPHs'});
+         
+       }
+     }
+     // this.DTcolumns = Object.keys(this.DTArray[0]);
+     // this.DTitemResource = new DataTableResource(this.DTArray);
+     // this.DTitemResource.count().then((count: any) => this.DTitemCount = count);
+     // this.DTreloadItems(this.DTparam);
+    }
+ }
+
+ OnTripRoute(item) {
+  console.log(item);
+  var $this = this;
+  let payload: { queryParams: { vehicle: string, drivername: string, location: string, driverid: string, searchfromdate: number, searchtodate: number } };
+  var geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(item.lat, item.long);
+            var currentlocation;
+            geocoder.geocode({ 'location': latlng }, function (res, status) {
+              if (status == 'OK') {
+                currentlocation = res[0].formatted_address;
+                payload = {
+                  queryParams: {
+                    vehicle: JSON.stringify(item.IMEI),
+                    drivername: JSON.stringify(item.Driver),
+                    location: JSON.stringify(currentlocation),
+                    driverid: JSON.stringify(item.DriverId),
+                    searchfromdate: item.fromdate,
+                    searchtodate: item.todate
+                  }
+                };
+                console.log(payload);
+                $this.router.navigate(['/fleetmatics'], payload);
+              }
+            });
+}
 
   getIdlingAllDevices() {
     // console.log(moment().subtract(1, 'days').toString()+ "hello ");
@@ -1085,7 +1170,6 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.DTArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
       }
     }
-    console.log(count);
     this.DTcolumns = Object.keys(this.DTArray[0]);
     this.DTitemResource = new DataTableResource(this.DTArray);
     this.DTitemResource.count().then((count: any) => this.DTitemCount = count);

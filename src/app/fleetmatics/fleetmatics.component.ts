@@ -1955,101 +1955,114 @@ Stop(acc) {
   loadRoute() {
     var lat_lng = new Array();
     var $this = this;
+    var routes = [];
     for(let item of this.locations) {
       var lat = item['latitude'];
       var long = item['longitude'];
-      var myLatlng = new google.maps.LatLng(lat, long);
+      routes.push({lat: lat, lng: long});
+    }
+    var myLatlng = new google.maps.LatLng(lat, long);
+    var centerLatlng = new google.maps.LatLng(routes[Math.round(this.locations.length/2)]);
       
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: myLatlng,
+        zoom: 13,
+        center: centerLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: true
       });
+      var flightPath = new google.maps.Polyline({
+        path: routes,
+        geodesic: true,
+        strokeColor: 'green',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+    
+      flightPath.setMap(map);
       // bounds.extend(myLatlng);
       // bounds.extend(marker.position);
-    lat_lng.push(myLatlng);
-    var infowindow = new google.maps.InfoWindow();
-    var startmarker;
-    var endmarker;
-    var i;
-    var image = {
-      url: '../../assets/images/warehouse.png',
-      scaledSize: new google.maps.Size(50, 50),
-    };
-    // startmarker = new google.maps.Marker({
-    //   position: new google.maps.LatLng(lat, long),
-    //   map: map,
-    //   icon:image
-    // });
-    // endmarker = new google.maps.Marker({
-    //   position: new google.maps.LatLng(this.endLat, this.endLong),
-    //   map: map,
-    //   icon:image
-    // });
-    }
-    // map.fitBounds(bounds);
-    var service = new google.maps.DirectionsService();
-    var delayFactor = 0;
+    // lat_lng.push(myLatlng);
+    // var infowindow = new google.maps.InfoWindow();
+    // var startmarker;
+    // var endmarker;
+    // var i;
+    // var image = {
+    //   url: '../../assets/images/warehouse.png',
+    //   scaledSize: new google.maps.Size(50, 50),
+    // };
+    // // startmarker = new google.maps.Marker({
+    // //   position: new google.maps.LatLng(lat, long),
+    // //   map: map,
+    // //   icon:image
+    // // });
+    // // endmarker = new google.maps.Marker({
+    // //   position: new google.maps.LatLng(this.endLat, this.endLong),
+    // //   map: map,
+    // //   icon:image
+    // // });
+    // }
+    // // map.fitBounds(bounds);
+    // var service = new google.maps.DirectionsService();
+    // var delayFactor = 0;
 
-    function m_get_directions_route(request, latlong) {
-      service.route(request, function (result, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-          //Process you route here
-          var bounds = new google.maps.LatLngBounds();
-          var lineSymbol = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-          };
-          var polylineoptns = {
-            strokeOpacity: 0.8,
-            strokeWeight: 3,
-            strokeColor: 'green',
-            // icons: [{
-            //    icon: lineSymbol
-            // }],
-            map: map,
-          };
+    // function m_get_directions_route(request, latlong) {
+    //   service.route(request, function (result, status) {
+    //     if (status === google.maps.DirectionsStatus.OK) {
+    //       //Process you route here
+    //       var bounds = new google.maps.LatLngBounds();
+    //       var lineSymbol = {
+    //         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+    //       };
+    //       var polylineoptns = {
+    //         strokeOpacity: 0.8,
+    //         strokeWeight: 3,
+    //         strokeColor: 'green',
+    //         // icons: [{
+    //         //    icon: lineSymbol
+    //         // }],
+    //         map: map,
+    //       };
 
-          var path = new google.maps.MVCArray();
-          var poly = new google.maps.Polyline(polylineoptns);
-          poly.setPath(path);
-          // bounds.extend(path);
-          for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-            path.push(result.routes[0].overview_path[i]);
-            bounds = result.routes[0].bounds;
-            // marker.setPosition(result.routes[0].overview_path[i]);
-          }
-          map.fitBounds(bounds);
-          var zoom = map.getZoom();
-          map.setZoom(zoom > 10 ? 13 : zoom);
-        }
-        // else if (status === google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
-        //   // delayFactor++;
-        //   // setTimeout(function () {
-        //   //   m_get_directions_route(request, latlong);
-        //   // }, delayFactor * 1000);
-        // } 
-        else {
-          //console.log("Route: " + status);
-        }
-      });
-    }
+    //       var path = new google.maps.MVCArray();
+    //       var poly = new google.maps.Polyline(polylineoptns);
+    //       poly.setPath(path);
+    //       // bounds.extend(path);
+    //       for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+    //         path.push(result.routes[0].overview_path[i]);
+    //         bounds = result.routes[0].bounds;
+    //         // marker.setPosition(result.routes[0].overview_path[i]);
+    //       }
+    //       map.fitBounds(bounds);
+    //       var zoom = map.getZoom();
+    //       map.setZoom(zoom > 10 ? 13 : zoom);
+    //     }
+    //     // else if (status === google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
+    //     //   // delayFactor++;
+    //     //   // setTimeout(function () {
+    //     //   //   m_get_directions_route(request, latlong);
+    //     //   // }, delayFactor * 1000);
+    //     // } 
+    //     else {
+    //       //console.log("Route: " + status);
+    //     }
+    //   });
+    // }
 
 
-    for (i = 0; i < lat_lng.length; i++) {
-      if ((i + 1) < lat_lng.length) {
-        var src = lat_lng[i];
-        var des = lat_lng[i + 1];
-        var request = {
-          origin: src,
-          destination: des,
-          travelMode: google.maps.DirectionsTravelMode.DRIVING
-        };
-        m_get_directions_route(request, lat_lng);
-      }
-    }
+    // for (i = 0; i < lat_lng.length; i++) {
+    //   if ((i + 1) < lat_lng.length) {
+    //     var src = lat_lng[i];
+    //     var des = lat_lng[i + 1];
+    //     var request = {
+    //       origin: src,
+    //       destination: des,
+    //       travelMode: google.maps.DirectionsTravelMode.DRIVING
+    //     };
+    //     m_get_directions_route(request, lat_lng);
+    //   }
+    // }
   }
 
   convertoDays(input) {

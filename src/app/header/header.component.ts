@@ -13,7 +13,9 @@ export class HeaderComponent implements OnInit {
   previous: any;
   backUrl: Boolean = false;
   currentUrl: any;
-  username:any;
+  username: any;
+  menushow = false;
+
   constructor(private router: Router, private routerService: RouteService) {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userid');
@@ -21,6 +23,9 @@ export class HeaderComponent implements OnInit {
       this.title = '';
     } else {
       this.title = localStorage.getItem('title');
+    }
+    if (this.username!=='melrosepark') {
+      this.menushow = true;
     }
 
 

@@ -23,7 +23,7 @@
       <div class="row">
           <div class="col-xs-12 col-sm-4 col-md-4 p-top">
               <i class="fa fa-bars pointer-class menu-css" aria-hidden="true"
-              (click)="showSideMenu()"></i>
+              (click)="showSideMenu()" *ngIf="menushow"></i>
             <span (click)="showDashBoard()" class="pointer-class home-css"> Home </span>
           </div>
           <div class="col-xs-12 col-sm-4 col-md-4">
