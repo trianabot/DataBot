@@ -102,7 +102,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   IdleitemResource: any = new DataTableResource([]);
   IdleitemCount = 0;
   Idleitems: any = [];
-  Idleparam: any = {offset: 0, limit: 25};
+  Idleparam: any = {offset: 0, limit: 100};
 
   speedArray: any = [];
   speedcolumns: string [];
@@ -131,6 +131,9 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
 
   onTripTrucksArray: any = [];
   onTripTrucks: any;
+  minimapshow = false;
+  currentlocation: any;
+  truckmapshow = false;
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -444,9 +447,12 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.updatemarkers(fromdate, todate);
       }
       this.vehicleTracker();
+      this.trucksinfo()
       this.onTripTrucksInfo(fromdate, todate);
     });
   }
+
+ 
 
   updatemarkers(fromdate, todate) {
     var bounds = new google.maps.LatLngBounds();
@@ -528,7 +534,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
                 // tslint:disable-next-line: max-line-length
                 +'<div class="col-md-4" style="padding:0px"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold">' + '<img src="../assets/speed.jpg"> Speed&nbsp;:&nbsp;' + data['speed'] +'mph'+ '</span></b>' + '</div></div>'
                 // tslint:disable-next-line: max-line-length
-                +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + data['virtualOdo'] + '</span></b></div>'
+                +'<div class="row" style="margin:0px"><div class="col-md-4" style="padding:0px"><b style=""><span style="color:black;float:left;font-family: sans-serif;">' + '<img src="../assets/odometer.png" style="width:18px">&nbsp;Odo&nbsp;:&nbsp;' + Math.round(data['virtualOdo']) + '</span></b></div>'
                 // tslint:disable-next-line: max-line-length
                 +'<div class="col-md-8" style="padding:0px;margin-left: -50px;"><b style="display:inline-block; float:right;font-family: sans-serif;"><span style="color:black;text-weight:bold;">' + '<img src="../assets/battery.png" style="width:16px"> Device Status&nbsp;:&nbsp;' + deviceStatus + '</span></b></div></div></div>');
             infoWindow.open(this.map, marker);
@@ -593,7 +599,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
             this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon, 'IMEI': item['imei'], 'lat': item['latitude'], 'long': item['longitude'], 'DriverId': item['driverId'], 'fromdate': this.searchfromdate, 'todate': this.searchtodate});
             // this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
             // console.log(this.trucksInfo);
-            this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
+            // this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
            
             
         }
@@ -606,16 +612,78 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
           icon = '../../assets/truck-dir.png';
         }
           this.vehicleTrackerInfo.push({'Driver': item['personName'], 'VIN': item['vin'], 'Speed': item['speed'] ,'Status': status, 'icon': icon, 'IMEI': item['imei'], 'lat': item['latitude'], 'long': item['longitude'], 'DriverId': item['driverId'], 'fromdate': this.searchfromdate, 'todate': this.searchtodate});
-          this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
+          // this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'],'Status': status});
         }
      }
-     this.columns = Object.keys(this.trucksInfo[0]);
- // this.columns.splice(0, 1);
- this.itemResource = new DataTableResource(this.trucksInfo);
- this.itemResource.count().then((count: any) => this.itemCount = count);
- this.reloadItems(this.param);
+//      this.columns = Object.keys(this.trucksInfo[0]);
+//  // this.columns.splice(0, 1);
+//  this.itemResource = new DataTableResource(this.trucksInfo);
+//  this.itemResource.count().then((count: any) => this.itemCount = count);
+//  this.reloadItems(this.param);
      
   }
+
+  trucksinfo() {
+    
+    var geocoder = new google.maps.Geocoder();
+    var $this = this;
+    $this.trucksInfo = [];
+    for(let item of this.mapdata) {
+      var icon;
+      var status;
+      if(this.username == 'melrosepark') {
+        if(item['fleetId'] == 129900) {
+          if(item['speed'] == '0') {
+            status = 'Stopped';
+            icon = '../../assets/truck-stop.png';
+          }else{
+            status = 'Running';
+            icon = '../../assets/truck-dir.png';
+          }
+          // var currentlocation;
+          // var latlong = new google.maps.LatLng(item.latitude, item.longitude);
+          // geocoder.geocode({ 'location': latlong }, function (res, status) {
+          //     if (status == 'OK') {
+          //       currentlocation = res[0].address_components[2].long_name;
+          //       $this.currentlocation = currentlocation;
+          //       console.log($this.currentlocation);
+                
+          //     }
+          //   });
+          this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'], 'Status': status});
+        }
+      }else {
+        if(item['speed'] == '0') {
+          status = 'Stopped';
+          icon = '../../assets/truck-stop.png';
+        }else{
+          status = 'Running';
+          icon = '../../assets/truck-dir.png';
+        }
+        var currentlocation;
+          var latlong = new google.maps.LatLng(item.latitude, item.longitude);
+          // geocoder.geocode({ 'location': latlong }, function (res, status) {
+          //   //   var r = []
+          //     if (status == 'OK') {
+                // currentlocation = res[0].address_components[2].long_name;
+                // $this.currentlocation = currentlocation;
+                // console.log($this.currentlocation);
+                // r.push({'VIN': item['vin'], 'Driver Name': item['personName'], 'Location': $this.currentlocation,'Status': status});
+                // console.log(r);
+                // $this.trucksInfo.push(r);
+            //   }
+            // });
+            // console.log($this.trucksInfo);
+            this.trucksInfo.push({'VIN': item['vin'], 'Driver Name': item['personName'], 'Status': status});
+      }
+  }
+                this.columns = Object.keys($this.trucksInfo[0]);
+                // this.columns.splice(0, 1);
+                this.itemResource = new DataTableResource($this.trucksInfo);
+                this.itemResource.count().then((count: any) => this.itemCount = count);
+                this.reloadItems(this.param);
+  
+}
 
   reloadItems(params: any) {
     this.itemResource.query(params).then((items: any) => this.items = items);
@@ -1177,75 +1245,77 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   }
 
   rowClick(event) {
-    this.showmap = true;
-    var mapOptions;
-    var map;
-     var startloc = event.row.item['Start Address'];
-     var endloc = event.row.item['End Address'];
-     var startlatitude;
-     var startlongitude;
-     var endlatitude;
-     var endlongitude;
-     var geocoder = new google.maps.Geocoder();
-     var startinfoWindow = new google.maps.InfoWindow();
-     var endinfoWindow = new google.maps.InfoWindow();
-     var bounds = new google.maps.LatLngBounds();
-     geocoder.geocode({ 'address': startloc }, function (res, status) {
-      if (status == 'OK') {
-        startlatitude =  res[0].geometry.location.lat();
-        startlongitude = res[0].geometry.location.lng();
-        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
-        mapOptions = {
-          center: new google.maps.LatLng(startlatitude, startlongitude),
-          zoom: 9,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      map = new google.maps.Map(document.getElementById("smallmap"),
-      mapOptions);
-      var startmarker = new google.maps.Marker({
-        position: new google.maps.LatLng(startlatitude, startlongitude),
-        map: map,
-        // title: data[i].title
-      });
-      // bounds.extend(latLng);
-      var contentString = '<div id="content">'+
-        '<div id="siteNotice" style="color:black">'+ 'Start Point'
-        '</div>'+
-        '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
-        '</div>';
-      startinfoWindow = new google.maps.InfoWindow({
-         content: contentString
-      });
-      startinfoWindow.open(map, startmarker);
-      }
-    });
-    geocoder.geocode({ 'address': endloc }, function (res, status) {
-      if (status == 'OK') {
-        endlatitude =  res[0].geometry.location.lat();
-        endlongitude = res[0].geometry.location.lng();
-        // var latlong1 = new google.maps.LatLng(endlatitude, endlongitude);
-        var endmarker = new google.maps.Marker({
-        position: new google.maps.LatLng(endlatitude, endlongitude),
-        map: map,
-        // title: data[i].title
-      });
-      // bounds.extend(latlong1);
-      var contentString1 = '<div id="content">'+
-        '<div id="siteNotice" style="color:black">'+ 'End Point'
-        '</div>'+
-        '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
-        '</div>';
-      startinfoWindow = new google.maps.InfoWindow({
-         content: contentString1
-      });
-      startinfoWindow.open(map, endmarker);
-      }
+    // this.showmap = true;
+    // var mapOptions;
+    // var map;
+    //  var startloc = event.row.item['Start Address'];
+    //  var endloc = event.row.item['End Address'];
+    //  var startlatitude;
+    //  var startlongitude;
+    //  var endlatitude;
+    //  var endlongitude;
+    //  var geocoder = new google.maps.Geocoder();
+    //  var startinfoWindow = new google.maps.InfoWindow();
+    //  var endinfoWindow = new google.maps.InfoWindow();
+    //  var bounds = new google.maps.LatLngBounds();
+    //  geocoder.geocode({ 'address': startloc }, function (res, status) {
+    //   if (status == 'OK') {
+    //     startlatitude =  res[0].geometry.location.lat();
+    //     startlongitude = res[0].geometry.location.lng();
+    //     var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+    //     mapOptions = {
+    //       center: new google.maps.LatLng(startlatitude, startlongitude),
+    //       zoom: 9,
+    //       mapTypeId: google.maps.MapTypeId.ROADMAP
+    //   };
+    //   map = new google.maps.Map(document.getElementById("smallmap"),
+    //   mapOptions);
+    //   var startmarker = new google.maps.Marker({
+    //     position: new google.maps.LatLng(startlatitude, startlongitude),
+    //     map: map,
+    //     // title: data[i].title
+    //   });
+    //   // bounds.extend(latLng);
+    //   var contentString = '<div id="content">'+
+    //     '<div id="siteNotice" style="color:black">'+ 'Start Point'
+    //     '</div>'+
+    //     '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
+    //     '</div>';
+    //   startinfoWindow = new google.maps.InfoWindow({
+    //      content: contentString
+    //   });
+    //   startinfoWindow.open(map, startmarker);
+    //   }
+    // });
+    // geocoder.geocode({ 'address': endloc }, function (res, status) {
+    //   if (status == 'OK') {
+    //     endlatitude =  res[0].geometry.location.lat();
+    //     endlongitude = res[0].geometry.location.lng();
+    //     // var latlong1 = new google.maps.LatLng(endlatitude, endlongitude);
+    //     var endmarker = new google.maps.Marker({
+    //     position: new google.maps.LatLng(endlatitude, endlongitude),
+    //     map: map,
+    //     // title: data[i].title
+    //   });
+    //   // bounds.extend(latlong1);
+    //   var contentString1 = '<div id="content">'+
+    //     '<div id="siteNotice" style="color:black">'+ 'End Point'
+    //     '</div>'+
+    //     '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
+    //     '</div>';
+    //   startinfoWindow = new google.maps.InfoWindow({
+    //      content: contentString1
+    //   });
+    //   startinfoWindow.open(map, endmarker);
+    //   }
 
-    });
+    // });
   }
 
   close() {
     this.showmap = false;
+    this.minimapshow = false;
+    this.truckmapshow = false;
   }
 
   getidleArrayMelInfo() {
@@ -1355,7 +1425,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.HBArray = [];
     this.ACCArray = [];
     this.databotService.getalertArrayMelinfoByDates(fromdate, todate).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
@@ -1394,7 +1464,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
     this.HBArray = [];
     this.ACCArray = [];
     this.databotService.getalertArrayinfoByDates(searchfromdate, searchtodate).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
@@ -1436,6 +1506,93 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   //     });
   //   });
   // }
+
+  rowDTClick(event) {
+    var mapOptions;
+    var map;
+     var lat  = event['lat'];
+     var long = event['long'];
+     this.minimapshow = true;
+     var latLng = new google.maps.LatLng(lat, long);
+     var geocoder = new google.maps.Geocoder();
+     geocoder.geocode({ 'location': latLng }, function (res, status) {
+      if (status == 'OK') {
+        mapOptions = {
+          center: new google.maps.LatLng(lat, long),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("minimap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, long),
+        map: map,
+        // title: data[i].title
+      });
+    }else {
+
+          }
+    });
+  }
+
+  IdlerowClick(event) {
+    this.showmap = true;
+    var startlatitude;
+    var startlongitude;
+    var mapOptions;
+    var map;
+     var startloc = event.row.item['Location'];
+     var geocoder = new google.maps.Geocoder();
+     geocoder.geocode({ 'address': startloc }, function (res, status) {
+      if (status == 'OK') {
+        startlatitude =  res[0].geometry.location.lat();
+        startlongitude = res[0].geometry.location.lng();
+        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+        mapOptions = {
+          center: new google.maps.LatLng(startlatitude, startlongitude),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("smallmap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(startlatitude, startlongitude),
+        map: map,
+        // title: data[i].title
+      });
+    }else {
+
+          }
+    });
+  }
+
+  TruckInfo(item) {
+    this.truckmapshow = true;
+    var mapOptions;
+    var map;
+     var lat  = item['lat'];
+     var long = item['long'];
+     this.minimapshow = true;
+     var latLng = new google.maps.LatLng(lat, long);
+     var geocoder = new google.maps.Geocoder();
+     geocoder.geocode({ 'location': latLng }, function (res, status) {
+      if (status == 'OK') {
+        mapOptions = {
+          center: new google.maps.LatLng(lat, long),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("truckminimap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, long),
+        map: map,
+        // title: data[i].title
+      });
+      }
+    });
+        
+  }
 
 }
 

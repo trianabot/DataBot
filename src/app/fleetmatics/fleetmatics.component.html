@@ -469,8 +469,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal5">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-5.png"><br>
-                            <span>Drive Time</span><br>
-                            <span class="f-s-10">(DD HH MM)</span>
+                            <span class="txt-fs">Drive Time</span><br>
+                            <span class="txt-fs1">(DD HH MM)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -485,8 +485,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal4">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-2.png"><br>
-                            <span>Idle Time</span><br>
-                            <span class="f-s-10">(DD HH MM)</span>
+                            <span class="txt-fs">Idle Time</span><br>
+                            <span class="txt-fs1">(DD HH MM)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -501,8 +501,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal3">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-7.png"><br>
-                            <span>Stop Time</span><br>
-                            <span class="f-s-10">(DD HH MM)</span>
+                            <span class="txt-fs">Stop Time</span><br>
+                            <span class="txt-fs1">(DD HH MM)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -517,8 +517,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal5">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-1.png"><br>
-                            <span>Total Miles</span><br>
-                            <span class="f-s-10">(Miles)</span>
+                            <span class="txt-fs">Total Miles</span><br>
+                            <span class="txt-fs1">(Miles)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -531,8 +531,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal5">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-6.png"><br>
-                            <span>Total Trips</span><br>
-                            <span class="f-s-10">(Incidents)</span>
+                            <span class="txt-fs">Total Trips</span><br>
+                            <span class="txt-fs1">(Incidents)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -545,8 +545,8 @@
                     <div class="a-r pointer" data-toggle="modal" data-target="#myModal6">
                         <div class="row m-0 p-25 p-b">
                             <img src="../../assets/nw-icon-3.png"><br>
-                            <span>Total Alerts</span><br>
-                            <span class="f-s-10">(Incidents)</span>
+                            <span class="txt-fs">Total Alerts</span><br>
+                            <span class="txt-fs1">(Incidents)</span>
                         </div>
                         <div class="row m-0">
                             <div class="col-md-12 p-10">
@@ -563,7 +563,7 @@
                     <div class="col-md-10 padding0">
                         Live Tracker
                     </div>
-                    <div class="col-md-2 padding0">
+                    <div class="col-md-2 p-2">
                         <div class="col-md-12 padding0">
                                 <div class="col-md-9 padding0">
                                         <button class="btn btn-success" (click)="loadRoute()">Route Replay</button>
@@ -648,7 +648,7 @@
             </div>
 
         </div>
-        <div class="col-md-3 padding0 w-20">
+        <div class="col-md-3 padding0 w-20 m-l-2">
             <div class="row m-0 t-b tc-ta">
                 <!-- <div class="col-md-12 padding0 p-2">
                     <span>Will Taylor</span>
@@ -878,8 +878,8 @@
                     <h4 class="modal-title">Stops Info</h4>
                 </div>
                 <div class="modal-body">
-                    <data-table id="persons-grid" headerTitle="" [items]="stopitems" [itemCount]="stopitemCount"
-                        (reload)="stopreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                    <data-table id="persons-grid" class="cursor" headerTitle="" [items]="stopitems" [itemCount]="stopitemCount"
+                        (reload)="stopreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowStopClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of stopColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -903,8 +903,8 @@
                     <h4 class="modal-title">Idle Info</h4>
                 </div>
                 <div class="modal-body">
-                    <data-table id="persons-grid" headerTitle="" [items]="idleitems" [itemCount]="idleitemCount"
-                        (reload)="idlereloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                    <data-table id="persons-grid" class="cursor" headerTitle="" [items]="idleitems" [itemCount]="idleitemCount"
+                        (reload)="idlereloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowIdleClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of idleColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -928,8 +928,8 @@
                     <h4 class="modal-title">Trip Info</h4>
                 </div>
                 <div class="modal-body">
-                    <data-table id="persons-grid" headerTitle="" [items]="tripitems" [itemCount]="tripitemCount"
-                        (reload)="tripreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowClick($event)"
+                    <data-table id="persons-grid" class="cursor" headerTitle="" [items]="tripitems" [itemCount]="tripitemCount"
+                        (reload)="tripreloadItems($event)" [pagination]="false" [pageLimits]="pagelimits" [limit]="10" (rowClick)="rowDTClick($event)"
                         (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
                         <data-table-column *ngFor="let col of tripColumns; let i = index" [visible]="(i<8)?true:false"
                             [property]='col' [header]='col' [sortable]="true" [resizable]="true">
@@ -986,5 +986,57 @@
 
         </div>
     </div>
+
+    <div class="modal-map" *ngIf="minimapshow">
+        <div class="row">
+             <div class="col-md-6">
+                  <span></span>
+             </div>
+             <div class="col-md-6 txt-r">
+               <div (click)="close()"><i class="fa fa-times cursor m-r-10" aria-hidden="true"></i></div>
+             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                   <div id="minimap">
+
+                   </div>
+            </div>
+        </div>
+   </div>
+   <div class="modal-map" *ngIf="idleminimapshow">
+    <div class="row">
+         <div class="col-md-6">
+              <span></span>
+         </div>
+         <div class="col-md-6 txt-r">
+           <div (click)="close()"><i class="fa fa-times cursor m-r-10" aria-hidden="true"></i></div>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+               <div id="idleminimap">
+
+               </div>
+        </div>
+    </div>
+</div>
+<div class="modal-map" *ngIf="stopminimapshow">
+    <div class="row">
+         <div class="col-md-6">
+              <span></span>
+         </div>
+         <div class="col-md-6 txt-r">
+           <div (click)="close()"><i class="fa fa-times cursor m-r-10" aria-hidden="true"></i></div>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+               <div id="stopminimap">
+
+               </div>
+        </div>
+    </div>
+</div>
 
 </div>

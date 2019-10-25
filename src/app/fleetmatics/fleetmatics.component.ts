@@ -219,6 +219,11 @@ export class FleetmaticsComponent implements OnInit {
   idlingtimeDaysFormat: any;
   stoptimeDaysFormat: any;
   alerts: any;
+  minimapshow = false;
+  idleminimapshow = false;
+  idleminimap: any;
+  stopminimap: any;
+  stopminimapshow = false;
 
   constructor(public databotService: DatabotService, private route: ActivatedRoute) {
     if (localStorage.getItem('username') == 'melrosepark' || localStorage.getItem('username') == 'Melrosepark') {
@@ -1391,7 +1396,7 @@ export class FleetmaticsComponent implements OnInit {
         var size;
         if(item['personName'] == this.driver) {
           this.map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
+            zoom: 15,
             center: new google.maps.LatLng(item.latitude, item.longitude),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false,
@@ -1784,13 +1789,14 @@ Stop(acc) {
       var momentString = momentObj.format('MMM DD, YYYY');
       if (stops[item]['deviceNbr'] == this.imei && (stops[item]['stopType'] == 'Engine Off')) {
         $this.stoptime = $this.stoptime + stops[item]['duration'];
+        let duration = stops[item]['duration'];
         let stoptime = moment(stops[item]['beginDate']).format('hh:mm:ss');
         let tripId = stops[item]['id'];
         let tripStart = moment(stops[item]['beginDate']).format('YYYY-MM-DD hh:mm:ss A');
         let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
-        let location = stops[item]['street'] + stops[item]['city'] + stops[item]['countryCode'];
+        let location = stops[item]['street'] + ',' + stops[item]['city'] + ',' + stops[item]['stateCode'] + ',' + stops[item]['countryCode'] + ',' + stops[item]['postalCode'] ;
         let stoptype = stops[item]['stopType'];
-        this.stopArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd, 'Location': location, 'Stop Type': stoptype});
+        this.stopArray.push({'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
         this.stopidletime.push(stoptime);
         this.stopmins.push(stops[item]['duration']);
         this.StopChart();
@@ -1808,9 +1814,9 @@ Stop(acc) {
         let tripId = stops[item]['id'];
         let tripStart = moment(stops[item]['beginDate']).format('YYYY-MM-DD  hh:mm:ss A');
         let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
-        let location = stops[item]['street'] + stops[item]['city'] + stops[item]['countryCode'];
+        let location = stops[item]['street'] + ',' + stops[item]['city'] + ',' + stops[item]['stateCode'] + ',' + stops[item]['countryCode'] + ',' + stops[item]['postalCode'] ;
         let stoptype = stops[item]['stopType'];
-        this.idleArray.push({'Trip Id': tripId, 'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+        this.idleArray.push({'Trip Start': tripStart, 'Trip End': tripEnd, 'Duration': duration, 'Location': location, 'Stop Type': stoptype});
         this.IdleChart();
 
         this.idleColumns = Object.keys(this.idleArray[0]);
@@ -1893,7 +1899,7 @@ Stop(acc) {
         this.mile.push(item['authorizedMiles']);
         this.unauthorizedMile.push(item['unauthorizedMiles']);
         this.trip.push(this.totaltrips);
-        this.tripArray.push({'Start Time': startTime, 'Start Address': item['startAddress'], 'End Time': endTime, 'End Address': item['endAddress'], 'Duration': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
+        this.tripArray.push({'Start Time': startTime,'End Time': endTime, 'Start Address': item['startAddress'],  'End Address': item['endAddress'], 'Duration(Mins)': item['durationMinutes'], 'Authorized Miles': item['authorizedMiles'], 'Total Miles': item['distanceMiles']});
         
         this.tripColumns = Object.keys(this.tripArray[0]);
         // this.columns.splice(0, 1);
@@ -1942,7 +1948,6 @@ Stop(acc) {
     this.databotService.getVehicleRouteLocations(this.getParams(), this.imei).subscribe(data => {
         this.locations = data['data']['locations'];
         this.driver = this.locations[0]['personName'];
-        console.log(this.driver);
         // this.loadRoute(this.locations);
         // this.loadRoute();
     });
@@ -1965,7 +1970,7 @@ Stop(acc) {
     var centerLatlng = new google.maps.LatLng(routes[Math.round(this.locations.length/2)]);
       
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
+        zoom: 14,
         center: centerLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -2099,5 +2104,100 @@ Stop(acc) {
   tripreloadItems(params: any) {
     this.tripitemResource.query(params).then((items: any) => this.tripitems = items);
   }
+
+  close() {
+    this.minimapshow = false;
+    this.idleminimapshow = false;
+    this.stopminimapshow = false;
+  }
+
+  rowDTClick(event) {
+    this.minimapshow = true;
+    var startloc = event.row.item['Start Address'];
+     var endloc = event.row.item['End Address'];
+     var geocoder = new google.maps.Geocoder();
+     var startlatitude;
+     var startlongitude;
+     var mapOptions;
+     var map;
+     geocoder.geocode({ 'address': startloc}, function (res, status) {
+      if (status == 'OK') {
+        startlatitude =  res[0].geometry.location.lat();
+        startlongitude = res[0].geometry.location.lng();
+        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+        mapOptions = {
+          center: new google.maps.LatLng(startlatitude, startlongitude),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("minimap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(startlatitude, startlongitude),
+        map: map,
+        // title: data[i].title
+      });
+      }
+    });
+  }
+
+  rowIdleClick(event) {
+    this.idleminimapshow = true;
+    var loc = event.row.item['Location'];
+    var geocoder = new google.maps.Geocoder();
+     var startlatitude;
+     var startlongitude;
+     var mapOptions;
+     var map;
+     geocoder.geocode({ 'address': loc}, function (res, status) {
+      if (status == 'OK') {
+        startlatitude =  res[0].geometry.location.lat();
+        startlongitude = res[0].geometry.location.lng();
+        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+        mapOptions = {
+          center: new google.maps.LatLng(startlatitude, startlongitude),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("idleminimap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(startlatitude, startlongitude),
+        map: map,
+        // title: data[i].title
+      });
+      }
+    });
+  }
+
+  rowStopClick(event) {
+    this.stopminimapshow = true;
+    var loc = event.row.item['Location'];
+    var geocoder = new google.maps.Geocoder();
+     var startlatitude;
+     var startlongitude;
+     var mapOptions;
+     var map;
+     geocoder.geocode({ 'address': loc}, function (res, status) {
+      if (status == 'OK') {
+        startlatitude =  res[0].geometry.location.lat();
+        startlongitude = res[0].geometry.location.lng();
+        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+        mapOptions = {
+          center: new google.maps.LatLng(startlatitude, startlongitude),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("stopminimap"),
+      mapOptions);
+      var startmarker = new google.maps.Marker({
+        position: new google.maps.LatLng(startlatitude, startlongitude),
+        map: map,
+        // title: data[i].title
+      });
+      }
+    });
+  }
+
 
 }

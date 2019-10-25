@@ -28,6 +28,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   showProduction: boolean = false;
   showHealthAnalysis: boolean = false;
   showmatics: boolean = false;
+  username: any;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     //   var reportCase1 = sessionStorage.getItem('reportusecase');
@@ -40,6 +41,12 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     // //console.log("Usecase", reportusecase);
     // this.redirect(reportusecase);
     // this.showfleetManagment = false;    
+    this.username = localStorage.getItem('username');
+    if(this.username == 'melrosepark') {
+      this.showfleetManagment = true;
+    }else{
+      this.showfleetManagment = false;
+    }
   }
 
   ngOnChanges() {

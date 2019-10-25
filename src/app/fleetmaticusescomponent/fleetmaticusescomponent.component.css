@@ -426,6 +426,16 @@ background: #0B3453;
   width: 35px;
   margin-bottom: 10px;
 }
+.spn-l {
+    margin: 8px 0px 0px 20px;
+    display: block;
+}
+.txt-fs {
+  font-size: 15px;
+}
+.txt-fs1 {
+  font-size: 13px;
+}
 
 /* input[type="date"]::before {
 	color: #999999;
@@ -451,7 +461,12 @@ input[type="date"]:valid::before {
 .inp {
   width: 100%;
 }
-
+@media screen and (max-width:1920px){
+  #map{
+    height:627px;
+    width:100%;
+    }
+}
 @media screen and (max-width:1366px){
   
 }
@@ -518,10 +533,21 @@ input[type="date"]:valid::before {
   height:300px;
   width:100%;  
 }
+#minimap {
+  height:300px;
+  width:100%;  
+}
+#truckminimap {
+  height:300px;
+  width:100%; 
+}
 .txt-r {
   text-align: right;
 }
 
 .cursor {
   cursor: pointer;
+}
+.m-r-10 {
+  margin-right: 10px;
 }
