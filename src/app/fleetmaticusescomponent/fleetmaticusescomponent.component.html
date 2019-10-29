@@ -407,33 +407,35 @@
                     </div>
                     <div class="modal-body">
                         <div class="row b-gray text-color">
-                              <div class="col-md-3 p-5 t-a">
+                              <div class="col-md-3 p-8 t-a">
                                    Driver
                               </div>
-                            <div class="col-md-3 p-5 t-a">
+                            <div class="col-md-3 p-8 t-a">
                                    VIN
                             </div>
-                            <div class="col-md-3 p-5 t-a">
+                            <div class="col-md-3 p-8 t-a">
                                     Speed
                              </div>
-                            <div class="col-md-3 p-5 t-a">
+                            <div class="col-md-3 p-8 t-a">
                                    Status
                             </div>
                             </div>
                             <div class="row b-b cursor" style="height:600px;overflow-y:scroll">
-                                <div class="col-md-12 padding0" *ngFor="let item of vehicleTrackerInfo" (click)="OnTripRoute(item)" data-dismiss="modal">
-                                    <div class="col-md-3 p-5 t-a">
+                                <div class="col-md-12 padding0" *ngFor="let item of vehicleTrackerInfo;let i=index" (click)="OnTripRoute(item)" data-dismiss="modal">
+                                    <div class="col-md-12 padding0" [ngStyle]="{'background-color':getColor(i)}">
+                                    <div class="col-md-3 p-8 t-a">
                                         {{item.Driver}}
                                     </div>
-                                    <div class="col-md-3 p-5 t-a">
+                                    <div class="col-md-3 p-8 t-a">
                                         {{item.VIN}}
                                     </div>
-                                    <div class="col-md-3 p-5 t-a">
+                                    <div class="col-md-3 p-8 t-a">
                                         {{item.Speed}}MPH S
                                     </div>
-                                    <div class="col-md-3 p-5 t-a">
+                                    <div class="col-md-3 p-8 t-a">
                                         {{item.Status}} &nbsp; <img class="wd-10" src="{{item.icon}}">
                                     </div>
+                                   </div>
                                 </div>
                             </div>
                             <hr>
@@ -452,7 +454,7 @@
         <div class="modal fade" id="myModal1" role="dialog">
             <div class="modal-dialog">
     
-                <div class="modal-content">
+                <div class="modal-content w-70">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Trucks Info</h4>
@@ -466,27 +468,29 @@
                         </data-table-column>
                     </data-table> -->
                     <div class="row b-gray text-color">
-                        <div class="col-md-4 p-5 t-a">
+                        <div class="col-md-4 p-8 t-a">
                              Driver Name
                         </div>
-                      <div class="col-md-4 p-5 t-a">
+                      <div class="col-md-4 p-8 t-a">
                              VIN
                       </div>
-                      <div class="col-md-4 p-5 t-a">
+                      <div class="col-md-4 p-8 t-a">
                              Status
                       </div>
                       </div>
                       <div class="row b-b cursor" style="height:600px;overflow-y:scroll">
-                          <div class="col-md-12 padding0" *ngFor="let item of vehicleTrackerInfo" (click)="TruckInfo(item)">
-                              <div class="col-md-4 p-5 t-a">
+                          <div class="col-md-12 padding0" *ngFor="let item of vehicleTrackerInfo; let i=index" (click)="TruckInfo(item)">
+                              <div class="col-md-12 padding0" [ngStyle]="{'background-color':getColor(i)}">
+                              <div class="col-md-4 p-8 t-a">
                                   {{item.Driver}}
                               </div>
-                              <div class="col-md-4 p-5 t-a">
+                              <div class="col-md-4 p-8 t-a">
                                   {{item.VIN}}
                               </div>
-                              <div class="col-md-4 p-5 t-a">
+                              <div class="col-md-4 p-8 t-a">
                                   {{item.Status}}
                               </div>
+                            </div>
                           </div>
                       </div>
                       <hr>
@@ -503,7 +507,7 @@
         <div class="modal fade" id="myModal2" role="dialog">
             <div class="modal-dialog">
     
-                <div class="modal-content">
+                <div class="modal-content w-70">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Travelled Info</h4>
@@ -517,33 +521,35 @@
                         </data-table-column>
                     </data-table> -->
                     <div class="row b-gray text-color">
-                        <div class="col-md-3 p-5 t-a">
+                        <div class="col-md-3 p-8 t-a">
                              Driver
                         </div>
-                      <div class="col-md-3 p-5 t-a">
+                      <div class="col-md-3 p-8 t-a">
                              VIN
                       </div>
-                      <div class="col-md-3 p-5 t-a">
+                      <div class="col-md-3 p-8 t-a">
                               Speed
                        </div>
-                      <div class="col-md-3 p-5 t-a">
+                      <div class="col-md-3 p-8 t-a">
                              Heading
                       </div>
                       </div>
-                  <div class="row b-b cursor" *ngFor="let item of onTripTrucksArray">
-                     <div class="col-md-3 p-5 t-a" (click)="rowDTClick(item)">
+                  <div class="row b-b cursor" *ngFor="let item of onTripTrucksArray; let i=index">
+                      <div class="col-md-12 padding0" [ngStyle]="{'background-color':getColor(i)}">
+                     <div class="col-md-3 p-8 t-a" (click)="rowDTClick(item)">
                           {{item.Driver}}
                      </div>
-                     <div class="col-md-3 p-5 t-a" (click)="rowDTClick(item)">
+                     <div class="col-md-3 p-8 t-a" (click)="rowDTClick(item)">
                           {{item.VIN}}
                      </div>
-                     <div class="col-md-3 p-5 t-a" (click)="rowDTClick(item)">
+                     <div class="col-md-3 p-8 t-a" (click)="rowDTClick(item)">
                           {{item.speed}}
                      </div>
-                     <div class="col-md-3 p-5 t-a" (click)="rowDTClick(item)">
+                     <div class="col-md-3 p-8 t-a" (click)="rowDTClick(item)">
                           <img class="wd-10" src="{{item.icon}}">
                      </div>
-                  </div><hr>
+                  </div>
+                    </div><hr>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

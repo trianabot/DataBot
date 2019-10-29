@@ -1670,7 +1670,6 @@ export class FleetmaticsComponent implements OnInit {
       // this.harshevents = new Chart(this.harshEventsOptions);
       this.HarshEvents(this.todayAcceleration, this.todayBraking, this.highSpeed);
       let score = (this.todayAcceleration+this.todayBraking+this.highSpeed);
-      // console.log(score);
       this.behaviourCard(score);
       this.speedCard(this.highSpeed);
     });
@@ -1796,7 +1795,7 @@ Stop(acc) {
         let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
         let location = stops[item]['street'] + ',' + stops[item]['city'] + ',' + stops[item]['stateCode'] + ',' + stops[item]['countryCode'] + ',' + stops[item]['postalCode'] ;
         let stoptype = stops[item]['stopType'];
-        this.stopArray.push({'Trip Start': tripStart, 'Trip End': tripEnd,'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+        this.stopArray.push({'Trip Start': tripStart, 'Trip End': tripEnd,'Duration (Mins)': duration, 'Location': location, 'Stop Type': stoptype});
         this.stopidletime.push(stoptime);
         this.stopmins.push(stops[item]['duration']);
         this.StopChart();
@@ -1816,7 +1815,7 @@ Stop(acc) {
         let tripEnd = moment(stops[item]['endDate']).format('YYYY-MM-DD hh:mm:ss A');
         let location = stops[item]['street'] + ',' + stops[item]['city'] + ',' + stops[item]['stateCode'] + ',' + stops[item]['countryCode'] + ',' + stops[item]['postalCode'] ;
         let stoptype = stops[item]['stopType'];
-        this.idleArray.push({'Trip Start': tripStart, 'Trip End': tripEnd, 'Duration': duration, 'Location': location, 'Stop Type': stoptype});
+        this.idleArray.push({'Trip Start': tripStart, 'Trip End': tripEnd, 'Duration (Mins)': duration, 'Location': location, 'Stop Type': stoptype});
         this.IdleChart();
 
         this.idleColumns = Object.keys(this.idleArray[0]);
@@ -2113,32 +2112,44 @@ Stop(acc) {
 
   rowDTClick(event) {
     this.minimapshow = true;
+    var locArray = [];
     var startloc = event.row.item['Start Address'];
-     var endloc = event.row.item['End Address'];
+    var endloc = event.row.item['End Address'];
+     locArray.push(startloc, endloc);
      var geocoder = new google.maps.Geocoder();
      var startlatitude;
      var startlongitude;
      var mapOptions;
      var map;
-     geocoder.geocode({ 'address': startloc}, function (res, status) {
-      if (status == 'OK') {
-        startlatitude =  res[0].geometry.location.lat();
-        startlongitude = res[0].geometry.location.lng();
-        var latLng = new google.maps.LatLng(startlatitude, startlongitude);
-        mapOptions = {
-          center: new google.maps.LatLng(startlatitude, startlongitude),
-          zoom: 18,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      map = new google.maps.Map(document.getElementById("minimap"),
-      mapOptions);
-      var startmarker = new google.maps.Marker({
-        position: new google.maps.LatLng(startlatitude, startlongitude),
-        map: map,
-        // title: data[i].title
+     
+       geocoder.geocode({ 'address': startloc}, function (res, status) {
+        if (status == 'OK') {
+          startlatitude =  res[0].geometry.location.lat();
+          startlongitude = res[0].geometry.location.lng();
+          var latLng = new google.maps.LatLng(startlatitude, startlongitude);
+          mapOptions = {
+            center: new google.maps.LatLng(startlatitude, startlongitude),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("minimap"),
+        mapOptions);
+        for(let item of locArray) {
+          geocoder.geocode({ 'address': item}, function (res, status) {
+            if (status == 'OK') {
+              startlatitude =  res[0].geometry.location.lat();
+              startlongitude = res[0].geometry.location.lng();
+              var startmarker = new google.maps.Marker({
+                position: new google.maps.LatLng(startlatitude, startlongitude),
+                map: map,
+                // title: data[i].title
+              });
+            }
+          });
+        }
+        }
       });
-      }
-    });
+     
   }
 
   rowIdleClick(event) {

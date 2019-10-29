@@ -1594,5 +1594,14 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         
   }
 
+  getColor(i){
+    if (i % 2 === 0){i = 'odd';}
+    // if (this.vehicleTrackerInfo && (this.vehicleTrackerInfo.length - 1 === i)) {i = 'last'}
+    switch (i) {
+      case i = 1 : return '#FFFFFF';
+      case i = 'odd' : return '#F6F6F6';
+    }
+  }
+
 }
 
