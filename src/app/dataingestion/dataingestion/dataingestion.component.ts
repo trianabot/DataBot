@@ -197,14 +197,14 @@ export class DataingestionComponent implements OnInit {
     this.newkey = event;
     this.selectednew = n;
     // console.log(this.finalcollection);
-    this.tablekeys.push({ csvkey: this.originalkey, newkey: this.newkey });
-    this.changeKey(this.originalkey, this.newkey, this.result);
+    // this.tablekeys.push({ csvkey: this.originalkey, newkey: this.newkey });
+    // this.changeKey(this.originalkey, this.newkey, this.result);
     // this.newkeys = this.newkeys.filter(item => item !== this.newkey);
     // console.log(this.newkeys);
   }
   Add() {
-    // this.tablekeys.push({ csvkey: this.originalkey, newkey: this.newkey });
-    // this.changeKey(this.originalkey, this.newkey, this.result);
+    this.tablekeys.push({ csvkey: this.originalkey, newkey: this.newkey });
+    this.changeKey(this.originalkey, this.newkey, this.result);
   }
   delete(item) {
 
