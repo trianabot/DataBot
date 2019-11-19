@@ -4,6 +4,49 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 
 
+export interface Todo {
+  // title: string;
+  // description: string;
+  // done: boolean;
+
+  
+  imei: string
+  deviceUUID: string
+  driverId            : string
+  firstName            : string
+  lastName              : string
+  personName            : string
+  assetTracker           : string
+  deviceReportTypeCode    : string
+  latitude                : string    
+  longitude               : string 
+  heading                 : string 
+  appDriverId             : string 
+  appDriverName           : string       
+  date                    : string
+  editDate                : string     
+  speed                   : string     
+  speeding                : string       
+  behaviorCd              : string      
+  estSpeedLimit           : string      
+  fleetId                 : string   
+  personMisc4             : string 
+  personMisc5             : string   
+  personMisc6             : string     
+  personMisc7             : string    
+  personMisc8             : string     
+  vin                     : string  
+  make                    : string      
+  model                   : string        
+  year                    : string        
+  fuelLevel               : string     
+  battery                 : string       
+  direction               : string        
+  trueOdo                 : string        
+  virtualOdo              : string         
+  sensorData              : string              
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +54,9 @@ export class DatabotService {
   private apiendpoint = environment.apiEndPoint;
   private linxupEndpoint = environment.linxupEndPoint;
   private linxupApiEndpoint = environment.linxupApiEndPoint;
+  private linxupDB = environment.linxupDBEndPoint;
+  private getCollections = '/linxup/dbcollections';
+  private postData = '/linxup/locations';
 
   constructor(public http: HttpClient) { }
 
@@ -246,6 +292,19 @@ export class DatabotService {
 
   getEachDriverInfo(driver, fromdate, todate) {
     return this.http.get('http://13.71.1.239:5000/screen2/' + driver + '/' + fromdate + '/' + todate );
+  }
+
+  getDBCollections() {
+    return this.http.get(this.linxupDB + this.getCollections);
+  }
+
+  postDBCollections(body) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(this.linxupDB + '/linxup/locations' , body, httpOptions);
   }
 
 }

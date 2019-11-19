@@ -290,7 +290,7 @@
                                             <span class="float-left txt-fs">Idling</span><br>
                                             <span class="f-s-10 txt-fs1">(Incidents)</span><br>
                                             <button class="p-31 m-t-10"><span
-                                                    class="f-s-22 float-left">{{(flaskinfo?.Idling!=null) ? flaskinfo?.Idling : '- -'}}</span></button>
+                                                    class="f-s-22 float-left">{{(metadata?.Idling!=null) ? metadata?.Idling : '- -'}}</span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -314,7 +314,7 @@
                                             <span class=" float-left txt-fs">Speeding</span><br>
                                             <span class="f-s-10 txt-fs1">(Incidents)</span><br>
                                             <button class="p-30 m-t-10"><span
-                                                    class="f-s-22 float-left">{{(flaskinfo?.HIGH_SPEED!=null) ? flaskinfo?.HIGH_SPEED : '- -'}}</span></button>
+                                                    class="f-s-22 float-left">{{metadata['High Speed']}}</span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -339,7 +339,7 @@
                                             <span class="float-left txt-fs">Harsh Braking</span><br>
                                             <span class="f-s-10 txt-fs1">(Incidents)</span><br>
                                             <button class="p-30 m-t-10"><span class="f-s-22">
-                                                    {{(flaskinfo?.HARSH_BRAKING!=null) ? flaskinfo?.HARSH_BRAKING : '- -'}} </span></button>
+                                                    {{metadata['Harsh Breaking']}} </span></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -362,7 +362,7 @@
                                             <span class="float-left txt-fs">Acceleration</span><br>
                                             <span class="f-s-10 txt-fs1">(Incidents)</span><br>
                                             <button class="p-31 m-t-10"><span
-                                                    class="f-s-22">{{(flaskinfo?.RAPID_ACCELERATION!=null) ? flaskinfo?.RAPID_ACCELERATION : '- -'}}</span></button>
+                                                    class="f-s-22">{{metadata['Rapid Acceleration']}}</span></button>
                                         </li>
                                     </ul>
                                 </div>

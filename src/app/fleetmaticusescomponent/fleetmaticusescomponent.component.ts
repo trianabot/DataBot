@@ -134,6 +134,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
   minimapshow = false;
   currentlocation: any;
   truckmapshow = false;
+  metadata: any;
 
   constructor(public databotService: DatabotService, private router: Router) {
     let searchtodate = Date.now();
@@ -1353,6 +1354,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
+        this.metadata = data['Metadata'][0];
         this.speedcolumns = Object.keys(this.speedArray[0]);
         // this.columns.splice(0, 1);
         this.speeditemResource = new DataTableResource(this.speedArray);
@@ -1380,6 +1382,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
+        this.metadata = data['Metadata'][0];
         this.speedcolumns = Object.keys(this.speedArray[0]);
         // this.columns.splice(0, 1);
         this.speeditemResource = new DataTableResource(this.speedArray);
@@ -1429,6 +1432,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
+        this.metadata = data['Metadata'][0];
         this.speedcolumns = Object.keys(this.speedArray[0]);
         // this.columns.splice(0, 1);
         this.speeditemResource = new DataTableResource(this.speedArray);
@@ -1468,6 +1472,7 @@ export class FleetmaticusescomponentComponent implements OnInit, OnDestroy {
         this.speedArray = data['HIGH_SPEED'];
         this.HBArray = data['HARSH_BRAKING'];
         this.ACCArray = data['RAPID_ACCELERATION'];
+        this.metadata = data['Metadata'][0];
         this.speedcolumns = Object.keys(this.speedArray[0]);
         // this.columns.splice(0, 1);
         this.speeditemResource = new DataTableResource(this.speedArray);

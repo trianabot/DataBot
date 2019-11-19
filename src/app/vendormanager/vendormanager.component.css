@@ -120,3 +120,18 @@ th{
 .txt-c {
     color: #ffffff
 }
+
+.float-left{
+    float: left;
+}
+.cursor {
+    cursor: pointer;
+}
+.btn-d {
+    background: #20283d;
+    color: white;
+    margin-left: 15px;
+    padding: 5px;
+    border-radius: 10px;
+
+}
