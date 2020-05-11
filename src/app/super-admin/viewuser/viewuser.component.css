@@ -1,0 +1,27 @@
+.bg-table{
+    background: #252525;
+    height: 35px;
+}
+.bg-tr{
+    background: #f7f7ef;
+    border-bottom: 2px solid #ffffff;
+}
+.odd {
+    background: #CCC;
+  }
+  .th {
+    text-align: center !important;
+    /* padding: 10px !important; */
+  }
+  .txt-w {
+      color: #ffffff;
+  }
+  .w-100 {
+    width: 100%
+  }
+  .m-t {
+      margin-top: 10px;
+  }
+  .cursor {
+      cursor: pointer;
+  }

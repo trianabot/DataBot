@@ -21,6 +21,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
   showreport: boolean = false;
   userId: any;
   showEng: boolean = false;
+  showVender: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.userId = localStorage.getItem('userid');
@@ -57,8 +58,9 @@ export class IndustriesComponent implements OnInit, OnChanges {
     }
   }
 
+
   showUseCase(useCaseType) {
-    
+    console.log(useCaseType)
     this.router.navigate(['/industries'], {
       queryParams: {
         id: null,
@@ -78,6 +80,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showpsephology = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
     else if (useCaseType == 2) {
       this.showHealth = true
@@ -88,6 +91,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showpsephology = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
     else if (useCaseType == 3) {
       this.showManufacturing = true
@@ -98,6 +102,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showpsephology = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
 
     else if (useCaseType == 4) {
@@ -109,6 +114,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showpsephology = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
 
     else if (useCaseType == 5) {
@@ -120,6 +126,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showpsephology = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
     else if (useCaseType == 6) {
       this.showpsephology = true;
@@ -130,6 +137,7 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showTextile = false;
       this.showEng = false;
       this.usecase = true;
+      this.showVender = false;
     }
 
     else if (useCaseType == 7) {
@@ -141,6 +149,18 @@ export class IndustriesComponent implements OnInit, OnChanges {
       this.showManufacturing = false;
       this.showTextile = false;
       this.usecase = true;
+      this.showVender = false;
+    }
+    else if (useCaseType == 10) {
+      this.showEng = false;
+      this.showpsephology = false;
+      this.showEnergy = false;
+      this.show = false
+      this.showHealth = false;
+      this.showManufacturing = false;
+      this.showTextile = false;
+      this.usecase = true;
+      this.showVender = true;
     }
 
   }

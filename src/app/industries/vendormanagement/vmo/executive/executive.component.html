@@ -1,0 +1,248 @@
+<!-- <app-header></app-header> -->
+<div class="container-fluid con" *ngIf="prescreen">
+  <div class="row m-0 family">
+    <div class="col-md-6  padding0">
+      <div class="row m-0">
+        <div class="col-md-12 padding0">
+          <div class="a-r-2 border_box">
+            <div class="row pd-5">
+              <!-- <div class="col-md-12 padding0">
+                  <span class="fs-20 fw  family">SPEND OVERVIEW</span>
+                </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-12 padding0" *ngIf="suppliershow">
+                <div class="row m-t-10">
+                  <div class="col-md-8 padding0 cursor fb m-l-10" (click)="suppTable()">
+                    Current Year Savings Tracker
+                  </div>
+                  <!-- <div class="col-md-4 padding0 m-0 w-current pd-5">
+                      <div class="col-md-12 boeder_left padding0 pd-5 cursor text-center " [ngClass]="{activeclass1: isActiveOverview(1)}" (click)="overview('CommittedAmount_2019', 'Committed',1)">
+                          <span class="pd-5">Annualized</span><span *ngIf="selectedOverview==1"><i class="fa fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </div> -->
+                </div>
+                <div class="row padding0 m-0">
+                  <div class="col-md-12 padding0 chtOverview1" [chart]="ssChart" (click)="CurrentYearSavingsChart()">
+                  </div>
+                </div>
+                <!-- <div class="col-md-1 padding0 pd-9 fb">
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6 padding0">
+      <div class="row  a-r-2 border_box">
+        <div class="col-md-8 padding0 cursor fb m-l-10" (click)="suppTable()">
+          Annualized Savings Tracker
+        </div>
+        <!-- <div class="col-md-4 padding0 m-0 w-current pd-5">
+          <div class="col-md-12 boeder_left padding0 pd-5 cursor text-center " [ngClass]="{activeclass1: isActiveOverview(1)}" (click)="overview('CommittedAmount_2019', 'Committed',1)">
+              <span class="pd-5">2019</span><span *ngIf="selectedOverview==1"><i class="fa fa-check" aria-hidden="true"></i></span>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-md-12 padding0 chtOverview" [chart]="svChart" (click)="AnnualizedYearSavingsChart()"></div>
+        </div>
+      </div>
+      <div class="col-md-12 padding0 m-t-4 a-r-2 border_box">
+        <div class="col-md-8 padding0 cursor fb m-l-10" (click)="suppTable()">
+          Savings Tracker
+        </div>
+        <div class="row padding0 m-0">
+          <div class="col-md-12 padding0 chtOverview" [chart]="scChart" (click)="SavingsChart()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 3px;">
+  <div class="col-md-12 a-r-2 border_box" *ngIf="CurrentYearSavings">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-signal" aria-hidden="true"></i></div>
+          <div><label>Annualized Level 1 Savings: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$23.04M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-signal" aria-hidden="true"></i></div>
+          <div><label>Annualized Level 3 Savings: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$8.2M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Since Nov. 13 Report: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.4M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Accenture: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.4M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Infosys: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.4M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>SHI: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.4M</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 a-r-2 border_box" *ngIf="AnnualizedYearSavings">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-signal" aria-hidden="true"></i></div>
+          <div><label>2019 Level 1 Savings: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$17.4M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-signal" aria-hidden="true"></i></div>
+          <div><label>2019 Level 3 Savings: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$7.1M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Since Nov. 13 Report: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$.2M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>HD Insights Level 2 Support: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$.09M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Infosys: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$.04M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Telematic Development : </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$.03M</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 a-r-2 border_box" *ngIf="Savings">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Annualized Level 1 Savings: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.6M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Since Nov. 13 Report: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$1.6M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>Annualized Savings For Indirect : </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$45.6M</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 text-right m-t-10">
+          <div><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <div><label>10% Run Rate Reduction Target: </label></div>
+        </div>
+        <div class="col-md-6 padding0">
+          <p class="fs">$31.1M</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

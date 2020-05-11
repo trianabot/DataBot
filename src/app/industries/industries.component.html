@@ -112,6 +112,19 @@
         </div>
 
       </div>
+      <div class="manufacture col-md-2 pointer-class"  (click)="showUseCase(10)" *ngIf='!showVender'>
+        <div class="talkbubble vender">
+        <img src="../../assets/images/human_capital.png" id="aks" class="img-center img-responsive">
+        <p style="text-align: center; margin-top: 10px;"> Vendor Manager </p>
+      </div>
+      </div>
+      <div class="col-md-2 imgmargin pointer-class" *ngIf='showVender'>
+        <div class="talkbubble1">
+          <img src="../../assets/images/human_capital.png" class="img-center img-responsive">
+          <p style="text-align: center;color:#1E428A;font-weight:bold;margin-top: 10px;">Vendor Manager</p>
+        </div>
+
+      </div>
 
 
 

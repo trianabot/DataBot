@@ -1,0 +1,443 @@
+<!-- <app-header></app-header> -->
+<div class="container-fluid" style="background: #f7f7f7 !important;">
+  <div class="col-md-12 padding0">
+
+    <!---row--->
+    <div class="row m-0 border_box">
+      <div class="col-md-12 padding0">
+        <div class="col-md-12 inline pd-5 a-r-1">
+          <p>RATING</p>
+          <!-- <span class="fl"><i class="fa fa-file-excel-o" (click)="exportCSVFile()" title="Click To Download" aria-hidden="true"></i><span class="fr m-l-10" (click)="seeAllInfo()" title="Click To See All Suppliers">All</span></span> -->
+
+        </div>
+      </div>
+      <div class="col-md-12 padding0 " style=" background: #f7f7f7;padding: 0px;">
+        <table class="tb padding0 w-100 table table-bordered" style="margin-bottom: 0px !important;">
+          <thead>
+            <tr class="bg-table text-white">
+              <th class="pd-5 ">Project Id</th>
+              <th class="pd-5 ">Invoice</th>
+              <th class="pd-5 ">Weightage</th>
+              <th class="pd-5 ">Date</th>
+              <th class="pd-5 ">Rating</th>
+              <!-- <th class="pd-5 ">Delete</th> -->
+            </tr>
+          </thead>
+          <tbody class="bg-tr">
+            <tr class="odd" (click)="timeStamps(obj)" *ngFor="let obj of productData" style="cursor: pointer;">
+              <td class="pd-8 ">{{obj.projectId}}</td>
+              <td class="pd-8 ">{{obj.invoiceId}}</td>
+              <td class="pd-8 ">{{obj.weightage}}</td>
+              <td class="pd-8 ">{{obj.invoiceDate}}</td>
+              <td class="pd-8 ">
+                <app-rating [rating]='obj.rating' [itemId]='obj.projectId'></app-rating>
+              </td>
+              <!-- <td (click)=removeProject(obj._id)><i class="fa fa-trash" aria-hidden="true"></i></td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showassignedData">
+    <div>
+      <div class="col-md-12 m-t-10 padding0" style="margin-top: 10px;background-color:#f7f7f7;">
+        <div class="col-md-6 float-left padding0">
+          <span>Project Id:</span>&nbsp;
+          <span>{{projectItem.projectId}}</span>
+        </div>
+        <div class="col-md-6 padding0">
+          <div class="float-right">
+            <span>Invoice:</span>&nbsp;
+            <span>{{projectItem.invoiceId}}</span> &nbsp;
+            <button class="float-right bg_temp" (click)="addtimestamp()"><i class="fa fa-plus" aria-hidden="true"
+                style="font-size: 12px; color: white;"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="addtimestampform">
+        <div class="col-md-12 padding0">
+          <form [formGroup]="commentForm">
+            <div *ngFor="let item of Addcomments; let i =index;">
+              <!-- <button class="float-right bg" (click) = "removeItem()">close</button> -->
+              <div class="col-md-12 ">
+                <div class="bg_color">
+                  <div class="col-md-12 padding0">
+                    <div class="col-md-6 float-left m-t-10">
+                      <p>{{myDate | date}}</p>
+                    </div>
+                    <div class="col-md-6 float-right  m-t-10 padding0">
+                      <span class="float-right" style="padding: 0px 10px;" (click)="submit()"><i
+                          class="fa fa-check border_circle" aria-hidden="true" style="cursor: pointer;"></i></span>
+                      <span class="float-right" (click)="removeItem()"><i class="fa fa-times border_circle"
+                          aria-hidden="true" style="cursor: pointer;"></i></span>
+                    </div>
+                  </div>
+                  <div class="row pd-20">
+                    <div class="col-md-3 ">
+                      <div class="row pd-15 br-rt">
+                        <div class="col-md-12" style="display:flex;">
+                          <span> InputBy :</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input style="position:relative;" formControlName="inputBy" name="UserName" type="text"
+                            placeholder="">
+                          <i class="fa fa-user icon"></i>
+                        </div>
+                      </div>
+                      <div class="row pd-15 br-rt">
+                        <div class="col-md-12" style="display:flex;">
+                          <span> InputFor :</span>&nbsp;&nbsp;&nbsp;
+                          <input style="position:relative;" formControlName="inputFor" name="UserName" type="text"
+                            placeholder="">
+                          <i class="fa fa-user icon"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="col-md-6 br-rt">
+                        <div class="row">
+                          <div class="col-md-4 ">
+                            <div>
+                              <p class="mr-lt">People</p>
+                            </div>
+                            <input type="text" formControlName="people">
+                            <div>
+                              <!-- <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i> -->
+                          <!-- <star-rating-comp [starType]="'icon'"></star-rating-comp> -->
+                          <!-- <ngx-star-rating formControlName="peopleRating" [id]="'rating2'" [disabled] ="true"></ngx-star-rating> -->
+                              <app-rating [rating]='peopleRate' [itemId]='"peopleRating"'
+                                (ratingClick)='peopleRatingClick($event)'></app-rating>
+                            </div>
+                          </div>
+                          <div class="col-md-8 p-r-50">
+                            <div> <label>Comment</label><br>
+
+                            </div>
+                            <div class=""><input type="text" class="input_style" formControlName="peopleComment"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 ">
+                            <div>
+                              <p class="mr-lt">Quality</p>
+                            </div>
+                            <input type="text" formControlName="quality">
+                            <div>
+                              <!-- <ngx-star-rating formControlName="qualityRate" [id]="'rating2'" [disabled] ="true"></ngx-star-rating> -->
+                              <app-rating [rating]='qualityRate' [itemId]='"qualityRating"'
+                                (ratingClick)='qualityRatingClick($event)'></app-rating>
+                              <!-- <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                          <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i> -->
+                            </div>
+                          </div>
+                          <div class="col-md-8 p-r-50">
+                            <div> <label>Comment</label><br>
+
+                            </div>
+                            <div class=""><input type="text" class="input_style" formControlName="qualityComment">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-4 p-l-50">
+                            <div>
+                              <p class="mr-lt">Velocity</p>
+                            </div>
+                            <input type="text" formControlName="velocity">
+                            <div>
+                              <!-- <ngx-star-rating formControlName="velocityRating" [id]="'rating2'" [disabled] ="true"></ngx-star-rating> -->
+                              <app-rating [rating]='velocityRate' [itemId]='"velocityRating"'
+                                (ratingClick)='velocityRatingClick($event)'></app-rating>
+                            </div>
+                          </div>
+                          <div class="col-md-8 p-l-50">
+                            <div> <label>Comment</label><br>
+
+                            </div>
+                            <div class=""> <input type="text" class="input_style" formControlName="velocityComment">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 p-l-50">
+                            <div>
+                              <p class="mr-lt">Cost</p>
+                            </div>
+                            <input type="text" formControlName="cost">
+                            <div>
+                              <!-- <app-rating [rating]='obj.Rating' (ratingClick)='ratingComponentClick($event)'></app-rating> -->
+                              <app-rating [rating]='costRate' [itemId]='"costRating"'
+                                (ratingClick)='costRatingClick($event)'></app-rating>
+                                <!-- <ngx-star-rating formControlName="costRating" [id]="'rating2'" [disabled] ="true"></ngx-star-rating> -->
+                            </div>
+                          </div>
+                          <div class="col-md-8 p-l-50">
+                            <div> <label>Comment</label><br>
+
+                            </div>
+                            <div class=""><input type="text" class="input_style" formControlName="costComment"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- <div class="col-md-12" *ngIf="commentedData">
+      <div class="col-md-4 border" *ngFor="let obj of createData">
+        <div class="col-md-12 m-t-b">
+          <div class="col-md-3 br-rt" >
+            <p>20-03-2020</p>
+          </div>
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-12 padding0 ">
+               <div class=" padding0 float-right p-r-l">
+                 <span>InputFor: &nbsp;</span><span class="names"> <i class="fa fa-user" aria-hidden="true"> </i> &nbsp;{{createData.inputby}}</span>
+               </div>
+               <div class=" padding0 float-right ">
+                 <span>InputBy: &nbsp;</span><span class="names"> <i class="fa fa-user" aria-hidden="true"> </i> &nbsp;{{createData[0].inputfor}}</span>
+               </div>
+              </div>
+             </div>
+            <!-- <p><span class="names">Satheesh</span> &nbsp; For &nbsp; <span class="names">Hanu </span></p> 
+          </div>
+        </div>
+        <div class="col-md-12 m-t-b padding0">
+          <div class="col-md-4 br-rt" >
+            <div class="row">
+              <div class="col-md-12 flex">
+                <div class="col-md-11 padding0" >
+                  <div>
+                    <p class="mr-lt">People</p>
+                  </div>
+                  <div>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <p>{{obj['Weightage1']}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 fs">
+            {{obj['Comment1']}}
+          </div>
+        </div>
+        <div class="col-md-12 m-t-b padding0">
+          <div class="col-md-4 br-rt" >
+            <div class="row">
+              <div class="col-md-12 flex">
+                <div class="col-md-11 padding0" >
+                  <div>
+                    <p class="mr-lt">Quality</p>
+                  </div>
+                  <div>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <p>{{obj['Weightage2']}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 fs">
+            {{obj['Comment2']}}
+          </div>
+        </div>
+        <div class="col-md-12 m-t-b padding0">
+          <div class="col-md-4 br-rt" >
+            <div class="row">
+              <div class="col-md-12 flex">
+                <div class="col-md-11 padding0" >
+                  <div>
+                    <p class="mr-lt">Velocity</p>
+                  </div>
+                  <div>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <p>{{obj['Weightage3']}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 fs">
+            {{obj['Comment3']}}
+          </div>
+        </div>
+        <div class="col-md-12 m-t-b padding0">
+          <div class="col-md-4 br-rt" >
+            <div class="row">
+              <div class="col-md-12 flex">
+                <div class="col-md-11 padding0" >
+                  <div>
+                    <p class="mr-lt">Cost</p>
+                  </div>
+                  <div>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color: yellow;padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="padding: 1px;"></i>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <p>{{obj['Weightage4']}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 fs">
+            {{obj['Comment4']}}
+          </div>
+        </div>
+      </div>
+    </div> -->
+      <div class="col-md-12 padding0 m-t-10" style="margin-bottom: 10px; background: #f7f7f7;">
+        <div *ngFor="let obj of projectItem.addRating">
+          <!-- <p>data:{{(obj.people+obj.quality+obj.velocity+obj.cost)/10*4}}</p> -->
+          <div class="col-md-4 p-r-2 p-l-0">
+            <div class="row border">
+              <div class="col-md-12 m-t-b padding0">
+                <div class="col-md-3 br-rt">
+                  <p>{{projectItem.invoiceDate}}</p>
+                </div>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-12 padding0 ">
+                      <div class=" padding0 float-right p-r-l">
+                        <span>InputFor: &nbsp;</span><span class="names"> <i class="fa fa-user" aria-hidden="true"> </i>
+                          &nbsp;{{obj.inputFor}}</span>
+                      </div>
+                      <div class=" padding0 float-right ">
+                        <span>InputBy: &nbsp;</span><span class="names"> <i class="fa fa-user" aria-hidden="true"> </i>
+                          &nbsp;{{obj.inputBy}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <p><span class="names">Satheesh</span> &nbsp; For &nbsp; <span class="names">Hanu </span></p> -->
+                </div>
+              </div>
+              <div class="col-md-12 m-t-b padding0">
+                <div class="col-md-4 br-rt">
+                  <div class="row">
+                    <div class="col-md-12 flex">
+                      <div class="col-md-11 padding0">
+                        <div>
+                          <p class="mr-lt">People</p>
+                        </div>
+                        <div>
+                          <app-rating [rating]='obj.peopleRating' [itemId]='obj._id+"people"'></app-rating>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <p>{{obj.people}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 fs">
+                  {{obj.peopleComment}}
+                </div>
+              </div>
+              <div class="col-md-12 m-t-b padding0">
+                <div class="col-md-4 br-rt">
+                  <div class="row">
+                    <div class="col-md-12 flex">
+                      <div class="col-md-11 padding0">
+                        <div>
+                          <p class="mr-lt">Quality</p>
+                        </div>
+                        <div>
+                          <app-rating [rating]='obj.qualityRating' [itemId]='obj._id+"Quality"'></app-rating>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <p>{{obj.quality}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 fs">
+                  {{obj.qualityComment}}
+                </div>
+              </div>
+              <div class="col-md-12 m-t-b padding0">
+                <div class="col-md-4 br-rt">
+                  <div class="row">
+                    <div class="col-md-12 flex">
+                      <div class="col-md-11 padding0">
+                        <div>
+                          <p class="mr-lt">Velocity</p>
+                        </div>
+                        <div>
+                          <app-rating [rating]='obj.velocityRating' [itemId]='obj._id+"Velocity"'></app-rating>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <p>{{obj.velocity}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 fs">
+                  {{obj.velocityComment}}
+                </div>
+              </div>
+              <div class="col-md-12 m-t-b padding0">
+                <div class="col-md-4 br-rt">
+                  <div class="row">
+                    <div class="col-md-12 flex">
+                      <div class="col-md-11 padding0">
+                        <div>
+                          <p class="mr-lt">Cost</p>
+                        </div>
+                        <div>
+                          <app-rating [rating]='obj.costRating' [itemId]='obj._id+"cost"'></app-rating>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <p>{{obj.cost}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 fs">
+                  {{obj.costComment}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

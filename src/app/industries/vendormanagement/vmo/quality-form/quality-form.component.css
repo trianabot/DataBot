@@ -1,0 +1,43 @@
+input{
+    width: 100%;
+}
+.input_style{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #cacaca;
+    background: none;
+}
+.padding0{
+    padding: 0px;
+}
+.display{
+    display: flex;
+}
+.br-rt{
+    border-right: 1px solid #e1e1e1;
+    border-radius: 0px;
+
+}
+.border{
+    border: 1px solid #cacaca;
+    margin: 0px;
+    background-color: white;
+    }
+.padding-2-0{
+    padding: 2px 3px;
+}
+.border_circle{
+    border: 1px solid;
+    border-radius: 50%;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    padding-top: 2px;
+}
+.search{
+    width: 25% !important;
+    border: 1px solid;
+}
+.pd-10{
+    padding: 10px;
+}

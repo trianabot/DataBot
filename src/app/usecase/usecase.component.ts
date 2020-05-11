@@ -49,6 +49,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     //console.log("Destroy");
   }
   redirect(useCaseType) {
+    alert(useCaseType);
     //this.reportusecase = true;
     this.reportUseCaseTypeValue = useCaseType;
     sessionStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
@@ -68,7 +69,10 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
 
     else if (useCaseType == 5) {
       this.router.navigate(['/healthusecase']);
-    }
+    }else if (useCaseType == 10){
+      console.log("case10",useCaseType)
+      this.router.navigate(['/vendor-home']);
+  }
 
 
 
@@ -102,6 +106,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
 
         this.router.navigate(['/fleetmatic']);
     }
+    
     //console.log(useCaseType);
   }
   getPrevious() {

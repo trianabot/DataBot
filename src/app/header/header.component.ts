@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     if ((this.currentUrl == '/productionusecase') || (this.currentUrl == '/telematicsusecase') || (this.currentUrl == '/supplyusercase')
       || (this.currentUrl == '/fleetmatic') || (this.currentUrl == '/reportusecase') || (this.currentUrl == '/humancapital')
       || (this.currentUrl == '/healthusecase') || (this.currentUrl == '/hrms-usecase-2') || (this.currentUrl == '/healthcare-analytics')
-      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking')) {
+      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking') || (this.currentUrl == '/vendor-home')) {
       this.backUrl = true;
     }
   }

@@ -339,6 +339,22 @@ color:#1E428A;
   content: url('../../assets/images/Reporting.png');
 }
 
+/* vendor management */
+.talkbubble.vender p{
+  color:#8F9094;
+  font-weight: bold;
+}
+
+
+.talkbubble.vender:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+
+
+.talkbubble.vender:hover img{
+  content: url('../../assets/images/Finance.png');
+}
 /*Human Capital hover settings*/
 .talkbubble.humanCapital p{
   color:#8F9094;

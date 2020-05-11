@@ -1,0 +1,189 @@
+<div class="row">
+  <div class="col-md-12 pd-10">
+    <div class="col-md-6">
+      projectId:001101
+    </div>
+    <div class="col-md-6 text-right">
+      <input type="search" class="search" placeholder="Search">
+    </div>
+    <form [formGroup]="qualityRatingForm">
+    <div class="col-md-4 padding-2-0">
+      <div class="col-md-12 border">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Date</p>
+          </div>
+          <div class="col-md-3 br-rt">
+            <p>Date</p>
+          </div>
+          <div class="col-md-3 display">
+            InputBy:<span><input type="text" class="input_style" formControlName="inputBy"></span>
+          </div>
+          <div class="col-md-3 display">
+            InputFor:<span><input type="text" class="input_style" formControlName="inputFor"></span>
+          </div>
+          <div class="col-md-1">
+            <span (click)="submit()"><i
+              class="fa fa-check border_circle" aria-hidden="true" style="cursor: pointer;"></i></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              <p>People</p>
+          </div>
+          <div class="col-md-4">
+          <div>
+            <app-rating [rating]='peopleRate' [itemId]='"peopleRating"'
+            (ratingClick)='peopleRatingClick($event)'></app-rating>
+          </div>
+          </div>
+          <div class="col-md-2 br-rt" >
+            <input type="text" class="input_style" formControlName="people">
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="input_style" formControlName="peopleComment">
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="mr-lt">Quality</p>
+            </div>
+            <div class="col-md-4">
+            <div>
+              <app-rating [rating]='qualityRate' [itemId]='"qualityRating"'
+              (ratingClick)='qualityRatingClick($event)'></app-rating>
+            </div>
+            </div>
+            <div class="col-md-2 br-rt">
+              <input type="text" class="input_style" formControlName="quality">
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="input_style" formControlName="qualityComment">
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mr-lt">Velocity</p>
+              </div>
+              <div class="col-md-4">
+              <div>
+                <app-rating [rating]='velocityRate' [itemId]='"velocityRating"'
+                  (ratingClick)='velocityRatingClick($event)'></app-rating>
+              </div>
+              </div>
+              <div class="col-md-2 br-rt">
+                <input type="text" class="input_style" formControlName="velocity">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="input_style" formControlName="velocityComment">
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <p>Cost</p>
+                </div>
+                <div class="col-md-4">
+                <div>
+                  <app-rating [rating]='costRate' [itemId]='"costRating"'
+                                  (ratingClick)='costRatingClick($event)'></app-rating>
+                </div>
+                </div>
+                <div class="col-md-2 br-rt">
+                  <input type="text" class="input_style " formControlName="cost">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="input_style" formControlName="costComment">
+                </div>
+                </div>
+      </div>
+    </div>
+    <div class="col-md-4 padding-2-0">
+      <div class="col-md-12 border">
+        <div class="row">
+          <div class="col-md-3">
+            <p>Date</p>
+          </div>
+          <div class="col-md-3 br-rt">
+            <p>Date</p>
+          </div>
+          <div class="col-md-3 display">
+            InputBy:<span><input type="text" class="input_style" formControlName="inputBy"></span>
+          </div>
+          <div class="col-md-3 display">
+            InputFor:<span><input type="text" class="input_style" formControlName="inputFor"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              <p>People</p>
+          </div>
+          <div class="col-md-4">
+          <div>
+            <app-rating [rating]='peopleRate' [itemId]='"peopleRating"'
+            (ratingClick)='peopleRatingClick($event)'></app-rating>
+          </div>
+          </div>
+          <div class="col-md-2 br-rt" >
+            <input type="text" class="input_style" formControlName="people">
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="input_style" formControlName="peopleComment">
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="mr-lt">Quality</p>
+            </div>
+            <div class="col-md-4">
+            <div>
+              <app-rating [rating]='qualityRate' [itemId]='"qualityRating"'
+              (ratingClick)='qualityRatingClick($event)'></app-rating>
+            </div>
+            </div>
+            <div class="col-md-2 br-rt">
+              <input type="text" class="input_style" formControlName="quality">
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="input_style" formControlName="qualityComment">
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mr-lt">Velocity</p>
+              </div>
+              <div class="col-md-4">
+              <div>
+                <app-rating [rating]='velocityRate' [itemId]='"velocityRating"'
+                  (ratingClick)='velocityRatingClick($event)'></app-rating>
+              </div>
+              </div>
+              <div class="col-md-2 br-rt">
+                <input type="text" class="input_style" formControlName="velocity">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="input_style" formControlName="velocityComment">
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <p>Cost</p>
+                </div>
+                <div class="col-md-4">
+                <div>
+                  <app-rating [rating]='costRate' [itemId]='"costRating"'
+                                  (ratingClick)='costRatingClick($event)'></app-rating>
+                </div>
+                </div>
+                <div class="col-md-2 br-rt">
+                  <input type="text" class="input_style " formControlName="cost">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="input_style" formControlName="costComment">
+                </div>
+                </div>
+      </div>
+    </div>
+    </form>
+    
+  </div>
+</div>

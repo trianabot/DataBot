@@ -1,0 +1,36 @@
+<div class="container-fluid" >
+  <div class="col-md-12 padding0">
+<div class="row" style="background: #f7f7f7 !important;">
+<div class="col-md-12">
+  <p>RATING</p>
+</div>
+<div class="col-md-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="pd-5 ">Project Id</th>
+          <th class="pd-5 ">Invoice</th>
+          <th class="pd-5 ">Weightage</th>
+          <th class="pd-5 ">Date</th>
+          <th class="pd-5 ">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr (click)="ratingForm()" *ngFor="let obj of ratings" style="cursor: pointer;">
+        <td class="pd-8 ">{{obj.projectId}}</td>
+        <td class="pd-8 ">{{obj.invoiceId}}</td>
+        <td class="pd-8 ">{{obj.weightage}}</td>
+        <td class="pd-8 ">{{obj.invoiceDate}}</td>
+        <td class="pd-8 ">
+          <app-rating [rating]='obj.rating' [itemId]='obj.projectId'></app-rating>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div *ngIf="ShowRatingForm">
+  <app-quality-form></app-quality-form>
+</div>
+</div>
+</div>

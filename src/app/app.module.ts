@@ -77,8 +77,25 @@ import { VehiclebehaviorComponent } from './vehiclebehavior/vehiclebehavior.comp
 import { VehicleperformanceComponent } from './vehicleperformance/vehicleperformance.component';
 import { VehiclerouteComponent } from './vehicleroute/vehicleroute.component';
 import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.component';
+import { VendormanagerComponent } from './vendormanager/vendormanager.component';
+import { CaterpillarOverviewComponent } from './caterpillar-overview/caterpillar-overview.component';
+import { SuppliersComponent } from './industries/vendormanagement/suppliers/suppliers.component';
+import { DeptComponent } from './industries/vendormanagement/dept/dept.component';
+import { CategoryComponent } from './industries/vendormanagement/category/category.component';
+import { LandingpageComponent } from './industries/vendormanagement/landingpage/landingpage.component';
+import { VenderHomeComponent } from './industries/vendormanagement/vender-home/vender-home.component';
+import { ViewuserComponent } from './super-admin/viewuser/viewuser.component'
+import { TimeComponent } from './industries/vendormanagement/vmo/time/time.component';
+import { VmoComponent } from './industries/vendormanagement/vmo/vmo.component';
+import { RatingComponent } from './rating/rating.component';
+import { MillionPipe } from './core/pipes/million.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
+import { OrderByPipe } from './core/pipes/order-by.pipe';
+import { DataTableModule } from 'angular7-data-table';
 
-
+@Pipe({
+  name: 'million'
+})
 
 @NgModule({
   declarations: [
@@ -131,12 +148,26 @@ import { VehiclecustomerComponent } from './vehiclecustomer/vehiclecustomer.comp
     VehiclebehaviorComponent,
     VehicleperformanceComponent,
     VehiclerouteComponent,
-    VehiclecustomerComponent
+    VehiclecustomerComponent,
+    CaterpillarOverviewComponent,
+    SuppliersComponent,
+    DeptComponent,
+    CategoryComponent,
+    LandingpageComponent,
+    VenderHomeComponent,
+    ViewuserComponent,
+    TimeComponent,
+    VmoComponent,
+    VendormanagerComponent,
+    RatingComponent,
+    MillionPipe,
+    OrderByPipe,
 
     ],
   imports: [
     BrowserModule,ChartModule,HttpClientModule,HttpModule,AngularDateTimePickerModule,FileUploadModule,NgxPaginationModule,Ng5SliderModule,
     AppRoutingModule,NgbModule,FormsModule,ReactiveFormsModule,BrowserAnimationsModule,
+    DataTableModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

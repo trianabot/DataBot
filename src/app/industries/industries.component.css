@@ -288,6 +288,14 @@
     color:#8F9094;
     font-weight: bold;
 }
+.talkbubble.vender p{
+    color:#8F9094;
+    font-weight: bold;
+}
+.talkbubble.vender:hover p{
+    color:#1E428A;
+    font-weight: bold;
+}
 
 .talkbubble.energy:hover p{
     color:#1E428A;
@@ -296,6 +304,9 @@
 
 .talkbubble.energy:hover img{
     content: url('../../assets/images/energy.png');
+}
+.talkbubble.vender:hover img{
+    content: url('../../assets/images/human_capital.png');
 }
 
 

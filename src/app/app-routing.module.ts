@@ -43,6 +43,16 @@ import { HumancapitalusecomponentComponent } from './humancapitalusecomponent/hu
 import { ReportusecasecomponentComponent } from './reportusecasecomponent/reportusecasecomponent.component';
 import { HealthusecasecomponentComponent } from './healthusecasecomponent/healthusecasecomponent.component';
 import { FleetmaticusescomponentComponent } from './fleetmaticusescomponent/fleetmaticusescomponent.component';
+import { VendormanagerComponent } from './vendormanager/vendormanager.component';
+import { CaterpillarOverviewComponent } from './caterpillar-overview/caterpillar-overview.component';
+import { SuppliersComponent } from './industries/vendormanagement/suppliers/suppliers.component';
+import { DeptComponent } from './industries/vendormanagement/dept/dept.component';
+import { CategoryComponent } from './industries/vendormanagement/category/category.component';
+import { LandingpageComponent } from './industries/vendormanagement/landingpage/landingpage.component';
+import { VenderHomeComponent } from './industries/vendormanagement/vender-home/vender-home.component';
+import { ViewuserComponent } from './super-admin/viewuser/viewuser.component'
+import { TimeComponent } from './industries/vendormanagement/vmo/time/time.component';
+import { VmoComponent } from './industries/vendormanagement/vmo/vmo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -89,7 +99,21 @@ const routes: Routes = [
   {path: 'humancapital', component: HumancapitalusecomponentComponent},
   {path: 'reportusecase', component: ReportusecasecomponentComponent},
   {path: 'healthusecase', component: HealthusecasecomponentComponent},
-  {path: 'fleetmatic', component: FleetmaticusescomponentComponent}
+  {path: 'fleetmatic', component: FleetmaticusescomponentComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'industries', component: IndustriesComponent},
+  { path: 'industries/:id', component: IndustriesComponent},
+  {path: 'cat-overview', component: CaterpillarOverviewComponent},
+  {path: 'vendor-home', component: VenderHomeComponent},
+  {path: 'suppliers', component: SuppliersComponent},
+  {path: 'dept', component: DeptComponent},
+  {path: 'landingpage', component: LandingpageComponent},
+  {path: 'category', component: CategoryComponent},
+  { path: 'vendor-manager', component: VendormanagerComponent},
+  // { path: 'vendor-home', component: VenderHomeComponent},
+  { path: 'view-users', component: ViewuserComponent},
+ {path: 'time', component : TimeComponent},
+ {path: 'vmo', component : VmoComponent},
   // {path: '', component : HomeComponent, pathMatch : 'full'},  
 ];
 

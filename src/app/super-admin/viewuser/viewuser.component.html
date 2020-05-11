@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="container-fluid">
+      <div class="row m-t">
+           <div class="col-md-6">
+            <table class="nopadding w-100">
+              <thead class="bg-table text-white">
+                  <th class="th txt-w">User Name</th>
+                  <th class="th txt-w">First Name</th>
+                  <th class="th txt-w">Last Name</th>
+                  <th class="th txt-w">Phone</th>
+                  <th class="th txt-w">Designation</th>
+                  <th class="th txt-w">Location</th>
+                  <th class="th txt-w">Update</th>
+              </thead>
+              <tr class="bg-tr" *ngFor="let item of users; let i=index; let odd=odd" [ngClass]="{ odd: odd}">
+                  <td class="th">{{item.userName}}</td>
+                  <td class="th">{{item.firstName}}</td>
+                  <td class="th">{{item.lastName}}</td>
+                  <td class="th">{{item.phone}}</td>
+                  <td class="th">{{item.designation}}</td>
+                  <td class="th">{{item.location}}</td>
+                  <td class="th cursor" (click)="edit(item)">edit</td>
+              </tr>
+          </table>
+           </div>
+           <div class="col-md-6">
+
+           </div>
+      </div>
+</div>
