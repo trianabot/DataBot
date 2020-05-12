@@ -39,10 +39,13 @@ export class HeaderComponent implements OnInit {
     var fleetmaticsURL = URL.split('?');
     fleetmaticsURL = fleetmaticsURL[0];
     var fleetmatics = '/fleetmatics?vehicle=%22357812091510963%22&drivername=%22Frank%20Perry%22&location=%2223446%20Ridge%20Rd,%20Minerva,%20OH%2044657,%20USA%22&driverid=390510&searchfromdate=1569409755524&searchtodate=1569496155524';
-    if ((this.currentUrl == '/productionusecase') || (this.currentUrl == '/telematicsusecase') || (this.currentUrl == '/supplyusercase')
+    if ((this.currentUrl == '/productionusecase') || (this.currentUrl == '/telematicsusecase')  || (this.currentUrl == '/supplyusercase') || (this.currentUrl == '/vendor-manager')
       || (this.currentUrl == '/reportusecase') || (this.currentUrl == '/humancapital')
-      || (this.currentUrl == '/healthusecase') || (this.currentUrl == '/hrms-usecase-2') || (this.currentUrl == '/healthcare-analytics')
-      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking') || (fleetmaticsURL == '/fleetmatics')) {
+      || (this.currentUrl == '/healthusecase') || (this.currentUrl == '/hrms-usecase-2') || (this.currentUrl == '/healthcare-analytics') 
+      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking') || (fleetmaticsURL == '/fleetmatics') ) {
+      this.backUrl = true;
+    }
+    if((this.currentUrl == '/fleetmatic')){
       this.backUrl = true;
     }
   }
