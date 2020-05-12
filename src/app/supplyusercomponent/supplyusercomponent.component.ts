@@ -22,10 +22,13 @@ export class SupplyusercomponentComponent implements OnInit {
     this.inventoryReport = true;
     this.selected = item;
   }
+  setactiveProject(item){
 
+  }
   
 
   isActive(item: any) {
     return this.selected === item;
   }
+  sidenavChanged(){}
 }

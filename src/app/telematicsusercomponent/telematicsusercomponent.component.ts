@@ -55,5 +55,6 @@ export class TelematicsusercomponentComponent implements OnInit {
   isActive(item: any) {
     return this.selected === item;
   }
+  sidenavChanged(){}
 
 }

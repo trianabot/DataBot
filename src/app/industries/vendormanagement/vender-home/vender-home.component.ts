@@ -99,9 +99,5 @@ export class VenderHomeComponent implements OnInit {
     this.selected = randomNumber.num;
     this.showView(randomNumber.num);
   }
-  back(){
-    alert("hi");
-    this.router.navigate(['/vendor-home']);
-  }
-
+  sidenavChanged(){}
 }

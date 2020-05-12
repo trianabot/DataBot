@@ -27,4 +27,5 @@ export class ReportusecasecomponentComponent implements OnInit {
   isActive(item: any) {
     return this.selected === item;
   }
+  sidenavChanged(){}
 }

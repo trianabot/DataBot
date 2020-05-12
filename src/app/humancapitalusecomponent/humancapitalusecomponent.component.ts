@@ -34,5 +34,6 @@ export class HumancapitalusecomponentComponent implements OnInit {
   isActive(item: any) {
     return this.selected === item;
   }
+  sidenavChanged(){}
 
 }

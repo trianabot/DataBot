@@ -55,6 +55,6 @@ export class FleetmaticusescomponentComponent implements OnInit {
   isActive(item: any) {
     return this.selected === item;
   }
-
+  sidenavChanged(){}
 
 }

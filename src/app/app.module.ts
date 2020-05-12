@@ -92,15 +92,13 @@ import { MillionPipe } from './core/pipes/million.pipe';
 import { Pipe, PipeTransform } from '@angular/core';
 import { OrderByPipe } from './core/pipes/order-by.pipe';
 import { DataTableModule } from 'angular7-data-table';
-
-@Pipe({
-  name: 'million'
-})
+import { ExecutiveComponent } from './industries/vendormanagement/vmo/executive/executive.component';
+import { QualityComponent } from './industries/vendormanagement/vmo/quality/quality.component';
+import { QualityFormComponent } from './industries/vendormanagement/vmo/quality-form/quality-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
     UsecaseComponent,
     ReportsComponent,
     HealthComponent,
@@ -162,6 +160,9 @@ import { DataTableModule } from 'angular7-data-table';
     RatingComponent,
     MillionPipe,
     OrderByPipe,
+    ExecutiveComponent,
+    QualityComponent,
+    QualityFormComponent
 
     ],
   imports: [

@@ -26,5 +26,6 @@ export class HealthusecasecomponentComponent implements OnInit {
   isActive(item: any) {
     return this.selected === item;
   }
+  sidenavChanged(){}
 
 }
