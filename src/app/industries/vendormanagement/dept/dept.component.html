@@ -217,7 +217,7 @@
                                                                 'fa-sort-asc': (column == 'y' && !isDesc), 
                                                                 'fa-sort-desc': (column == 'y' && isDesc) }"
                                                 aria-hidden="true"> </i></th>
-                                        <th class="th">Status&nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'name', 
+                                        <th class="th" (click)="sort('name')">Status&nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'name', 
                                                                 'fa-sort-asc': (column == 'name' && !isDesc), 
                                                                 'fa-sort-desc': (column == 'name' && isDesc) }"
                                                 aria-hidden="true"> </i></th>

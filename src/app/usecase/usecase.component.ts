@@ -49,7 +49,6 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
     //console.log("Destroy");
   }
   redirect(useCaseType) {
-    alert(useCaseType);
     //this.reportusecase = true;
     this.reportUseCaseTypeValue = useCaseType;
     sessionStorage.setItem('reportusecase', this.reportUseCaseTypeValue)
