@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     if ((this.currentUrl == '/productionusecase') || (this.currentUrl == '/telematicsusecase')  || (this.currentUrl == '/supplyusercase') || (this.currentUrl == '/vendor-manager')
       || (this.currentUrl == '/reportusecase') || (this.currentUrl == '/humancapital')
       || (this.currentUrl == '/healthusecase') || (this.currentUrl == '/hrms-usecase-2') || (this.currentUrl == '/healthcare-analytics') 
-      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking') || (fleetmaticsURL == '/fleetmatics') ) {
+      || (this.currentUrl == '/inventory') || (this.currentUrl == '/inventormap') || (this.currentUrl == '/stocktracking') || (fleetmaticsURL == '/fleetmatics') || (fleetmaticsURL == '/vendor-home') ) {
       this.backUrl = true;
     }
     if((this.currentUrl == '/fleetmatic')){

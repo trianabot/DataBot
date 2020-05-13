@@ -401,6 +401,26 @@ color:#1E428A;
 .talkbubble.healthCare:hover img{
   content: url('../../assets/images/healthcareAna.png');
 }
+.talkbubble.vendor:hover img{
+  content: url('../../assets/images/human-capital.png') !important; 
+}
+.talkbubble.vendor .txtcolor:hover {
+  color:#1E428A !important;
+  /* font-weight: bold; */
+}
+.talkbubble.vendor .txtcolor {
+  color:#8F9094;
+  /* font-weight: bold; */
+}
+.talkbubble.vendor  p{
+  color:#8F9094;
+  /* font-weight: bold; */
+}
+.talkbubble.vendor:hover p{
+  color:#1E428A;
+  font-weight: bold;
+}
+
 
 
 

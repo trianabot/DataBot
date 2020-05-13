@@ -81,12 +81,23 @@ import { VehiclebehaviourtenantComponent } from './vehiclebehaviourtenant/vehicl
 import { FleetmaticsComponent } from './fleetmatics/fleetmatics.component';
 import { DataTableModule } from 'angular7-data-table';
 import { VendormanagerComponent } from './vendormanager/vendormanager.component';
+import { CaterpillarOverviewComponent } from './caterpillar-overview/caterpillar-overview.component';
+import { VenderHomeComponent } from './industries/vendormanagement/vender-home/vender-home.component';
+import { SuppliersComponent } from './industries/vendormanagement/suppliers/suppliers.component';
+import { DeptComponent } from './industries/vendormanagement/dept/dept.component';
+import { CategoryComponent } from './industries/vendormanagement/category/category.component';
+import { LandingpageComponent } from './industries/vendormanagement/landingpage/landingpage.component';
+import { RatingComponent } from './rating/rating.component';
+import { VmoComponent } from './industries/vendormanagement/vmo/vmo.component';
+import { TimeComponent } from './industries/vendormanagement/vmo/time/time.component';
+import { OrderByPipe } from './core/pipes/order-by.pipe';
+import { MillionPipe } from './core/pipes/million.pipe';
+import { ShowinputComponent } from './showinput/showinput.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
     UsecaseComponent,
     ReportsComponent,
     HealthComponent,
@@ -137,7 +148,19 @@ import { VendormanagerComponent } from './vendormanager/vendormanager.component'
     VehiclecustomerComponent,
     VehiclebehaviourtenantComponent,
     FleetmaticsComponent,
-    VendormanagerComponent
+    VendormanagerComponent,
+    CaterpillarOverviewComponent,
+    VenderHomeComponent,
+    SuppliersComponent,
+    DeptComponent,
+    VmoComponent,
+    TimeComponent,
+    CategoryComponent,
+    LandingpageComponent,
+    RatingComponent,
+    OrderByPipe,
+    MillionPipe,
+    ShowinputComponent,
 
     ],
   imports: [

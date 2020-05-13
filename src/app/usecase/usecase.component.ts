@@ -29,6 +29,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
   showHealthAnalysis: boolean = false;
   showmatics: boolean = false;
   username: any;
+  vender : boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     //   var reportCase1 = sessionStorage.getItem('reportusecase');
@@ -77,7 +78,7 @@ export class UsecaseComponent implements OnInit, OnChanges, OnDestroy {
       this.router.navigate(['/healthusecase']);
     }
     else if (useCaseType == 10) {
-      this.router.navigate(['/vendor-manager']);
+      this.router.navigate(['/vendor-home']);
     }
 
 

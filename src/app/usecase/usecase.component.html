@@ -496,11 +496,32 @@
           </div>
         </div>
 
-        <div class="col-md-4 imgmargin pointer-class" (click)="redirect(10)">
+        <div class="col-md-4 imgmargin pointer-class" (click)="redirect(10)" *ngIf='vender'>
           <div class="talkbubble vendor">
             <img src="../../assets/images/human_capital.png" class="img-center img-responsive">
             <div class="col-md-12" style="text-align: justify">
-              <p style="text-align: center;color:#969699 ;font-weight:bold;margin-top: 10px;">Vendor Manager</p>
+              <p style="text-align: center;color:#1E428A ;font-weight:bold;margin-top: 10px;" class="txtcolor">Vendor Management</p>
+              <span class="txtcolor">
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10" style="text-align:justify">
+                    <div class="width-content">
+                      Measure vendor levels, overlapping service providers, contract management, contract status, vendor
+                      certification status, performance levels vendor cost(s), value and competitive analysis
+                    </div>
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
+              </span>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4 imgmargin pointer-class" (click)="redirect(10)" *ngIf='!vender'>
+          <div class="talkbubble vendor">
+            <img src="../../assets/images/human_capital.png" class="img-center img-responsive">
+            <div class="col-md-12" style="text-align: justify">
+              <p style="text-align: center ;font-weight:bold;margin-top: 10px;">Vendor Management</p>
               <span class="txtcolor">
                 <div class="row">
                   <div class="col-md-1"></div>
