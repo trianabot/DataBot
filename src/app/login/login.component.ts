@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.modelText = "Please enter username or password";
       $('#myModal').modal('show');
     }
-    else if ((register.value.user == "Databotics" || register.value.user == "databotics") && register.value.password == "Databot@12345") {
+    else if ((register.value.user == "Abaxent" || register.value.user == "abaxent") && register.value.password == "Abaxent@12345") {
       this.router.navigate(['/industries']);
       localStorage.setItem('userid', '1');
     } else if ((register.value.user == "Telematics" || register.value.user == "telematics") && register.value.password == "Databot@12345") {

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiEndPoint: "http://localhost:4000",
-  apiEndPoint: "http://ec2-3-231-255-189.compute-1.amazonaws.com:4006",
+  apiEndPoint: "http://api.databotics.io",
+  // apiEndPoint: "http://ec2-3-231-255-189.compute-1.amazonaws.com:4006",
 };
 
 /*

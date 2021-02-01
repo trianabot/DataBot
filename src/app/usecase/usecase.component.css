@@ -1,18 +1,18 @@
-
 .panel-heading {
-  padding:0px;
+  padding: 0px;
   border-bottom: 0px;
-   border-top-left-radius: 0px;
-   border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 .panel {
-   margin-bottom: 0px;
-   border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  margin-bottom: 0px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border: 0px solid transparent;
 }
-.width-content{
-  width:298px;margin:auto !important
+.width-content {
+  width: 298px;
+  margin: auto !important;
 }
 .panel-body {
   padding: 4px;
@@ -29,7 +29,6 @@
   margin-right: auto;
   margin-left: auto;
 }
-
 
 .vl {
   border-left: 1px solid #6c950f;
@@ -56,16 +55,15 @@
 }
 .talkbubble {
   /* border-right:1px solid #3d4e7b; */
-  padding:15px;
+  padding: 15px;
 }
 .talkbubble:hover {
   /* width: 120px; */
- padding:15px;
+  padding: 15px;
   /* background: #3d4e7b; */
   position: relative;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
-
 }
 /* .talkbubble:hover p {
     color:#fff !important;
@@ -84,7 +82,7 @@
 }
 .talkbubble1 {
   /* width: 120px; */
- padding:15px;
+  padding: 15px;
   /* background: #3d4e7b; */
   position: relative;
   border-bottom-left-radius: 25px;
@@ -103,30 +101,29 @@
   /* width: 100%; */
 }
 
-.imgmargin{
-  margin-top:70px !important;
+.imgmargin {
+  margin-top: 70px !important;
 }
 
-.blur-wrapper{
-pointer-events: none;
-opacity: 0.4;
+.blur-wrapper {
+  pointer-events: none;
+  opacity: 0.4;
 }
 .talkbubble.Fleetmat p {
-  color: #8F9094 ;
-    font-weight: bold;
+  color: #8f9094;
+  font-weight: bold;
 }
-.talkbubble .Fleetmat p{
- 
+.talkbubble .Fleetmat p {
 }
-.pointer-class{
-cursor: pointer;
+.pointer-class {
+  cursor: pointer;
 }
 
-.padding-top{
-padding-top: 29px
+.padding-top {
+  padding-top: 29px;
 }
-.imgmargin{
-margin-top:0px
+.imgmargin {
+  margin-top: 0px;
 }
 /* .txtcolor{
 color:#1E428A;
@@ -158,273 +155,266 @@ color:#1E428A;
 } */
 
 /*supply chain hover settings*/
-.talkbubble.supplyChain p{
-  color:#8F9094;
+.talkbubble.supplyChain p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.supplyChain span{
-  color:#8F9094;
+.talkbubble.supplyChain span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.supplyChain:hover p{
-  color:#1E428A;
+.talkbubble.supplyChain:hover p {
+  color: #1e428a;
   /* font-weight: bold; */
 }
-.talkbubble.supplyChain:hover span{
-  color:#1E428A;
+.talkbubble.supplyChain:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.supplyChain:hover img{
-  content: url('../../assets/images/supply.png');
+.talkbubble.supplyChain:hover img {
+  content: url("../../assets/images/supply.png");
 }
 
 /*reporting hover settings*/
-.talkbubble.reporting p{
-  color:#8F9094;
+.talkbubble.reporting p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.reporting span{
-  color:#8F9094;
+.talkbubble.reporting span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.reporting:hover p{
-  color:#1E428A;
+.talkbubble.reporting:hover p {
+  color: #1e428a;
   font-weight: bold;
 }
-.talkbubble.reporting:hover span{
-  color:#1E428A;
+.talkbubble.reporting:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
-
 
 .talkbubble.Fleetmat.blur-wrapper span {
-  color: #8F9094;
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.Fleetmat.blur-wrapper:hover p{
-  color:#1E428A;
+.talkbubble.Fleetmat.blur-wrapper:hover p {
+  color: #1e428a;
   /* font-weight: bold; */
 }
-.talkbubble.Fleetmat.blur-wrapper:hover span{
-  color:#1E428A;
+.talkbubble.Fleetmat.blur-wrapper:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.Fleetmat.blur-wrapper:hover img{
-  content: url('../../assets/images/supply.png');
+.talkbubble.Fleetmat.blur-wrapper:hover img {
+  content: url("../../assets/images/supply.png");
 }
 
 /*human resource*/
-.talkbubble.humanCapital p{
-  color:#8F9094;
+.talkbubble.humanCapital p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.humanCapital span{
-  color:#8F9094;
+.talkbubble.humanCapital span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.humanCapital:hover p{
-  color:#1E428A;
+.talkbubble.humanCapital:hover p {
+  color: #8b032f;
   font-weight: bold;
 }
-.talkbubble.humanCapital:hover span{
-  color:#1E428A;
+.talkbubble.humanCapital:hover span {
+  color: #8b032f;
+  /* font-weight: bold; */
+}
+.talkbubble.vender:hover p {
+  color: #1e428a;
+  font-weight: bold;
+}
+.talkbubble.vender:hover span {
+  color: #8b032f;
   /* font-weight: bold; */
 }
 .talkbubble.vendor.blur-wrapper span {
-  color: #8F9094;
+  color: #8f9094;
   /* font-weight: bold; */
 }
-.talkbubble .consumption  .blur-wrapper span{
-  color: #8F9094;
+.talkbubble .consumption .blur-wrapper span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 /*production hover settings*/
-.talkbubble.producTion p{
-  color:#8F9094;
+.talkbubble.producTion p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.producTion span{
-  color:#8F9094;
+.talkbubble.producTion span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.producTion:hover p{
-  color:#1E428A;
+.talkbubble.producTion:hover p {
+  color: #1e428a;
   font-weight: bold;
 }
-.talkbubble.producTion:hover span{
-  color:#1E428A;
+.talkbubble.producTion:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.producTion:hover img{
-  content: url('../../assets/images/production.png');
+.talkbubble.producTion:hover img {
+  content: url("../../assets/images/production.png");
 }
 
 /*Telematics hover settings*/
 
-.talkbubble.Telematics p{
-  color:#8F9094;
+.talkbubble.Telematics p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.Telematics span{
-  color:#8F9094;
+.talkbubble.Telematics span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.Telematics:hover p{
-  color:#1E428A;
+.talkbubble.Telematics:hover p {
+  color: #1e428a;
   font-weight: bold;
 }
-.talkbubble.Telematics:hover span{
-  color:#1E428A;
+.talkbubble.Telematics:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.Telematics:hover img{
-  content: url('../../assets/images/telematic.png');
+.talkbubble.Telematics:hover img {
+  content: url("../../assets/images/telematic.png");
 }
 
 /* Fleet Hover Settings */
 
-.talkbubble.FleetMatics p{
-  color:#8F9094;
+.talkbubble.FleetMatics p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.FleetMatics span{
-  color:#8F9094;
+.talkbubble.FleetMatics span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.FleetMatics:hover p{
-  color:#1E428A;
+.talkbubble.FleetMatics:hover p {
+  color: #1e428a;
   font-weight: bold;
 }
-.talkbubble.FleetMatics:hover span{
-  color:#1E428A;
+.talkbubble.FleetMatics:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.FleetMatics:hover img{
-  content: url('../../assets/images/fleet.png');
+.talkbubble.FleetMatics:hover img {
+  content: url("../../assets/images/fleet.png");
 }
 
 /*Reporting hover settings*/
 
-.talkbubble.reporting p{
-  color:#8F9094;
+.talkbubble.reporting p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-
-.talkbubble.reporting:hover p{
-  color:#1E428A;
+.talkbubble.reporting:hover p {
+  color: #1e428a;
   font-weight: bold;
 }
 
-
-.talkbubble.reporting:hover img{
-  content: url('../../assets/images/Reporting.png');
+.talkbubble.reporting:hover img {
+  content: url("../../assets/images/Reporting.png");
 }
 
 /* vendor management */
-.talkbubble.vender p{
-  color:#8F9094;
+.talkbubble.vender p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-
-.talkbubble.vender:hover p{
-  color:#1E428A;
+.talkbubble.vender:hover p {
+  color: #8b032f;
   font-weight: bold;
 }
 
-
-.talkbubble.vender:hover img{
-  content: url('../../assets/images/Finance.png');
-}
 /*Human Capital hover settings*/
-.talkbubble.humanCapital p{
-  color:#8F9094;
+.talkbubble.humanCapital p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-
-.talkbubble.humanCapital:hover p{
-  color:#1E428A;
+.talkbubble.humanCapital:hover p {
+  color: #8b032f;
   font-weight: bold;
 }
 
-
-.talkbubble.humanCapital:hover img{
-  content: url('../../assets/images/humanresource-vendormanager.png');
+.talkbubble.humanCapital:hover img {
+  content: url("../../assets/images/humanresource-vendormanager_1.png");
 }
-
-
+.talkbubble.vender:hover img {
+  content: url("../../assets/images/human-capital_1.png");
+}
 /*Health care hover settings*/
-.talkbubble.healthCare p{
-  color:#8F9094;
+.talkbubble.healthCare p {
+  color: #8f9094;
   font-weight: bold;
 }
-.talkbubble.healthCare p{
-  color:#8F9094;
+.talkbubble.healthCare p {
+  color: #8f9094;
   font-weight: bold;
 }
 
-.talkbubble.healthCare span{
-  color:#8F9094;
+.talkbubble.healthCare span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-.talkbubble.healthCare:hover p{
-  color:#1E428A;
+.talkbubble.healthCare:hover p {
+  color: #1e428a;
   /* font-weight: bold; */
 }
-.talkbubble.healthCare:hover span{
-  color:#1E428A;
+.talkbubble.healthCare:hover span {
+  color: #1e428a;
   /* font-weight: bold; */
 }
 
-.talkbubble.Fleetmat.blur-wrapper span{
-  color:#8F9094;
+.talkbubble.Fleetmat.blur-wrapper span {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
 .talkbubble.Telematics .txtcolor :hover {
-  color:#1E428A;
+  color: #1e428a;
   /* font-weight: bold; */
 }
-.talkbubble.healthCare .txtcolor{
-  color:#8F9094;
+.talkbubble.healthCare .txtcolor {
+  color: #8f9094;
   /* font-weight: bold; */
 }
 
-
-
-
-.talkbubble.healthCare:hover img{
-  content: url('../../assets/images/healthcareAna.png');
+.talkbubble.healthCare:hover img {
+  content: url("../../assets/images/healthcareAna.png");
 }
 
-
-
-@media only screen and (max-width: 1024px) and (min-width: 768px)  {
-   
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
   .img-center {
     display: block;
     height: 105px;
     margin-left: 55px;
   }
-  }
+}

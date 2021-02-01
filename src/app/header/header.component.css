@@ -1,46 +1,47 @@
 .topnav {
-    overflow: hidden;
-    background-color:#20283d;
+  overflow: hidden;
+  background-color: #8b032f;
 }
 
-.active{
-  color:red !important; 
+.active {
+  color: red !important;
 }
 a:active {
   color: red !important;
 }
-.navbar-brand{
-  font-size:14px !important;
+.navbar-brand {
+  font-size: 14px !important;
 }
-.menu-css{
-  font-size:16px;color:white; margin-left:14px;
- 
-  float:left;
+.menu-css {
+  font-size: 16px;
+  color: white;
+  margin-left: 14px;
+
+  float: left;
   /* padding: 4px; */
 }
-.home-css{
-  color:#fff;
-  padding-left:12px;
-  
+.home-css {
+  color: #fff;
+  padding-left: 12px;
 }
-.p-top-bottom{
-  padding-top:3px;
-  padding-bottom:3px;
+.p-top-bottom {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
-.p-top{
-  padding-top:10px;
+.p-top {
+  padding-top: 10px;
 }
 /* Style the search box inside the navigation bar */
-.topnav input[type=text] {
-    float: right;
-    padding: 2px;
-    border: none;
-    margin: 2px;
-/*     margin-right: 16px; */
-    font-size: 17px;
-   /*  background-color: #155f57; */
-     border: 1px solid  #2e3956;
-    border-radius: 3px;
+.topnav input[type="text"] {
+  float: right;
+  padding: 2px;
+  border: none;
+  margin: 2px;
+  /*     margin-right: 16px; */
+  font-size: 17px;
+  /*  background-color: #155f57; */
+  border: 1px solid #2e3956;
+  border-radius: 3px;
 }
 
 #topHeading {
@@ -52,19 +53,19 @@ a:active {
 }
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
-    .topnav a, .topnav input[type=text] {
-        float: none;
-        display: block;
-        text-align: left;
-        width: 100%;
-        margin: 0;
-        padding: 14px;
-    }
-    .topnav input[type=text] {
-        border: 1px solid #ccc;
-    }
+  .topnav a,
+  .topnav input[type="text"] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type="text"] {
+    border: 1px solid #ccc;
+  }
 }
-
 
 /* The side navigation menu */
 .sidenav {
@@ -74,7 +75,7 @@ a:active {
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color:#1c2337; /* Black*/
+  background-color: #1c2337; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -93,7 +94,7 @@ a:active {
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color: white
+  color: white;
 }
 
 /* Position and style the close button (top right corner) */
@@ -107,14 +108,18 @@ a:active {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  transition: margin-left .5s;
+  transition: margin-left 0.5s;
   padding: 20px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 
 ::placeholder {
@@ -122,12 +127,14 @@ a:active {
   opacity: 1; /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: white;
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
- color:white;
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
 }
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
@@ -146,12 +153,17 @@ a:active {
 
 /* Some media queries for responsiveness */
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
+.sidenav a,
+.dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -166,7 +178,8 @@ a:active {
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
+.sidenav a:hover,
+.dropdown-btn:hover {
   color: #f1f1f1;
 }
 
@@ -176,7 +189,8 @@ a:active {
   color: white;
 }
 
-.sidenav a, .dropdown-btn1 {
+.sidenav a,
+.dropdown-btn1 {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -190,7 +204,8 @@ a:active {
   outline: none;
 }
 
-.sidenav a, .dropdown-btn2 {
+.sidenav a,
+.dropdown-btn2 {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -203,7 +218,8 @@ a:active {
   cursor: pointer;
   outline: none;
 }
-.sidenav a, .dropdown-btn3 {
+.sidenav a,
+.dropdown-btn3 {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -216,7 +232,8 @@ a:active {
   cursor: pointer;
   outline: none;
 }
-.sidenav a, .dropdown-btn4 {
+.sidenav a,
+.dropdown-btn4 {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -229,7 +246,8 @@ a:active {
   cursor: pointer;
   outline: none;
 }
-.sidenav a, .dropdown-btn5 {
+.sidenav a,
+.dropdown-btn5 {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 16px;
@@ -248,22 +266,22 @@ a:active {
   background-color: #1c2337;
   border: 1px solid transparent;
   border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .list-group.panel > .list-group-item {
   border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px
+  border-bottom-left-radius: 4px;
 }
 
-.usecase-class{
+.usecase-class {
   padding: 6px 8px 6px 25px !important;
 }
 
-.dashboard-class{
+.dashboard-class {
   padding: 6px 8px 6px 40px !important;
 }
 
-.pointer-class{
+.pointer-class {
   cursor: pointer;
 }
 
@@ -287,18 +305,18 @@ a:active {
 }
 
 /*media query*/
-@media only screen and (max-width: 1024px) and (min-width: 768px)  {
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
   .topnav button {
     height: 29px;
     margin-top: 3px;
     width: 44px;
     padding-right: 0px;
     /* margin-left: 200px; */
-}
+  }
 
-.img-center {
-  display: block;
-  height: 105px;
-  margin-left: 55px;
-}
+  .img-center {
+    display: block;
+    height: 105px;
+    margin-left: 55px;
+  }
 }
