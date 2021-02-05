@@ -172,9 +172,9 @@
                     <div class="col-md-1"></div>
                   </div>
                 </span>
-          
+
               </div>
-          
+
             </div>
           </div>
 
@@ -195,9 +195,9 @@
                     <div class="col-md-1"></div>
                   </div>
                 </span>
-          
+
               </div>
-          
+
             </div>
           </div> -->
 
@@ -290,7 +290,7 @@
                   <p style="text-align: center;color:#1E428A ;font-weight:bold;margin-top: 10px;">Forecasting</p>
                     </div>
                 </div>
-  
+
                 </div> -->
         <div class="col-md-4 imgmargin pointer-class">
           <div class="talkbubble Fleetmat blur-wrapper">
@@ -484,7 +484,7 @@
   <!-- <div *ngIf='UseCaseType==4'>
       <div class="col-md-12">
           <div class="col-md-2 padding-top">
-            
+
             </div>
            <div class="row">
 
@@ -497,8 +497,8 @@
                           <div class="row">
                             <div class="col-md-1"></div>
             <div class="col-md-10" style="text-align:justify">
-                Measure staffing levels, requirements and trends in compensation, work history and status. Review work performance, rates of attrition and employee, management and leadership satisfaction feedback 
-    
+                Measure staffing levels, requirements and trends in compensation, work history and status. Review work performance, rates of attrition and employee, management and leadership satisfaction feedback
+
             </div>
                             <div class="col-md-1"></div>
                             </div>
@@ -517,8 +517,8 @@
                             <div class="row">
                               <div class="col-md-1"></div>
               <div class="col-md-10" style="text-align:justify">
-                  Measure staffing levels, requirements and trends in compensation, work history and status. Review work performance, rates of attrition and employee, management and leadership satisfaction feedback 
-      
+                  Measure staffing levels, requirements and trends in compensation, work history and status. Review work performance, rates of attrition and employee, management and leadership satisfaction feedback
+
               </div>
                               <div class="col-md-1"></div>
                               </div>
@@ -526,7 +526,7 @@
                         </div>
                       </div>
                 </div>
-                
+
                 <div class="col-md-4 imgmargin">
                     <div class="talkbubble vendor blur-wrapper">
                     <img src="../../assets/images/humanresource-vendormanager-gray.png" class="img-center img-responsive">
@@ -536,7 +536,7 @@
                         <div class="row">
                           <div class="col-md-1"></div>
           <div class="col-md-10" style="text-align:justify">
-              Measure vendor levels, overlapping service providers, contract management, contract status, vendor certification status, performance levels vendor cost(s), value and competitive analysis 
+              Measure vendor levels, overlapping service providers, contract management, contract status, vendor certification status, performance levels vendor cost(s), value and competitive analysis
 
           </div>
                           <div class="col-md-1"></div>
@@ -544,18 +544,17 @@
                         </span>
                       </div>
                   </div>
-    
-                  </div>
-    
 
-                
+                  </div>
+
+
+
             </div>
       </div>
   </div> -->
 
   <div *ngIf="UseCaseType == 4">
     <div class="col-md-12">
-      <div class="col-md-2 padding-top"></div>
       <div class="row">
         <div
           class="col-md-4 imgmargin pointer-class"
@@ -682,7 +681,66 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 imgmargin pointer-class" *ngIf="showHrms">
+        <div
+          class="col-md-4 imgmargin pointer-class"
+          (click)="redirect(10)"
+          *ngIf="!showHrms"
+        >
+          <div class="talkbubble newlink">
+            <img
+              src="../../assets/images/forecastinga.png"
+              id="aks9"
+              class="img-center img-responsive"
+            />
+            <div class="col-md-12" style="text-align: justify">
+              <p style="text-align: center; margin-top: 10px">New Link</p>
+              <span class="txtcolor">
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10" style="text-align: justify">
+                    <div class="width-content">
+                      Measure vendor levels, overlapping service providers,
+                      contract management, contract status, vendor certification
+                      status, performance levels vendor cost(s), value and
+                      competitive analysis
+                    </div>
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-4 imgmargin pointer-class"
+          (click)="redirect(10)"
+          *ngIf="showHrms"
+        >
+          <div class="talkbubble1">
+            <img
+              src="../../assets/images/vendor-management.png"
+              class="img-center img-responsive"
+            />
+            <div class="col-md-12" style="text-align: justify">
+              <p>New Link</p>
+              <span class="txtcolor">
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10" style="text-align: justify">
+                    <div class="width-content">
+                      Measure vendor levels, overlapping service providers,
+                      contract management, contract status, vendor certification
+                      status, performance levels vendor cost(s), value and
+                      competitive analysis
+                    </div>
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 imgmargin pointer-class" *ngIf="showHrms">
           <div class="talkbubble1">
             <img
               src="../../assets/images/human-capital.png"
@@ -715,7 +773,7 @@
               </span>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -997,7 +1055,7 @@
                   <div class="col-md-1"></div>
                   <!-- <div class="col-md-10" style="text-align:justify;color:#969699;">
           <div class="width-content">
-          Monitor energy consumption to assist with the optimization energy usage and to measure peak times, down times and trends in order to estimate energy utilization costs and savings 
+          Monitor energy consumption to assist with the optimization energy usage and to measure peak times, down times and trends in order to estimate energy utilization costs and savings
     </div>
       </div> -->
                   <div class="col-md-1"></div>
@@ -1029,7 +1087,7 @@
                   <div class="col-md-1"></div>
                   <!-- <div class="col-md-10" style="text-align:justify;color:#969699;">
           <div class="width-content">
-          Monitor energy utilization and associated fees by streaming energy usage in order to reduce costs, increase energy security and reduce pollution emitted from non-renewable sources 
+          Monitor energy utilization and associated fees by streaming energy usage in order to reduce costs, increase energy security and reduce pollution emitted from non-renewable sources
     </div>
       </div> -->
                   <div class="col-md-1"></div>
